@@ -64,7 +64,7 @@ return [
             /* 'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class), */
             'driver' => 'eloquent',
-            'model' => App\Models\model_kos::class,
+            'model' => App\Models\users::class,
         ],
 
         // 'users' => [
