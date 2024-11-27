@@ -11,19 +11,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate CSS -->
     <link rel="stylesheet" href="css/animate.css">
-    <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/all.css">
     <!-- flaticon CSS -->
     <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <!-- swiper CSS -->
-    <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -131,8 +123,7 @@
                                 <div class="col-lg-5 col-md-8">
                                     <div class="banner_text">
                                         <div class="banner_text_iner">
-                                            <h1>Wood & Cloth
-                                                Sofa</h1>
+                                            <h1>Kos Fortuna</h1>
                                             <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                                 suspendisse ultrices gravida. Risus commodo viverra</p>
                                             <a href="#" class="btn_2">buy now</a>
@@ -213,6 +204,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="product_list_slider owl-carousel">
@@ -302,13 +294,49 @@
     </section>
     <!-- product_list part start-->
 
+    {{-- carousell --}}
+    <div id="carousel-kos" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <img src="{{ asset('images/display3.jpeg') }}" class="d-block w-100" alt="Slide 1">
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="{{ asset('images/display5.jpeg') }}" class="d-block w-100" alt="Slide 2">
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="{{ asset('images/display7.jpeg') }}" class="d-block w-100" alt="Slide 3">
+            </div>
+        </div>
+    <div>
+
+    <div class="slideshow-container">
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+            <img src="{{ asset('images/display3.jpeg') }}" style="width: 100%" />
+        </div>
+    
+        <div class="mySlides fade">
+            <img src="{{ asset('images/display5.jpeg') }}" style="width: 100%" />
+        </div>
+    
+        <div class="mySlides fade">
+            <img src="{{ asset('images/display7.jpeg') }}" style="width: 100%" />
+        </div>
+    
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
     <!-- feature_part start-->
     <section class="feature_part padding_top">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <div class="section_tittle text-center">
-                        <h2>Featured Category</h2>
+                        <h2>Kategori</h2>
                     </div>
                 </div>
             </div>
@@ -316,15 +344,11 @@
                 <div class="col-lg-6 col-sm-6">
                     <div class="single_feature_post_text">
                         <h3>BULANAN</h3> 
-                        {{-- <p>
-                            <span class="price-top">Rp</span>
-                            400.000
-                            <span class="price-bottom">/bulan</span>
-                        </p>                         --}}
                         <div class="price-container">
                             <p><span class="currency">Rp</span> <span class="price">400.000</span> <span class="period">/ Bulan</span></p>
                         </div>
-                        <p>Termasuk 1 Parkir Motor</p>  
+                        <p>Termasuk 1 Parkir Motor <br>
+                        Sisa Kamar: {} </p>  
                         <a href="{{ route('booking', ['tipe' => 'Bulanan']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
                         <img src="img/feature/feature_1.png" alt="">
                     </div>
@@ -332,15 +356,11 @@
                 <div class="col-lg-6 col-sm-6">
                     <div class="single_feature_post_text">
                         <h3>TAHUNAN</h3> 
-                        {{-- <p>
-                            <span class="price-top">Rp</span>
-                            400.000
-                            <span class="price-bottom">/bulan</span>
-                        </p>                         --}}
                         <div class="price-container">
                             <p><span class="currency">Rp</span> <span class="price">4.500.000</span> <span class="period">/ Tahun</span></p>
                         </div>
-                        <p>Termasuk 1 Parkir Motor</p>  
+                        <p>Termasuk 1 Parkir Motor <br>
+                            Sisa Kamar: {} </p>  
                         <a href="{{ route('booking', ['tipe' => 'Tahunan']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
                     </div>
                 </div>
@@ -351,7 +371,7 @@
 
 
     <!-- awesome_shop start-->
-    <section class="our_offer section_padding">
+    {{-- <section class="our_offer section_padding">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 col-md-6">
@@ -382,7 +402,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- awesome_shop part start-->
 
     <!-- product_list part start-->
@@ -560,31 +580,39 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!--::footer_part end::-->
 
     <!-- jquery plugins here-->
-    <script src="js/jquery-1.12.1.min.js"></script>
-    <!-- popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- bootstrap js -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- easing js -->
-    <script src="js/jquery.magnific-popup.js"></script>
-    <!-- swiper js -->
-    <script src="js/swiper.min.js"></script>
-    <!-- swiper js -->
-    <script src="js/masonry.pkgd.js"></script>
-    <!-- particles js -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <!-- slick js -->
-    <script src="js/slick.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+  
+        function plusSlides(n) {
+          showSlides((slideIndex += n));
+        }
+  
+        function currentSlide(n) {
+          showSlides((slideIndex = n));
+        }
+  
+        function showSlides() {
+          let i;
+          let slides = document.getElementsByClassName("mySlides");
+  
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {
+            slideIndex = 1;
+          }
+          slides[slideIndex - 1].style.display = "block";
+          setTimeout(showSlides, 3000); // Change image every 2 seconds
+        }
+      </script>
 </body>
 
 </html>
