@@ -139,7 +139,7 @@
     </header>
     <!-- Header part end-->
 
-     <main>
+    <main>
          @yield('content') <!-- The content of individual pages will be injected here -->
     </main>
     
