@@ -12,9 +12,10 @@ class controller_dashboard extends Controller
     }
     public function index()
     {
-        if (Auth::check()) {
+        // if (Auth::check()) {
             return view('dashboard');
-        } else {
-            return view('login');
-        }    }
+        // } else {
+        //     return view('login');
+        // }    
+    }
 }
