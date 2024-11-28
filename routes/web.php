@@ -18,7 +18,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register/action', [AuthController::class, 'actionRegister'])->name('actionregister');
 
 Route::get('/', [controller_dashboard::class, 'index'])->name('dashboard');
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::get('/admin', [AdminController::class, 'dashboardAdmin'])->name('dashboardAdmin');
 
 Route::get('/booking', [BookingController::class, 'showCheckout'])->name('booking');
 Route::post('/booking', [BookingController::class, 'store'])->name('checkout.store');
