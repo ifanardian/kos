@@ -6,7 +6,11 @@ use App\Http\Controllers\controller_dashboard;
 use App\Http\Controllers\controller_register;
 use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\controller_checkout;
-use App\Http\Controllers\AdminController;
+
+use App\Http\Controllers\Admin\ConfirmBookingController;
+
+
+
 
 // use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
@@ -22,6 +26,17 @@ Route::get('/admin', [AdminController::class, 'dashboardAdmin'])->name('dashboar
 
 Route::get('/booking', [BookingController::class, 'showCheckout'])->name('booking');
 Route::post('/booking', [BookingController::class, 'store'])->name('checkout.store');
+
+// Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    // Route::get('/admin/dashboard', [controller_dashboard::class, 'adminIndex'])->name('admin.dashboard');
+    // Route::get('/admin/users', [controller_register::class, 'listUsers'])->name('admin.users');
+    // Route::post('/admin/users/create', [controller_register::class, 'createUser'])->name('admin.users.create');
+    // Route::delete('/admin/users/{id}', [controller_register::class, 'deleteUser'])->name('admin.users.delete');
+// });
+
+Route::get('/admin', [ConfirmBookingController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/ktp/{filename}', [ConfirmBookingController::class, 'showKtp'])->name('ktp.show');
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
