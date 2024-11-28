@@ -9,6 +9,23 @@
   background-image: linear-gradient(to left, #fff 0%, #fff 51%, #fff 100%);
 }
 
+
+#panorama-section {
+  text-align: center; 
+  padding: 20px; 
+}
+
+.section_tittle h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#panorama {
+  width: 950px;
+  height: 550px;
+  margin: 0 auto; 
+}
+
 /* CAROUSEL */
 .slideshow-container {
   margin: auto;
@@ -349,8 +366,8 @@ button:focus,
 
 /* line 163, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_common.scss */
 .section_tittle {
-  margin-top: 13rem;
-  margin-bottom: 80px;
+  margin-top: 8rem;
+  margin-bottom: 5rem;
 }
 
 @media (max-width: 991px) {
@@ -653,7 +670,7 @@ ul {
   line-height: 60px;
   text-align: center;
   border-radius: 5px;
-  background-color: #ff3368;
+  background-color: #ff3368; 
   font-size: 15px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
@@ -3010,6 +3027,7 @@ ul {
 
 /* line 66, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product_list.scss */
 .single_product_item .single_product_text {
+  display: flex;
   padding: 32px 0;
   background-color: #f8fbff;
   -webkit-transition: 0.5s;
@@ -3020,7 +3038,7 @@ ul {
 .single_product_item .single_product_text h4 {
   font-weight: 700;
   font-size: 18px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   margin-left: 40px;
 }
 
@@ -7746,6 +7764,7 @@ h6 {
 
 /* line 65, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .single_footer_part .list-unstyled li a {
+  text-decoration: none;
   color: #7f7f7f;
   margin-bottom: 10px;
   display: inline-block;

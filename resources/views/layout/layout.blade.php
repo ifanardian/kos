@@ -15,6 +15,8 @@
     <!-- style CSS -->
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     @stack('styles')
 </head>
 
@@ -25,7 +27,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="#"> <img src="{{ asset('images/fortune.png') }}" style="width: 50px"> </a>
+                        <a class="navbar-brand" href="#"> <img src="{{ asset('images/fortune.png') }}" style="width: 50px"> Fortuna</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">

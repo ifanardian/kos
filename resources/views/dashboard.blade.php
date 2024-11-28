@@ -29,6 +29,22 @@
     </section>
     <!-- banner part start-->
 
+    <div id="panorama-section">
+        <div class="section_tittle text-center">
+          <h2>Virtual Tour 360</h2>
+        </div>
+        <div id="panorama">
+    
+      
+            <script>
+                pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": "{{ asset('images/panorama.png') }}"
+                });
+            </script>
+        </div>
+    </div>
+
     <!-- product_list start-->
     <section class="product_list section_padding">
         <div class="container">
@@ -60,7 +76,7 @@
                                         <img src="img/product/product_3.png" alt="">
                                         <div class="single_product_text">
                                             <img style="margin-left: 35px" width="30" height="30" src="https://img.icons8.com/material-outlined/100/star--v2.png" alt="star--v2"/>
-                                            <h4>Harga dan Kualitas Bersaing</h4>
+                                            <h4>Harga Bersaing</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -99,6 +115,7 @@
     </section>
     <!-- product_list part start-->
 
+    {{-- GRID --}}
     <div class="row-grid"> 
         <div class="column">
           <img src="{{ asset('images/display8.jpeg') }}" style="width:100%">
