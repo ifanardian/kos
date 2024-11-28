@@ -34,11 +34,24 @@
                     </td>
                     <td>{{ $item->tanggal_pesan }}</td>
                     <td>
-                        {{ $item->status }}
+                    <form id="form-update-status" action="{{ route('update.status.booking', $item->id) }}" method="POST">
+                        @csrf
+                        <input type="hidden" id="id" name="id" value="{{ $item->id }}">
+                        <select name="status" onchange="this.form.submit()">
+                            <option value="PENDING" {{ $item->status == 'PENDING' ? 'selected' : '' }}>PENDING</option>
+                            <option value="APPROVED" {{ $item->status == 'APPROVED' ? 'selected' : '' }}>APPROVED</option>
+                            <option value="REJECTED" {{ $item->status == 'REJECT' ? 'selected' : '' }}>REJECTED</option>
+                        </select>
+                    </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <script>
+        document.getElementById('status').addEventListener('change', function() {
+            document.getElementById('form-update-status').submit();
+        });
+    </script>
 </body>
 </html>
