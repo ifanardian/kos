@@ -6,7 +6,9 @@ use App\Http\Controllers\controller_dashboard;
 use App\Http\Controllers\controller_register;
 use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\controller_checkout;
+
 use App\Http\Controllers\Admin\ConfirmBookingController;
+
 
 
 
@@ -20,6 +22,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register/action', [AuthController::class, 'actionRegister'])->name('actionregister');
 
 Route::get('/', [controller_dashboard::class, 'index'])->name('dashboard');
+Route::get('/admin', [AdminController::class, 'dashboardAdmin'])->name('dashboardAdmin');
 
 Route::get('/booking', [BookingController::class, 'showCheckout'])->name('booking');
 Route::post('/booking', [BookingController::class, 'store'])->name('checkout.store');
