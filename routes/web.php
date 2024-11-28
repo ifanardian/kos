@@ -21,7 +21,6 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register/action', [AuthController::class, 'actionRegister'])->name('actionregister');
 
 Route::get('/', [controller_dashboard::class, 'index'])->name('dashboard');
-Route::get('/admin', [AdminController::class, 'dashboardAdmin'])->name('dashboardAdmin');
 
 Route::get('/booking', [BookingController::class, 'showCheckout'])->name('booking');
 Route::post('/booking', [BookingController::class, 'store'])->name('checkout.store');
@@ -43,3 +42,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('/checkout', [controller_checkout::class, 'checkout'])->name('checkout'); 
 });
+
+
+// FIONA
+
+Route::get('/cdashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
+Route::get('/cpenyewaadmin', [AdminController::class, 'penyewaAdmin'])->name('penyewaadmin');
+Route::get('/ckamaradmin', [AdminController::class, 'kamarAdmin'])->name('kamardmin');
+Route::get('/criwayatadmin', [AdminController::class, 'riwayatAdmin'])->name('riwayatadmin');
+Route::get('/cverifikasiadmin', [AdminController::class, 'verifikasiAdmin'])->name('verifikasiadmin');

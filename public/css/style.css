@@ -2554,6 +2554,10 @@ ul {
 /**************** banner part css start ****************/
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_banner.scss */
 .banner_part {
+  display: flex; /* Aktifkan Flexbox */
+  justify-content: center; /* Pusatkan secara horizontal */
+  align-items: center; /* Pusatkan secara vertikal */
+  min-height: 100vh; /* Pastikan banner memenuhi tinggi layar */
   position: relative;
   background-color: #ecfdff;
   overflow: hidden;
