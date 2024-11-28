@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InvoiceMail;
 
 
 class ConfirmBookingController extends Controller
@@ -29,5 +31,16 @@ class ConfirmBookingController extends Controller
             ]);
         }
         abort(404);
+    }
+
+    public function updateStatusBooking(Request $request)
+    {
+        $booking = Booking::find($request->id);
+        $booking->status = $request->status;
+        $booking->save();
+        if($booking->status == "APPROVED"){
+            Mail::to($booking->email)->send(new InvoiceMail($booking));
+        }
+        return redirect()->back();
     }
 }
