@@ -6,9 +6,8 @@ use App\Http\Controllers\controller_dashboard;
 use App\Http\Controllers\controller_register;
 use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\controller_checkout;
-
 use App\Http\Controllers\Admin\ConfirmBookingController;
-
+use App\Http\Controllers\AdminController;
 
 
 
@@ -34,7 +33,7 @@ Route::post('/booking', [BookingController::class, 'store'])->name('checkout.sto
     // Route::delete('/admin/users/{id}', [controller_register::class, 'deleteUser'])->name('admin.users.delete');
 // });
 
-Route::get('/admin', [ConfirmBookingController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin2', [ConfirmBookingController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/ktp/{filename}', [ConfirmBookingController::class, 'showKtp'])->name('ktp.show');
 
 
