@@ -3,39 +3,64 @@
 @section('title', 'Kelola Kamar')
 
 @section('content')
-<h2>Kelola Kamar</h2>
-<a href="#" class="btn btn-primary mb-3">Tambah Kamar</a>
-<table class="table table-bordered">
-    <thead>
-        <tr class="table-secondary">
-            <th>Nomor Kamar</th>
-            <th>Tipe Kamar</th>
-            <th>Harga</th>
-            <th>Status</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>101</td>
-            <td>Standar</td>
-            <td>Rp 1,000,000</td>
-            <td>Kosong</td>
-            <td>
-                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-            </td>
-        </tr>
-        <tr>
-            <td>102</td>
-            <td>Deluxe</td>
-            <td>Rp 1,500,000</td>
-            <td>Terisi</td>
-            <td>
-                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Kelola Kamar</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+
+    <div class="col-xl col-lg-7">
+        <div class="card shadow mb-4">
+            <!-- Card Body -->
+            <div class="card-body">
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
+                <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">No. Kamar</th>
+                        <th scope="col">Tipe Kamar</th>
+                        <th scope="col">Penyewa</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Jatuh Tempo</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
 @endsection
