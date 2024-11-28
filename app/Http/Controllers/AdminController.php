@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
-    public function dashboard()
+    public function dashboardAdmin()
     {
         return view('admin.dashboard');
     }

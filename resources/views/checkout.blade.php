@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Kos Fortuna')
+@section('title', 'Checkout')
 @section('content')
 <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
