@@ -40,9 +40,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 // FIONA
 
+// admin
 Route::get('/cdashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
 Route::get('/cpenyewaadmin', [AdminController::class, 'penyewaAdmin'])->name('penyewaadmin');
 Route::get('/ckamaradmin', [AdminController::class, 'kamarAdmin'])->name('kamaradmin');
 Route::get('/criwayatadmin', [AdminController::class, 'riwayatAdmin'])->name('riwayatadmin');
 Route::get('/cverifikasiadmin', [AdminController::class, 'verifikasiAdmin'])->name('verifikasiadmin');
 Route::get('/cwebsiteadmin', [AdminController::class, 'websiteAdmin'])->name('websiteadmin');
+
+// user
+Route::get('/cbooking', [AdminController::class, 'booking'])->name('cobabooking');
+Route::get('/cpayment', [AdminController::class, 'payment'])->name('cobapayment');
+
