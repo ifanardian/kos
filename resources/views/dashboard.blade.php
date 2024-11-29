@@ -31,7 +31,7 @@
 
     <div id="panorama-section">
         <div class="section_tittle text-center">
-          <h2>Virtual Tour 360</h2>
+          <h2>Virtual Tour 360<sup>°</sup></h2>
         </div>
         <div id="panorama">
     
