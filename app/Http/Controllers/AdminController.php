@@ -35,4 +35,14 @@ class AdminController extends Controller
     {
         return view('admin.website');
     }
+
+    public function booking()
+    {
+        return view('booking');
+    }
+
+    public function payment()
+    {
+        return view('payment');
+    }
 }
