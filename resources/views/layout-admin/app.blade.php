@@ -126,7 +126,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('verifikasiadmin') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Verifikasi Pembayaran</span></a>
+                    <span>Verifikasi Calon Penghuni</span></a>
             </li>
 
             <!-- Divider -->

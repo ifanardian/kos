@@ -9,7 +9,7 @@
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2>Pemesanan Kamar</h2>
+              <h2>Booking Kamar</h2>
               <p>Home <span>-</span> Shop Single</p>
             </div>
           </div>
@@ -83,13 +83,13 @@
                 <label for="email">Alamat Email</label>
                 <input type="text" class="form-control" id="email" name="email" required/>
               </div>
-              <div class="col-md-12 form-group p_star">
+              {{-- <div class="col-md-12 form-group p_star">
                 <select class="country_select">
                   <option value="1">Country</option>
                   <option value="2">Country</option>
                   <option value="4">Country</option>
                 </select>
-              </div>
+              </div> --}}
               <div class="col-md-11 form-group p_star">
                 <label for="address">Alamat Lengkap (sesuai KTP)</label>
                 <textarea class="form-control" name="address" id="address" rows="1"></textarea>
@@ -123,72 +123,19 @@
                 <label for="message">Order Notes</label>
                 <textarea class="form-control" name="message" id="message" rows="1"></textarea>
               </div>
-              <button type= "submit">kirim</button>
+              {{-- <button type= "submit">kirim</button> --}}
             </form>
           </div>
           <div class="col-lg-4">
             <div class="order_box">
               <h2>Your Order</h2>
-              <ul class="list">
-                {{-- @if ($bookings) --}}
-                {{-- <li>
-                  <a href="#">Product
-                    <span>Total</span>
-                  </a>
-                </li> --}}
-                @csrf
-                <li>
-                  <a href="#"> Sewa Kos {{ $tipe }}
-                    <span class="last">Rp {{ number_format($harga, 0, ',', '.') }} </span>
-                  </a>
-                </li>
-              </ul>
-              <ul class="list list_2">
-                <li>
-                  <a href="#">Subtotal
-                    <span>Rp {{ number_format($harga, 0, ',', '.') }}</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Total
-                    <span>Rp {{ number_format($harga, 0, ',', '.') }}</span>
-                  </a>
-                </li>
-              </ul>
-              {{-- @else
-                  <p>Booking information not found.</p>
-              @endif --}}
               <div class="payment_item">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option5" name="selector" />
-                  <label for="f-option5">Pembayaran Tunai</label>
-                  <div class="check"></div>
-                </div>
                 <p>
-                  Datang secara langsung ke XXX untuk melakukan DP dan pembayaran secara tunai.
+                  Silahkan isi form untuk melakukan booking kamar kos,  
+                  Anda akan bisa melakukan pembayaran setelah admin mengkonfirmasi booking Anda.   
+                  Verifikasi akan dikirim via email. Pastikan data yang Anda kirim lengkap dan valid
                 </p>
               </div>
-              <div class="payment_item active">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option6" name="selector" />
-                  <label for="f-option6">Pembayaran Non Tunai</label>
-                  <img src="img/product/single-product/card.jpg" alt="" />
-                  <div class="check"></div>
-                </div>
-                <p>
-                  BCA a/n XXX <br>
-                  012121212121 <br>
-                  BRI a/n XXX <br>
-                  98908707886 <br><br>
-                  <label for="ktp">Upload Bukti Pembayaran</label>
-                  <input type="file" class="file-upload" id="ktp" name="ktp"  accept=".jpg, .jpeg" required/>
-                </p>
-              </div>
-              {{-- <div class="creat_account">
-                <input type="checkbox" id="f-option4" name="selector" />
-                <label for="f-option4">I’ve read and accept the </label>
-                <a href="#">terms & conditions*</a>
-              </div> --}}
               <a class="btn_3" type="submit" href="{{ route('checkout') }}">BOOK</a>
             </div>
           </div>
