@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        schema::create('ms_kos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_kos');
-            $table->string('alamat');
-            $table->string('deskripsi');
-            $table->string('fasilitas');
-            $table->string('harga');
-            $table->string('tipe_kos');
+        Schema::create('kamar', function (Blueprint $table) {
+            $table->string('id_kamar')->primary();
+            $table->string('foto');
+            $table->enum('status', ['KOSONG', 'TERISI']);
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ms_kos');
+        Schema::dropIfExists('kamar');
     }
 };

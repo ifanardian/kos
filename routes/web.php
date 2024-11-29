@@ -25,10 +25,20 @@ Route::get('/', [controller_dashboard::class, 'index'])->name('dashboard');
 Route::get('/booking', [BookingController::class, 'showCheckout'])->name('booking');
 Route::post('/booking', [BookingController::class, 'store'])->name('checkout.store');
 
-Route::get('/admin2', [ConfirmBookingController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/ktp/{filename}', [ConfirmBookingController::class, 'showKtp'])->name('ktp.show');
-Route::post('/admin/update-status-booking', [ConfirmBookingController::class, 'updateStatusBooking'])->name('update.status.booking');
-Route::get('/admin/send-invoice', [SendEmailController::class, 'sendInvoice'])->name('send.invoice');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [ConfirmBookingController::class, 'index'])->name('admin.dashboard');
+    Route::get('ktp/{filename}', [ConfirmBookingController::class, 'showKtp'])->name('admin.ktp');
+    Route::post('update-status-booking', [ConfirmBookingController::class, 'updateStatusBooking'])->name('admin.update.statusbooking');
+    Route::get('send-invoice', [SendEmailController::class, 'sendInvoice'])->name('admin.send.invoice');
+
+
+    //membuat untuk rill
+    Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
+    Route::get('penyewa', [ConfirmBookingController::class, 'penyewa'])->name('admin.penyewa');
+});
+
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

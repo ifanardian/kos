@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Mstipekos;
+use App\Models\Penyewa;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Mail;
@@ -13,11 +15,18 @@ use App\Mail\InvoiceMail;
 
 class ConfirmBookingController extends Controller
 {
-    public function index()
-    {
-        $data = Booking::all();
+    // public function index()
+    // {
+    //     $data = Booking::all();
 
-        return view('admin.confirm-booking.index', compact('data'));   
+    //     return view('admin.confirm-booking.index', compact('data'));   
+    // }
+
+    public function verifikasiBooking()
+    {
+        $data = Booking::orderByRaw("FIELD(status, 'PENDING') DESC")->orderBy('created_at', 'asc')->get();
+        $tipe = Mstipekos::all();
+        return view('admin.admin-verifikasi', compact('data', 'tipe'));
     }
 
     public function showKtp($filename)
@@ -37,10 +46,29 @@ class ConfirmBookingController extends Controller
     {
         $booking = Booking::find($request->id);
         $booking->status = $request->status;
-        $booking->save();
+        
         if($booking->status == "APPROVED"){
-            Mail::to($booking->email)->send(new InvoiceMail($booking));
+            // dd($booking->ktp);
+            // Mail::to($booking->email)->send(new InvoiceMail($booking));
+            Penyewa::create([
+                'email' => $booking->email,
+                'nama' => $booking->nama_lengkap,
+                'no_telepon' => $booking->no_hp,
+                'no_kamar' => '1',
+                'ktp' => $booking->ktp,
+                'status' => 'BELUM LUNAS',
+                'tanggal_menyewa' => $booking->tanggal_pesan,
+                'tanggal_jatuh_tempo' => date('Y-m-d', strtotime($booking->tanggal_pesan . ' + 1 month')),
+                'tanggal_berakhir' =>null,
+            ]);
         }
+        $booking->save();
         return redirect()->back();
+    }
+
+    public function penyewa()
+    {
+        $data = Penyewa::all();
+        return view('admin.admin-penyewa', compact('data'));
     }
 }
