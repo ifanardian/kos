@@ -112,6 +112,10 @@
                 </div>
               </div> --}}
               <div class="col-md-11 form-group p_star">
+                <label for="email">Periode Penempatan</label>
+                <input type="text" class="form-control" id="periode" name="periode" required/>
+              </div>
+              <div class="col-md-11 form-group p_star">
                 <label for="bookingDate">Tanggal Pemesanan</label>
                 <input type="date" class="form-control" id="bookingDate" name="booking_date" required min="<?= date('Y-m-d'); ?>"/>
               </div>

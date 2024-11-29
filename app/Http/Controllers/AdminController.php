@@ -30,4 +30,9 @@ class AdminController extends Controller
     {
         return view('admin.verifikasi');
     }
+
+    public function websiteAdmin()
+    {
+        return view('admin.website');
+    }
 }
