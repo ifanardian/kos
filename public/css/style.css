@@ -5160,7 +5160,6 @@ ul {
 
 /* line 1599, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
 .order_box {
-  background: #ecfdff;
   padding: 30px;
 }
 
@@ -5296,11 +5295,19 @@ ul {
 }
 
 /* line 1739, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
-.order_box .btn_3 {
-  display: block;
-  line-height: 38px;
+.order-box {
+  margin-top: 10px;
+}
+
+.btn_3 {
+  text-decoration: none;
+  width: 300px; /* Atur lebar tombol */
+  padding: 15px 0; 
   text-transform: uppercase;
   text-align: center;
+  border: none;
+  border-radius: 30px; /* Membuat sudut melengkung */
+  cursor: pointer;
 }
 
 @media (max-width: 991px) {

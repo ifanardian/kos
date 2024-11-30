@@ -45,4 +45,9 @@ class AdminController extends Controller
     {
         return view('payment');
     }
+
+    public function tagihan()
+    {
+        return view('tagihan');
+    }
 }
