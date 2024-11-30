@@ -27,7 +27,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="#"> <img src="{{ asset('images/fortune.png') }}" style="width: 50px"> Fortuna</a>
+                        <a class="navbar-brand" href="{{ route('dashboard') }}"> <img src="{{ asset('images/fortune.png') }}" style="width: 50px"> Fortuna</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Home</a>
+                                    <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('checkout') }}">Contact</a>

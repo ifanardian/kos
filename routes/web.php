@@ -61,4 +61,4 @@ Route::get('/cwebsiteadmin', [AdminController::class, 'websiteAdmin'])->name('we
 // user
 Route::get('/cbooking', [AdminController::class, 'booking'])->name('cobabooking');
 Route::get('/cpayment', [AdminController::class, 'payment'])->name('cobapayment');
-
+Route::get('/ctagihan', [AdminController::class, 'tagihan'])->name('cobatagihan');
