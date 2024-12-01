@@ -91,30 +91,17 @@
                 </select>
               </div> --}}
                             <div class="col-md-11 form-group p_star">
-                                <label for="address">Alamat Lengkap (sesuai KTP)</label>
-                                <textarea class="form-control" name="address" id="address" rows="1"></textarea>
+                                <label for="address">Alamat Lengkap</label>
+                                <textarea class="form-control" name="address" id="address" placeholder="(isi alamat lengkap sesuai KTP)" rows="1"></textarea>
                             </div>
                             <div class="col-md-11 form-group p_star">
                                 <label for="ktp">Unggah foto KTP</label>
                                 <input type="file" class="form-control file-upload" id="ktp" name="ktp"
                                     accept=".jpg, .jpeg" required />
                             </div>
-                            {{-- <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">District</option>
-                  <option value="2">District</option>
-                  <option value="4">District</option>
-                </select>
-              </div> --}}
-                            {{-- <div class="col-md-12 form-group">
-                <div class="creat_account">
-                  <input type="checkbox" id="f-option2" name="selector" />
-                  <label for="f-option2">Create an account?</label>
-                </div>
-              </div> --}}
                             <div class="col-md-11 form-group p_star">
                                 <label for="email">Periode Penempatan</label>
-                                <input type="text" class="form-control" id="periode" name="periode" required />
+                                <input type="text" class="form-control" id="periode" name="periode" placeholder="(cth: November 2024)" required />
                             </div>
                             <div class="col-md-11 form-group p_star">
                                 <label for="bookingDate">Tanggal Pemesanan</label>
