@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-md-11 form-group p_star">
                             <label for="email">Periode Pembayaran</label>
-                            <input type="text" class="form-control" id="periode" name="periode" required />
+                            <input type="text" class="form-control" id="periode" name="periode" placeholder="(cth: November 2024)" required />
                         </div>
                         <div class="col-md-11 form-group p_star">
                             <label for="ktp">Unggah Bukti</label>

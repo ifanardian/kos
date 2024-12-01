@@ -110,7 +110,7 @@
     <footer class="footer_part">
         <div class="container">
             <div class="row justify-content-around">
-                <div class="col-sm-6 col-lg-2">
+                {{-- <div class="col-sm-6 col-lg-2">
                     <div class="single_footer_part">
                         <h4>Top Products</h4>
                         <ul class="list-unstyled">
@@ -142,34 +142,46 @@
                             <li><a href="">Terms of Service</a></li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-sm-6 col-lg-2">
+                </div> --}}
+                <div class="col-sm-6 col-lg-6">
                     <div class="single_footer_part">
-                        <h4>Resources</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="">Guides</a></li>
-                            <li><a href="">Research</a></li>
-                            <li><a href="">Experts</a></li>
-                            <li><a href="">Agencies</a></li>
-                        </ul>
+                        <div class="maps_container">
+                            <h4>Our Location</h4>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1148.3001655459595!2d110.49470678989275!3d-7.34160484265857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a79c376ec6c21%3A0x6b978b8638843e71!2sMbak%20Lusi%201!5e0!3m2!1sen!2sid!4v1733029132564!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-4">
-                    <div class="single_footer_part">
-                        <h4>Newsletter</h4>
-                        <p>Heaven fruitful doesn't over lesser in days. Appear creeping
-                        </p>
-                        <div id="mc_embed_signup">
-                            <form target="_blank"
-                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="subscribe_form relative mail_part">
-                                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
-                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = ' Email Address '">
-                                <button type="submit" name="submit" id="newsletter-submit"
-                                    class="email_icon newsletter-submit button-contactForm">subscribe</button>
-                                <div class="mt-10 info"></div>
-                            </form>
+                    <div class="col-sm-6 col-lg-8">
+                        <div class="single_footer_part">
+                            <h4>Alamat Lengkap</h4>
+                            <ul class="list-unstyled">
+                                <li><a>Jl. Anggrek No. 5, Jakarta, Indonesia</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-8">
+                        <div class="single_footer_part">
+                            <h4>Jam Operasional</h4>
+                            <ul class="list-unstyled">
+                                <li><a>Senin - Minggu : <br> 08.00-18.00 </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-8">
+                        <div class="single_footer_part">
+                            <h4>Kontak</h4>
+                            <ul class="list-unstyled">
+                                <li><a>WhatsApp +XXXXXXXXXXXXX</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-8">
+                        <div class="single_footer_part">
+                            <h4>Social</h4>
+                            <ul class="list-unstyled">
+                                <li><a>WhatsApp +XXXXXXXXXXXXX</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
