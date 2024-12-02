@@ -1,28 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Booking;
+namespace App\Http\Controllers\User\Booking;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Mstipekos;
 
 class BookingController extends Controller
 {
     public function showCheckout()
     {
-        return view('Booking.booking');
+        $tipeKos = Mstipekos::all();
+        // dd($tipeKos);
+        return view('user.booking.booking', compact('tipeKos'));
     }
 
     public function store(Request $request)
     {
-        // dd($request->all(), $request->file('ktp_file_path'), $request->tipe);
+        // dd($request->note);
         $request->validate([
-            'tipe' => 'required',
             'nama_lengkap' => 'required',
             'no_hp' => 'required',
             'email' => 'required|email',
+            'tipe_kos' => 'required',
             'alamat' => 'required',
-            'tanggal_pesan' => 'required',
+            'periode_penempatan' => 'required',
+            'note' => 'nullable',
             'ktp' => 'required|mimes:jpg,jpeg,png|max:2048',
         ]);
         $ktp = $request->file('ktp');
@@ -33,12 +37,13 @@ class BookingController extends Controller
         // $ktpPath = $request->file('ktp')->store('uploads/ktp');
 
         Booking::create([
-            'tipe' => $request->tipe,
             'nama_lengkap' => $request->nama_lengkap,
             'no_hp' => $request->no_hp,
             'email' => $request->email,
+            'tipe_kos' => $request->tipe_kos,
             'alamat' => $request->alamat,
-            'tanggal_pesan' => $request->tanggal_pesan,
+            'periode_penempatan' => $request->periode_penempatan,
+            'note' => $request->note,
             'ktp' => $fileName,
         ]);
 

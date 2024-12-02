@@ -50,7 +50,7 @@
                                 </a>
                               </td>
                               <td>{{$item->status}}</td>
-                              <td>{{'asd'}}</td>
+                              <td>{{$item->tanggal_menyewa}}</td>
                               <td>{{$item->tanggal_jatuh_tempo}}</td>
                               <td>@mdo</td>
                             </tr>

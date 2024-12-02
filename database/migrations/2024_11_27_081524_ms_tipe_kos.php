@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         schema::create('ms_tipe_kos', function (Blueprint $table) {
-            $table->string('tipe_kos')->primary();
+            $table->id();
             $table->double('harga');
             $table->string('deskripsi');
             $table->timestamps();
         });
+        DB::table('ms_tipe_kos')->insert([
+            ['harga' => '400000', 'deskripsi' => 'Bulanan', 'created_at' => now(), 'updated_at' => now()],
+            ['kolom1' => '1000000', 'deskripsi' => 'Tahunan', 'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 
     /**
