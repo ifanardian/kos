@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Dashboard')
+@section('title', 'Dashboard | Kos Fortuna')
 @section('content')
 <!-- banner part start-->
 {{-- <section class="banner_part">
@@ -73,6 +73,13 @@
             });
 
         </script>
+    </div>
+</div>
+
+<div id="panorama-section">
+    <div class="section_tittle text-center">
+        <h2>Kos Fortuna adalah pilihan hunian ideal yang menawarkan kenyamanan, keamanan, dan fasilitas lengkap dengan harga bersahabat. 
+            Terletak di lokasi strategis, Kos Fortuna dekat dengan berbagai fasilitas umum seperti pusat perbelanjaan, transportasi, dan area rekreasi.</h2>
     </div>
 </div>
 
@@ -362,33 +369,4 @@
     @push('scripts')
     <script src="js/custom.js"></script>
     @endpush
-
-    <script>
-        let slideIndex = 0;
-        showSlides();
-
-        function plusSlides(n) {
-            showSlides((slideIndex += n));
-        }
-
-        function currentSlide(n) {
-            showSlides((slideIndex = n));
-        }
-
-        function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 3000); // Change image every 2 seconds
-        }
-
-    </script>
     @endsection

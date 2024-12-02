@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Tagihan')
+@section('title', 'Tagihan Bulanan | Kos Fortuna')
 @section('content')
 <!--================Home Banner Area =================-->
 <!-- breadcrumb start-->
