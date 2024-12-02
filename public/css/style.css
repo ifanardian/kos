@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap");
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_extends.scss */
 .btn_2, .form-contact .form-group .btn_1 i {
-  background-image: linear-gradient(16deg, #ff005a 0%, #ff5d2d 64%, #ffba00 100%);
+  /* background-image: linear-gradient(16deg, #ff005a 0%, #ff5d2d 64%, #ffba00 100%); */
+  background-image: linear-gradient(16deg, #31511E 0%, #859F3D 64%, #e0fb75 100%);
 }
 
 /* line 10, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_extends.scss */
@@ -2235,7 +2236,8 @@ ul {
 /**************menu part start*****************/
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
 .main_menu {
-  position: absolute;
+  position: fixed;
+  backdrop-filter: blur(30px); 
   left: 0;
   top: 0;
   width: 100%;
@@ -2251,6 +2253,7 @@ ul {
 /* line 14, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
 .main_menu .navbar {
   padding: 0px;
+  font-family: "Poppins", sans-serif;
 }
 
 /* line 20, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
@@ -2584,7 +2587,7 @@ ul {
   align-items: center; /* Pusatkan secara vertikal */
   min-height: 100vh; /* Pastikan banner memenuhi tinggi layar */
   position: relative;
-  background-color: #ecfdff;
+  background-color: #E9EED9;
   overflow: hidden;
 }
 
@@ -2813,7 +2816,8 @@ ul {
 .feature_part .single_feature_post_text {
   text-align: center;
   padding: 50px;
-  background-color: #cde9ec;
+  background-color: #CBD2A4;
+  border-radius: 30px;
   margin-bottom: 30px;
   position: relative;
   height: 300px;
@@ -2898,7 +2902,7 @@ ul {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #ff3368;
+  color: #ac5818;
   position: absolute;
   left: 50%;
   bottom: 60px;
@@ -3068,7 +3072,7 @@ ul {
 .single_product_item .single_product_text {
   display: flex;
   padding: 32px 0;
-  background-color: #f8fbff;
+  background-color: #f5f7ec;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }

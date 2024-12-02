@@ -9,7 +9,7 @@
     <title>login</title>
 </head>
 <body>
-  <section class="vh-100" style="background-color: #3b5d50;">
+  <section class="vh-100" style="background-color: #31511E;">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
@@ -38,7 +38,7 @@
                         </div>
                       </div>
 
-                      <p class="text-center">Don't have an account? <a href="{{ url('register') }}">Sign up</a></p>
+                      {{-- <p class="text-center">Don't have an account? <a href="{{ url('register') }}">Sign up</a></p> --}}
      
                       <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button type="submit" value="submit" class="btn btn-primary btn-lg">Login</button>
