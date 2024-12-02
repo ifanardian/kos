@@ -13,8 +13,8 @@ class Users extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = "users";
-    protected $primaryKey = 'username';
-    public $fillable = ['username', 'first_name', 'last_name', 'email'];
+    protected $primaryKey = 'email';
+    public $fillable = ['email','password','remember_token'];
     /**
      * The attributes that are mass assignable.
      *

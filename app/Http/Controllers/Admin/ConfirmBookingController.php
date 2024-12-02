@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Booking;
-use App\Models\Mstipekos;
-use App\Models\Penyewa;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\InvoiceMail;
+
+use App\Mail\SetPasswordMail;
+
+use App\Models\Booking;
+use App\Models\Mstipekos;
+use App\Models\Penyewa;
+use App\Models\Users;
+use App\Models\Payments;
 
 
 class ConfirmBookingController extends Controller
@@ -47,21 +51,37 @@ class ConfirmBookingController extends Controller
         $booking = Booking::find($request->id);
         $booking->status = $request->status;
         
-        if($booking->status == "APPROVED"){
-            // dd($booking->ktp);
-            // Mail::to($booking->email)->send(new InvoiceMail($booking));
+        if ($booking->status == "APPROVED") {
+            // Add user to 'users' table with null password initially
+            Users::create([
+                'email' => $booking->email,
+                'password' => null, // Password akan diatur oleh user
+            ]);
+
             Penyewa::create([
                 'email' => $booking->email,
                 'nama' => $booking->nama_lengkap,
                 'no_telepon' => $booking->no_hp,
-                'no_kamar' => '1',
+                'no_kamar' => $request->room_number,
+                'tipe_kos' => $booking->tipe_kos,
+                'alamat' => $booking->alamat,
                 'ktp' => $booking->ktp,
-                'status' => 'BELUM LUNAS',
-                'tanggal_menyewa' => $booking->tanggal_pesan,
-                'tanggal_jatuh_tempo' => date('Y-m-d', strtotime($booking->tanggal_pesan . ' + 1 month')),
-                'tanggal_berakhir' =>null,
+                'tanggal_booking' => $booking->created_at->format('Y-m-d'),
+                'tanggal_menyewa' => $booking->periode_penempatan,
+                'tanggal_jatuh_tempo' => date('Y-m-d', strtotime($booking->periode_penempatan . ' + 1 month')),
+                'tanggal_berakhir' => null,
             ]);
+            
+            $tipekos = Mstipekos::where('id', $booking->tipe_kos)->first();
+            Payments::create([
+                'email' => $booking->email,
+                'periode_tagihan' => $booking->periode_penempatan,
+                'total_tagihan' => $tipekos->harga,
+            ]);
+            Mail::to($booking->email)->send(new SetPasswordMail($booking));
+
         }
+
         $booking->save();
         return redirect()->back();
     }

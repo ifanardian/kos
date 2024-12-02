@@ -1,7 +1,7 @@
 <?php
+namespace App\Http\Controllers\Auth;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
@@ -14,15 +14,15 @@ class AuthController extends Controller
     public function viewLogin()
     {
         if (Auth::check()) {
-            return redirect('dashboard');
+            return redirect()->route('dashboard');
         } 
-        return view('login');
+        return view('auth.login');
     }
 
     public function actionLogin(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required'],
+            'email' => ['required'],
             'password' => ['required'],
         ]);
         if (Auth::attempt($credentials)) {
@@ -38,7 +38,7 @@ class AuthController extends Controller
     public function register()
     {
         if (Auth::check()) {
-            return redirect('dashboard');
+            return redirect()->route('dashboard');
         }
         return view('register');
     }

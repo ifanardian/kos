@@ -12,14 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penyewa', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->id();
+            $table->string('email');
             $table->string('nama');
             $table->string('no_telepon');
             $table->string('no_kamar');
-            $table->string('status');
+            $table->string('tipe_kos');
+            $table->string('alamat');
             $table->string('ktp');
             $table->string('tanggal_menyewa');
             $table->string('tanggal_jatuh_tempo');
+            $table->string('tanggal_booking');
+            $table->boolean('status_penyewaan')->default(false);
             $table->string('tanggal_berakhir')->nullable();
             $table->timestamps();
         });

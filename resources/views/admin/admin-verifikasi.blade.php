@@ -29,7 +29,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Tipe Kamar</th>
-                        <th scope="col">Harga</th>
+                        <!-- <th scope="col">Harga</th> -->
                         <th scope="col">KTP</th>
                         <th scope="col">Tanggal Pemesanan</th>
                         <th scope="col">Periode Penempatan</th>
@@ -48,31 +48,38 @@
                           <td>
                             <?php
                               foreach($tipe as $t){
-                                if($item->tipe == $t->tipe_kos){
+                                if($item->tipe_kos == $t->id){
                                   echo $t->deskripsi;
                                 }
                               }
                               
                             ?>
                           </td>
-                          <td>{{'harga'}}</td>
+                          <!-- <td>{{'harga'}}</td> -->
                           <td>
                             <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" >
                               <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" alt="KTP" style="width:100px;height:auto;">
                             </a>
                           </td>
                           <td>{{ $item->created_at }}</td>
-                          <td>{{ $item->tanggal_pesan }}</td>
+                          <td>{{ $item->periode_penempatan }}</td>
                           <td>
-                            <form id="form-update-status" action="{{ route('admin.update.statusbooking') }}" method="POST">
-                              @csrf
-                              <input type="hidden" id="id" name="id" value="{{ $item->id }}">
-                              <select name="status" onchange="this.form.submit()">
-                                <option value="PENDING" {{ $item->status == 'PENDING' ? 'selected' : '' }}>PENDING</option>
-                                <option value="APPROVED" {{ $item->status == 'APPROVED' ? 'selected' : '' }}>APPROVED</option>
-                                <option value="REJECTED" {{ $item->status == 'REJECT' ? 'selected' : '' }}>REJECTED</option>
-                              </select>
-                            </form>
+                            @if ($item->status == "PENDING")
+                              <form id="form-update-status-{{ $item->id }}" action="{{ route('admin.update.statusbooking') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="id" name="id" value="{{ $item->id }}">
+                                <input type="hidden" id="room_number" name="room_number" value="">
+
+                                <select class="form-control" name="status" id="status-select-{{ $item->id }}" onchange="handleStatusChange(this, '{{ $item->id }}')">
+                                  <option value="PENDING" {{ $item->status == 'PENDING' ? 'selected' : '' }}>PENDING</option>
+                                  <option value="APPROVED" {{ $item->status == 'APPROVED' ? 'selected' : '' }}>APPROVED</option>
+                                  <option value="REJECTED" {{ $item->status == 'REJECTED' ? 'selected' : '' }}>REJECTED</option>
+                                </select>
+                              </form>
+                            @else
+                              {{ $item->status }}
+                            @endif
+                          </td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -83,4 +90,85 @@
 
 </div>
 <!-- /.container-fluid -->
+
+<!-- Modal approve -->
+<div class="modal fade" id="roomModal" tabindex="-1" aria-labelledby="roomModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="roomModalLabel">Masukkan Nomor Kamar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="modal-room-number" class="form-label">Nomor Kamar</label>
+          <input type="text" class="form-control" id="modal-room-number" placeholder="Masukkan nomor kamar">
+          <input type="hidden" id= "no_form" value="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Confirmation -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Konfirmasi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="cancelStatus()"></button>
+      </div>
+      <div class="modal-body">
+        Apakah Anda yakin ingin mengubah status?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="cancelStatus()">Batal</button>
+        <button type="button" class="btn btn-primary" onclick="submitForm2()">Ya</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function handleStatusChange(selectElement, itemId) {
+    if (selectElement.value === "APPROVED") {
+      // Tampilkan modal jika status APPROVED dipilih
+      const modal = new bootstrap.Modal(document.getElementById('roomModal'));
+      document.getElementById('no_form').value = itemId;
+      modal.show();
+    } else {
+      // Jika status selain APPROVED, langsung submit form
+      const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+      document.getElementById('no_form').value = itemId;
+      confirmModal.show();
+    }
+  }
+
+  function submitForm2() {
+    const formId = document.getElementById('form-update-status-' + document.getElementById('no_form').value);
+    formId.submit();
+  }
+
+  function cancelStatus() {
+    var selectElement = document.getElementById('status-select-' + document.getElementById('no_form').value);
+    selectElement.selectedIndex = 0;
+  }
+
+  function submitForm() {
+    const roomNumberInput = document.getElementById('modal-room-number').value;
+    if (!roomNumberInput) {
+      alert("Nomor kamar tidak boleh kosong!");
+      return;
+    }
+
+    let itemId = document.getElementById('no_form').value;
+    document.getElementById('form-update-status-' + itemId).querySelector('#room_number').value = roomNumberInput;
+    document.getElementById('form-update-status-' + itemId).submit();
+  }
+</script>
 @endsection
+

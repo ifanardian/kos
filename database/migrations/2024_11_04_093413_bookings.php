@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('tipe'); // Tipe pemesanan (BULANAN/TAHUNAN)
+            $table->string('tipe_kos'); // Tipe pemesanan (BULANAN/TAHUNAN)
             $table->string('nama_lengkap');
             $table->string('no_hp');
             $table->string('email');
             $table->text('alamat');
             $table->string('ktp'); // Path file upload KTP
-            $table->date('tanggal_pesan');
+            $table->date('periode_penempatan');
+            $table->string('note')->nullable();
             $table->enum('status', ['PENDING', 'APPROVED', 'REJECTED'])->default('PENDING');
             $table->timestamps();
         });
