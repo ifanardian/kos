@@ -73,30 +73,22 @@
               <table class="table table-borderless">
                 <thead>
                   <tr>
-                    <th scope="col" colspan="2">Kos</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
+                    <th scope="col">No Kos</th>
+                    <th scope="col" >Tipe</th>
+                    <th scope="col"colspan="2">Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                    <th>x02</th>
-                    <th> <span>$720.00</span></th>
-                  </tr>
-                  <tr>
-                    <th colspan="3">Subtotal</th>
-                    <th> <span>$2160.00</span></th>
-                  </tr>
-                  <tr>
-                    <th colspan="3">shipping</th>
-                    <th><span>flat rate: $50.00</span></th>
+                    <th><span>{{$detailPenyewa->no_kamar}}</span></th>
+                    <th>{{ DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('deskripsi') }}</th>
+                    <th colspan="2"> <span>Rp. {{ number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.') }}</span></th>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th scope="col" colspan="3">Quantity</th>
-                    <th scope="col">Total</th>
+                    <th scope="col" colspan="3">Grand Total</th>
+                    <th scope="col">Rp. {{ number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.')}}</th>
                   </tr>
                 </tfoot>
               </table>
@@ -133,71 +125,89 @@
           <div class="col-lg-4">
             <div class="order_box">
               <h2>Your Order</h2>
-              <ul class="list">
-                {{-- @if ($bookings) --}}
-                {{-- <li>
-                  <a href="#">Product
-                    <span>Total</span>
-                  </a>
-                </li> --}}
+              <form action="{{ route('payment.action') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <li>
-                  {{-- <a href="#"> Sewa Kos {{ $tipe }} --}}
-                    {{-- <span class="last">Rp {{ number_format($harga, 0, ',', '.') }} </span> --}}
-                  </a>
-                </li>
-              </ul>
-              <ul class="list list_2">
-                <li>
-                  <a href="#">Subtotal
-                    {{-- <span>Rp {{ number_format($harga, 0, ',', '.') }}</span> --}}
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Total
-                    {{-- <span>Rp {{ number_format($harga, 0, ',', '.') }}</span> --}}
-                  </a>
-                </li>
-              </ul>
-              {{-- @else
-                  <p>Booking information not found.</p>
-              @endif --}}
-              <div class="payment_item">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option5" name="selector" />
-                  <label for="f-option5">Pembayaran Tunai</label>
-                  <div class="check"></div>
+                <ul class="list">
+                  {{-- @if ($bookings) --}}
+                  {{-- <li>
+                    <a href="#">Product
+                      <span>Total</span>
+                    </a>
+                  </li> --}}
+                  <li>
+                    {{-- <a href="#"> Sewa Kos {{ $tipe }} --}}
+                      {{-- <span class="last">Rp {{ number_format($harga, 0, ',', '.') }} </span> --}}
+                    </a>
+                  </li>
+                </ul>
+                <ul class="list list_2">
+                  <!-- <li>
+                    <a href="#">Subtotal
+                      {{-- <span>Rp {{ number_format($harga, 0, ',', '.') }}</span> --}}
+                    </a>
+                  </li> -->
+                  <li>
+                    <a href="#">Total
+                    <span>Rp {{ number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.') }}</span>
+                    </a>
+                  </li>
+                </ul>
+                {{-- @else
+                    <p>Booking information not found.</p>
+                @endif --}}
+                <div class="payment_item">
+                  <div class="radion_btn">
+                    <input type="radio" id="f-option5" name="metode_pembayaran" value="Tunai" required />
+                    <label for="f-option5">Pembayaran Tunai</label>
+                    <div class="check"></div>
+                  </div>
+                  <p>
+                    Datang secara langsung ke XXX untuk melakukan DP dan pembayaran secara tunai.
+                  </p>
                 </div>
-                <p>
-                  Datang secara langsung ke XXX untuk melakukan DP dan pembayaran secara tunai.
-                </p>
-              </div>
-              <div class="payment_item">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option6" name="selector" />
-                  <label for="f-option6">Pembayaran Non Tunai</label>
-                  <div class="check"></div>
+                <div class="payment_item">
+                  <div class="radion_btn">
+                    <input type="radio" id="f-option6" name="metode_pembayaran" value="Transfer" required />
+                    <label for="f-option6">Pembayaran Non Tunai</label>
+                    <div class="check"></div>
+                  </div>
+                  <p>
+                    BCA a/n XXX <br>
+                    012121212121 <br>
+                    BRI a/n XXX <br>
+                    98908707886 <br><br>
+                    <label for="bukti_tf" >Upload Bukti Pembayaran</label>
+                    <input type="file" class="file-upload" id="bukti_tf" name="bukti_tf" accept=".jpg, .jpeg" disabled/>
+                  </p>
                 </div>
-                <p>
-                  BCA a/n XXX <br>
-                  012121212121 <br>
-                  BRI a/n XXX <br>
-                  98908707886 <br><br>
-                  <label for="ktp">Upload Bukti Pembayaran</label>
-                  <input type="file" class="file-upload" id="ktp" name="ktp"  accept=".jpg, .jpeg" required/>
-                </p>
-              </div>
-              {{-- <div class="creat_account">
-                <input type="checkbox" id="f-option4" name="selector" />
-                <label for="f-option4">I’ve read and accept the </label>
-                <a href="#">terms & conditions*</a>
-              </div> --}}
-              <a class="btn_3" type="submit" href="{{ route('checkout') }}">BOOK</a>
+                <input type="hidden" name="email" value="{{ $payment->email }}">
+                <input type="hidden" name="periode_tagihan" value="{{ $payment->periode_tagihan }}">
+                <button class="btn_3" type="submit">BOOK</button>
+              </form>     
             </div>
-          </div>      
+          </div>
+     
         </div>
       </div>
     </div>
   </section>
   <!--================ confirmation part end =================-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('input[type="radio"]').click(function() {
+        if($(this).attr('id') == 'f-option5') {
+          $('#bukti_tf').attr('required', false);
+          $('#bukti_tf').attr('disabled', true);
+          $('#bukti_tf').value = '';
+        } else {
+          $('label[for="bukti_tf"]').show();
+          $('#bukti_tf').show();
+          $('#bukti_tf').attr('required', true);
+          $('#bukti_tf').attr('disabled', false);
+          // $('#bukti_tf').removeAttr('disabled');
+        }
+      });
+    });
+  </script>
 @endsection
