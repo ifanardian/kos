@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('metode_pembayaran')->nullable();
             $table->date('tanggal_pembayaran')->nullable();
             $table->string('bukti_pembayaran')->nullable();
+            $table->boolean('status_verifikasi')->nullable()->default(null);
             $table->timestamps();
 
             $table->primary(['email', 'periode_tagihan']);

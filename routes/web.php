@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ConfirmBookingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\SendEmailController;
+use App\Http\Controllers\Admin\Verifikasipembayaran\AdminPaymentController;
 
 
 //user
@@ -29,7 +30,8 @@ Route::post('/password/create', [App\Http\Controllers\Auth\ForgotPasswordControl
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/tagihan', [PaymentController::class, 'showPayment'])->name('tagihan');
+    Route::get('/payment', [PaymentController::class, 'showPayment'])->name('tagihan');
+    Route::post('/payment', [PaymentController::class, 'payment'])->name('payment.action');
     Route::get('/checkout', [controller_checkout::class, 'checkout'])->name('checkout'); 
 });
 
@@ -42,6 +44,8 @@ Route::prefix('admin')->group(function () {
     //membuat untuk rill
     Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
     Route::get('penyewa', [ConfirmBookingController::class, 'penyewa'])->name('admin.penyewa');
+    Route::get('payment', [AdminPaymentController::class, 'showPayment'])->name('admin.payment');
+    Route::post('payment', [AdminPaymentController::class, 'actionPayment'])->name('admin.action.pembayaran');
 });
 
 
