@@ -49,7 +49,15 @@
                           <td>{{$dt->periode_tagihan}}</td>
                           <td>{{$dt->total_tagihan}}</td>
                           <td>{{$dt->metode_pembayaran}}</td>
-                          <td>{{$dt->bukti_pembayaran}}</td>
+                          <td>
+                            @if($dt->bukti_pembayaran != null)
+                            <a href="{{ route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) }}" >
+                                <img src="{{ route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) }}" alt="tf" style="width:100px;height:auto;">
+                            </a>
+                            @else
+                              Tidak Ada Bukti Pembayaran
+                            @endif
+                          </td>
                           <td>
                           <form id="form-update-status" action="{{ route('admin.action.pembayaran') }}" method="POST">
                             @csrf

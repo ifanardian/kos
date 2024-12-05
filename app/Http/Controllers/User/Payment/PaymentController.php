@@ -33,16 +33,19 @@ class PaymentController extends Controller
             'email' => 'required|email',
             'periode_tagihan' => 'required|string',
             'metode_pembayaran' => 'required|string',
-            'bukti_pembayaran' => 'nullable|file|mimes:jpg,png,pdf',
+            'bukti_tf' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
+        $bukti_pembayaran = $request->file('bukti_tf');
+        $fileName =$request->email.'-'.date('d-m-Y').'.'.$bukti_pembayaran->extension();
+        $filePath = $bukti_pembayaran->storeAs('bukti pembayaran/'.$request->email, $fileName, 'local');
 
         DB::table('payments')
             ->where('email', $request->email)
             ->where('periode_tagihan', $request->periode_tagihan)
             ->update([
                 'metode_pembayaran' => $request->metode_pembayaran,
-                'bukti_pembayaran' => $request->metode_pembayaran == 'Transfer' ? $request->bukti_pembayaran : null,
-                'tanggal_pembayaran' => $request->metode_pembayaran == 'Transfer' ? date('d-m-Y') : null,
+                'bukti_pembayaran' => $request->metode_pembayaran == 'Transfer' ? $fileName : null,
+                'tanggal_pembayaran' => $request->metode_pembayaran == 'Transfer' ? date('Y-m-d') : null,
                 'status_verifikasi' => false,
                 'updated_at' => now(),
             ]);        

@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="confirmation_tittle">
-                <span>Silahkan lakukan pembayaran paling lambat {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay(2)->format('d M Y') }}</span>
+                <span>Silahkan lakukan pembayaran paling lambat {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span>
             </div>
           </div>
           <div class="col-lg-8">
@@ -177,7 +177,7 @@
                     BRI a/n XXX <br>
                     98908707886 <br><br>
                     <label for="bukti_tf" >Upload Bukti Pembayaran</label>
-                    <input type="file" class="file-upload" id="bukti_tf" name="bukti_tf" accept=".jpg, .jpeg" disabled/>
+                    <input type="file" class="file-upload" id="bukti_tf" name="bukti_tf" accept=".jpg, .jpeg, .png" disabled/>
                   </p>
                 </div>
                 <input type="hidden" name="email" value="{{ $payment->email }}">

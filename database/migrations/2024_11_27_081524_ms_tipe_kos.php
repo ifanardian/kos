@@ -14,12 +14,13 @@ return new class extends Migration
         schema::create('ms_tipe_kos', function (Blueprint $table) {
             $table->id();
             $table->double('harga');
+            $bulan->integer('bulan');
             $table->string('deskripsi');
             $table->timestamps();
         });
         DB::table('ms_tipe_kos')->insert([
-            ['harga' => '400000', 'deskripsi' => 'Bulanan', 'created_at' => now(), 'updated_at' => now()],
-            ['kolom1' => '1000000', 'deskripsi' => 'Tahunan', 'created_at' => now(), 'updated_at' => now()],
+            ['harga' => '400000','bulan'=> 1, 'deskripsi' => 'Bulanan', 'created_at' => now(), 'updated_at' => now()],
+            ['kolom1' => '1000000','bulan'=> 12 , 'deskripsi' => 'Tahunan', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 
