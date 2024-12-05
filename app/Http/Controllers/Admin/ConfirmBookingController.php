@@ -15,6 +15,7 @@ use App\Models\Mstipekos;
 use App\Models\Penyewa;
 use App\Models\Users;
 use App\Models\Payments;
+use Illuminate\Support\Facades\DB;
 
 
 class ConfirmBookingController extends Controller
@@ -68,15 +69,18 @@ class ConfirmBookingController extends Controller
                 'ktp' => $booking->ktp,
                 'tanggal_booking' => $booking->created_at->format('Y-m-d'),
                 'tanggal_menyewa' => $booking->periode_penempatan,
-                'tanggal_jatuh_tempo' => date('Y-m-d', strtotime($booking->periode_penempatan . ' + 1 month')),
+                'tanggal_jatuh_tempo' => $booking->periode_penempatan,
                 'tanggal_berakhir' => null,
             ]);
             
             $tipekos = Mstipekos::where('id', $booking->tipe_kos)->first();
-            Payments::create([
+
+            DB::table('payments')->insert([
                 'email' => $booking->email,
                 'periode_tagihan' => $booking->periode_penempatan,
                 'total_tagihan' => $tipekos->harga,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
             Mail::to($booking->email)->send(new SetPasswordMail($booking));
 

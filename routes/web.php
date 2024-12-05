@@ -46,6 +46,7 @@ Route::prefix('admin')->group(function () {
     Route::get('penyewa', [ConfirmBookingController::class, 'penyewa'])->name('admin.penyewa');
     Route::get('payment', [AdminPaymentController::class, 'showPayment'])->name('admin.payment');
     Route::post('payment', [AdminPaymentController::class, 'actionPayment'])->name('admin.action.pembayaran');
+    Route::get('tf/{filename}', [AdminPaymentController::class, 'showbuktitf'])->name('admin.buktitf');
 });
 
 
