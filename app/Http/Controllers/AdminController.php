@@ -50,4 +50,9 @@ class AdminController extends Controller
     {
         return view('tagihan');
     }
+
+    public function password()
+    {
+        return view('auth.register');
+    }
 }
