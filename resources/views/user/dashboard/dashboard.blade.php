@@ -1,38 +1,14 @@
-@extends('user.layout.layout')
-@section('title', 'Dashboard')
+@extends('layout.layout')
+@section('title', 'Dashboard | Kos Fortuna')
 @section('content')
 <!-- banner part start-->
-{{-- <section class="banner_part">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-12">
-                <div class="single_banner_slider">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-8">
-                            <div class="banner_text">
-                                <div class="banner_text_iner">
-                                    <h1>Kos Fortuna</h1>
-                                    <p>Hunian Nyaman, Fasilitas Lengkap, Harga Bersahabat.</p>
-                                    <a href="#" class="btn_2">book now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="banner_img d-none d-lg-block">
-                            <img src="img/banner_img.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
 <section class="banner_part">
-    <div class="banner_video">
+    {{-- <div class="banner_video">
         <video autoplay muted loop>
             <source src="{{ asset('images/leaf.mp4') }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
+    Your browser does not support the video tag.
+    </video>
+    </div> --}}
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
@@ -58,7 +34,6 @@
 </section>
 
 <!-- banner part start-->
-
 <div id="panorama-section">
     <div class="section_tittle text-center">
         <h2>Virtual Tour 360<sup>°</sup></h2>
@@ -136,12 +111,11 @@
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <img src="img/product/product_6.png" alt="">
                                 <div class="single_product_text">
                                     <img style="margin-left: 35px" width="30" height="30"
                                         src="https://img.icons8.com/material-outlined/100/light-on--v1.png"
                                         alt="light-on--v1" />
-                                    <h4>Listrik & Air Gratis</h4>
+                                    <h4>CCTV 24 Jam</h4>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +196,7 @@
                         <div class="price-container">
                             <p><span class="currency">Rp</span> <span class="price">400.000</span> <span
                                     class="period">/ Bulan</span></p>
-                            <p>Sisa Kamar: {} </p>
+                            <p style="color: beige">Sisa Kamar: {} </p>
                         </div>
                         <a href="{{ route('booking', ['tipe' => 'Bulanan']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
@@ -235,7 +209,7 @@
                         <div class="price-container">
                             <p><span class="currency">Rp</span> <span class="price">4.500.000</span> <span
                                     class="period">/ Tahun</span></p>
-                            <p>Sisa Kamar: {} </p>
+                            <p style="color: beige">Sisa Kamar: {} </p>
                         </div>
                         <a href="{{ route('booking', ['tipe' => 'Tahunan']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
@@ -244,151 +218,80 @@
             </div>
         </div>
     </section>
-    <!-- upcoming_event part start-->
+    
 
-
-    <!-- awesome_shop start-->
-    {{-- <section class="our_offer section_padding">
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-6 col-md-6">
-                    <div class="offer_img">
-                        <img src="img/offer_img.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="offer_text">
-                        <h2>Weekly Sale on
-                            60% Off All Products</h2>
-                        <div class="date_countdown">
-                            <div id="timer">
-                                <div id="days" class="date"></div>
-                                <div id="hours" class="date"></div>
-                                <div id="minutes" class="date"></div>
-                                <div id="seconds" class="date"></div>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="enter email address"
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <a href="#" class="input-group-text btn_2" id="basic-addon2">book now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- awesome_shop part start-->
-
-    <!-- product_list part start-->
-    {{-- <section class="product_list best_seller section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>Best Sellers <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-12">
-                    <div class="best_product_slider owl-carousel">
-                        <div class="single_product_item">
-                            <img src="img/product/product_1.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_2.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_3.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_4.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_5.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- product_list part end-->
-
-    <!-- subscribe_area part start-->
-    <section class="subscribe_area section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="subscribe_area_text text-center">
-                        <h5>Join Our Newsletter</h5>
-                        <h2>Subscribe to get Updated
-                            with new offers</h2>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="enter email address"
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <a href="#" class="input-group-text btn_2" id="basic-addon2">subscribe now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--::subscribe_area part end::-->
     @push('scripts')
     <script src="js/custom.js"></script>
-    @endpush
+    {{-- <script>
+    window.addEventListener("scroll", () => {
+        const banner = document.querySelector(".banner_part");
+        const scrollPos = window.scrollY; // Mendapatkan posisi scroll
+        const maxHeight = window.innerHeight; // Tinggi layar
 
+        // Hitung opacity berdasarkan posisi scroll
+        const opacity = Math.min(scrollPos / maxHeight, 1); 
+
+        // Terapkan efek gradasi dinamis
+        banner.style.backgroundImage = `
+            linear-gradient(to bottom, rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, 0)),
+            url("{{ asset('images/houses.png') }}")
+    `;
+    });
+    </script> --}}
     <script>
-        let slideIndex = 0;
-        showSlides();
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector(".main_menu");
+            const banner = document.querySelector(".banner_part"); // Elemen di bawah navbar
 
-        function plusSlides(n) {
-            showSlides((slideIndex += n));
-        }
+            // Dapatkan posisi scroll
+            const bannerHeight = banner.offsetHeight;
+            const scrollTop = window.scrollY;
 
-        function currentSlide(n) {
-            showSlides((slideIndex = n));
-        }
-
-        function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+            // Cek jika scroll sudah melewati banner
+            if (scrollTop > bannerHeight) {
+                navbar.classList.remove("navbar-dark");
+                navbar.classList.add("navbar-light");
+            } else {
+                navbar.classList.remove("navbar-light");
+                navbar.classList.add("navbar-dark");
             }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 3000); // Change image every 2 seconds
-        }
+        });
 
     </script>
+
+    {{-- SCRIPT NAVBAR BERUBAH SAAT DI SCROLL --}}
+    {{-- <script>
+    const navbar = document.querySelector('.main_menu');
+
+    window.addEventListener('scroll', () => {
+    const bannerHeight = document.querySelector('.banner_part').offsetHeight;
+    if (window.scrollY > bannerHeight) {
+        navbar.style.background = '#7cbfc8'; // Warna setelah scroll
+        navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
+    } else {
+        navbar.style.background = 'transparent'; // Transparan saat di atas banner
+        navbar.style.boxShadow = 'none';
+    }
+    });
+
+</script> --}}
+    @endpush
+
+    @push('styles')
+    <style>
+        .banner_part {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            background-image: url("{{ asset('images/houses.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+    @endpush
+
     @endsection

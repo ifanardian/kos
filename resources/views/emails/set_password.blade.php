@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AKTIFASI KOS</title>
+    <title>AKTIVASI KOS</title>
 </head>
 <body>
     <h1>Selamat Datang, {{ $email }}</h1>
-    <p>Silahkan membuat password dan Login Untuk Membayar Kos pada Menu Tagihan</p>
+    <p>Silahkan membuat password baru untuk akun anda dan Login untuk membayar tagihan kos pada menu tagihan</p>
     <a href="{{ $url }}">Buat Password</a>
     <p>Terimakasih</p>
 </body>

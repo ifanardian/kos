@@ -17,6 +17,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        body {
+            background-color: #e3f6ff; 
+        }
+    </style>
     @stack('styles')
 </head>
 
@@ -27,7 +32,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="{{ route('dashboard') }}"> <img src="{{ asset('images/fortune.png') }}" style="width: 50px"> Fortuna</a>
+                        <a class="navbar-brand" href="{{ route('dashboard') }}"> 
+                            <img src="{{ asset('images/fortune.png') }}" style="width: 50px"> Fortuna
+                        </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +76,7 @@
                             </ul>
                         </div>
                         <div class="d-flex">
-                            <div>
+                            <div class="nav-item">
                                 <a class="nav-link" href="'. route('login') .'">LOGIN</a>
                             </div>
                             {{-- <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>

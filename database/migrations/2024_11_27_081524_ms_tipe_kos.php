@@ -14,7 +14,7 @@ return new class extends Migration
         schema::create('ms_tipe_kos', function (Blueprint $table) {
             $table->id();
             $table->double('harga');
-            $bulan->integer('bulan');
+            $table->integer('bulan');
             $table->string('deskripsi');
             $table->timestamps();
         });
