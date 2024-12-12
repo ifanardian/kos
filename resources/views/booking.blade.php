@@ -74,7 +74,19 @@
                                     Verifikasi akan dikirim via email. Pastikan data yang Anda kirim lengkap dan valid
                                 </p>
                             </div>
-                            <a class="btn_3" type="submit" href="{{ route('checkout') }}">BOOK</a>
+                            {{-- <a class="btn_3" id="openPopupBtn" type="submit" href="{{ route('checkout') }}">BOOK</a> --}}
+                            <button class="btn_3" id="bookBtn" type="submit" href="#">BOOK</button>
+                            
+                            <!-- Struktur pop-up -->
+                            <div id="popup" class="popup">
+                                <div class="popup-content">
+                                    <span id="closePopupBtn" class="close-btn">&times;</span>
+                                    <h2>Pop-up Title</h2>
+                                    <p>This is a pop-up message!</p>
+                                    <button id="confirmBtn">Confirm</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -82,6 +94,54 @@
         </div>
 </section>
 <!--================End Checkout Area =================-->
-<!-- custom js -->
-<script src="js/custom.js"></script>
+<script>
+    // Ambil elemen
+    const popup = document.getElementById('popup');
+    const bookBtn = document.getElementById('bookBtn');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const popupMessage = document.getElementById('popupMessage');
+
+    // Fungsi untuk mengirim data dan menampilkan pop-up
+    bookBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Mencegah aksi default link
+
+    // Kirim data ke server menggunakan AJAX
+    const formData = new FormData();
+    formData.append('nama', 'John Doe');
+    formData.append('email', 'john.doe@example.com');
+    formData.append('pesan', 'Pesan dari John Doe');
+
+    fetch('/api/pesan', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+        popupMessage.textContent = 'Pemesanan berhasil dilakukan!';
+        popup.style.display = 'flex'; // Tampilkan pop-up
+        } else {
+        popupMessage.textContent = 'Gagal melakukan pemesanan!';
+        popup.style.display = 'flex'; // Tampilkan pop-up
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    });
+
+    // Fungsi untuk menutup pop-up
+    closePopupBtn.addEventListener('click', () => {
+    popup.style.display = 'none'; // Sembunyikan pop-up
+    });
+
+    // Menutup pop-up jika klik di luar area konten
+    window.addEventListener('click', (e) => {
+    if (e.target === popup) {
+        popup.style.display = 'none';
+    }
+    });
+
+</script>
+
 @endsection

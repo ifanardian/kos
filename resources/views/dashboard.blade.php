@@ -47,9 +47,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="banner_img d-none d-lg-block">
-                            <img src="img/banner_img.png" alt="">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -233,7 +230,6 @@
                         </div>
                         <a href="{{ route('booking', ['tipe' => 'Bulanan']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
-                        <img src="img/feature/feature_1.png" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">
@@ -367,6 +363,5 @@
     </section>
     <!--::subscribe_area part end::-->
     @push('scripts')
-    <script src="js/custom.js"></script>
     @endpush
     @endsection

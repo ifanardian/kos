@@ -23,9 +23,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="banner_img d-none d-lg-block">
-                            <img src="img/banner_img.png" alt="">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +57,6 @@
                     <div class="row align-items-center justify-content-center">
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <img src="img/product/product_2.png" alt="">
                                 <div class="single_product_text">
                                     <img style="margin-left: 35px" width="30" height="35"
                                         src="https://img.icons8.com/material-outlined/100/map--v1.png" alt="map--v1" />
@@ -71,7 +67,6 @@
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <img src="img/product/product_2.png" alt="">
                                 <div class="single_product_text">
                                     <img style="margin-left: 35px" width="30" height="30"
                                         src="https://img.icons8.com/material-outlined/100/bureau.png" alt="bureau" />
@@ -81,7 +76,6 @@
                         </div>
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <img src="img/product/product_3.png" alt="">
                                 <div class="single_product_text">
                                     <img style="margin-left: 35px" width="30" height="30"
                                         src="https://img.icons8.com/material-outlined/100/star--v2.png"
@@ -128,7 +122,7 @@
 <!-- product_list part start-->
 
 {{-- GRID --}}
-<div class="row-grid">
+<div class="row-grid dark-bg">
     <div class="column">
         <img src="{{ asset('images/display8.jpeg') }}" style="width:100%">
         <img src="{{ asset('images/display2.jpeg') }}" style="width:100%">
@@ -180,7 +174,7 @@
     </div> --}}
 
     <!-- feature_part start-->
-    <section class="feature_part padding_top">
+    <section class="feature_part padding_top dark-bg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-9">
@@ -200,7 +194,6 @@
                         </div>
                         <a href="{{ route('booking', ['tipe' => 'Bulanan']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
-                        <img src="img/feature/feature_1.png" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">
@@ -221,7 +214,6 @@
     
 
     @push('scripts')
-    <script src="js/custom.js"></script>
     {{-- <script>
     window.addEventListener("scroll", () => {
         const banner = document.querySelector(".banner_part");
@@ -238,7 +230,7 @@
     `;
     });
     </script> --}}
-    <script>
+    {{-- <script>
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector(".main_menu");
             const banner = document.querySelector(".banner_part"); // Elemen di bawah navbar
@@ -257,24 +249,49 @@
             }
         });
 
-    </script>
+    </script> --}}
 
     {{-- SCRIPT NAVBAR BERUBAH SAAT DI SCROLL --}}
-    {{-- <script>
-    const navbar = document.querySelector('.main_menu');
+    <script>
+        // const navbar = document.querySelector('.main_menu');
 
-    window.addEventListener('scroll', () => {
-    const bannerHeight = document.querySelector('.banner_part').offsetHeight;
-    if (window.scrollY > bannerHeight) {
-        navbar.style.background = '#7cbfc8'; // Warna setelah scroll
-        navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
-    } else {
-        navbar.style.background = 'transparent'; // Transparan saat di atas banner
-        navbar.style.boxShadow = 'none';
-    }
-    });
+        // window.addEventListener('scroll', () => {
+        //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
+        //     if (window.scrollY > bannerHeight) {
+        //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
+        //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
+        //     } else {
+        //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
+        //         navbar.style.boxShadow = 'none';
+        //     }
+        //     });
 
-</script> --}}
+        const navbar = document.querySelector('.main_menu');
+        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
+
+        window.addEventListener('scroll', () => {
+            const bannerHeight = document.querySelector('.banner_part').offsetHeight;
+
+            if (window.scrollY > bannerHeight) {
+                // Ubah warna navbar dan font setelah scroll
+                // navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
+                navbar.style.backdropFilter = 'blur(100px)';
+                // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
+                navLinks.forEach(link => {
+                    link.style.color = '#fff'; // Warna font terang untuk background solid
+                });
+            } else {
+                // Kembalikan warna navbar dan font ke default saat di atas banner
+                navbar.style.background = 'transparent'; // Transparan sebelum scroll
+                navbar.style.boxShadow = 'none';
+                navLinks.forEach(link => {
+                    link.style.color = '#000'; // Warna font gelap untuk background terang
+                });
+            }
+        });
+
+
+    </script>
     @endpush
 
     @push('styles')

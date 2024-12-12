@@ -22,7 +22,7 @@
                 <table class="table table-sm">
                     <thead>
                       <tr>
-                        <th scope="col">email</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Nama Penyewa</th>
                         <th scope="col">No Kamar</th>
                         <th scope="col">Tanggal Pembayaran</th>
