@@ -72,7 +72,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('penyewaadmin') }}" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="{{ route('admin.penyewa') }}" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data Penyewa</span>
@@ -107,7 +107,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('riwayatadmin') }}" data-toggle="collapse" data-target="#collapsePages"
+                <a class="nav-link collapsed" href="{{ route('admin.payment') }}" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Riwayat Pembayaran</span>
@@ -128,7 +128,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('verifikasiadmin') }}">
+                <a class="nav-link" href="{{ route('admin.verifikasi.booking') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Verifikasi Calon Penghuni</span></a>
             </li>
