@@ -83,24 +83,26 @@
                                 </p>
                             </div>
                             {{-- <a class="btn_3" id="bookButton" type="submit">BOOK</a> --}}
-
-                            <button class="btn_3" id="bookBtn" type="submit" href="#">BOOK</button>
                             
-                            <!-- Struktur pop-up -->
-                            <div id="popup" class="popup">
-                                <div class="popup-content">
-                                    <span id="closePopupBtn" class="close-btn">&times;</span>
-                                    <h2>Pop-up Title</h2>
-                                    <p>This is a pop-up message!</p>
-                                    <button id="confirmBtn">Confirm</button>
-                                </div>
-                            </div>
+                            {{-- fiona coba popup --}}
+                            <button class="btn_3" id="bookButton" type="submit">BOOK</button>
+                            {{-- end --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 </section>
+
+<!-- Struktur Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span id="closePopupBtn" class="close-btn">&times;</span>
+        <h3>Booking berhasil</h3>
+        <p id="popupMessage"></p>
+        <button id="confirmBtn">Close</button>
+    </div>
+</div>
 <!--================End Checkout Area =================-->
 <script>
     // document.getElementById('bookButton').addEventListener('click', function () {
@@ -108,41 +110,48 @@
     // });
 
     // Ambil elemen
+
+    // fiona coba popup
     const popup = document.getElementById('popup');
-    const bookBtn = document.getElementById('bookBtn');
+    const bookButton = document.getElementById('bookButton');
     const closePopupBtn = document.getElementById('closePopupBtn');
     const popupMessage = document.getElementById('popupMessage');
+    const formBook = document.getElementById('formBook');
 
     // Fungsi untuk mengirim data dan menampilkan pop-up
-    bookBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Mencegah aksi default link
+    bookButton.addEventListener('click', (e) => {
+        e.preventDefault(); // Mencegah aksi default tombol submit
 
-        // fetch('/api/pesan', {
-        //     method: 'POST',
-        //     body: formData
-        // })
+        // Kirim data form dengan Fetch API
+        const formData = new FormData(formBook);
 
-        document.getElementById('bookButton').addEventListener('click', function () {
-            document.getElementById('formBook').submit();
-        });
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-            popupMessage.textContent = 'Pemesanan berhasil dilakukan!';
-            popup.style.display = 'flex'; // Tampilkan pop-up
-            } else {
-            popupMessage.textContent = 'Gagal melakukan pemesanan!';
-            popup.style.display = 'flex'; // Tampilkan pop-up
-            }
+        fetch(formBook.action, {
+            method: 'POST',
+            body: formData,
         })
-        .catch(error => {
-            console.error(error);
-        });
+            .then(response => response.json{
+                console.log('Raw Response:', response);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Parsed Response:', data);
+                if (data.success) {
+                    popupMessage.textContent = 'Silahkan menunggu email konfirmasi dari admin.';
+                } else {
+                    popupMessage.textContent = 'Gagal melakukan pemesanan. Silakan coba lagi.';
+                }
+                popup.style.display = 'flex'; // Tampilkan pop-up
+            })
+            .catch(error => {
+                console.error('Fetch Error:', error);
+                popupMessage.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
+                popup.style.display = 'flex'; // Tampilkan pop-up
+            });
     });
 
     // Fungsi untuk menutup pop-up
     closePopupBtn.addEventListener('click', () => {
-        popup.style.display = 'none'; // Sembunyikan pop-up
+        popup.style.display = 'none';
     });
 
     // Menutup pop-up jika klik di luar area konten
@@ -151,6 +160,13 @@
             popup.style.display = 'none';
         }
     });
+
+    // Tombol "Confirm" pada pop-up
+    document.getElementById('confirmBtn').addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+    // end fiona coba popup
+
 </script>
 
 <script>
