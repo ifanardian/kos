@@ -1,12 +1,5 @@
 @extends('user.layout.layout')
 @section('title', 'Checkout')
-{{-- @push('styles')
-    <style>
-        body {
-            background-color: #021526;
-        }
-    </style>
-@endpush --}}
 @section('content')
 <!--================Home Banner Area =================-->
 <!-- breadcrumb start-->
@@ -89,7 +82,19 @@
                                     Verifikasi akan dikirim via email. Pastikan data yang Anda kirim lengkap dan valid
                                 </p>
                             </div>
-                            <a class="btn_3" id="bookButton" type="submit">BOOK</a>
+                            {{-- <a class="btn_3" id="bookButton" type="submit">BOOK</a> --}}
+
+                            <button class="btn_3" id="bookBtn" type="submit" href="#">BOOK</button>
+                            
+                            <!-- Struktur pop-up -->
+                            <div id="popup" class="popup">
+                                <div class="popup-content">
+                                    <span id="closePopupBtn" class="close-btn">&times;</span>
+                                    <h2>Pop-up Title</h2>
+                                    <p>This is a pop-up message!</p>
+                                    <button id="confirmBtn">Confirm</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,11 +102,95 @@
         </div>
 </section>
 <!--================End Checkout Area =================-->
-<!-- custom js -->
-<script src="js/custom.js"></script>
 <script>
-    document.getElementById('bookButton').addEventListener('click', function () {
-        document.getElementById('formBook').submit();
+    // document.getElementById('bookButton').addEventListener('click', function () {
+    //     document.getElementById('formBook').submit();
+    // });
+
+    // Ambil elemen
+    const popup = document.getElementById('popup');
+    const bookBtn = document.getElementById('bookBtn');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const popupMessage = document.getElementById('popupMessage');
+
+    // Fungsi untuk mengirim data dan menampilkan pop-up
+    bookBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Mencegah aksi default link
+
+        // fetch('/api/pesan', {
+        //     method: 'POST',
+        //     body: formData
+        // })
+
+        document.getElementById('bookButton').addEventListener('click', function () {
+            document.getElementById('formBook').submit();
+        });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+            popupMessage.textContent = 'Pemesanan berhasil dilakukan!';
+            popup.style.display = 'flex'; // Tampilkan pop-up
+            } else {
+            popupMessage.textContent = 'Gagal melakukan pemesanan!';
+            popup.style.display = 'flex'; // Tampilkan pop-up
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
     });
+
+    // Fungsi untuk menutup pop-up
+    closePopupBtn.addEventListener('click', () => {
+        popup.style.display = 'none'; // Sembunyikan pop-up
+    });
+
+    // Menutup pop-up jika klik di luar area konten
+    window.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    // const navbar = document.querySelector('.main_menu');
+
+    // window.addEventListener('scroll', () => {
+    //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
+    //     if (window.scrollY > bannerHeight) {
+    //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
+    //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
+    //     } else {
+    //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
+    //         navbar.style.boxShadow = 'none';
+    //     }
+    //     });
+
+    const navbar = document.querySelector('.main_menu');
+    const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
+
+    window.addEventListener('scroll', () => {
+        const bannerHeight = document.querySelector('.breadcrumb, .breadcrumb_bg').offsetHeight;
+
+        if (window.scrollY > bannerHeight) {
+            // Ubah warna navbar dan font setelah scroll
+            navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
+            // navbar.style.backdropFilter = 'blur(100px)';
+            // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
+            navLinks.forEach(link => {
+                link.style.color = '#fff'; // Warna font terang untuk background solid
+            });
+        } else {
+            // Kembalikan warna navbar dan font ke default saat di atas banner
+            navbar.style.background = 'transparent'; // Transparan sebelum scroll
+            navbar.style.boxShadow = 'none';
+            navLinks.forEach(link => {
+                link.style.color = '#e5e5d2'; // Warna font gelap untuk background terang
+            });
+        }
+    });
+
+
 </script>
 @endsection

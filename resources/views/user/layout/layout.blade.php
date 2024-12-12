@@ -74,7 +74,7 @@
                             </ul>
                         </div>
                         <div class="d-flex">
-                            <div>
+                            <div class="nav-item">
                                 <a class="nav-link" href="'. route('login') .'">LOGIN</a>
                             </div>
                             {{-- <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
@@ -219,8 +219,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!--::footer_part end::-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
     @stack('scripts')
 </body>
 

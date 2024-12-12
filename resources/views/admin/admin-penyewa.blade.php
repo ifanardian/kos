@@ -26,7 +26,7 @@
                     <table class="table table-sm">
                         <thead>
                           <tr>
-                            <th scope="col">email</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Nomor Telepon</th>
                             <th scope="col">No Kamar</th>
