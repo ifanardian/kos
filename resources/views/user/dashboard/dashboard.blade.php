@@ -1,5 +1,23 @@
 @extends('layout.layout')
 @section('title', 'Dashboard | Kos Fortuna')
+
+@push('styles')
+<style>
+    .banner_part {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        position: relative;
+        background-image: url("{{ asset('images/houses.png') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+</style>
+@endpush
+
 @section('content')
 <!-- banner part start-->
 <section class="banner_part">
@@ -211,7 +229,7 @@
             </div>
         </div>
     </section>
-    
+    @endsection
 
     @push('scripts')
     {{-- <script>
@@ -274,8 +292,8 @@
 
             if (window.scrollY > bannerHeight) {
                 // Ubah warna navbar dan font setelah scroll
-                // navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
-                navbar.style.backdropFilter = 'blur(100px)';
+                navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
+                // navbar.style.backdropFilter = 'blur(100px)';
                 // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
                 navLinks.forEach(link => {
                     link.style.color = '#fff'; // Warna font terang untuk background solid
@@ -290,25 +308,5 @@
             }
         });
 
-
     </script>
     @endpush
-
-    @push('styles')
-    <style>
-        .banner_part {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-            background-image: url("{{ asset('images/houses.png') }}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-    </style>
-    @endpush
-
-    @endsection

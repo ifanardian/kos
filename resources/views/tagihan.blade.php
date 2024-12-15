@@ -1,5 +1,29 @@
-@extends('layout.layout')
+@extends('user.layout.layout')
 @section('title', 'Tagihan Bulanan | Kos Fortuna')
+@push('styles')
+<style>
+    .main_menu .navbar-brand {
+        color: #ffffce;
+    }
+
+    .main_menu .main-menu-item ul li .nav-link {
+        color: #ffffce;
+    }
+
+    .main_menu .main-menu-item ul li .nav-link:hover {
+        color: #6987af;
+    }
+
+    .main_menu .d-flex .nav-item {
+        color: #ffffce;
+    }
+
+    .main_menu .d-flex .nav-item:hover {
+        color: #6987af;
+    }
+
+</style>
+@endpush
 @section('content')
 <!--================Home Banner Area =================-->
 <!-- breadcrumb start-->
@@ -100,46 +124,45 @@
 
 @push('scripts')
 
-    {{-- SCRIPT NAVBAR BERUBAH SAAT DI SCROLL --}}
-    <script>
-        // const navbar = document.querySelector('.main_menu');
+{{-- SCRIPT NAVBAR BERUBAH SAAT DI SCROLL --}}
+<script>
+    // const navbar = document.querySelector('.main_menu');
 
-        // window.addEventListener('scroll', () => {
-        //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
-        //     if (window.scrollY > bannerHeight) {
-        //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
-        //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
-        //     } else {
-        //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
-        //         navbar.style.boxShadow = 'none';
-        //     }
-        //     });
+    // window.addEventListener('scroll', () => {
+    //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
+    //     if (window.scrollY > bannerHeight) {
+    //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
+    //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
+    //     } else {
+    //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
+    //         navbar.style.boxShadow = 'none';
+    //     }
+    //     });
 
-        const navbar = document.querySelector('.main_menu');
-        const navLinks = document.querySelectorAll('.nav-link'); // Semua elemen link navbar
+    const navbar = document.querySelector('.main_menu');
+    const navLinks = document.querySelectorAll('.nav-link'); // Semua elemen link navbar
 
-        window.addEventListener('scroll', () => {
-            const bannerHeight = document.querySelector('.banner_part').offsetHeight;
+    window.addEventListener('scroll', () => {
+        const bannerHeight = document.querySelector('.banner_part').offsetHeight;
 
-            if (window.scrollY > bannerHeight) {
-                // Ubah warna navbar dan font setelah scroll
-                // navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
-                navbar.style.backdropFilter = 'blur(100px)';
-                // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
-                navLinks.forEach(link => {
-                    link.style.color = '#fff'; // Warna font terang untuk background solid
-                });
-            } else {
-                // Kembalikan warna navbar dan font ke default saat di atas banner
-                navbar.style.background = 'transparent'; // Transparan sebelum scroll
-                navbar.style.boxShadow = 'none';
-                navLinks.forEach(link => {
-                    link.style.color = '#e5e5d2'; // Warna font gelap untuk background terang
-                });
-            }
-        });
+        if (window.scrollY > bannerHeight) {
+            // Ubah warna navbar dan font setelah scroll
+            // navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
+            navbar.style.backdropFilter = 'blur(100px)';
+            // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
+            navLinks.forEach(link => {
+                link.style.color = '#fff'; // Warna font terang untuk background solid
+            });
+        } else {
+            // Kembalikan warna navbar dan font ke default saat di atas banner
+            navbar.style.background = 'transparent'; // Transparan sebelum scroll
+            navbar.style.boxShadow = 'none';
+            navLinks.forEach(link => {
+                link.style.color = '#e5e5d2'; // Warna font gelap untuk background terang
+            });
+        }
+    });
 
-
-    </script>
-    @endpush
+</script>
+@endpush
 @endsection
