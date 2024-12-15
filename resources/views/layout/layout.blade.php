@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <title>dashboard</title> -->
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('images/fortune.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/luck.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
     <!-- animate CSS -->
@@ -33,7 +33,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="{{ route('dashboard') }}"> 
-                            <img src="{{ asset('images/fortune.png') }}" style="width: 50px"> Fortuna
+                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -221,7 +221,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!--::footer_part end::-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+    {{-- <script>
         // const navbar = document.querySelector('.main_menu');
 
         // window.addEventListener('scroll', () => {
@@ -260,7 +260,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
 
 
-    </script>
+    </script> --}}
     @stack('scripts')
 </body>
 
