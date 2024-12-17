@@ -292,7 +292,7 @@
 
             if (window.scrollY > bannerHeight) {
                 // Ubah warna navbar dan font setelah scroll
-                navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
+                navbar.style.background = '#7cafc8'; 
                 // navbar.style.backdropFilter = 'blur(100px)';
                 // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
                 navLinks.forEach(link => {
