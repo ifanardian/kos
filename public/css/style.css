@@ -735,7 +735,7 @@ ul {
     color: var(--primary-color);
     /* text-shadow: 2px 0px 5px var(--background-color); */
     transition: color 0.3s ease;
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference; */
     font-size: 16px;
     padding: 36px 23px;
     line-height: 12px;
