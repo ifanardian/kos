@@ -2,16 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+    <link rel="icon" href="{{ asset('images/luck.png') }}" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <!-- animate CSS -->
+    <link rel="stylesheet" href={{ asset('css/animate.css') }}>
+    <!-- style CSS -->
+    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <title>login</title>
     <style>
         body {
@@ -65,7 +68,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="d-flex flex-row align-items-center mb-5">
                                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
                                                 <label class="form-label" for="form3Example4c">Password</label>
@@ -82,7 +85,7 @@
                                                 class="btn btn-primary btn-lg">Login</button>
                                         </div> --}}
 
-                                        <div class="password">
+                                        <div class="password text-center">
                                             <button class="btn_3" type="submit" value="submit">Login</button>
                                         </div>
 

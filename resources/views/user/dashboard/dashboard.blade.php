@@ -67,7 +67,7 @@
 </div>
 
 <!-- product_list start-->
-<section class="product_list section_padding">
+{{-- <section class="product_list section_padding">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -79,7 +79,6 @@
                                     <img style="margin-left: 35px" width="30" height="35"
                                         src="https://img.icons8.com/material-outlined/100/map--v1.png" alt="map--v1" />
                                     <h4>Dekat Fasilitas Umum</h4>
-                                    {{-- <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a> --}}
                                 </div>
                             </div>
                         </div>
@@ -136,8 +135,94 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- product_list part start-->
+
+{{-- ganti card --}}
+{{-- <div class="figure_card mr-5">
+    <figure class="mr-5">
+        <img src="https://picsum.photos/id/287/250/300" alt="Mountains">
+        <figcaption></figcaption>
+    </figure>
+    <figure>
+        <img src="https://picsum.photos/id/287/250/300" alt="Mountains">
+        <figcaption></figcaption>
+    </figure>
+</div>
+<div class="figure_card">
+    <figure>
+        <img src="https://picsum.photos/id/287/250/300" alt="Mountains">
+        <figcaption></figcaption>
+    </figure>
+</div> --}}
+{{-- end ganti card --}}
+
+{{-- card 2 --}}
+<div class="ag-format-container mt-5 mb-5">
+    <div class="ag-courses_box">
+        <div class="ag-courses_item">
+            <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+
+                <div class="ag-courses-item_title">
+                    Dekat Fasilitas Umum
+                </div>
+            </a>
+        </div>
+
+        <div class="ag-courses_item">
+            <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+
+                <div class="ag-courses-item_title">
+                    Fasilitas Kamar Lengkap
+                </div>
+            </a>
+        </div>
+
+        <div class="ag-courses_item">
+            <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+
+                <div class="ag-courses-item_title">
+                    Harga Bersaing
+                </div>
+            </a>
+        </div>
+
+        <div class="ag-courses_item">
+            <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+
+                <div class="ag-courses-item_title">
+                    Area Parkir Luas
+                </div>
+            </a>
+        </div>
+
+        <div class="ag-courses_item">
+            <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+
+                <div class="ag-courses-item_title">
+                    Akses Jalan Mudah
+                </div>
+            </a>
+        </div>
+
+        <div class="ag-courses_item">
+            <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+
+                <div class="ag-courses-item_title">
+                    CCTV 24 Jam
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+{{-- end card --}}
 
 {{-- GRID --}}
 <div class="row-grid dark-bg">
@@ -292,7 +377,7 @@
 
             if (window.scrollY > bannerHeight) {
                 // Ubah warna navbar dan font setelah scroll
-                navbar.style.background = '#7cafc8'; 
+                navbar.style.background = '#7cafc8';
                 // navbar.style.backdropFilter = 'blur(100px)';
                 // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
                 navLinks.forEach(link => {

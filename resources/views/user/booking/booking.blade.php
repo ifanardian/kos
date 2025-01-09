@@ -133,84 +133,71 @@
 
 @push('scripts')
 <script>
-    // document.getElementById('bookButton').addEventListener('click', function () {
-    //     document.getElementById('formBook').submit();
-    // });
+    document.getElementById('bookButton').addEventListener('click', function () {
+        document.getElementById('formBook').submit();
+    });
 
     // Ambil elemen
 
-    // fiona coba popup
-    const popup = document.getElementById('popup');
-    const bookButton = document.getElementById('bookButton');
-    const closePopupBtn = document.getElementById('closePopupBtn');
-    const popupMessage = document.getElementById('popupMessage');
-    const formBook = document.getElementById('formBook');
+    // // fiona coba popup
+    // const popup = document.getElementById('popup');
+    // const bookButton = document.getElementById('bookButton');
+    // const closePopupBtn = document.getElementById('closePopupBtn');
+    // const popupMessage = document.getElementById('popupMessage');
+    // const formBook = document.getElementById('formBook');
 
-    // Fungsi untuk mengirim data dan menampilkan pop-up
-    bookButton.addEventListener('click', (e) => {
-        e.preventDefault(); // Mencegah aksi default tombol submit
+    // // Fungsi untuk mengirim data dan menampilkan pop-up
+    // bookButton.addEventListener('click', (e) => {
+    //     e.preventDefault(); // Mencegah aksi default tombol submit
 
-        // Kirim data form dengan Fetch API
-        const formData = new FormData(formBook);
+    //     // Kirim data form dengan Fetch API
+    //     const formData = new FormData(formBook);
 
-        fetch(formBook.action, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json {
-                console.log('Raw Response:', response);
-                return response.json();
-            })
-            .then(data => {
-                console.log('Parsed Response:', data);
-                if (data.success) {
-                    popupMessage.textContent = 'Silahkan menunggu email konfirmasi dari admin.';
-                } else {
-                    popupMessage.textContent = 'Gagal melakukan pemesanan. Silakan coba lagi.';
-                }
-                popup.style.display = 'flex'; // Tampilkan pop-up
-            })
-            .catch(error => {
-                console.error('Fetch Error:', error);
-                popupMessage.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
-                popup.style.display = 'flex'; // Tampilkan pop-up
-            });
-    });
+    //     fetch(formBook.action, {
+    //             method: 'POST',
+    //             body: formData,
+    //         })
+    //         .then(response => response.json {
+    //             console.log('Raw Response:', response);
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             console.log('Parsed Response:', data);
+    //             if (data.success) {
+    //                 popupMessage.textContent = 'Silahkan menunggu email konfirmasi dari admin.';
+    //             } else {
+    //                 popupMessage.textContent = 'Gagal melakukan pemesanan. Silakan coba lagi.';
+    //             }
+    //             popup.style.display = 'flex'; // Tampilkan pop-up
+    //         })
+    //         .catch(error => {
+    //             console.error('Fetch Error:', error);
+    //             popupMessage.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
+    //             popup.style.display = 'flex'; // Tampilkan pop-up
+    //         });
+    // });
 
-    // Fungsi untuk menutup pop-up
-    closePopupBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
+    // // Fungsi untuk menutup pop-up
+    // closePopupBtn.addEventListener('click', () => {
+    //     popup.style.display = 'none';
+    // });
 
-    // Menutup pop-up jika klik di luar area konten
-    window.addEventListener('click', (e) => {
-        if (e.target === popup) {
-            popup.style.display = 'none';
-        }
-    });
+    // // Menutup pop-up jika klik di luar area konten
+    // window.addEventListener('click', (e) => {
+    //     if (e.target === popup) {
+    //         popup.style.display = 'none';
+    //     }
+    // });
 
-    // Tombol "Confirm" pada pop-up
-    document.getElementById('confirmBtn').addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
-    // end fiona coba popup
+    // // Tombol "Confirm" pada pop-up
+    // document.getElementById('confirmBtn').addEventListener('click', () => {
+    //     popup.style.display = 'none';
+    // });
+    // // end fiona coba popup
 
 </script>
 
 <script>
-    // const navbar = document.querySelector('.main_menu');
-
-    // window.addEventListener('scroll', () => {
-    //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
-    //     if (window.scrollY > bannerHeight) {
-    //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
-    //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
-    //     } else {
-    //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
-    //         navbar.style.boxShadow = 'none';
-    //     }
-    //     });
-
     const navbar = document.querySelector('.main_menu');
     const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
 
