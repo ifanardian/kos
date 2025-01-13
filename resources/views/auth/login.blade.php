@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <title>login</title>
+    <title>Login | Kos Fortuna</title>
     <style>
         body {
             font-family: "Lexend", sans-serif;
@@ -40,6 +40,23 @@
             color: #fff !important;
             text-transform: uppercase;
             font-weight: 400;
+        }
+
+        .form-control {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .form-control:focus {
+            border-bottom: 2px solid #007bff;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .form-label {
+            font-weight: bold;
         }
 
     </style>

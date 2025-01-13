@@ -29,7 +29,11 @@ class ForgotPasswordController extends Controller
     public function showCreatePasswordForm(Request $request)
     {
         $email = $request->query('email');
-        return view('auth.create_password', compact('email'));
+        // old
+        // return view('auth.create_password', compact('email'));
+
+        // fiona ganti ke tampilan baru
+        return view('auth.register', compact('email'));
     }
 
     /**

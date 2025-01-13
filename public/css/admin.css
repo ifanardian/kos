@@ -75,6 +75,11 @@
     outline: 0 !important;
   }
   
+.thead-center th {
+  text-align: center; /* Mengatur teks agar berada di tengah */
+  vertical-align: middle !important; /* Jika ada elemen tinggi, akan sejajar vertikal */
+}
+
   hr {
     box-sizing: content-box;
     height: 0;

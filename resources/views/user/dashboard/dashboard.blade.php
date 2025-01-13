@@ -35,7 +35,7 @@
                         <div class="col-lg-5 col-md-8">
                             <div class="banner_text">
                                 <div class="banner_text_iner">
-                                    <h1>Kos Fortuna</h1>
+                                    <h1>Kos Fortunaa</h1>
                                     <p>Hunian Nyaman, Fasilitas Lengkap, Harga Bersahabat.</p>
                                     <a href="#" class="btn_2">book now</a>
                                 </div>
@@ -57,9 +57,87 @@
 
 
         <script>
-            pannellum.viewer('panorama', {
-                "type": "equirectangular",
-                "panorama": "{{ asset('images/panorama.png') }}"
+            // pannellum.viewer('panorama', {
+            //     "type": "equirectangular",
+            //     "panorama": "{{ asset('images/panorama.jpeg') }}",
+            //     "autoLoad": true,
+            //     "autoRotate": -4
+            // });
+
+            pannellum.viewer('panorama', {   
+                "default": {
+                    "firstScene": "middle",
+                    // "author": "Matthew Petroff",
+                    "sceneFadeDuration": 1000,
+                    "autoLoad": true
+                },
+
+                "scenes": {
+                    "middle": {
+                        // "title": "Kos",
+                        "hfov": 160, //seberapa zoom gambar pas pertama kali diliat
+                        "pitch": -10,
+                        "yaw": 80, //sudut mana yang diliat pertama kali
+                        "type": "equirectangular",
+                        "panorama": "{{ asset('images/panorama.jpeg') }}",
+                        "hotSpots": [
+                            {
+                                "pitch": -9.1,
+                                "yaw": 257,
+                                "type": "scene",
+                                "text": "Kamar Mandi",
+                                "sceneId": "kamarmandi"
+                            },
+                            {
+                                "pitch": -9.1,
+                                "yaw": 78,
+                                "type": "scene",
+                                "text": "Tempat Jemur",
+                                "sceneId": "jemur"
+                            }
+
+                        ]
+                    },
+
+                    "kamarmandi": {
+                        // "title": "Kamar Mandi",
+                        "hfov": 120,
+                        "pitch": -12,
+                        "yaw": 130,
+                        "type": "equirectangular",
+                        "panorama": "{{ asset('images/km.jpeg') }}",
+                        "hotSpots": [
+                            {
+                                "pitch": -9.1,
+                                "yaw": 217,
+                                "type": "scene",
+                                "text": "Tempat Jemur",
+                                "sceneId": "jemur",
+                                "targetYaw": -23,
+                                "targetPitch": 2
+                            }
+                        ]
+                    },
+
+                    "jemur": {
+                        // "title": "Kamar Mandi",
+                        "hfov": 120,
+                        "yaw": 140,
+                        "type": "equirectangular",
+                        "panorama": "{{ asset('images/km.jpeg') }}",
+                        "hotSpots": [
+                            {
+                                "pitch": -9.1,
+                                "yaw": 218,
+                                "type": "scene",
+                                "text": "Tempat Jemur",
+                                "sceneId": "jemur",
+                                "targetYaw": -23,
+                                "targetPitch": 2
+                            }
+                        ]
+                    }
+                }
             });
 
         </script>
@@ -314,61 +392,10 @@
             </div>
         </div>
     </section>
-    @endsection
+@endsection
 
-    @push('scripts')
-    {{-- <script>
-    window.addEventListener("scroll", () => {
-        const banner = document.querySelector(".banner_part");
-        const scrollPos = window.scrollY; // Mendapatkan posisi scroll
-        const maxHeight = window.innerHeight; // Tinggi layar
-
-        // Hitung opacity berdasarkan posisi scroll
-        const opacity = Math.min(scrollPos / maxHeight, 1); 
-
-        // Terapkan efek gradasi dinamis
-        banner.style.backgroundImage = `
-            linear-gradient(to bottom, rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, 0)),
-            url("{{ asset('images/houses.png') }}")
-    `;
-    });
-    </script> --}}
-    {{-- <script>
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector(".main_menu");
-            const banner = document.querySelector(".banner_part"); // Elemen di bawah navbar
-
-            // Dapatkan posisi scroll
-            const bannerHeight = banner.offsetHeight;
-            const scrollTop = window.scrollY;
-
-            // Cek jika scroll sudah melewati banner
-            if (scrollTop > bannerHeight) {
-                navbar.classList.remove("navbar-dark");
-                navbar.classList.add("navbar-light");
-            } else {
-                navbar.classList.remove("navbar-light");
-                navbar.classList.add("navbar-dark");
-            }
-        });
-
-    </script> --}}
-
-    {{-- SCRIPT NAVBAR BERUBAH SAAT DI SCROLL --}}
+    {{-- @push('scripts')
     <script>
-        // const navbar = document.querySelector('.main_menu');
-
-        // window.addEventListener('scroll', () => {
-        //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
-        //     if (window.scrollY > bannerHeight) {
-        //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
-        //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
-        //     } else {
-        //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
-        //         navbar.style.boxShadow = 'none';
-        //     }
-        //     });
-
         const navbar = document.querySelector('.main_menu');
         const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
 
@@ -378,8 +405,6 @@
             if (window.scrollY > bannerHeight) {
                 // Ubah warna navbar dan font setelah scroll
                 navbar.style.background = '#7cafc8';
-                // navbar.style.backdropFilter = 'blur(100px)';
-                // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
                 navLinks.forEach(link => {
                     link.style.color = '#fff'; // Warna font terang untuk background solid
                 });
@@ -394,4 +419,4 @@
         });
 
     </script>
-    @endpush
+    @endpush --}}

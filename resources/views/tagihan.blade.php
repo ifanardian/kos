@@ -1,4 +1,4 @@
-@extends('user.layout.layout')
+@extends('layout.layout')
 @section('title', 'Tagihan Bulanan | Kos Fortuna')
 @push('styles')
 <style>

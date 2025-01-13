@@ -42,6 +42,22 @@
             font-weight: 400;
         }
 
+        .form-control {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .form-control:focus {
+            border-bottom: 2px solid #007bff;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -67,12 +83,12 @@
                                     @endif
                                     <form method="POST" action="{{ route('password.store') }}" id="registerForm" class="mx-1 mx-md-6">
                                         @csrf
-                                        {{-- <input type="hidden" name="email" value="{{ $email }}"> --}}
+                                        <input type="hidden" name="email" value="{{ $email }}">
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <label class="form-label" for="first_name">New Password</label>
-                                                <input type="text" id="first_name" name="first_name"
+                                                <label class="form-label" for="password">New Password</label>
+                                                <input type="password" id="password" name="password"
                                                     class="form-control" />
                                             </div>
                                         </div>
@@ -80,8 +96,8 @@
                                         <div class="d-flex flex-row align-items-center mb-5">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <label class="form-label" for="form3Example1c">Confirm Password</label>
-                                                <input type="text" id="last_name" name="last_name"
+                                                <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                                <input type="password" id="last_name" name="password_confirmation"
                                                     class="form-control" />
                                             </div>
                                         </div>

@@ -81,7 +81,7 @@
                                 $user = Auth::user();
                                 if($user){
                                     echo'
-                                        <a class="nav-link" href="'. route('logout') .'">Logout</a>
+                                        <a class="nav-link" href="'. route('logout') .'">LOGOUT</a>
                                     ';
                                     
                                 }else{
