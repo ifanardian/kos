@@ -2,13 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Document</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ asset('images/luck.png') }}" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <!-- animate CSS -->
+    <link rel="stylesheet" href={{ asset('css/animate.css') }}>
+    <!-- style CSS -->
+    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <title>Create Password</title>
     <style>
         body {
             font-family: "Lexend", sans-serif;
@@ -35,6 +42,22 @@
             font-weight: 400;
         }
 
+        .form-control {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .form-control:focus {
+            border-bottom: 2px solid #007bff;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -58,27 +81,27 @@
                                         </ul>
                                     </div>
                                     @endif
-                                    <form method="POST" action="{{ route('password.store') }}" id="registerForm" class="mx-1 mx-md-4">
+                                    <form method="POST" action="{{ route('password.store') }}" id="registerForm" class="mx-1 mx-md-6">
                                         @csrf
                                         <input type="hidden" name="email" value="{{ $email }}">
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <label class="form-label" for="first_name">New Password</label>
-                                                <input type="text" id="first_name" name="first_name"
+                                                <label class="form-label" for="password">New Password</label>
+                                                <input type="password" id="password" name="password"
                                                     class="form-control" />
                                             </div>
                                         </div>
 
-                                        <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="d-flex flex-row align-items-center mb-5">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <label class="form-label" for="form3Example1c">Confirm Password</label>
-                                                <input type="text" id="last_name" name="last_name"
+                                                <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                                <input type="password" id="last_name" name="password_confirmation"
                                                     class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="password">
+                                        <div class="password text-center">
                                             <button class="btn_3" type="submit" value="submit">Set Password</button>
                                         </div>
 

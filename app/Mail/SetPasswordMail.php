@@ -23,13 +23,15 @@ class SetPasswordMail extends Mailable
 
     public function build()
     {
-        $url = route('password.create', ['email' => $this->booking->email]);
+        $url_setpassword = route('password.create', ['email' => $this->booking->email]);
+        $url_payment = route('tagihan');
 
-        return $this->subject('Set Your Password')
+        return $this->subject('Buat Password untuk Akun Anda')
                     ->view('emails.set_password')
                     ->with([
                         'email' => $this->booking->email,
-                        'url' => $url,
+                        'url_setpassword' => $url_setpassword,
+                        'url_payment' => $url_payment,
                     ]);
     }
 

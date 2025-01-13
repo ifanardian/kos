@@ -1,4 +1,4 @@
-@extends('user.layout.layout')
+@extends('layout.layout')
 @section('title', 'Payment | Kos Fortuna')
 
 @push('styles')
@@ -104,7 +104,7 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col">No Kos</th>
+                                    <th scope="col">No Kamar</th>
                                     <th scope="col">Tipe</th>
                                     <th scope="col" colspan="2">Total</th>
                                 </tr>
@@ -160,7 +160,7 @@
 
                 <div class="col-lg-4">
                     <div class="order_box">
-                        <h2>Your Order</h2>
+                        <h2>OPSI PEMBAYARAN</h2>
                         <form action="{{ route('payment.action') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <ul class="list">
@@ -176,19 +176,14 @@
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="list list_2">
-                                <!-- <li>
-                    <a href="#">Subtotal
-                      {{-- <span>Rp {{ number_format($harga, 0, ',', '.') }}</span> --}}
-                    </a>
-                  </li> -->
+                            {{-- <ul class="list list_2">
                                 <li>
                                     <a href="#">Total
                                         <span>Rp
                                             {{ number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
+                            </a>
+                            </li>
+                            </ul> --}}
                             {{-- @else
                     <p>Booking information not found.</p>
                 @endif --}}
@@ -200,7 +195,8 @@
                                     <div class="check"></div>
                                 </div>
                                 <p>
-                                    Datang secara langsung ke XXX untuk melakukan DP dan pembayaran secara tunai.
+                                    Datang secara langsung ke Kos Fortuna untuk melakukan DP dan pembayaran secara
+                                    tunai.
                                 </p>
                             </div>
                             <div class="payment_item">
@@ -211,10 +207,9 @@
                                     <div class="check"></div>
                                 </div>
                                 <p>
-                                    BCA a/n XXX <br>
-                                    012121212121 <br>
-                                    BRI a/n XXX <br>
-                                    98908707886 <br><br>
+                                    Lusiana <br>
+                                    BCA 0130743048 <br>
+                                    BRI 378701034178537 <br><br>
                                     <label for="bukti_tf">Upload Bukti Pembayaran</label>
                                     <input type="file" class="file-upload" id="bukti_tf" name="bukti_tf"
                                         accept=".jpg, .jpeg, .png" disabled />
@@ -222,7 +217,7 @@
                             </div>
                             <input type="hidden" name="email" value="{{ $payment->email }}">
                             <input type="hidden" name="periode_tagihan" value="{{ $payment->periode_tagihan }}">
-                            <button class="btn_3" type="submit">BOOK</button>
+                            <button class="btn_3" type="submit">BAYAR</button>
                         </form>
                     </div>
                 </div>
@@ -232,9 +227,9 @@
     </div>
 </section>
 <!--================ confirmation part end =================-->
-@endsection
 
-@push('scripts')
+
+{{-- @push('scripts') --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -294,4 +289,5 @@
     });
 
 </script>
-@endpush
+{{-- @endpush --}}
+@endsection

@@ -33,7 +33,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="{{ route('dashboard') }}"> 
-                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna
+                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna i
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -56,18 +56,12 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" href="'. route('checkout.store') .'">Tagihan</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="'. route('logout') .'">Logout</a>
-                                            </li>
                                         ';
                                         
                                     }else{
                                         echo'
                                             <li class="nav-item">
                                                 <a class="nav-link" href="'. route('booking') .'">Booking</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="'. route('login') .'">Login</a>
                                             </li>
                                         ';
                                     }
@@ -77,21 +71,21 @@
                         </div>
                         <div class="d-flex">
                             <div class="nav-item">
-                                <a class="nav-link" href="'. route('login') .'">LOGIN</a>
+                            <?php
+                                $user = Auth::user();
+                                if($user){
+                                    echo'
+                                        <a class="nav-link" href="'. route('logout') .'">LOGOUT</a>
+                                    ';
+                                    
+                                }else{
+                                    echo'
+                                        <a class="nav-link" href="'. route('login') . '">LOGIN</a>
+                                    ';
+                                }
+                                // <a class="nav-link" href="{{ route('login') }} ">LOGIN</a>
+                            ?>
                             </div>
-                            {{-- <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <a href=""><i class="ti-heart"></i></a>
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> 
-                            </div> --}}
                         </div>
                     </nav>
                 </div>
@@ -114,42 +108,9 @@
     </main>
     
     <!--::footer_part start::-->
-    <footer class="footer_part">
+    <footer class="footer_part mt-5">
         <div class="container">
             <div class="row justify-content-around">
-                {{-- <div class="col-sm-6 col-lg-2">
-                    <div class="single_footer_part">
-                        <h4>Top Products</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="">Managed Website</a></li>
-                            <li><a href="">Manage Reputation</a></li>
-                            <li><a href="">Power Tools</a></li>
-                            <li><a href="">Marketing Service</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-2">
-                    <div class="single_footer_part">
-                        <h4>Quick Links</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="">Jobs</a></li>
-                            <li><a href="">Brand Assets</a></li>
-                            <li><a href="">Investor Relations</a></li>
-                            <li><a href="">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-2">
-                    <div class="single_footer_part">
-                        <h4>Features</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="">Jobs</a></li>
-                            <li><a href="">Brand Assets</a></li>
-                            <li><a href="">Investor Relations</a></li>
-                            <li><a href="">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                </div> --}}
                 <div class="col-sm-6 col-lg-6">
                     <div class="single_footer_part">
                         <div class="maps_container">
@@ -199,11 +160,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        {{-- <div class="copyright_text">
-                            <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
-                        </div> --}}
                     </div>
                     <div class="col-lg-4">
                         <div class="footer_icon social_icon">
@@ -220,32 +176,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!--::footer_part end::-->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <script>
-        // const navbar = document.querySelector('.main_menu');
-
-        // window.addEventListener('scroll', () => {
-        //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
-        //     if (window.scrollY > bannerHeight) {
-        //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
-        //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
-        //     } else {
-        //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
-        //         navbar.style.boxShadow = 'none';
-        //     }
-        //     });
-
+    <script>
         const navbar = document.querySelector('.main_menu');
-        const navLinks = document.querySelectorAll('.nav-link'); // Semua elemen link navbar
+        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
 
         window.addEventListener('scroll', () => {
             const bannerHeight = document.querySelector('.banner_part').offsetHeight;
 
             if (window.scrollY > bannerHeight) {
                 // Ubah warna navbar dan font setelah scroll
-                navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
-                // navbar.style.backdropFilter = 'blur(100px)';
-                // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
+                navbar.style.background = '#7cafc8';
                 navLinks.forEach(link => {
                     link.style.color = '#fff'; // Warna font terang untuk background solid
                 });
@@ -258,10 +200,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 });
             }
         });
+        
+        @yield('scripts')
+    </script>
 
-
-    </script> --}}
-    @stack('scripts')
+    
 </body>
 
 </html>

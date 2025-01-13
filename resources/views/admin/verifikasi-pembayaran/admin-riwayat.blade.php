@@ -20,7 +20,7 @@
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
                 <table class="table table-sm">
-                    <thead>
+                    <thead class="thead-center">
                       <tr>
                         <th scope="col">Email</th>
                         <th scope="col">Nama Penyewa</th>
@@ -64,7 +64,7 @@
                             <input type="hidden" name="email" value="{{ $dt->email }}">
                             <input type="hidden" name="periode_tagihan" value="{{ $dt->periode_tagihan }}">
                             <input type="hidden" name="metode_pembayaran" value="{{ $dt->metode_pembayaran }}">
-                            <select name="status" onchange="this.form.submit()">
+                            <select class="form-control" name="status" onchange="this.form.submit()">
                                 <option value="0" {{ $dt->status_verifikasi == '0' ? 'selected' : '' }}>Belum Terverifikasi</option>
                                 <option value="1" {{ $dt->status_verifikasi == '1' ? 'selected' : '' }}>Terverifikasi</option>
                             </select>

@@ -77,7 +77,20 @@
                         </div>
                         <div class="d-flex">
                             <div class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }} ">LOGIN</a>
+                            <?php
+                                $user = Auth::user();
+                                if($user){
+                                    echo'
+                                        <a class="nav-link" href="'. route('logout') .'">LOGOUT</a>
+                                    ';
+                                    
+                                }else{
+                                    echo'
+                                        <a class="nav-link" href="'. route('login') . '">LOGIN</a>
+                                    ';
+                                }
+                                // <a class="nav-link" href="{{ route('login') }} ">LOGIN</a>
+                            ?>
                             </div>
                             {{-- <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
                             <a href=""><i class="ti-heart"></i></a>

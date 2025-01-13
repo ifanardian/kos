@@ -1,4 +1,4 @@
-@extends('user.layout.layout')
+@extends('layout.layout')
 @section('title', 'Booking | Kos Fortuna')
 
 @push('styles')
@@ -22,6 +22,12 @@
     .main_menu .d-flex .nav-item:hover {
         color: #6987af;
     }
+
+    .is-invalid {
+        border-color: red;
+        background-color: #f8d7da;
+    }
+
 
 </style>
 @endpush
@@ -79,7 +85,7 @@
                         <div class="col-md-11 form-group p_star">
                             <label for="alamat">Alamat Lengkap</label>
                             <textarea class="form-control" name="alamat" id="alamat"
-                                placeholder="(isi alamat lengkap sesuai KTP)" rows="1"></textarea>
+                                placeholder="(isi alamat lengkap sesuai KTP)" rows="1" required></textarea>
                         </div>
                         <div class="col-md-11 form-group p_star">
                             <label for="ktp">Unggah foto KTP</label>
@@ -110,7 +116,7 @@
                         {{-- <a class="btn_3" id="bookButton" type="submit">BOOK</a> --}}
 
                         {{-- fiona coba popup --}}
-                        <button class="btn_3" id="bookButton" type="submit">BOOK</button>
+                        <a class="btn_3" id="bookButton" type="submit">BOOK</a>
                         {{-- end --}}
                     </div>
                 </div>
@@ -119,98 +125,45 @@
     </div>
 </section>
 
-<!-- Struktur Pop-up -->
-<div id="popup" class="popup">
-    <div class="popup-content">
-        <span id="closePopupBtn" class="close-btn">&times;</span>
-        <h3>Booking berhasil</h3>
-        <p id="popupMessage"></p>
-        <button id="confirmBtn">Close</button>
-    </div>
-</div>
+<!-- custom js -->
+<script src="js/custom.js"></script>
+{{-- <script>
+    document.getElementById('bookButton').addEventListener('click', function() {
+        document.getElementById('formBook').submit();
+    });
+</script> --}}
 
-@endsection
-
-@push('scripts')
 <script>
-    // document.getElementById('bookButton').addEventListener('click', function () {
-    //     document.getElementById('formBook').submit();
-    // });
+    document.getElementById('bookButton').addEventListener('click', function (event) {
+        // Prevent default submission
+        event.preventDefault();
 
-    // Ambil elemen
+        // Select the form and its fields
+        const form = document.getElementById('formBook');
+        const fields = form.querySelectorAll('[required]');
+        let isValid = true;
 
-    // fiona coba popup
-    const popup = document.getElementById('popup');
-    const bookButton = document.getElementById('bookButton');
-    const closePopupBtn = document.getElementById('closePopupBtn');
-    const popupMessage = document.getElementById('popupMessage');
-    const formBook = document.getElementById('formBook');
+        // Check each required field
+        fields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.classList.add('is-invalid'); // Optional: Add a visual indicator
+            } else {
+                field.classList.remove('is-invalid'); // Remove the indicator if valid
+            }
+        });
 
-    // Fungsi untuk mengirim data dan menampilkan pop-up
-    bookButton.addEventListener('click', (e) => {
-        e.preventDefault(); // Mencegah aksi default tombol submit
-
-        // Kirim data form dengan Fetch API
-        const formData = new FormData(formBook);
-
-        fetch(formBook.action, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json {
-                console.log('Raw Response:', response);
-                return response.json();
-            })
-            .then(data => {
-                console.log('Parsed Response:', data);
-                if (data.success) {
-                    popupMessage.textContent = 'Silahkan menunggu email konfirmasi dari admin.';
-                } else {
-                    popupMessage.textContent = 'Gagal melakukan pemesanan. Silakan coba lagi.';
-                }
-                popup.style.display = 'flex'; // Tampilkan pop-up
-            })
-            .catch(error => {
-                console.error('Fetch Error:', error);
-                popupMessage.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
-                popup.style.display = 'flex'; // Tampilkan pop-up
-            });
-    });
-
-    // Fungsi untuk menutup pop-up
-    closePopupBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
-
-    // Menutup pop-up jika klik di luar area konten
-    window.addEventListener('click', (e) => {
-        if (e.target === popup) {
-            popup.style.display = 'none';
+        // If all fields are valid, submit the form
+        if (isValid) {
+            form.submit();
+        } else {
+            alert('Harap isi semua field yang wajib diisi.');
         }
     });
-
-    // Tombol "Confirm" pada pop-up
-    document.getElementById('confirmBtn').addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
-    // end fiona coba popup
-
 </script>
 
+
 <script>
-    // const navbar = document.querySelector('.main_menu');
-
-    // window.addEventListener('scroll', () => {
-    //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
-    //     if (window.scrollY > bannerHeight) {
-    //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
-    //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
-    //     } else {
-    //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
-    //         navbar.style.boxShadow = 'none';
-    //     }
-    //     });
-
     const navbar = document.querySelector('.main_menu');
     const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
 
@@ -220,8 +173,6 @@
         if (window.scrollY > bannerHeight) {
             // Ubah warna navbar dan font setelah scroll
             navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
-            // navbar.style.backdropFilter = 'blur(100px)';
-            // navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5)';
             navLinks.forEach(link => {
                 link.style.color = '#fff'; // Warna font terang untuk background solid
             });
@@ -236,4 +187,4 @@
     });
 
 </script>
-@endpush
+@endsection
