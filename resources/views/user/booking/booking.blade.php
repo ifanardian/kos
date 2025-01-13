@@ -77,7 +77,11 @@
                             <label for="tipe_kos">Tipe Kamar</label>
                             <select class="form-control" id="tipe_kos" name="tipe_kos">
                                 @foreach ($tipeKos as $tipe)
-                                <option value="{{ $tipe->id }}">{{ $tipe->deskripsi	}} || Rp. {{ $tipe->harga }}
+                                {{-- <option value="{{ $tipe->id }}">{{ $tipe->deskripsi	}} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
+                                </option> --}}
+                                {{-- fiona coba --}}
+                                <option value="{{ $tipe->id }}" {{ $selectedTipe == $tipe->deskripsi ? 'selected' : '' }}>
+                                    {{ $tipe->deskripsi }} || Rp. {{ number_format($tipe->harga, 0, ',', '.') }}
                                 </option>
                                 @endforeach
                             </select>

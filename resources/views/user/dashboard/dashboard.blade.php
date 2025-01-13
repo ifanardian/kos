@@ -37,7 +37,7 @@
                                 <div class="banner_text_iner">
                                     <h1>Kos Fortunaa</h1>
                                     <p>Hunian Nyaman, Fasilitas Lengkap, Harga Bersahabat.</p>
-                                    <a href="#" class="btn_2">book now</a>
+                                    <a href="{{ route('booking') }}" class="btn_2">book now</a>
                                 </div>
                             </div>
                         </div>
@@ -66,18 +66,18 @@
 
             pannellum.viewer('panorama', {   
                 "default": {
-                    "firstScene": "middle",
+                    "firstScene": "beranda",
                     // "author": "Matthew Petroff",
                     "sceneFadeDuration": 1000,
                     "autoLoad": true
                 },
 
                 "scenes": {
-                    "middle": {
+                    "beranda": {
                         // "title": "Kos",
                         "hfov": 160, //seberapa zoom gambar pas pertama kali diliat
-                        "pitch": -10,
-                        "yaw": 80, //sudut mana yang diliat pertama kali
+                        "pitch": -10, //seberapa tinggi/rendah letak panahnya (vertikal)
+                        "yaw": 80, //sudut mana yang diliat pertama kali (horizontal)
                         "type": "equirectangular",
                         "panorama": "{{ asset('images/panorama.jpeg') }}",
                         "hotSpots": [
@@ -108,17 +108,26 @@
                         "panorama": "{{ asset('images/km.jpeg') }}",
                         "hotSpots": [
                             {
-                                "pitch": -9.1,
+                                "pitch": -8,
                                 "yaw": 217,
                                 "type": "scene",
                                 "text": "Tempat Jemur",
                                 "sceneId": "jemur",
                                 "targetYaw": -23,
                                 "targetPitch": 2
+                            },
+                            {
+                                "pitch": -18,
+                                "yaw": 217,
+                                "type": "scene",
+                                "text": "Beranda",
+                                "sceneId": "beranda",
+                                "targetYaw": -25, //scene pertama kali (horizontal)
+                                "targetPitch": -1 //seberapa ndangak (vertikal)
                             }
                         ]
                     },
-
+                    // belum selesai, nunggu image
                     "jemur": {
                         // "title": "Kamar Mandi",
                         "hfov": 120,
@@ -373,7 +382,7 @@
                                     class="period">/ Bulan</span></p>
                             <p style="color: beige">Sisa Kamar: {} </p>
                         </div>
-                        <a href="{{ route('booking', ['tipe' => 'Bulanan']) }}" class="feature_btn">BOOK NOW <i
+                        <a href="{{ route('booking', ['tipe_kos' => 'Bulanan']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
                     </div>
                 </div>
@@ -381,11 +390,11 @@
                     <div class="single_feature_post_text">
                         <h3>TAHUNAN</h3>
                         <div class="price-container">
-                            <p><span class="currency">Rp</span> <span class="price">4.500.000</span> <span
+                            <p><span class="currency">Rp</span> <span class="price">4.400.000</span> <span
                                     class="period">/ Tahun</span></p>
                             <p style="color: beige">Sisa Kamar: {} </p>
                         </div>
-                        <a href="{{ route('booking', ['tipe' => 'Tahunan']) }}" class="feature_btn">BOOK NOW <i
+                        <a href="{{ route('booking', ['tipe_kos' => 'Tahunan']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
                     </div>
                 </div>

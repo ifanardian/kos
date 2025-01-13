@@ -54,6 +54,7 @@
                     <div class="confirmation_tittle">
                         <span>Silahkan lakukan pembayaran paling lambat
                             {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span>
+                        <p><strong> Status Pembayaran: <span>{{$payment->status_verifikasi}}</span></strong></p>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -61,7 +62,7 @@
                         <h4>order info</h4>
                         <ul>
                             <li>
-                                <p>order number</p><span>: {{$payment->email}}{{$payment->periode_tagihan}}</span>
+                                <p>order number</p><span>: {{$payment->email}}_{{$payment->periode_tagihan}}</span>
                             </li>
                             <li>
                                 <p>Tanggal Jatuh Tempo</p><span>:
@@ -100,7 +101,12 @@
                     </div>
 
                     <div class="order_details_iner">
-                        <h3>Order Details</h3>
+                        <div class="order_header">
+                            <h3>Order Details</h3>
+                            <a class="btn_3" href="{{ route('cobatagihan') }}" >LIHAT TAGIHAN BULAN SEBELUMNYA</a>
+                        </div>
+                        {{-- <button class="btn_3" type="submit">LIHAT TAGIHAN BULAN SEBELUMNYA</button>
+                        <h3>Order Details</h3> --}}
                         <table class="table table-borderless">
                             <thead>
                                 <tr>

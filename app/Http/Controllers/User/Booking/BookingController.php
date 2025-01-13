@@ -9,11 +9,13 @@ use App\Models\Mstipekos;
 
 class BookingController extends Controller
 {
-    public function showCheckout()
+    public function showCheckout(Request $request)
     {
         $tipeKos = Mstipekos::all();
         // dd($tipeKos);
-        return view('user.booking.booking', compact('tipeKos'));
+        // fiona tambah
+        $selectedTipe = $request->get('tipe_kos', null);
+        return view('user.booking.booking', compact('tipeKos', 'selectedTipe'));
     }
 
     public function store(Request $request)
@@ -23,7 +25,8 @@ class BookingController extends Controller
             'nama_lengkap' => 'required',
             'no_hp' => 'required',
             'email' => 'required|email',
-            'tipe_kos' => 'required',
+            // 'tipe_kos' => 'required',
+            'tipe_kos' => 'required|exists:ms_tipe_kos,deskripsi',
             'alamat' => 'required',
             'periode_penempatan' => 'required',
             'note' => 'nullable',

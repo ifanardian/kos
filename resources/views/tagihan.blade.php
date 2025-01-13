@@ -33,7 +33,8 @@
             <div class="col-lg-8">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Upload Tagihan</h2>
+                        {{-- <h2>Upload Tagihan</h2> --}}
+                        <h2>Detail Pembayaran Sewa Kos</h2>
                         <p>Home <span>-</span> Upload Tagihan</p>
                     </div>
                 </div>
@@ -47,9 +48,44 @@
 <section class="confirmation_part padding_top">
     <div class="container">
         <div class="billing_details">
-            <div class="row">
+            <div class="col">
+                <div class="order_box">
+                    {{-- <h2>Detail Pembayaran Sewa Kos</h2> --}}
+                    <div class="payment_item">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tanggal Pembayaran</th>
+                                    <th scope="col">Periode Pembayaran</th>
+                                    <th scope="col">Nominal</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="row">
                 <div class="col-lg-7">
-                    {{-- <h3>Detail Pembayaran</h3> --}}
                     <form action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
                         <div class="col-md-11 form-group p_star">
                             <label for="no">No Kamar</label>
@@ -116,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>
@@ -126,19 +162,6 @@
 
 {{-- SCRIPT NAVBAR BERUBAH SAAT DI SCROLL --}}
 <script>
-    // const navbar = document.querySelector('.main_menu');
-
-    // window.addEventListener('scroll', () => {
-    //     const bannerHeight = document.querySelector('.banner_part').offsetHeight;
-    //     if (window.scrollY > bannerHeight) {
-    //         navbar.style.background = '#7cbfc8'; // Warna setelah scroll
-    //         navbar.style.boxShadow = '0px 2px 5px rgba(255, 255, 255, 0.5);';
-    //     } else {
-    //         navbar.style.background = 'transparent'; // Transparan saat di atas banner
-    //         navbar.style.boxShadow = 'none';
-    //     }
-    //     });
-
     const navbar = document.querySelector('.main_menu');
     const navLinks = document.querySelectorAll('.nav-link'); // Semua elemen link navbar
 
