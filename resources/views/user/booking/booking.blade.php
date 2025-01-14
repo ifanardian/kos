@@ -76,9 +76,19 @@
                         <div class="col-md-11 form-group p_star">
                             <label for="tipe_kos">Tipe Kamar</label>
                             <select class="form-control" id="tipe_kos" name="tipe_kos">
+                                <option value="">-- Pilih Tipe Kamar --</option>
                                 @foreach ($tipeKos as $tipe)
-                                <option value="{{ $tipe->id }}">{{ $tipe->deskripsi	}} || Rp. {{ $tipe->harga }}
+                                {{-- lama --}}
+                                {{-- <option value="{{ $tipe->id }}">{{ $tipe->deskripsi	}} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
+                                </option> --}}
+                                {{-- fiona coba --}}
+                                <option value="{{ $tipe->id }}" {{ $selectedTipe == $tipe->id ? 'selected' : '' }}>
+                                    {{ $tipe->deskripsi }} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
                                 </option>
+                                {{-- <option value="{{ $tipe->id }}" {{ old('tipe_kos') == $tipe->id ? 'selected' : '' }}>
+                                    {{ $tipe->deskripsi }} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
+                                </option> --}}
+                                
                                 @endforeach
                             </select>
                         </div>
@@ -113,10 +123,10 @@
                                 Verifikasi akan dikirim via email. Pastikan data yang Anda kirim lengkap dan valid
                             </p>
                         </div>
-                        {{-- <a class="btn_3" id="bookButton" type="submit">BOOK</a> --}}
+                        <a class="btn_3" id="bookButton" type="submit">BOOK</a>
 
                         {{-- fiona coba popup --}}
-                        <a class="btn_3" id="bookButton" type="submit">BOOK</a>
+                        {{-- <button class="btn_3" id="bookButton" form="formBook" type="button">BOOK</button> --}}
                         {{-- end --}}
                     </div>
                 </div>
@@ -127,12 +137,14 @@
 
 <!-- custom js -->
 <script src="js/custom.js"></script>
-{{-- <script>
+{{-- lama --}}
+<script>
     document.getElementById('bookButton').addEventListener('click', function() {
         document.getElementById('formBook').submit();
     });
-</script> --}}
+</script>
 
+{{-- fiona coba validasi form --}}
 <script>
     document.getElementById('bookButton').addEventListener('click', function (event) {
         // Prevent default submission
@@ -140,12 +152,14 @@
 
         // Select the form and its fields
         const form = document.getElementById('formBook');
+        console.log('Form:', form);
         const fields = form.querySelectorAll('[required]');
         let isValid = true;
 
         // Check each required field
         fields.forEach(field => {
             if (!field.value.trim()) {
+                console.log(`Field ${field.name || field.id} is invalid`);
                 isValid = false;
                 field.classList.add('is-invalid'); // Optional: Add a visual indicator
             } else {
@@ -155,6 +169,7 @@
 
         // If all fields are valid, submit the form
         if (isValid) {
+            alert('Booking berhasil! Harap menunggu email.');
             form.submit();
         } else {
             alert('Harap isi semua field yang wajib diisi.');

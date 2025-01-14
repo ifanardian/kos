@@ -13,17 +13,46 @@ class PaymentController extends Controller
 {
     public function showPayment()
     {
+        // lama
+        // $user = Auth::user();
+        // $payment =  DB::table('payments')
+        //     ->where('email', $user->email)
+        //     ->whereNull('metode_pembayaran')
+        //     ->orderBy('periode_tagihan', 'desc')
+        //     ->first();
+        // if (!$payment) {
+        //     return redirect()->route('dashboard');//tidak ada tagihan
+        // }
+        // $detailPenyewa = Penyewa::where('email', $user->email)->first();
+        // return view('user.payment.payment', compact('payment', 'detailPenyewa'));
+
+        // fiona coba bulanan
         $user = Auth::user();
-        $payment =  DB::table('payments')
+        $payment = DB::table('payments')
             ->where('email', $user->email)
-            ->whereNull('metode_pembayaran')
+            ->whereNull('metode_pembayaran') // Tagihan yang belum dibayar
             ->orderBy('periode_tagihan', 'desc')
             ->first();
-        if (!$payment) {
-            return redirect()->route('dashboard');//tidak ada tagihan
-        }
+    
         $detailPenyewa = Penyewa::where('email', $user->email)->first();
-        return view('user.payment.payment', compact('payment', 'detailPenyewa'));
+    
+        if (!$payment) {
+            // Jika tidak ada tagihan baru, ambil informasi pembayaran terakhir
+            $payment = DB::table('payments')
+                ->where('email', $user->email)
+                ->orderBy('periode_tagihan', 'desc')
+                ->first();
+    
+            if ($payment) {
+                $isFirstPayment = false; // Pembayaran bulanan
+            } else {
+                return redirect()->route('dashboard'); // Tidak ada data sama sekali
+            }
+        } else {
+            $isFirstPayment = true; // Pembayaran pertama kali
+        }
+    
+        return view('user.payment.payment', compact('payment', 'detailPenyewa', 'isFirstPayment'));
     }
 
     public function payment(Request $request)

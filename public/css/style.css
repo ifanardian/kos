@@ -15,6 +15,14 @@ body {
     letter-spacing: 1px;
 }
 
+/* ORDER DETAIL PADA TAGIHAN */
+.order_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Jarak antara header dan tabel */
+}
+
 /* css card figure feature */
 .figure_card {
     margin: 0;
