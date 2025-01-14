@@ -11,11 +11,13 @@ class BookingController extends Controller
 {
     public function showCheckout(Request $request)
     {
+        // LAMA
         $tipeKos = Mstipekos::all();
+        // $tipeKos = Mstipekos::orderBy('deskripsi', 'asc')->get();
         // dd($tipeKos);
         // fiona tambah
         $selectedTipe = $request->get('tipe_kos', null);
-        return view('user.booking.booking', compact('tipeKos', 'selectedTipe'));
+        return view('user.booking.booking', compact('tipeKos', 'selectedTipe')); //, 'selectedTipe'
     }
 
     public function store(Request $request)
@@ -26,7 +28,7 @@ class BookingController extends Controller
             'no_hp' => 'required',
             'email' => 'required|email',
             // 'tipe_kos' => 'required',
-            'tipe_kos' => 'required|exists:ms_tipe_kos,deskripsi',
+            'tipe_kos' => 'required|exists:ms_tipe_kos,id',
             'alamat' => 'required',
             'periode_penempatan' => 'required',
             'note' => 'nullable',

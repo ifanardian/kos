@@ -127,22 +127,31 @@
                             }
                         ]
                     },
-                    // belum selesai, nunggu image
                     "jemur": {
                         // "title": "Kamar Mandi",
                         "hfov": 120,
-                        "yaw": 140,
+                        "pitch": -12,
+                        "yaw": 355.5,
                         "type": "equirectangular",
-                        "panorama": "{{ asset('images/km.jpeg') }}",
+                        "panorama": "{{ asset('images/jmr.jpeg') }}",
                         "hotSpots": [
                             {
-                                "pitch": -9.1,
-                                "yaw": 218,
+                                "pitch": -4,
+                                "yaw": -6.5,
                                 "type": "scene",
-                                "text": "Tempat Jemur",
-                                "sceneId": "jemur",
-                                "targetYaw": -23,
-                                "targetPitch": 2
+                                "text": "Kamar Mandi",
+                                "sceneId": "kamarmandi",
+                                "targetYaw": 130,
+                                "targetPitch": -5
+                            },
+                            {
+                                "pitch": -12, //seberapa naik panahnya
+                                "yaw": -6,
+                                "type": "scene",
+                                "text": "Beranda",
+                                "sceneId": "beranda",
+                                "targetYaw": -94, //scene pertama kali (horizontal)
+                                "targetPitch": -5 //seberapa ndangak (vertikal)
                             }
                         ]
                     }
@@ -382,7 +391,7 @@
                                     class="period">/ Bulan</span></p>
                             <p style="color: beige">Sisa Kamar: {} </p>
                         </div>
-                        <a href="{{ route('booking', ['tipe_kos' => 'Bulanan']) }}" class="feature_btn">BOOK NOW <i
+                        <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
                     </div>
                 </div>
@@ -394,7 +403,7 @@
                                     class="period">/ Tahun</span></p>
                             <p style="color: beige">Sisa Kamar: {} </p>
                         </div>
-                        <a href="{{ route('booking', ['tipe_kos' => 'Tahunan']) }}" class="feature_btn">BOOK NOW <i
+                        <a href="{{ route('booking', ['tipe_kos' => '2']) }}" class="feature_btn">BOOK NOW <i
                                 class="fas fa-play"></i></a>
                     </div>
                 </div>
