@@ -48,6 +48,17 @@
 <!--================ confirmation part start =================-->
 <section class="confirmation_part padding_top">
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-12">
@@ -61,8 +72,6 @@
                             <p>Silahkan lakukan pembayaran pertama untuk menyelesaikan proses pemesanan. <br> 
                                 <span>Pembayaran paling lambat
                                 {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span></p>
-                            <p><strong>Status Pembayaran: 
-                                <span>{{$payment->status_verifikasi ? 'Terverifikasi' : 'Menunggu Verifikasi'}}</span></strong></p>
                         @else
                             <p>Silahkan lakukan pembayaran untuk memperpanjang masa tinggal Anda.</p>
                         @endif
@@ -73,6 +82,7 @@
                     <div class="single_confirmation_details">
                         <h4>order info</h4>
                         <ul>
+                            {{-- saat baru pertama kali bayar kos --}}
                             @if ($isFirstPayment)
                                 <li>
                                     <p>order number</p><span>: {{$payment->email}}_{{$payment->periode_tagihan}}</span>
@@ -97,8 +107,6 @@
                                     <p>Tipe Kos</p>
                                     <span>:
                                         {{ DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
-
-
                                 </li>
                                 <li>
                                     <p>Periode Penempatan</p>
@@ -110,6 +118,7 @@
                                     <span>:
                                         {{\Carbon\Carbon::parse($detailPenyewa->tanggal_booking)->format('d M Y')}}</span>
                                 </li>
+                            {{-- saat bayar kos per bulannya --}}
                             @else
                                 <li>
                                     <p>Tanggal Jatuh Tempo</p>
@@ -181,8 +190,7 @@
                                     <div class="check"></div>
                                 </div>
                                 <p>
-                                    Datang secara langsung ke Kos Fortuna untuk melakukan pembayaran secara
-                                    tunai.
+                                    Datang secara langsung ke Kos Fortuna untuk melakukan pembayaran secara tunai.
                                 </p>
                             </div>
                             <div class="payment_item">
@@ -203,7 +211,9 @@
                             </div>
                             <input type="hidden" name="email" value="{{ $payment->email }}">
                             <input type="hidden" name="periode_tagihan" value="{{ $payment->periode_tagihan }}">
-                            <button class="btn_3" type="submit">BAYAR</button>
+                            <div class="password text-center">
+                                <button class="btn_3" type="submit">BAYAR</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -235,6 +245,18 @@
     });
 
 </script>
+
+@if (session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
+@if (session('error'))
+    <script>
+        alert("{{ session('error') }}");
+    </script>
+@endif
+
 
 <script>
     const navbar = document.querySelector('.main_menu');

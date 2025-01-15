@@ -123,7 +123,9 @@
                                 Verifikasi akan dikirim via email. Pastikan data yang Anda kirim lengkap dan valid
                             </p>
                         </div>
-                        <a class="btn_3" id="bookButton" type="submit">BOOK</a>
+                        <div class="password text-center">
+                            <a class="btn_3" id="bookButton" type="submit">BOOKING</a>
+                        </div>
 
                         {{-- fiona coba popup --}}
                         {{-- <button class="btn_3" id="bookButton" form="formBook" type="button">BOOK</button> --}}

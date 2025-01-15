@@ -81,6 +81,6 @@ class PaymentController extends Controller
                 'status_verifikasi' => false,
                 'updated_at' => now(),
             ]);        
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Pembayaran Anda berhasil dilakukan. Harap menunggu verifikasi.');
     }
 }

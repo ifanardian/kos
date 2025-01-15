@@ -31,7 +31,7 @@ class AuthController extends Controller
             return redirect()->intended('/');
         }
         return back()->withErrors([
-            'error' => 'The provided credentials do not match our records.',
+            'error' => 'Email atau password salah.',
         ]);
     }
 

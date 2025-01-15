@@ -73,6 +73,7 @@ figure figcaption {
 .ag-format-container {
     width: 1100px;
     margin: 0 auto;
+    padding: 20px;
   }
   
 /* body {
@@ -94,7 +95,7 @@ figure figcaption {
     -ms-flex-preferred-size: calc(33.33333% - 30px);
     flex-basis: calc(33.33333% - 30px);
 
-    margin: 0 15px 30px;
+    margin: 0 15px 50px;
 
     overflow: hidden;
 
@@ -293,7 +294,7 @@ figure figcaption {
 
 #panorama-section {
     text-align: center;
-    padding: 20px;
+    padding: 80px;
 }
 
 #description-section {
@@ -1528,6 +1529,10 @@ ul {
     margin-bottom: 30px;
     position: relative;
     height: 300px;
+}
+
+.padding_top_feature {
+    padding-top: 220px;
 }
 
 @media (max-width: 576px) {

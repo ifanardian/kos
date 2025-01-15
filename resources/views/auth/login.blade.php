@@ -13,6 +13,7 @@
     <!-- style CSS -->
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <title>Login | Kos Fortuna</title>
@@ -27,19 +28,6 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             overflow: hidden;
-        }
-
-        .btn_3 {
-            display: inline-block;
-            padding: 9px 42px;
-            border-radius: 50px;
-            background-image: linear-gradient(16deg, #031d34 0%, #054592 64%, #5280a2 100%);
-            border: 1px solid #ecfdff;
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff !important;
-            text-transform: uppercase;
-            font-weight: 400;
         }
 
         .form-control {
@@ -59,6 +47,22 @@
             font-weight: bold;
         }
 
+        .alert {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
     </style>
 </head>
 
@@ -71,7 +75,19 @@
                         <div class="card-body p-md-5">
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-5 col-xl-10 order-2 order-lg-1">
+                                    @if (session('success'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
 
+                                    @if ($errors->has('error'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ $errors->first('error') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
                                     <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 
                                     <form method="POST" action="{{ route('actionlogin') }}" id="loginForm"
