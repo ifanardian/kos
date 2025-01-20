@@ -69,9 +69,14 @@
                         @if ($isFirstPayment)
                             {{-- <span>Silahkan lakukan pembayaran paling lambat
                             {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span> --}}
+                                {{-- lama --}}
+                            {{-- <p>Silahkan lakukan pembayaran pertama untuk menyelesaikan proses pemesanan. <br> 
+                                <span>Pembayaran paling lambat
+                                {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span></p> --}}
+                            {{-- fiona coba h+1 booking --}}
                             <p>Silahkan lakukan pembayaran pertama untuk menyelesaikan proses pemesanan. <br> 
                                 <span>Pembayaran paling lambat
-                                {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span></p>
+                                {{ \Carbon\Carbon::parse($payment->created_at)->addDay()->format('d M Y') }}</span></p>
                         @else
                             <p>Silahkan lakukan pembayaran untuk memperpanjang masa tinggal Anda.</p>
                         @endif
@@ -89,7 +94,7 @@
                                 </li>
                                 <li>
                                     <p>Tanggal Jatuh Tempo</p><span>:
-                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span>
+                                        {{ \Carbon\Carbon::parse($payment->created_at)->addDay()->format('d M Y') }}</span>
                                 </li>
                                 <li>
                                     <p>Nama Lengkap</p>

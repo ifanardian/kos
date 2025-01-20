@@ -95,4 +95,65 @@ class ConfirmBookingController extends Controller
         $data = Penyewa::all();
         return view('admin.admin-penyewa', compact('data'));
     }
+
+    // fiona bikin status penyewa aktif/nonaktif
+    // tolong cek dah benar pa blm
+    // public function updatePenyewa(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //         'no_telepon' => 'required|string',
+    //         'no_kamar' => 'required|string',
+    //         'status' => 'required|boolean',
+    //     ]);
+    //     if ($request->status == 1) {
+                
+    //         $penyewa = DB::table('penyewa')
+    //             ->where('email', $request->email)
+    //             ->first();
+    //         DB::table('penyewa')
+    //             ->where('email', $request->email)
+    //             ->update([
+    //                 'status_penyewaan' => \Carbon\Carbon::parse($penyewa->status_penyewaan),
+    //             ]);
+            
+    //     }else{
+    //         DB::table('penyewa')
+    //             ->where('email', $request->email)
+    //             ->where('periode_tagihan', $request->periode_tagihan)
+    //             ->update([
+    //                 'status_penyewaan' => $request->status,
+    //                 'tanggal_berakhir' => now(),
+    //                 'updated_at' => now(),
+    //             ]);
+    //     }    
+    //     return redirect()->back();
+    // }
+
+    public function updatePenyewa(Request $request)
+    {
+    $request->validate([
+        'id' => 'required|integer',
+        'nama' => 'required|string',
+        'no_telepon' => 'required|string',
+        'tipe_kos' => 'required|string',
+        'alamat' => 'required|string',
+        'tanggal_menyewa' => 'required|date',
+        'tanggal_jatuh_tempo' => 'required|date',
+        'status_penyewaan' => 'required|boolean',
+    ]);
+
+    Penyewa::where('id', $request->id)->update([
+        'nama' => $request->nama,
+        'no_telepon' => $request->no_telepon,
+        'tipe_kos' => $request->tipe_kos,
+        'alamat' => $request->alamat,
+        'tanggal_menyewa' => $request->tanggal_menyewa,
+        'tanggal_jatuh_tempo' => $request->tanggal_jatuh_tempo,
+        'status_penyewaan' => $request->status_penyewaan,
+    ]);
+
+    return redirect()->back()->with('success', 'Data penyewa berhasil diperbarui.');
+    }
+
 }

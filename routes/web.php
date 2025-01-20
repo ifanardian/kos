@@ -44,6 +44,7 @@ Route::prefix('admin')->group(function () {
     //membuat untuk rill
     Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
     Route::get('penyewa', [ConfirmBookingController::class, 'penyewa'])->name('admin.penyewa');
+    Route::post('/penyewa-update', [ConfirmBookingController::class, 'updatePenyewa'])->name('admin.penyewa.update');
     Route::get('payment', [AdminPaymentController::class, 'showPayment'])->name('admin.payment');
     Route::post('payment', [AdminPaymentController::class, 'actionPayment'])->name('admin.action.pembayaran');
     Route::get('tf/{filename}', [AdminPaymentController::class, 'showbuktitf'])->name('admin.buktitf');
