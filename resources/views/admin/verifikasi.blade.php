@@ -21,7 +21,7 @@
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
                 <table class="table table-sm">
-                    <thead>
+                    <thead class="thead-center">
                       <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nama Penyewa</th>
