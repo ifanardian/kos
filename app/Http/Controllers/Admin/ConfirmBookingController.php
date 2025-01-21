@@ -130,30 +130,80 @@ class ConfirmBookingController extends Controller
     //     return redirect()->back();
     // }
 
+    // public function updatePenyewa(Request $request)
+    // {
+    //     $request->validate([
+    //         'id' => 'required|integer',
+    //         'nama' => 'required|string',
+    //         'no_telepon' => 'required|string',
+    //         'tipe_kos' => 'required|string',
+    //         'alamat' => 'required|string',
+    //         'tanggal_menyewa' => 'required|date',
+    //         'tanggal_jatuh_tempo' => 'required|date',
+    //         'status_penyewaan' => 'required|boolean',
+    //     ]);
+
+    //     Penyewa::where('id', $request->id)->update([
+    //         'nama' => $request->nama,
+    //         'no_telepon' => $request->no_telepon,
+    //         'tipe_kos' => $request->tipe_kos,
+    //         'alamat' => $request->alamat,
+    //         'tanggal_menyewa' => $request->tanggal_menyewa,
+    //         'tanggal_jatuh_tempo' => $request->tanggal_jatuh_tempo,
+    //         'status_penyewaan' => $request->status_penyewaan,
+    //     ]);
+
+    //     return redirect()->back()->with('success', 'Data penyewa berhasil diperbarui.');
+    // }
+
     public function updatePenyewa(Request $request)
     {
-    $request->validate([
-        'id' => 'required|integer',
-        'nama' => 'required|string',
-        'no_telepon' => 'required|string',
-        'tipe_kos' => 'required|string',
-        'alamat' => 'required|string',
-        'tanggal_menyewa' => 'required|date',
-        'tanggal_jatuh_tempo' => 'required|date',
-        'status_penyewaan' => 'required|boolean',
-    ]);
+        // dd($request->all());
+        $request->validate([
+            'id' => 'required|integer',
+            'nama' => 'required|string',
+            'no_telepon' => 'required|string',
+            'tipe_kos' => 'required|string',
+            'alamat' => 'required|string',
+            'tanggal_menyewa' => 'required|date',
+            'tanggal_berakhir' => 'nullable|date',
+            'status_penyewaan' => 'required|boolean',
+            'ktp' => 'nullable|mimes:jpeg,png,jpg|max:2048', // Validasi file
+        ]);
 
-    Penyewa::where('id', $request->id)->update([
-        'nama' => $request->nama,
-        'no_telepon' => $request->no_telepon,
-        'tipe_kos' => $request->tipe_kos,
-        'alamat' => $request->alamat,
-        'tanggal_menyewa' => $request->tanggal_menyewa,
-        'tanggal_jatuh_tempo' => $request->tanggal_jatuh_tempo,
-        'status_penyewaan' => $request->status_penyewaan,
-    ]);
+        $penyewa = Penyewa::findOrFail($request->id);
 
-    return redirect()->back()->with('success', 'Data penyewa berhasil diperbarui.');
+        // Jika ada file KTP baru, simpan dan ganti file lama
+        if ($request->hasFile('ktp')) {
+            // $fileName = time() . '_' . $request->ktp->getClientOriginalName();
+            // $request->ktp->storeAs('ktp', $fileName, 'local');
+            $ktp = $request->file('ktp');
+            $fileName =$request->email.'-'.time().'.'.$ktp->extension();
+            $filePath = $ktp->storeAs('ktp', $fileName, 'local');
+            
+
+            // Hapus file lama jika ada
+            if ($penyewa->ktp) {
+                Storage::disk('local')->delete('ktp/' . $penyewa->ktp);
+            }
+
+            $penyewa->ktp = $fileName;
+        }
+
+        Penyewa::where('id', $request->id)->update([
+            'nama' => $request->nama,
+            'no_telepon' => $request->no_telepon,
+            'tipe_kos' => $request->tipe_kos,
+            'alamat' => $request->alamat,
+            'tanggal_menyewa' => $request->tanggal_menyewa,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'status_penyewaan' => $request->status_penyewaan,
+            'ktp' => $fileName,
+        ]);
+
+        return redirect()->back()->with('success', 'Data penyewa berhasil diperbarui.');
     }
+
+
 
 }
