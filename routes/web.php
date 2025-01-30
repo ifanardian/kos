@@ -40,10 +40,14 @@ Route::prefix('admin')->group(function () {
     Route::get('ktp/{filename}', [ConfirmBookingController::class, 'showKtp'])->name('admin.ktp');
     Route::post('update-status-booking', [ConfirmBookingController::class, 'updateStatusBooking'])->name('admin.update.statusbooking');
     Route::get('send-invoice', [SendEmailController::class, 'sendInvoice'])->name('admin.send.invoice');
+    // fiona tambah
+    Route::get('/admin/kelola-kamar', [AdminController::class, 'index'])->name('admin.kelola_kamar');
+    Route::post('/admin/kelola-kamar/update', [AdminController::class, 'updateTipeKos'])->name('admin.harga_kamar.update');
 
     //membuat untuk rill
     Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
     Route::get('penyewa', [ConfirmBookingController::class, 'penyewa'])->name('admin.penyewa');
+    // fiona
     Route::post('/penyewa-update', [ConfirmBookingController::class, 'updatePenyewa'])->name('admin.penyewa.update');
     Route::get('payment', [AdminPaymentController::class, 'showPayment'])->name('admin.payment');
     Route::post('payment', [AdminPaymentController::class, 'actionPayment'])->name('admin.action.pembayaran');

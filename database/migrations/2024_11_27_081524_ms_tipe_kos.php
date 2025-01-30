@@ -20,7 +20,7 @@ return new class extends Migration
         });
         DB::table('ms_tipe_kos')->insert([
             ['harga' => '400000','bulan'=> 1, 'deskripsi' => 'Bulanan', 'created_at' => now(), 'updated_at' => now()],
-            ['kolom1' => '1000000','bulan'=> 12 , 'deskripsi' => 'Tahunan', 'created_at' => now(), 'updated_at' => now()],
+            ['harga' => '1000000','bulan'=> 12 , 'deskripsi' => 'Tahunan', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 

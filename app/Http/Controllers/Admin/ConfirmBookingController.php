@@ -190,6 +190,8 @@ class ConfirmBookingController extends Controller
             $penyewa->ktp = $fileName;
         }
 
+        $penyewa->save();
+
         Penyewa::where('id', $request->id)->update([
             'nama' => $request->nama,
             'no_telepon' => $request->no_telepon,

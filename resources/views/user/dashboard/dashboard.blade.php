@@ -230,6 +230,10 @@
     </div>
 </div>
 
+@php
+    $hargaBulanan = \App\Models\MsTipeKos::where('bulan', 1)->first();
+    $hargaTahunan = \App\Models\MsTipeKos::where('bulan', 12)->first();
+@endphp
 <section class="feature_part padding_top_feature dark-bg">
     <div class="container">
         <div class="row justify-content-center">
@@ -244,8 +248,9 @@
                 <div class="single_feature_post_text">
                     <h3>BULANAN</h3>
                     <div class="price-container">
-                        <p><span class="currency">Rp</span> <span class="price">400.000</span> <span class="period">/
-                                Bulan</span></p>
+                        <p>
+                            <span class="price">Rp {{ number_format($hargaBulanan->harga ?? 400000, 0, ',', '.') }}</span> 
+                            <span class="period">/ Bulan</span></p>
                         <p style="color: beige">Sisa Kamar: {} </p>
                     </div>
                     <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i
@@ -256,8 +261,8 @@
                 <div class="single_feature_post_text">
                     <h3>TAHUNAN</h3>
                     <div class="price-container">
-                        <p><span class="currency">Rp</span> <span class="price">4.400.000</span> <span class="period">/
-                                Tahun</span></p>
+                        <p><span class="price">Rp {{ number_format($hargaTahunan->harga ?? 4400000, 0, ',', '.') }}</span> 
+                            <span class="period">/ Tahun</span></p>
                         <p style="color: beige">Sisa Kamar: {} </p>
                     </div>
                     <a href="{{ route('booking', ['tipe_kos' => '2']) }}" class="feature_btn">BOOK NOW <i
