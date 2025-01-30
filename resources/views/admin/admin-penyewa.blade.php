@@ -38,6 +38,13 @@
                         <tbody>
                             @foreach ($data as $item)
                             <tr class="tr-center">
+                                <?php
+                                if($item->status_penyewaan == '0'){
+                                    echo "<tr style =' color: Red;'>";
+                                }else{
+                                    echo "<tr style =' color: Green;'>";
+                                }
+                                ?>
                                 <td>{{$item->no_kamar}}</td>
                                 <td>{{$item->nama}}</td>
                                 <td>{{$item->no_telepon}}</td>
@@ -138,7 +145,7 @@
                                 {{-- <img id="preview-ktp" src="" alt="KTP Preview" style="width: 150px; height: auto;"> --}}
                                 
                                 <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
-                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" alt="KTP" style="width:150px;height:auto;">
+                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}" alt="KTP" style="width:150px;height:auto;">
                                 </a>
                             </div>
                             <input type="file" class="form-control" id="edit-ktp" name="ktp" accept="image/*">
@@ -182,31 +189,6 @@
     </script>
 
 <script>
-    // const editModal = document.getElementById('editModal');
-    // editModal.addEventListener('show.bs.modal', function (event) {
-    //   const button = event.relatedTarget;
-    //   const id = button.getAttribute('data-id');
-    //   const email = button.getAttribute('data-email');
-    //   const nama = button.getAttribute('data-nama');
-    //   const noTelepon = button.getAttribute('data-no_telepon');
-    //   const tipeKos = button.getAttribute('data-tipe_kos');
-    //   const alamat = button.getAttribute('data-alamat');
-    //   const tanggalMenyewa = button.getAttribute('data-tanggal_menyewa');
-    //   const tanggalJatuhTempo = button.getAttribute('data-tanggal_jatuh_tempo');
-    //   const statusPenyewaan = button.getAttribute('data-status_penyewaan');
-  
-    //   // Isi data ke dalam modal
-    //   document.getElementById('edit-id').value = id;
-    //   document.getElementById('edit-email').value = email;
-    //   document.getElementById('edit-nama').value = nama;
-    //   document.getElementById('edit-no_telepon').value = noTelepon;
-    //   document.getElementById('edit-tipe_kos').value = tipeKos;
-    //   document.getElementById('edit-alamat').value = alamat;
-    //   document.getElementById('edit-tanggal_menyewa').value = tanggalMenyewa;
-    //   document.getElementById('edit-tanggal_jatuh_tempo').value = tanggalJatuhTempo;
-    //   document.getElementById('edit-status_penyewaan').value = statusPenyewaan;
-    // });
-
     const editModal = document.getElementById('editModal');
     editModal.addEventListener('show.bs.modal', function (event) {
         const button = event.relatedTarget;
@@ -233,11 +215,11 @@
         document.getElementById('edit-tanggal_menyewa').value = tanggalMenyewa;
         document.getElementById('edit-tanggal_berakhir').value = tanggalBerakhir;
         document.getElementById('edit-status_penyewaan').value = statusPenyewaan;
-
+        document.getElementById('preview-ktp').firstElementChild.src = ktpUrl || '';
         // Tampilkan preview foto KTP saat ini
-        const ktpPreview = document.getElementById('preview-ktp');
-        // ktpPreview.src = ktpUrl || ''; // Default ke string kosong jika URL tidak tersedia
-        ktpPreview.firstElementChild.src = ktpUrl || ''; // Untuk gambar
+        // const ktpPreview = document.getElementById('preview-ktp');
+        // ktpPreview.firstElementChild.src = ktpUrl || ''; 
+        console.log("KTP URL:", ktpUrl);
     });
 
     // Preview foto KTP baru yang diunggah

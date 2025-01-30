@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\DB;
 class Mstipekos extends Model
 {
     protected $table = 'ms_tipe_kos';  
-    protected $fillable = ['harga', 'deskripsi'];
+    protected $fillable = ['harga', 'bulan', 'deskripsi'];
 }
