@@ -11,7 +11,7 @@
         border-bottom: 2px solid #ccc;
         border-radius: 0;
         box-shadow: none;
-        width: 190px;
+        width: 170px;
         /* Sesuaikan lebar input */
         display: inline-block;
     }
@@ -45,6 +45,10 @@
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
     </div>
 
+    @php
+    $hargaBulanan = \App\Models\MsTipeKos::where('bulan', 1)->first();
+    $hargaTahunan = \App\Models\MsTipeKos::where('bulan', 12)->first();
+    @endphp
     <div class="row">
         <!-- Harga Bulanan -->
         <div class="col-md-6">
@@ -60,7 +64,7 @@
                         <div class="text-center mb-3">
                             <div class="input-container">
                                 <span class="price-text">Rp</span>
-                                <input type="text" class="form-control" name="harga" id="hargaBulananInput"
+                                <input type="text" class="form-control" name="harga" id="hargaBulananInput" style="width: 145px;"
                                     value="{{ number_format($hargaBulanan->harga ?? 400000, 0, ',', '.') }}" required>
                             </div>
                             <br>
