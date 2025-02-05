@@ -92,8 +92,18 @@ class ConfirmBookingController extends Controller
 
     public function penyewa()
     {
-        $data = Penyewa::all();
-        return view('admin.admin-penyewa', compact('data'));
+        // lama
+        // $data = Penyewa::all();
+        // return view('admin.admin-penyewa', compact('data'));
+
+        // fiona coba baru
+        // Ambil data penghuni aktif
+        $penghuniAktif = Penyewa::where('status_penyewaan', 1)->get();
+
+        // Ambil data penghuni nonaktif (riwayat)
+        $penghuniRiwayat = Penyewa::where('status_penyewaan', 0)->get();
+
+        return view('admin.admin-penyewa', compact('penghuniAktif', 'penghuniRiwayat'));
     }
 
     // fiona bikin status penyewa aktif/nonaktif
