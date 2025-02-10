@@ -96,13 +96,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="roomModalLabel">Masukkan Nomor Kamar</h5>
+        <h5 class="modal-title" id="roomModalLabel">Tentukan Nomor Kamar</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
           <label for="modal-room-number" class="form-label">Nomor Kamar</label>
-          <input type="text" class="form-control" id="modal-room-number" placeholder="Masukkan nomor kamar">
+          <select id="modal-room-number" class="form-control">
+            <option value="">Pilih Nomor Kamar</option>
+          </select>
+          {{-- <label for="modal-room-number" class="form-label">Nomor Kamar</label>
+          <input type="text" class="form-control" id="modal-room-number" placeholder="Masukkan nomor kamar"> --}}
           <input type="hidden" id= "no_form" value="">
         </div>
       </div>
@@ -132,6 +136,8 @@
   </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   function handleStatusChange(selectElement, itemId) {
@@ -139,6 +145,27 @@
       // Tampilkan modal jika status APPROVED dipilih
       const modal = new bootstrap.Modal(document.getElementById('roomModal'));
       document.getElementById('no_form').value = itemId;
+
+      $("#modal-room-number").empty().append('<option value="">Tentukan Nomor Kamar</option>');
+      $.ajax({
+            url: "{{ route('admin.get_kamar_tersedia') }}",
+            type: "GET",
+            success: function(response) {
+                console.log("Data kamar diterima:", response);
+                let uniqueRooms = new Set(response); // Set otomatis menghapus duplikasi
+
+                uniqueRooms.forEach(no_kamar => {
+                    $("#modal-room-number").append(`<option value="${no_kamar}">${no_kamar}</option>`);
+                });
+
+                // Tampilkan modal setelah data kamar dimuat
+                $("#roomModal").modal("show");
+            },
+            error: function(xhr, status, error) {
+                console.error("Gagal mengambil data kamar:", error);
+            }
+        });
+
       modal.show();
     } else {
       // Jika status selain APPROVED, langsung submit form
@@ -169,6 +196,7 @@
     document.getElementById('form-update-status-' + itemId).querySelector('#room_number').value = roomNumberInput;
     document.getElementById('form-update-status-' + itemId).submit();
   }
+
 </script>
 @endsection
 
