@@ -4,6 +4,20 @@
 
 @section('content')
 
+<style>
+    .nav-tabs .nav-link {
+    background-color: #ebe8e8; /* Warna abu-abu untuk tab nonaktif */
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff !important; /* Warna biru untuk tab aktif */
+    color: white !important;
+    font-weight: bold;
+}
+
+</style>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -206,8 +220,6 @@
                         <div class="mb-3">
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
-                                {{-- <img id="preview-ktp" src="" alt="KTP Preview" style="width: 150px; height: auto;"> --}}
-
                                 <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
                                     <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}"
                                         alt="KTP" style="width:150px;height:auto;">
@@ -251,6 +263,8 @@
         // });
 
     </script>
+
+
 
     <script>
         const editModal = document.getElementById('editModal');

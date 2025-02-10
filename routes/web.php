@@ -13,7 +13,7 @@ use App\Http\Controllers\login;
 use App\Http\Controllers\User\Dashboard\DashboardController;
 use App\Http\Controllers\User\Payment\PaymentController;
 use App\Http\Controllers\User\Booking\BookingController;
-use App\Http\Controllers\controller_checkout;
+// use App\Http\Controllers\controller_checkout;
 use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/payment', [PaymentController::class, 'showPayment'])->name('tagihan');
     Route::post('/payment', [PaymentController::class, 'payment'])->name('payment.action');
-    Route::get('/checkout', [controller_checkout::class, 'checkout'])->name('checkout'); 
+    // Route::get('/checkout', [controller_checkout::class, 'checkout'])->name('checkout'); 
 });
 
 Route::prefix('admin')->group(function () {
@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function () {
     // fiona tambah
     Route::get('/admin/kelola-kamar', [AdminController::class, 'index'])->name('admin.kelola_kamar');
     Route::post('/admin/kelola-kamar/update', [AdminController::class, 'updateTipeKos'])->name('admin.harga_kamar.update');
+    Route::get('/get-kamar-tersedia', [ConfirmBookingController::class, 'getKamarTersedia']) ->name('admin.get_kamar_tersedia');
 
     //membuat untuk rill
     Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
