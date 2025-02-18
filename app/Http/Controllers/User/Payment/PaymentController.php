@@ -83,4 +83,17 @@ class PaymentController extends Controller
             ]);        
         return redirect()->route('dashboard')->with('success', 'Pembayaran Anda berhasil dilakukan. Harap menunggu verifikasi.');
     }
+
+    public function historyPembayaran()
+    {
+        $user = Auth::user()->email;
+        // $userEmail = auth()->user()->email; // Ambil email pengguna yang login
+        $paymentHistory = DB::table('payments')
+            ->where('email', $user)
+            ->orderBy('periode_tagihan', 'desc')
+            ->get();
+
+        return view('history_pembayaran', compact('paymentHistory'));
+    }
+
 }
