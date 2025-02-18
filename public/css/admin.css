@@ -11,6 +11,21 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+ #wrapper.toggled .sidebar {
+  margin-left: -250px; /* Sidebar disembunyikan */
+}
+
+.sidebar {
+  transition: margin 0.3s ease-in-out;
+}
+
+/* Rotasi panah */
+#sidebarToggle.rotated {
+  transform: rotate(180deg); 
+  transition: transform 0.3s ease;
+}
+
+
 
  :root {
     --blue: #4e73df;

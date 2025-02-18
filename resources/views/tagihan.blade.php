@@ -79,7 +79,8 @@
                                     <td colspan="2">Larry the Bird</td>
                                     <td>@mdo</td>
                                 </tr> --}}
-                                @forelse ($payment as $pay)
+
+                                {{-- @foreach ($payment as $pay)
                                 <tr>
                                     <td>{{ $pay->tanggal_pembayaran ? date('d-m-Y', strtotime($pay->tanggal_pembayaran)) : '-' }}</td>
                                     <td>{{ date('F Y', strtotime($pay->periode_tagihan)) }}</td>
@@ -96,7 +97,22 @@
                                 <tr>
                                     <td colspan="4" class="text-center">Belum ada pembayaran sebelumnya.</td>
                                 </tr>
-                                @endforelse
+                                @endforeach --}}
+                                @foreach ($paymentHistory as $pay)
+                                <tr>
+                                    <td>{{ $pay->tanggal_pembayaran ? date('d-m-Y', strtotime($pay->tanggal_pembayaran)) : '-' }}</td>
+                                    <td>{{ date('F Y', strtotime($pay->periode_tagihan)) }}</td>
+                                    <td>Rp {{ number_format($pay->total_tagihan, 0, ',', '.') }}</td>
+                                    <td>
+                                        @if ($pay->status_verifikasi)
+                                            <span class="badge bg-success">Terverifikasi</span>
+                                        @else
+                                            <span class="badge bg-warning">Menunggu Verifikasi</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

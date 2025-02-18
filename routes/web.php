@@ -32,6 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/payment', [PaymentController::class, 'showPayment'])->name('tagihan');
     Route::post('/payment', [PaymentController::class, 'payment'])->name('payment.action');
+    Route::post('/payment-history', [PaymentController::class, 'historyPembayaran'])->name('payment.history');
     // Route::get('/checkout', [controller_checkout::class, 'checkout'])->name('checkout'); 
 });
 
