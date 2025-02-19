@@ -29,9 +29,17 @@ class ConfirmBookingController extends Controller
 
     public function verifikasiBooking()
     {
-        $data = Booking::orderByRaw("FIELD(status, 'PENDING') DESC")->orderBy('created_at', 'asc')->get();
+        // LAMA
+        // $data = Booking::orderByRaw("FIELD(status, 'PENDING') DESC")->orderBy('created_at', 'asc')->get();
+        // $tipe = Mstipekos::all();
+        // return view('admin.admin-verifikasi', compact('data', 'tipe'));
+
+        $pending = Booking::where('status', 'PENDING')->orderBy('created_at', 'asc')->get();
+        $approved = Booking::where('status', 'APPROVED')->orderBy('created_at', 'asc')->get();
+        $rejected = Booking::where('status', 'REJECTED')->orderBy('created_at', 'asc')->get();
+        
         $tipe = Mstipekos::all();
-        return view('admin.admin-verifikasi', compact('data', 'tipe'));
+        return view('admin.admin-verifikasi', compact('pending', 'approved', 'rejected', 'tipe'));
     }
 
     public function showKtp($filename)

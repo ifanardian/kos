@@ -19,7 +19,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
+                    class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
                 <table class="table table-sm">
                     <thead class="thead-center">
                       <tr>
