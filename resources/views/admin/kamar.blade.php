@@ -101,50 +101,53 @@
         </div>
     </div>
 
-
     <div class="col-xl col-lg-7">
         <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Kelola Ketersediaan Kamar</h6>
+            </div>
             <!-- Card Body -->
             <div class="card-body">
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                        class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">No. Kamar</th>
-                            <th scope="col">Tipe Kamar</th>
-                            <th scope="col">Penyewa</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Jatuh Tempo</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">No. Kamar</th>
+                        <th scope="col">Tipe Kamar</th>
+                        <th scope="col">Penyewa</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Jatuh Tempo</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                    </tr>
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
