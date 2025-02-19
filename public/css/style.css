@@ -308,9 +308,14 @@ figure figcaption {
 }
 
 #panorama {
-    width: 950px;
-    height: 550px;
-    margin: 0 auto;
+    width: 80%;
+    height: 650px; /* Sesuaikan tinggi untuk mobile */
+}
+
+@media (max-width: 967px) {
+    #panorama {
+        height: 300px;
+    }
 }
 
 /* CAROUSEL */
@@ -393,28 +398,34 @@ background-color: #e9eed9;
 .row-grid {
     width: 75%;
     display: -ms-flexbox;
-    /* IE10 */
     display: flex;
-    -ms-flex-wrap: wrap;
-    /* IE10 */
     flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    gap: 10px;
     padding: 0 10px;
     justify-content: center;
-    /* Center horizontally */
     align-items: center;
-    /* Center vertically */
     margin: auto;
     height: 100vh;
-    /* Full viewport height */
 }
 
-/* Create four equal columns that sits next to each other */
 .column {
-    -ms-flex: 33.3%;
-    /* IE10 */
-    flex: 33.3%;
-    max-width: 33.3%;
-    padding: 0 4px;
+    flex: 1 1 calc(33.33% - 20px); /* 3 kolom untuk desktop */
+    max-width: calc(33.33% - 20px);
+}
+
+@media (max-width: 1024px) {
+    .column {
+        flex: 1 1 calc(50% - 20px); /* 2 kolom untuk tablet */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 767px) {
+    .column {
+        flex: 1 1 100%; /* 1 kolom untuk mobile */
+        max-width: 100%;
+    }
 }
 
 .column img {
@@ -1256,21 +1267,50 @@ ul {
     object-fit: cover;
 }
 
+/* Default styles for all devices */
 .banner_part {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     position: relative;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)),
-    url("{{ asset('images/houses.png') }}");
-    /* Gambar utama */
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("{{ asset('images/houses.png') }}");
     background-size: cover;
-    /* Memastikan gambar mengisi area */
-    background-attachment: fixed;
-    /* Membuat efek parallax */
+    background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     overflow: hidden;
+    width: 100%;
+}
+
+/* Styles for tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+    .banner_part {
+        min-height: 80vh;
+    }
+    .banner_text h1 {
+        font-size: 2rem;
+    }
+    .banner_text p {
+        font-size: 1rem;
+    }
+}
+
+/* Styles for mobile devices (up to 767px) */
+@media (max-width: 767px) {
+    .banner_part {
+        min-height: 60vh;
+    }
+    .banner_text h1 {
+        font-size: 1.5rem;
+    }
+    .banner_text p {
+        font-size: 0.9rem;
+    }
+    .btn_2 {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+    }
 }
 
 .banner_text_iner h1 {

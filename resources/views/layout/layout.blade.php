@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> --}}
     <!-- <title>dashboard</title> -->
     <title>@yield('title')</title>
     <link rel="icon" href="{{ asset('images/luck.png') }}" type="image/png">
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href={{ asset('css/animate.css') }}>
     <!-- style CSS -->
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
