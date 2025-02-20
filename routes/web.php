@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 //admin
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ConfirmBookingController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\SendEmailController;
 use App\Http\Controllers\Admin\AdminPaymentController;
+use App\Http\Controllers\Admin\KamarController;
+
+use App\Http\Controllers\AdminController;
 
 
 //user
@@ -44,8 +46,8 @@ Route::prefix('admin')->group(function () {
     Route::post('update-status-booking', [ConfirmBookingController::class, 'updateStatusBooking'])->name('admin.update.statusbooking');
     Route::get('send-invoice', [SendEmailController::class, 'sendInvoice'])->name('admin.send.invoice');
     // fiona tambah
-    Route::get('/admin/kelola-kamar', [AdminController::class, 'index'])->name('admin.kelola_kamar');
-    Route::post('/admin/kelola-kamar/update', [AdminController::class, 'updateTipeKos'])->name('admin.harga_kamar.update');
+    Route::get('/kelola-kamar', [KamarController::class, 'ShowIndex'])->name('admin.kelola_kamar');
+    Route::post('/kelola-kamar/update', [AdminController::class, 'updateTipeKos'])->name('admin.harga_kamar.update');
     Route::get('/get-kamar-tersedia', [ConfirmBookingController::class, 'getKamarTersedia']) ->name('admin.get_kamar_tersedia');
 
     //membuat untuk rill
@@ -63,7 +65,7 @@ Route::prefix('admin')->group(function () {
 // FIONA
 
 // admin
-Route::get('/cdashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
+Route::get('/cdashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin'); // sudah tak pindah ke admin/
 Route::get('/cpenyewaadmin', [AdminController::class, 'penyewaAdmin'])->name('penyewaadmin');
 Route::get('/ckamaradmin', [AdminController::class, 'kamarAdmin'])->name('kamaradmin');
 Route::get('/criwayatadmin', [AdminController::class, 'riwayatAdmin'])->name('riwayatadmin');

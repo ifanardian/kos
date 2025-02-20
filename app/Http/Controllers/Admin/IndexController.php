@@ -13,6 +13,6 @@ class IndexController extends Controller
         $kamarTerisi = DB::table('kamar')->where('status', 'T')->count();
         $kamarKosong = $totalKamar - $kamarTerisi;
         $totalPending = DB::table('bookings')->where('status', 'PENDING')->count();
-        return view('admin.dashboard',compact('totalKamar','kamarTerisi','kamarKosong', 'totalPending'));
+        return view('admin.dashboard.dashboard',compact('totalKamar','kamarTerisi','kamarKosong', 'totalPending'));
     }
 }
