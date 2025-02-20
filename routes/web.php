@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 //admin
+use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ConfirmBookingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\SendEmailController;
-use App\Http\Controllers\Admin\Verifikasipembayaran\AdminPaymentController;
+use App\Http\Controllers\Admin\AdminPaymentController;
 
 
 //user
@@ -15,6 +16,7 @@ use App\Http\Controllers\User\Payment\PaymentController;
 use App\Http\Controllers\User\Booking\BookingController;
 // use App\Http\Controllers\controller_checkout;
 use App\Http\Controllers\Auth\AuthController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -37,7 +39,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', [ConfirmBookingController::class, 'index'])->name('admin.dashboard');
+    Route::get('/', [IndexController::class, 'showIndex'])->name('admin.dashboard');
     Route::get('ktp/{filename}', [ConfirmBookingController::class, 'showKtp'])->name('admin.ktp');
     Route::post('update-status-booking', [ConfirmBookingController::class, 'updateStatusBooking'])->name('admin.update.statusbooking');
     Route::get('send-invoice', [SendEmailController::class, 'sendInvoice'])->name('admin.send.invoice');
