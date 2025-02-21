@@ -5,14 +5,19 @@
 <style>
     .banner_part {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
         position: relative;
+        min-height: 100vh;
         background-image: url("{{ asset('images/houses.png') }}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        background-attachment: fixed;
+        overflow: hidden;
+        width: 100%;
+        height: auto;
     }
 
 </style>
@@ -48,12 +53,12 @@
     </div>
 </section>
 
-<!-- banner part start-->
+{{-- VIRTUAL TOUR --}}
 <div id="panorama-section">
     <div class="section_tittle text-center">
         <h2>Virtual Tour 360<sup>°</sup></h2>
     </div>
-    <div id="panorama">
+    <div id="panorama" class="align-center">
         <script>
             pannellum.viewer('panorama', {
                 "default": {
@@ -147,7 +152,7 @@
     </div>
 </div>
 
-{{-- card 2 --}}
+{{-- CARD FASILITAS --}}
 <div class="ag-format-container mt-4 mb-5">
     <div class="ag-courses_box">
         <div class="ag-courses_item">
@@ -212,7 +217,6 @@
 
     </div>
 </div>
-{{-- end card --}}
 
 {{-- GRID --}}
 <div class="row-grid dark-bg">
@@ -230,11 +234,12 @@
     </div>
 </div>
 
+{{-- KATEGORI KAMAR --}}
 @php
-    $hargaBulanan = \App\Models\MsTipeKos::where('bulan', 1)->first();
-    $hargaTahunan = \App\Models\MsTipeKos::where('bulan', 12)->first();
+$hargaBulanan = \App\Models\MsTipeKos::where('bulan', 1)->first();
+$hargaTahunan = \App\Models\MsTipeKos::where('bulan', 12)->first();
 @endphp
-<section class="feature_part padding_top_feature dark-bg">
+<div class="feature_part padding_top_feature dark-bg mb-5 pb-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9">
@@ -243,35 +248,37 @@
                 </div>
             </div>
         </div>
-        <div class="row align-items-center justify-content-between">
-            <div class="col-lg-6 col-sm-6">
-                <div class="single_feature_post_text">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                <div class="single_feature_post_text text-center">
                     <h3>BULANAN</h3>
                     <div class="price-container">
                         <p>
-                            <span class="price">Rp {{ number_format($hargaBulanan->harga ?? 400000, 0, ',', '.') }}</span> 
-                            <span class="period">/ Bulan</span></p>
+                            <span class="price">Rp {{ number_format($hargaBulanan->harga ?? 400000, 0, ',', '.') }}</span>
+                            <span class="period">/ Bulan</span>
+                        </p>
                         <p style="color: beige">Sisa Kamar: {} </p>
                     </div>
-                    <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i
-                            class="fas fa-play"></i></a>
+                    <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6">
-                <div class="single_feature_post_text">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                <div class="single_feature_post_text text-center">
                     <h3>TAHUNAN</h3>
                     <div class="price-container">
-                        <p><span class="price">Rp {{ number_format($hargaTahunan->harga ?? 4400000, 0, ',', '.') }}</span> 
-                            <span class="period">/ Tahun</span></p>
+                        <p>
+                            <span class="price">Rp {{ number_format($hargaTahunan->harga ?? 4400000, 0, ',', '.') }}</span>
+                            <span class="period">/ Tahun</span>
+                        </p>
                         <p style="color: beige">Sisa Kamar: {} </p>
                     </div>
-                    <a href="{{ route('booking', ['tipe_kos' => '2']) }}" class="feature_btn">BOOK NOW <i
-                            class="fas fa-play"></i></a>
+                    <a href="{{ route('booking', ['tipe_kos' => '2']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+
 @endsection
 
 {{-- @push('scripts')
