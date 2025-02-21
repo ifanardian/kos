@@ -19,32 +19,91 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             background-color: #e3f6ff; 
         }
+
+        .main_menu {
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            /* font-weight: bold; */
+        }
+
+        .navbar-brand img {
+            width: 35px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #000;
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff;
+        }
+
+        /* Toggler button styles */
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+
+        .navbar-toggler .menu_icon {
+            color: #000;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: #fff;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar-nav .nav-link {
+                margin: 10px 0;
+            }
+
+            .d-flex {
+                margin-top: 10px;
+            }
+
+            .navbar-toggler {
+                margin-left: auto;
+            }
+        }
+
+
     </style>
     @stack('styles')
 </head>
 
 <body>
-    <!--::header part start::-->
     <header class="main_menu home_menu">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="{{ route('dashboard') }}"> 
+                        <a class="navbar-brand" href="{{ route('dashboard') }}">
                             <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna i
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fa fa-bars"></i></span>
                         </button>
-
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
                                 </li>
@@ -53,57 +112,47 @@
                                 </li>
                                 <?php
                                     $user = Auth::user();
-                                    if($user){
-                                        echo'
+                                    if ($user) {
+                                        echo '
                                             <li class="nav-item">
-                                                <a class="nav-link" href="'. route('tagihan') .'">Tagihan</a>
+                                                <a class="nav-link" href="' . route('tagihan') . '">Tagihan</a>
                                             </li>
                                         ';
-                                        
-                                    }else{
-                                        echo'
+                                    } else {
+                                        echo '
                                             <li class="nav-item">
-                                                <a class="nav-link" href="'. route('booking') .'">Booking</a>
+                                                <a class="nav-link" href="' . route('booking') . '">Booking</a>
                                             </li>
                                         ';
                                     }
-
                                 ?>
                             </ul>
-                        </div>
-                        <div class="d-flex">
-                            <div class="nav-item">
-                            <?php
-                                $user = Auth::user();
-                                if($user){
-                                    echo'
-                                        <a class="nav-link" href="'. route('logout') .'">LOGOUT</a>
-                                    ';
-                                    
-                                }else{
-                                    echo'
-                                        <a class="nav-link" href="'. route('login') . '">LOGIN</a>
-                                    ';
-                                }
-                                // <a class="nav-link" href="{{ route('login') }} ">LOGIN</a>
-                            ?>
+                            <div class="d-flex">
+                                <div class="nav-item">
+                                    <?php
+                                        $user = Auth::user();
+                                        if ($user) {
+                                            echo '
+                                                <a class="nav-link" href="' . route('logout') . '">LOGOUT</a>
+                                            ';
+                                        } else {
+                                            echo '
+                                                <a class="nav-link" href="' . route('login') . '">LOGIN</a>
+                                            ';
+                                        }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-        {{-- <div class="search_input" id="search_input_box">
-            <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
-                    <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
-            </div>
-        </div> --}}
     </header>
-    <!-- Header part end-->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <main>
          @yield('content') <!-- The content of individual pages will be injected here -->
@@ -112,71 +161,51 @@
     <!--::footer_part start::-->
     <footer class="footer_part mt-5">
         <div class="container">
-            <div class="row justify-content-around">
-                <div class="col-sm-6 col-lg-6">
+            <div class="row justify-content-center">
+                <!-- Bagian Peta -->
+                <div class="col-md-6">
                     <div class="single_footer_part">
+                        <h4>Our Location</h4>
                         <div class="maps_container">
-                            <h4>Our Location</h4>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1148.3001655459595!2d110.49470678989275!3d-7.34160484265857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a79c376ec6c21%3A0x6b978b8638843e71!2sMbak%20Lusi%201!5e0!3m2!1sen!2sid!4v1733029132564!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1148.3001655459595!2d110.49470678989275!3d-7.34160484265857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a79c376ec6c21%3A0x6b978b8638843e71!2sMbak%20Lusi%201!5e0!3m2!1sen!2sid!4v1733029132564!5m2!1sen!2sid" 
+                                width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="col-sm-6 col-lg-8">
-                        <div class="single_footer_part">
-                            <h4>Alamat Lengkap</h4>
-                            <ul class="list-unstyled">
-                                <li><a>Jl. Anggrek No. 5, Jakarta, Indonesia</a></li>
-                            </ul>
-                        </div>
+                <!-- Bagian Info -->
+                <div class="col-md-6 info_section">
+                    <div class="single_footer_part">
+                        <h4>Alamat Lengkap</h4>
+                        <p>Jl. Anggrek No. 5, Jakarta, Indonesia</p>
                     </div>
-                    <div class="col-sm-6 col-lg-8">
-                        <div class="single_footer_part">
-                            <h4>Jam Operasional</h4>
-                            <ul class="list-unstyled">
-                                <li><a>Senin - Minggu : <br> 08.00-18.00 </a></li>
-                            </ul>
-                        </div>
+                    <div class="single_footer_part">
+                        <h4>Jam Operasional</h4>
+                        <p>Senin - Minggu: 08.00-18.00</p>
                     </div>
-                    <div class="col-sm-6 col-lg-8">
-                        <div class="single_footer_part">
-                            <h4>Kontak</h4>
-                            <ul class="list-unstyled">
-                                <li><a>WhatsApp +XXXXXXXXXXXXX</a></li>
-                            </ul>
-                        </div>
+                    <div class="single_footer_part">
+                        <h4>Kontak</h4>
+                        <p>WhatsApp: +XXXXXXXXXXXXX</p>
                     </div>
-                    <div class="col-sm-6 col-lg-8">
-                        <div class="single_footer_part">
-                            <h4>Social</h4>
-                            <ul class="list-unstyled">
-                                <li><a>WhatsApp +XXXXXXXXXXXXX</a></li>
-                            </ul>
+                    <div class="single_footer_part">
+                        <h4>Social</h4>
+                        <div class="footer_icon social_icon">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
+        <!-- Copyright -->
         <div class="copyright_part">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="footer_icon social_icon">
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-center">© 2024 Kos Fortuna. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
+    
     <!--::footer_part end::-->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
