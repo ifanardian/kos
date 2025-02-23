@@ -110,18 +110,25 @@ class ConfirmBookingController extends Controller
 
     public function penyewa()
     {
-        // lama
-        // $data = Penyewa::all();
-        // return view('admin.admin-penyewa', compact('data'));
+        // $penghuniAktif = Penyewa::where('status_penyewaan', 1)->get();
+        // $penghuniRiwayat = Penyewa::where('status_penyewaan', 0)->get();
+        $penghuniAktif = DB::select("
+                SELECT p.*
+                FROM penyewa p
+                WHERE p.status_penyewaan = 1
+            ");
+        $penghuniRiwayat = DB::select("
+                SELECT p.*
+                FROM penyewa p
+                WHERE p.status_penyewaan = 0
+            ");
+        $msTipe = DB::select("
+                SELECT id, deskripsi
+                FROM ms_tipe_kos
+                ORDER BY id ASC
+        ");
 
-        // fiona coba baru
-        // Ambil data penghuni aktif
-        $penghuniAktif = Penyewa::where('status_penyewaan', 1)->get();
-
-        // Ambil data penghuni nonaktif (riwayat)
-        $penghuniRiwayat = Penyewa::where('status_penyewaan', 0)->get();
-
-        return view('admin.admin-penyewa', compact('penghuniAktif', 'penghuniRiwayat'));
+        return view('admin.admin-penyewa.adminpenyewa', compact('penghuniAktif', 'penghuniRiwayat', 'msTipe'));
     }
 
     public function updatePenyewa(Request $request)
