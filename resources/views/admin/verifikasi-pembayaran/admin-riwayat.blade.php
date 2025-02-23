@@ -34,49 +34,70 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $dt)
                         <?php
-                        if($dt->status_verifikasi == '0'){
-                            echo "<tr style =' color: Red;'>";
-                        }else{
-                            echo "<tr style =' color: Green;'>";
-                        }
-                      ?>
-                        <td>{{$dt->email}}</td>
-                        <td>{{DB::table('penyewa')->where('email', $dt->email)->value('nama')}}</td>
-                        <td>{{DB::table('penyewa')->where('email', $dt->email)->value('no_kamar')}}</td>
-                        <td>{{$dt->tanggal_pembayaran}}</td>
-                        <td>{{$dt->periode_tagihan}}</td>
-                        <td>{{$dt->total_tagihan}}</td>
-                        <td>{{$dt->metode_pembayaran}}</td>
-                        <td>
-                            @if($dt->bukti_pembayaran != null)
-                            <a href="{{ route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) }}">
-                                <img src="{{ route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) }}" alt="tf"
-                                    style="width:100px;height:auto;">
-                            </a>
-                            @else
-                            Tidak Ada Bukti Pembayaran
-                            @endif
-                        </td>
-                        <td>
-                            <form id="form-update-status" action="{{ route('admin.action.pembayaran') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="email" value="{{ $dt->email }}">
-                                <input type="hidden" name="periode_tagihan" value="{{ $dt->periode_tagihan }}">
-                                <input type="hidden" name="metode_pembayaran" value="{{ $dt->metode_pembayaran }}">
-                                <select class="form-control" name="status" onchange="this.form.submit()">
-                                    <option value="0" {{ $dt->status_verifikasi == '0' ? 'selected' : '' }}>Belum
-                                        Terverifikasi</option>
-                                    <option value="1" {{ $dt->status_verifikasi == '1' ? 'selected' : '' }}>
-                                        Terverifikasi</option>
-                                </select>
-                            </form>
+                        
+                            if(count($data)>0){
+                                foreach ($data as $dt) {
+                                    if ($dt->status_verifikasi == '0') {
+                                        echo "<tr style='color: Red;'>";
+                                    } else {
+                                        echo "<tr style='color: Green;'>";
+                                    }
+                                    echo "
+                                        <td>" . $dt->email . "</td>
+                                        <td>" . DB::table('penyewa')->where('email', $dt->email)->value('nama') . "</td>
+                                        <td>" . DB::table('penyewa')->where('email', $dt->email)->value('no_kamar') . "</td>
+                                        <td>" . $dt->tanggal_pembayaran . "</td>
+                                        <td>" . $dt->periode_tagihan . "</td>
+                                        <td>" . $dt->total_tagihan . "</td>
+                                        <td>" . $dt->metode_pembayaran . "</td>
+                                    ";
 
+                                    if ($dt->bukti_pembayaran != null) {
+                                        echo "
+                                            <td>
+                                                <a href='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "'>
+                                                    <img src='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "' alt='tf'
+                                                        style='width:100px;height:auto;'>
+                                                </a>
+                                            </td>
+                                        ";
+                                    } else {
+                                        echo "
+                                            <td>
+                                                Tidak Ada Bukti Pembayaran
+                                            </td>
+                                        ";
+                                    }
 
-                        </td>
-                        </tr>
-                        @endforeach
+                                    echo "
+                                        <td>
+                                            <form action='" . route('admin.action.pembayaran') . "' method='POST'>
+                                                " . csrf_field() . "
+                                                <input type='hidden' name='email' value='" . $dt->email . "'>
+                                                <input type='hidden' name='periode_tagihan' value='" . $dt->periode_tagihan . "'>
+                                                <input type='hidden' name='metode_pembayaran' value='" . $dt->metode_pembayaran . "'>
+                                                <select class='form-control' name='status' onchange='this.form.submit()'>
+                                                    <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . ">Belum Terverifikasi</option>
+                                                    <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected' : '') . ">Terverifikasi</option>
+                                                </select>
+                                            </form>
+                                        </td>
+                                    </tr>";
+                                }
+                            }
+                            else{
+                                echo"
+                                    <tr>
+                                        <td colspan = '9'> 
+                                            <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                        </td>
+                                    </tr>
+                                ";
+                            }
+                        ?>
+
+                        
                     </tbody>
                 </table>
             </div>
