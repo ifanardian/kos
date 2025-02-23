@@ -3,6 +3,23 @@
 
 @push('styles')
 <style>
+    /* .banner_part {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        min-height: 100vh;
+        background-image: url("{{ asset('images/houses.png') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        overflow: hidden;
+        width: 100%;
+        height: auto;
+    } */
+
     .banner_part {
         display: flex;
         flex-direction: column;
@@ -18,6 +35,7 @@
         overflow: hidden;
         width: 100%;
         height: auto;
+        padding: 20px; /* Tambahkan padding untuk mobile */
     }
 
 </style>
