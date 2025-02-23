@@ -69,198 +69,6 @@ figure figcaption {
 }
 }
 
-/* card */
-/* .ag-format-container {
-    width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-.ag-courses_box {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-
-    padding: 50px 0;
-}
-.ag-courses_item {
-    -ms-flex-preferred-size: calc(33.33333% - 30px);
-    flex-basis: calc(33.33333% - 30px);
-
-    margin: 0 15px 50px;
-
-    overflow: hidden;
-
-    border-radius: 28px;
-} */
-
-.ag-format-container {
-    width: 100%;
-    max-width: 1200px; /* Sesuaikan dengan kebutuhan */
-    margin: 0 auto; /* Pusatkan container */
-    padding: 0 15px; /* Padding untuk mobile */
-}
-
-.ag-courses_box {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    flex-wrap: wrap; /* Card akan wrap ke baris baru jika tidak cukup ruang */
-    gap: 20px; /* Jarak antar card */
-    justify-content: center; /* Pusatkan card */
-}
-
-.ag-courses_item {
-    flex: 1 1 calc(33.33% - 40px); /* 3 card per baris di desktop */
-    max-width: calc(33.33% - 40px); /* Maksimum lebar card */
-    box-sizing: border-box; /* Padding dan border termasuk dalam lebar */
-    border-radius: 28px;
-    margin: 0 5px 50px;
-    overflow: hidden;
-}
-
-/* Tablet: 2 card per baris */
-@media (max-width: 991.98px) {
-    .ag-courses_item {
-        flex: 1 1 calc(50% - 20px); /* 2 card per baris */
-        max-width: calc(50% - 20px);
-    }
-}
-
-/* Mobile: 1 card per baris */
-@media (max-width: 767.98px) {
-    .ag-courses_item {
-        flex: 1 1 100%; /* 1 card per baris */
-        max-width: 100%;
-    }
-}
-
-.ag-courses-item_link {
-    text-decoration: none;
-    display: block;
-    padding: 30px;
-    background-color: #f4fcff;
-
-    overflow: hidden;
-
-    position: relative;
-}
-.ag-courses-item_link:hover,
-.ag-courses-item_link:hover .ag-courses-item_date {
-    text-decoration: none;
-    color: #FFF;
-}
-.ag-courses-item_link:hover .ag-courses-item_bg {
-    -webkit-transform: scale(10);
-    -ms-transform: scale(10);
-    transform: scale(10);
-}
-.ag-courses-item_title {
-    text-decoration: none;
-
-    min-height: 20px;
-    margin: 0 0 5px;
-
-    overflow: hidden;
-
-    font-weight: bold;
-    font-size: 18px;
-    color: #000000;
-
-    z-index: 2;
-    position: relative;
-}
-.ag-courses-item_date-box {
-    font-size: 18px;
-    color: #FFF;
-
-    z-index: 2;
-    position: relative;
-}
-.ag-courses-item_date {
-    font-weight: bold;
-    color: #f9b234;
-
-    -webkit-transition: color .5s ease;
-    -o-transition: color .5s ease;
-    transition: color .5s ease
-}
-.ag-courses-item_bg {
-    height: 128px;
-    width: 128px;
-    background-color: #f9b234;
-
-    z-index: 1;
-    position: absolute;
-    top: -75px;
-    right: -75px;
-
-    border-radius: 50%;
-
-    -webkit-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    transition: all .5s ease;
-}
-.ag-courses_item:nth-child(2n) .ag-courses-item_bg {
-    background-color: #3ecd5e;
-}
-.ag-courses_item:nth-child(3n) .ag-courses-item_bg {
-    background-color: #e44002;
-}
-.ag-courses_item:nth-child(4n) .ag-courses-item_bg {
-    background-color: #952aff;
-}
-.ag-courses_item:nth-child(5n) .ag-courses-item_bg {
-    background-color: #cd3e94;
-}
-.ag-courses_item:nth-child(6n) .ag-courses-item_bg {
-    background-color: #4c49ea;
-}
-
-
-
-@media only screen and (max-width: 979px) {
-    .ag-courses_item {
-    -ms-flex-preferred-size: calc(50% - 30px);
-    flex-basis: calc(50% - 30px);
-    }
-    .ag-courses-item_title {
-    font-size: 24px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .ag-format-container {
-    width: 96%;
-    }
-
-}
-@media only screen and (max-width: 639px) {
-    .ag-courses_item {
-    -ms-flex-preferred-size: 100%;
-    flex-basis: 100%;
-    }
-    .ag-courses-item_title {
-    min-height: 72px;
-    line-height: 1;
-
-    font-size: 24px;
-    }
-    .ag-courses-item_link {
-    padding: 22px 40px;
-    }
-    .ag-courses-item_date-box {
-    font-size: 16px;
-    }
-}
 
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_extends.scss */
 .btn_2,
@@ -328,41 +136,7 @@ figure figcaption {
 }
 
 
-/* line 10, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_extends.scss */
-/* .form-contact .form-group .btn_1 {
-  background-image: linear-gradient(to left, #fff 0%, #fff 51%, #fff 100%);
-} */
 
-
-#panorama-section {
-    text-align: center;
-    padding: 80px;
-    margin-bottom: 5rem;
-    justify-content: center;
-    /* display: grid; */
-    place-items: center; 
-}
-
-#description-section {
-    text-align: center;
-    padding: 0px 100px;
-}
-
-.section_tittle h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-#panorama {
-    width: 80%;
-    height: 650px; /* Sesuaikan tinggi untuk mobile */
-}
-
-@media (max-width: 1967px) {
-    #panorama {
-        height: 600px;
-    }
-}
 
 /* CAROUSEL */
 .slideshow-container {
@@ -431,75 +205,7 @@ figure figcaption {
 
 /* END CAROUSEL */
 
-/* GRID */
-* {
-    box-sizing: border-box;
-}
 
-/* body {
-margin: 20px;
-background-color: #e9eed9;
-} */
-
-.row-grid {
-    width: 75%;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    gap: 10px;
-    padding: 0 10px;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    margin-top: 8rem;
-    height: 100vh;
-}
-
-.column {
-    flex: 1 1 calc(33.33% - 20px); /* 3 kolom untuk desktop */
-    max-width: calc(33.33% - 20px);
-}
-
-@media (max-width: 1024px) {
-    .column {
-        flex: 1 1 calc(50% - 20px); /* 2 kolom untuk tablet */
-        max-width: calc(50% - 20px);
-    }
-}
-
-@media (max-width: 767px) {
-    .column {
-        flex: 1 1 100%; /* 1 kolom untuk mobile */
-        max-width: 100%;
-    }
-}
-
-.column img {
-    margin-top: 8px;
-    vertical-align: middle;
-    width: 100%;
-}
-
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-    .column {
-        -ms-flex: 50%;
-        flex: 50%;
-        max-width: 50%;
-    }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-    .column {
-        -ms-flex: 100%;
-        flex: 100%;
-        max-width: 100%;
-    }
-}
-
-/* END GRID */
 /* line 4, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_common.scss */
 body {
     padding: 0;
@@ -898,11 +604,19 @@ ul {
     box-shadow: -1.717px 8.835px 29.76px 2.24px rgba(255, 51, 104, 0.18);
 }
 
-/* line 77, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_button.scss */
+/* line 77,  ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_button.scss */
 .btn_2:hover {
     text-decoration: none;
     color: #fff !important;
     background-position: right center;
+}
+
+@media (max-width: 767px) {
+    .btn_2 {
+        padding: 10px 200px; /* Kurangi padding untuk layar kecil */
+        line-height: 1.2; /* Sesuaikan line-height untuk layar kecil */
+        font-size: 104px; /* Sesuaikan ukuran font untuk layar kecil */
+    }
 }
 
 @media (max-width: 991px) {
@@ -1316,7 +1030,7 @@ ul {
 }
 
 /* Default styles for all devices */
-.banner_part {
+/* .banner_part {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1331,7 +1045,7 @@ ul {
     overflow: hidden;
     width: 100%;
     height: auto;
-}
+} */
 
 /* Styles for tablets (768px - 1024px) */
 @media (max-width: 1024px) {
@@ -1383,7 +1097,7 @@ ul {
 /* line 7, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_banner.scss */
 .banner_part .single_banner_slider .banner_text {
     display: table;
-    width: 1000%;
+    width: 100%;
     min-height: 60vh; 
 }
 
@@ -1610,8 +1324,288 @@ ul {
     }
 }
 
-/**************** hero part css end ****************/
-/**************** service_part css start ****************/
+/* END BANNER */
+
+/* PANORAMA */
+
+#panorama-section {
+    text-align: center;
+    padding: 40px 40px; /* Padding untuk mobile */
+    margin-bottom: 4rem; /* Margin untuk mobile */
+    justify-content: center;
+    place-items: center;
+}
+
+#panorama {
+    width: 80%; /* Lebar penuh */
+    height: 0; /* Tinggi diatur oleh padding-bottom */
+    padding-bottom: 45.25%; /* Rasio aspek 16:9 */
+    position: relative;
+    overflow: hidden;
+}
+
+#panorama iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.section_tittle h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 767.98px) {
+    #panorama {
+        padding-bottom: 150%; /* Rasio aspek 4:3 untuk mobile */
+    }
+
+    #panorama-section {
+        padding: 20px; /* Padding lebih kecil untuk mobile */
+        margin-bottom:  8rem; /* Margin lebih kecil untuk mobile */
+    }
+}
+
+@media (min-width: 768px) {
+    #panorama-section {
+        padding: 80px; /* Padding lebih besar untuk desktop */
+        margin-bottom: 5rem; /* Margin lebih besar untuk desktop */
+    }
+}
+
+
+.ag-format-container {
+    width: 100%;
+    max-width: 1200px; /* Sesuaikan dengan kebutuhan */
+    margin: 0 auto; /* Pusatkan container */
+    padding: 0 15px; /* Padding untuk mobile */
+}
+
+.ag-courses_box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Card akan wrap ke baris baru jika tidak cukup ruang */
+    gap: 20px; /* Jarak antar card */
+    justify-content: center; /* Pusatkan card */
+}
+
+.ag-courses_item {
+    flex: 1 1 calc(33.33% - 40px); /* 3 card per baris di desktop */
+    max-width: calc(33.33% - 40px); /* Maksimum lebar card */
+    box-sizing: border-box; /* Padding dan border termasuk dalam lebar */
+    border-radius: 28px;
+    margin: 0 5px 50px;
+    overflow: hidden;
+}
+
+/* Tablet: 2 card per baris */
+@media (max-width: 991.98px) {
+    .ag-courses_item {
+        flex: 1 1 calc(50% - 20px); /* 2 card per baris */
+        max-width: calc(50% - 20px);
+    }
+}
+
+/* Mobile: 1 card per baris */
+@media (max-width: 767.98px) {
+    .ag-courses_item {
+        flex: 1 1 100%; /* 1 card per baris */
+        max-width: 100%;
+    }
+}
+
+.ag-courses-item_link {
+    text-decoration: none;
+    display: block;
+    padding: 30px;
+    background-color: #f4fcff;
+
+    overflow: hidden;
+
+    position: relative;
+}
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+    text-decoration: none;
+    color: #FFF;
+}
+.ag-courses-item_link:hover .ag-courses-item_bg {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+}
+.ag-courses-item_title {
+    text-decoration: none;
+
+    min-height: 20px;
+    margin: 0 0 5px;
+
+    overflow: hidden;
+
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+
+    z-index: 2;
+    position: relative;
+}
+.ag-courses-item_date-box {
+    font-size: 18px;
+    color: #FFF;
+
+    z-index: 2;
+    position: relative;
+}
+.ag-courses-item_date {
+    font-weight: bold;
+    color: #f9b234;
+
+    -webkit-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease
+}
+.ag-courses-item_bg {
+    height: 128px;
+    width: 128px;
+    background-color: #f9b234;
+
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+
+    border-radius: 50%;
+
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+.ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+    background-color: #3ecd5e;
+}
+.ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+    background-color: #e44002;
+}
+.ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+    background-color: #952aff;
+}
+.ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+    background-color: #cd3e94;
+}
+.ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+    background-color: #4c49ea;
+}
+
+
+
+@media only screen and (max-width: 979px) {
+    .ag-courses_item {
+    -ms-flex-preferred-size: calc(50% - 30px);
+    flex-basis: calc(50% - 30px);
+    }
+    .ag-courses-item_title {
+    font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .ag-format-container {
+    width: 96%;
+    }
+
+}
+@media only screen and (max-width: 639px) {
+    .ag-courses_item {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    }
+    .ag-courses-item_title {
+    min-height: 72px;
+    line-height: 1;
+
+    font-size: 24px;
+    }
+    .ag-courses-item_link {
+    padding: 22px 40px;
+    }
+    .ag-courses-item_date-box {
+    font-size: 16px;
+    }
+}
+
+/* GRID */
+* {
+    box-sizing: border-box;
+}
+
+.row-grid {
+    width: 75%;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 10px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 8rem;
+    height: 100vh;
+}
+
+.column {
+    flex: 1 1 calc(33.33% - 20px); /* 3 kolom untuk desktop */
+    max-width: calc(33.33% - 20px);
+}
+
+@media (max-width: 1024px) {
+    .column {
+        flex: 1 1 calc(50% - 20px); /* 2 kolom untuk tablet */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 767px) {
+    .column {
+        flex: 1 1 100%; /* 1 kolom untuk mobile */
+        max-width: 100%;
+    }
+}
+
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+/* END GRID */
+
+/**************** FEATURE css start ****************/
 /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
 .feature_part .single_feature_post_text {
     text-align: center;
@@ -1619,13 +1613,13 @@ ul {
     background-color: #163e6f;
     border-radius: 30px;
     margin-bottom: 30px;
-    position: relative;
+    /* position: relative; */
     height: 300px;
 }
 
-.padding_top_feature {
-    padding-top: 220px;
-}
+/* .padding_top_feature {
+    padding-top: -220px;
+} */
 
 @media (max-width: 576px) {
 
@@ -1639,7 +1633,7 @@ ul {
 
     /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
     .feature_part .single_feature_post_text {
-        height: 300px;
+        /* height: 300px; */
         padding: 35px 20px;
     }
 }
@@ -1652,14 +1646,6 @@ ul {
         padding: 35px 20px;
     }
 }
-
-/* line 26, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-/* .feature_part .single_feature_post_text p {
-line-height: 16px;
-font-size: 22px;
-} */
-
-
 
 .price-container {
     color: var(--text-color);
@@ -1681,7 +1667,6 @@ font-size: 22px;
 .price-container .price {
     color: var(--text-color);
     font-size: 26px;
-    /* Larger font for the main price */
 }
 
 .price-container .period {
@@ -1691,12 +1676,10 @@ font-size: 22px;
     margin-left: 5px;
 }
 
-
-
 /* line 30, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
 .feature_part {
-    position: relative;
-    z-index: 2; /* Card kategori kamar di atas grid foto */
+    /* position: relative; */
+     /* Card kategori kamar di atas grid foto */
     margin-top: 8rem; /* Jarak antara card kategori kamar dan elemen sebelumnya */
     padding: 20px 0; /* Padding untuk card kategori kamar */
 }
