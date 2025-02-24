@@ -38,6 +38,19 @@
         padding: 20px; /* Tambahkan padding untuk mobile */
     }
 
+    .banner_text_iner p {
+        white-space: nowrap; /* Mencegah teks turun ke baris berikutnya */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Tambahkan elipsis jika teks terlalu panjang */
+    }
+
+    @media (max-width: 768px) {
+        .banner_text_iner p {
+            white-space: normal; /* Izinkan teks turun ke baris berikutnya pada layar kecil */
+            word-break: break-word; /* Pecah kata jika terlalu panjang */
+        }
+    }
+
 </style>
 @endpush
 

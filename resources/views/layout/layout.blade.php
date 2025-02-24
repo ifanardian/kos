@@ -25,67 +25,6 @@
         body {
             background-color: #e3f6ff; 
         }
-
-        .main_menu {
-            background-color: transparent;
-            transition: background-color 0.3s ease;
-        }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-            /* font-weight: bold; */
-        }
-
-        .navbar-brand img {
-            width: 35px;
-            margin-right: 10px;
-        }
-
-        .navbar-nav .nav-link {
-            color: #000;
-            font-size: 1rem;
-            margin: 0 10px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #007bff;
-        }
-
-        /* Toggler button styles */
-        .navbar-toggler {
-            border: none;
-            outline: none;
-        }
-
-        .navbar-toggler .menu_icon {
-            color: #000;
-            font-size: 1.5rem;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 991.98px) {
-            .navbar-collapse {
-                background-color: #fff;
-                padding: 10px;
-                border-radius: 5px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            .navbar-nav .nav-link {
-                margin: 10px 0;
-            }
-
-            .d-flex {
-                margin-top: 10px;
-            }
-
-            .navbar-toggler {
-                margin-left: auto;
-            }
-        }
-
-
     </style>
     @stack('styles')
 </head>
@@ -95,13 +34,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="{{ route('dashboard') }}">
-                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna i
-                        </a>
+                    <nav class="navbar navbar-expand-lg navbar-light">                        
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fa fa-bars"></i></span>
                         </button>
+                        <a class="navbar-brand" href="{{ route('dashboard') }}">
+                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna
+                        </a>
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
@@ -173,7 +112,7 @@
                     </div>
                 </div>
                 <!-- Bagian Info -->
-                <div class="col-md-6 info_section">
+                <div class="col-md-4 info_section">
                     <div class="single_footer_part">
                         <h4>Alamat Lengkap</h4>
                         <p>Jl. Anggrek No. 5, Jakarta, Indonesia</p>
@@ -231,7 +170,7 @@
                 });
             }
         });
-        
+
         @yield('scripts')
     </script>
 
