@@ -19,87 +19,89 @@
             <div class="card-body">
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                         class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
-                <table class="table table-sm">
-                    <thead class="thead-center">
-                        <tr>
-                            <th scope="col">Email</th>
-                            <th scope="col">Nama Penyewa</th>
-                            <th scope="col">No Kamar</th>
-                            <th scope="col">Tanggal Pembayaran</th>
-                            <th scope="col">Periode Pembayaran</th>
-                            <th scope="col">Nominal</th>
-                            <th scope="col">Metode Pembayaran</th>
-                            <th scope="col">Bukti Pembayaran</th>
-                            <th scope="col">Status verif</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        
-                            if(count($data)>0){
-                                foreach ($data as $dt) {
-                                    if ($dt->status_verifikasi == '0') {
-                                        echo "<tr style='color: Red;'>";
-                                    } else {
-                                        echo "<tr style='color: Green;'>";
-                                    }
-                                    echo "
-                                        <td>" . $dt->email . "</td>
-                                        <td>" . DB::table('penyewa')->where('email', $dt->email)->value('nama') . "</td>
-                                        <td>" . DB::table('penyewa')->where('email', $dt->email)->value('no_kamar') . "</td>
-                                        <td>" . $dt->tanggal_pembayaran . "</td>
-                                        <td>" . $dt->periode_tagihan . "</td>
-                                        <td>" . $dt->total_tagihan . "</td>
-                                        <td>" . $dt->metode_pembayaran . "</td>
-                                    ";
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="thead-center">
+                            <tr>
+                                <th scope="col">Email</th>
+                                <th scope="col">Nama Penyewa</th>
+                                <th scope="col">No Kamar</th>
+                                <th scope="col">Tanggal Pembayaran</th>
+                                <th scope="col">Periode Pembayaran</th>
+                                <th scope="col">Nominal</th>
+                                <th scope="col">Metode Pembayaran</th>
+                                <th scope="col">Bukti Pembayaran</th>
+                                <th scope="col">Status Verifikasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            
+                                if(count($data)>0){
+                                    foreach ($data as $dt) {
+                                        if ($dt->status_verifikasi == '0') {
+                                            echo "<tr style='color: Red;'>";
+                                        } else {
+                                            echo "<tr style='color: Green;'>";
+                                        }
+                                        echo "
+                                            <td>" . $dt->email . "</td>
+                                            <td>" . DB::table('penyewa')->where('email', $dt->email)->value('nama') . "</td>
+                                            <td>" . DB::table('penyewa')->where('email', $dt->email)->value('no_kamar') . "</td>
+                                            <td>" . $dt->tanggal_pembayaran . "</td>
+                                            <td>" . $dt->periode_tagihan . "</td>
+                                            <td>" . $dt->total_tagihan . "</td>
+                                            <td>" . $dt->metode_pembayaran . "</td>
+                                        ";
 
-                                    if ($dt->bukti_pembayaran != null) {
+                                        if ($dt->bukti_pembayaran != null) {
+                                            echo "
+                                                <td>
+                                                    <a href='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "'>
+                                                        <img src='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "' alt='tf'
+                                                            style='width:100px;height:auto;'>
+                                                    </a>
+                                                </td>
+                                            ";
+                                        } else {
+                                            echo "
+                                                <td>
+                                                    Tidak Ada Bukti Pembayaran
+                                                </td>
+                                            ";
+                                        }
+
                                         echo "
                                             <td>
-                                                <a href='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "'>
-                                                    <img src='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "' alt='tf'
-                                                        style='width:100px;height:auto;'>
-                                                </a>
+                                                <form action='" . route('admin.action.pembayaran') . "' method='POST'>
+                                                    " . csrf_field() . "
+                                                    <input type='hidden' name='email' value='" . $dt->email . "'>
+                                                    <input type='hidden' name='periode_tagihan' value='" . $dt->periode_tagihan . "'>
+                                                    <input type='hidden' name='metode_pembayaran' value='" . $dt->metode_pembayaran . "'>
+                                                    <select class='form-control' name='status' onchange='this.form.submit()'>
+                                                        <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . ">Belum Terverifikasi</option>
+                                                        <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected' : '') . ">Terverifikasi</option>
+                                                    </select>
+                                                </form>
                                             </td>
-                                        ";
-                                    } else {
-                                        echo "
-                                            <td>
-                                                Tidak Ada Bukti Pembayaran
-                                            </td>
-                                        ";
+                                        </tr>";
                                     }
-
-                                    echo "
-                                        <td>
-                                            <form action='" . route('admin.action.pembayaran') . "' method='POST'>
-                                                " . csrf_field() . "
-                                                <input type='hidden' name='email' value='" . $dt->email . "'>
-                                                <input type='hidden' name='periode_tagihan' value='" . $dt->periode_tagihan . "'>
-                                                <input type='hidden' name='metode_pembayaran' value='" . $dt->metode_pembayaran . "'>
-                                                <select class='form-control' name='status' onchange='this.form.submit()'>
-                                                    <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . ">Belum Terverifikasi</option>
-                                                    <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected' : '') . ">Terverifikasi</option>
-                                                </select>
-                                            </form>
-                                        </td>
-                                    </tr>";
                                 }
-                            }
-                            else{
-                                echo"
-                                    <tr>
-                                        <td colspan = '9'> 
-                                            <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
-                                        </td>
-                                    </tr>
-                                ";
-                            }
-                        ?>
+                                else{
+                                    echo"
+                                        <tr>
+                                            <td colspan = '9'> 
+                                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                            </td>
+                                        </tr>
+                                    ";
+                                }
+                            ?>
 
-                        
-                    </tbody>
-                </table>
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
