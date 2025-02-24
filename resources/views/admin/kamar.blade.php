@@ -160,7 +160,6 @@
 <script>
     // Fungsi untuk format angka dengan titik sebagai pemisah ribuan
     function formatCurrency(value) {
-        // Menghapus semua karakter selain angka
         value = value.replace(/\D/g, '');
         // Menambahkan titik setiap tiga digit
         return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
