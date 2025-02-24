@@ -64,7 +64,8 @@
                         <div class="text-center mb-3">
                             <div class="input-container">
                                 <span class="price-text">Rp</span>
-                                <input type="text" class="form-control" name="harga" id="hargaBulananInput" style="width: 145px;"
+                                <input type="text" class="form-control" name="harga" id="hargaBulananInput"
+                                    style="width: 145px;"
                                     value="{{ number_format($hargaBulanan->harga ?? 400000, 0, ',', '.') }}" required>
                             </div>
                             <br>
@@ -110,44 +111,46 @@
             <!-- Card Body -->
             <div class="card-body">
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">No. Kamar</th>
-                        <th scope="col">Tipe Kamar</th>
-                        <th scope="col">Penyewa</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Jatuh Tempo</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
-            </table>
+                        class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">No. Kamar</th>
+                                <th scope="col">Tipe Kamar</th>
+                                <th scope="col">Penyewa</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Jatuh Tempo</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
