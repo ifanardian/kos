@@ -13,6 +13,17 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     letter-spacing: 1px;
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
 }
 
 /* ORDER DETAIL PADA TAGIHAN */
@@ -674,6 +685,7 @@ ul {
     width: 100%;
     z-index: 999;
     background-color: transparent;
+    padding: 0;
 }
 
 .navbar .navbar-toggler {
@@ -710,6 +722,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0;
 }
 
 /* line 20, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
@@ -720,6 +733,7 @@ ul {
     padding: 36px 23px;
     line-height: 12px;
     font-weight: 400;
+    line-height: normal;
 }
 
 /* line 29, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
@@ -736,7 +750,7 @@ ul {
 
     /* line 194, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
     .main_menu {
-        padding: 26px 0px;
+        padding: 10px 0px;
     }
 
     /* line 198, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
@@ -803,9 +817,9 @@ ul {
     }
 
     /* line 262, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
-    .navbar-toggler .menu_icon {
+    /* .navbar-toggler .menu_icon {
         color: #000;
-    }
+    } */
 
     /* line 267, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
     .main_menu a i {
@@ -817,7 +831,7 @@ ul {
 
     /* line 273, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
     .main_menu {
-        padding: 20px 0px;
+        padding: 10px 0px;
     }
 }
 
@@ -1338,9 +1352,7 @@ ul {
     display: block;
     padding: 30px;
     background-color: #f4fcff;
-
     overflow: hidden;
-
     position: relative;
 }
 .ag-courses-item_link:hover,
@@ -3416,7 +3428,8 @@ h6 {
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 /* Pastikan elemen footer memiliki jarak yang cukup */
 .footer_part {
-    margin-bottom: 3rem; /* Tambahkan margin bawah untuk memberikan jarak antar elemen */
+    margin-bottom: 3rem;
+    overflow-x: hidden;  /* Tambahkan margin bawah untuk memberikan jarak antar elemen */
 }
 
 .footer_part .copyright_part {
@@ -3465,12 +3478,13 @@ iframe {
 @media (max-width: 768px) {
     .footer_part {
         text-align: center;
+        padding: 0 15px;
     }
     .footer_icon a {
         margin: 5px;
     }
     .info_section {
-        margin-left: 30px; /* Atau margin-left: 30px; */
+        margin-left: 0; /* Atur margin-left menjadi 0 untuk layar kecil */
     }
     .footer_part .single_footer_part {
         margin-bottom: 20px; /* Tambahkan margin bawah untuk perangkat kecil */

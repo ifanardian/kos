@@ -150,7 +150,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const navbar = document.querySelector('.main_menu');
-        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
+        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); // Semua elemen link navbar
 
         window.addEventListener('scroll', () => {
             const bannerHeight = document.querySelector('.banner_part').offsetHeight;

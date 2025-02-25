@@ -182,7 +182,7 @@
 
 <script>
     const navbar = document.querySelector('.main_menu');
-    const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
+    const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); // Semua elemen link navbar
 
     window.addEventListener('scroll', () => {
         const bannerHeight = document.querySelector('.breadcrumb, .breadcrumb_bg').offsetHeight;
