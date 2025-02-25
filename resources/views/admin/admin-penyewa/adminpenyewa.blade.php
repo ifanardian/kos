@@ -78,7 +78,7 @@
                                                     data-no_telepon="{{ $item->no_telepon }}"
                                                     data-tipe_kos="{{ $item->tipe_kos }}"
                                                     data-alamat="{{ $item->alamat }}"
-                                                    data-ktp-url="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                    data-ktp-url="{{$item->ktp}}"
                                                     data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
                                                     data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
                                                     data-status_penyewaan="{{ $item->status_penyewaan }}"
@@ -133,7 +133,7 @@
                                                     data-no_telepon="{{ $item->no_telepon }}"
                                                     data-tipe_kos="{{ $item->tipe_kos }}"
                                                     data-alamat="{{ $item->alamat }}"
-                                                    data-ktp-url="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                    data-ktp-url="{{ $item->ktp}}"
                                                     data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
                                                     data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
                                                     data-status_penyewaan="{{ $item->status_penyewaan }}"
@@ -204,7 +204,10 @@
                         <div class="mb-3">
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
-                               <!-- belum ada foto ktp --> --
+                                <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
+                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}"
+                                        alt="KTP" style="width:150px;height:auto;">
+                                </a>
                             </div>
                             <input type="file" class="form-control" id="edit-ktp" name="ktp" accept="image/*">
                         </div>
@@ -274,7 +277,7 @@
             document.getElementById('edit-tanggal_menyewa').value = tanggalMenyewa;
             document.getElementById('edit-tanggal_berakhir').value = tanggalBerakhir;
             document.getElementById('edit-status_penyewaan').value = statusPenyewaan;
-            document.getElementById('preview-ktp').firstElementChild.src = ktpUrl || '';
+            // document.getElementById('preview-ktp').value = ktpUrl ;
             // Tampilkan preview foto KTP saat ini
             // const ktpPreview = document.getElementById('preview-ktp');
             // ktpPreview.firstElementChild.src = ktpUrl || ''; 

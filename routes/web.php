@@ -47,8 +47,10 @@ Route::prefix('admin')->group(function () {
     Route::get('send-invoice', [SendEmailController::class, 'sendInvoice'])->name('admin.send.invoice');
     // fiona tambah
     Route::get('/kelola-kamar', [KamarController::class, 'ShowIndex'])->name('admin.kelola_kamar');
+    Route::post('/kelola-kamar/tipekos', [KamarController::class, 'PostTipeLangganan'])->name('post.admin.tipekos');
     Route::post('/kelola-kamar/update', [AdminController::class, 'updateTipeKos'])->name('admin.harga_kamar.update');
     Route::get('/get-kamar-tersedia', [ConfirmBookingController::class, 'getKamarTersedia']) ->name('admin.get_kamar_tersedia');
+    Route::post('/kelola-kamar/kamar', [KamarController::class, 'PostKamar'])->name('post.admin.kamar');
 
     //membuat untuk rill
     Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
