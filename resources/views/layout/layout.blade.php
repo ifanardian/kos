@@ -35,7 +35,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">                        
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="btn btn-link d-md-none rounded-circle mr-3">
                             <span class="menu_icon"><i class="fa fa-bars"></i></span>
                         </button>
                         <a class="navbar-brand" href="{{ route('dashboard') }}">
@@ -150,7 +150,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const navbar = document.querySelector('.main_menu');
-        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand'); // Semua elemen link navbar
+        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); // Semua elemen link navbar
 
         window.addEventListener('scroll', () => {
             const bannerHeight = document.querySelector('.banner_part').offsetHeight;
