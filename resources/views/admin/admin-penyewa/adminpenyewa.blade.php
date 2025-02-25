@@ -6,16 +6,18 @@
 
 <style>
     .nav-tabs .nav-link {
-    background-color: #ebe8e8; /* Warna abu-abu untuk tab nonaktif */
-    color: black;
-    transition: background-color 0.3s, color 0.3s;
-}
+        background-color: #ebe8e8;
+        /* Warna abu-abu untuk tab nonaktif */
+        color: black;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-.nav-tabs .nav-link.active {
-    background-color: #007bff !important; /* Warna biru untuk tab aktif */
-    color: white !important;
-    font-weight: bold;
-}
+    .nav-tabs .nav-link.active {
+        background-color: #007bff !important;
+        /* Warna biru untuk tab aktif */
+        color: white !important;
+        font-weight: bold;
+    }
 
 </style>
 <!-- Begin Page Content -->
@@ -45,59 +47,63 @@
                     <div class="card shadow mb-4">
                         <!-- Card Body -->
                         <div class="card-body">
-                            <table class="table table-sm">
-                                <thead class="thead-center">
-                                    <tr>
-                                        <th scope="col">No Kamar</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Nomor Telepon</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Tanggal Mulai Sewa</th>
-                                        <th scope="col">Tanggal Berakhir</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($penghuniAktif as $item)
-                                    <tr class="tr-center">
-                                        <td>{{$item->no_kamar}}</td>
-                                        <td>{{$item->nama}}</td>
-                                        <td>{{$item->no_telepon}}</td>
-                                        <td>
-                                            <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
-                                                {{ $item->status_penyewaan ? 'Aktif' : 'Nonaktif' }}
-                                            </span>
-                                        </td>
-                                        <td>{{$item->tanggal_menyewa}}</td>
-                                        <td>{{$item->tanggal_berakhir}}</td>
-                                        <td>
-                                            <div class="container">
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#editModal" data-email="{{ $item->email }}"
-                                                    data-nama="{{ $item->nama }}"
-                                                    data-no_telepon="{{ $item->no_telepon }}"
-                                                    data-tipe_kos="{{ $item->tipe_kos }}"
-                                                    data-alamat="{{ $item->alamat }}"
-                                                    data-ktp-url="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
-                                                    data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
-                                                    data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
-                                                    data-status_penyewaan="{{ $item->status_penyewaan }}"
-                                                    data-tanggal_berakhir="{{ $item->tanggal_berakhir }}"
-                                                    data-id="{{ $item->id }}">
-                                                    <i class="bi bi-pencil-fill"></i> Edit
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead class="thead-center">
+                                        <tr>
+                                            <th scope="col">No Kamar</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Nomor Telepon</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Tanggal Mulai Sewa</th>
+                                            <th scope="col">Tanggal Berakhir</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($penghuniAktif as $item)
+                                        <tr class="tr-center">
+                                            <td>{{$item->no_kamar}}</td>
+                                            <td>{{$item->nama}}</td>
+                                            <td>{{$item->no_telepon}}</td>
+                                            <td>
+                                                <span
+                                                    class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
+                                                    {{ $item->status_penyewaan ? 'Aktif' : 'Nonaktif' }}
+                                                </span>
+                                            </td>
+                                            <td>{{$item->tanggal_menyewa}}</td>
+                                            <td>{{$item->tanggal_berakhir}}</td>
+                                            <td>
+                                                <div class="container">
+                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                        data-bs-target="#editModal" data-email="{{ $item->email }}"
+                                                        data-nama="{{ $item->nama }}"
+                                                        data-no_telepon="{{ $item->no_telepon }}"
+                                                        data-tipe_kos="{{ $item->tipe_kos }}"
+                                                        data-alamat="{{ $item->alamat }}"
+                                                        data-ktp-url="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                        data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
+                                                        data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
+                                                        data-status_penyewaan="{{ $item->status_penyewaan }}"
+                                                        data-tanggal_berakhir="{{ $item->tanggal_berakhir }}"
+                                                        data-id="{{ $item->id }}">
+                                                        <i class="bi bi-pencil-fill"></i> Edit
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+
+
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+                    tabindex="0">
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <table class="table table-sm">
@@ -119,10 +125,11 @@
                                         <td>{{$item->nama}}</td>
                                         <td>{{$item->no_telepon}}</td>
                                         <td>
-                                            <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
+                                            <span
+                                                class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
                                                 {{ $item->status_penyewaan ? 'Aktif' : 'Nonaktif' }}
                                             </span>
-                                        </td>                                        
+                                        </td>
                                         <td>{{$item->tanggal_menyewa}}</td>
                                         <td>{{$item->tanggal_berakhir}}</td>
                                         <td>
@@ -182,7 +189,7 @@
                         <div class="mb-3">
                             <label for="edit-tipe_kos" class="form-label">Tipe Kos</label>
                             <select class="form-control" id="edit-tipe_kos" name="tipe_kos" required>
-                            <?php
+                                <?php
                                 if($msTipe){
                                     foreach($msTipe as $t){
                                         echo"
@@ -204,7 +211,7 @@
                         <div class="mb-3">
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
-                               <!-- belum ada foto ktp --> --
+                                <!-- belum ada foto ktp --> --
                             </div>
                             <input type="file" class="form-control" id="edit-ktp" name="ktp" accept="image/*">
                         </div>
