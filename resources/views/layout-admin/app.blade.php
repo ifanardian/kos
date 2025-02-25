@@ -326,6 +326,27 @@
                 sidebar.classList.toggle("toggled");
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.getElementById("accordionSidebar");
+            const sidebarToggle = document.getElementById("sidebarToggle");
+            const sidebarToggleTop = document.getElementById("sidebarToggleTop");
+
+            function toggleSidebar() {
+                sidebar.classList.toggle("toggled");
+            }
+
+            // Toggle sidebar saat tombol di sidebar ditekan
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener("click", toggleSidebar);
+            }
+
+            // Toggle sidebar saat tombol burger di navbar ditekan
+            if (sidebarToggleTop) {
+                sidebarToggleTop.addEventListener("click", toggleSidebar);
+            }
+        });
+
         
     </script>
 
