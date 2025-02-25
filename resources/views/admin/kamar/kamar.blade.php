@@ -87,7 +87,7 @@
                     }else{
                         echo"
                             <div class='card-body'>
-                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>TIDAK ADA DATA</h6>
                             </div>
                         ";
                     }
@@ -162,7 +162,7 @@
                             <tbody>
                                 <tr >
                                     <td colspan='6' rowspan='2'>
-                                        <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                        <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>TIDAK ADA DATA</h6>
                                     </td>
                                 </tr>
                             </tbody>
