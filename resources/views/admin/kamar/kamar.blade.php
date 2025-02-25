@@ -49,11 +49,12 @@
         <div class='card shadow mb-4'>
             <div class='card-header py-3 d-flex flex-row align-items-center justify-content-between'>
                 <h6 class='m-0 font-weight-bold text-primary'>List Langganan Kos</h6>
-                <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-bs-toggle="modal"data-bs-target="#editModal">
+                <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                    data-bs-toggle="modal" data-bs-target="#editModal">
                     <i class='fas fa-plus fa-sm text-white-50'></i> Tambah Data
                 </button>
             </div>
-                <?php
+            <?php
                     if($msTipe){
                         foreach($msTipe as $harga){
                             echo"
@@ -93,54 +94,56 @@
                     }
             
         ?>
+        </div>
     </div>
-</div>
 
     <div class="col-xl col-lg-7">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Kelola Kamar</h6>
-                
+
             </div>
             <div class='card-body'>
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+                        class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
                 <?php
                 if($kamar){
                     echo"
                         <div class='card-body'>
-                            <table class='table table-sm'>
-                                <thead>
-                                    <tr>
-                                        <th scope='col'>No. Kamar</th>
-                                        <th scope='col'>Status</th>
-                                        <th scope='col'>Penyewa</th>
-                                        <th scope='col'>Tipe Kamar</th>
-                                        <th scope='col'>Jatuh Tempo</th>
-                                        <th scope='col'>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                        ";
-    
-                                    foreach($kamar as $k){
-                                        echo"
-                                            <tr>
-                                                <th scope='row'>".$k->id_kamar."</th>
-                                                <td>". $k->status == 'T' ? 'Tersewa' : 'Kosong' ."</td>
-                                                <td>".$k->nama ?? '-' ."</td>
-                                                <td>".$k->deskripsi ?? '-'."</td>
-                                                <td>".$k->tanggal_jatuh_tempo ?? '-'."</td>
-                                                <td>
-                                                    <button>Tombol</button>
-                                                </td>
-                                            </tr>
-                                        ";
-                                    }
-                        echo"
-                                    </tbody>
-                                </table>
+                            <div class='table-responsive'>
+                                <table class='table table-sm'>
+                                    <thead>
+                                        <tr>
+                                            <th scope='col'>No. Kamar</th>
+                                            <th scope='col'>Status</th>
+                                            <th scope='col'>Penyewa</th>
+                                            <th scope='col'>Tipe Kamar</th>
+                                            <th scope='col'>Jatuh Tempo</th>
+                                            <th scope='col'>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                    ";
+        
+                                        foreach($kamar as $k){
+                                            echo"
+                                                <tr>
+                                                    <th scope='row'>".$k->id_kamar."</th>
+                                                    <td>". $k->status == 'T' ? 'Tersewa' : 'Kosong' ."</td>
+                                                    <td>".$k->nama ?? '-' ."</td>
+                                                    <td>".$k->deskripsi ?? '-'."</td>
+                                                    <td>".$k->tanggal_jatuh_tempo ?? '-'."</td>
+                                                    <td>
+                                                        <button>Tombol</button>
+                                                    </td>
+                                                </tr>
+                                            ";
+                                        }
+                            echo"
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         ";
                     
@@ -148,6 +151,7 @@
     
                 }else{
                     echo"
+                    <div class='table-responsive'>
                         <table class='table table-sm'>
                             <thead>
                                 <tr>
@@ -173,21 +177,20 @@
             
             
             ?>
+            </div>
         </div>
+
     </div>
 
-</div>
-
-<!-- /.container-fluid -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <!-- /.container-fluid -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modal">Tambah Data Kamar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="msTipeKos" action="" method="POST"
-                    enctype="multipart/form-data">
+                <form id="msTipeKos" action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -213,37 +216,38 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<!-- /.container-fluid -->
-<script>
-    // Fungsi untuk format angka dengan titik sebagai pemisah ribuan
-    function formatCurrency(value) {
-        // Menghapus semua karakter selain angka
-        value = value.replace(/\D/g, '');
-        // Menambahkan titik setiap tiga digit
-        return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    }
+    <!-- /.container-fluid -->
+    <script>
+        // Fungsi untuk format angka dengan titik sebagai pemisah ribuan
+        function formatCurrency(value) {
+            // Menghapus semua karakter selain angka
+            value = value.replace(/\D/g, '');
+            // Menambahkan titik setiap tiga digit
+            return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
 
-    // Fungsi untuk membersihkan format saat form disubmit
-    function cleanCurrencyInput() {
-        // Hapus titik sebelum pengiriman data
-        let hargaBulananInput = document.getElementById('hargaBulananInput');
-        let hargaTahunanInput = document.getElementById('hargaTahunanInput');
+        // Fungsi untuk membersihkan format saat form disubmit
+        function cleanCurrencyInput() {
+            // Hapus titik sebelum pengiriman data
+            let hargaBulananInput = document.getElementById('hargaBulananInput');
+            let hargaTahunanInput = document.getElementById('hargaTahunanInput');
 
-        // Hapus titik di input sebelum mengirimkan form
-        hargaBulananInput.value = hargaBulananInput.value.replace(/\D/g, '');
-        hargaTahunanInput.value = hargaTahunanInput.value.replace(/\D/g, '');
-    }
+            // Hapus titik di input sebelum mengirimkan form
+            hargaBulananInput.value = hargaBulananInput.value.replace(/\D/g, '');
+            hargaTahunanInput.value = hargaTahunanInput.value.replace(/\D/g, '');
+        }
 
-    // Menangani input pada Harga Bulanan
-    document.getElementById('hargaBulananInput').addEventListener('input', function () {
-        let formattedValue = formatCurrency(this.value);
-        this.value = formattedValue; // Update nilai di input
-    });
+        // Menangani input pada Harga Bulanan
+        document.getElementById('hargaBulananInput').addEventListener('input', function () {
+            let formattedValue = formatCurrency(this.value);
+            this.value = formattedValue; // Update nilai di input
+        });
 
-    // Menangani input pada Harga Tahunan
-    document.getElementById('hargaTahunanInput').addEventListener('input', function () {
-        let formattedValue = formatCurrency(this.value);
-        this.value = formattedValue; // Update nilai di input
-    });
-</script>
-@endsection
+        // Menangani input pada Harga Tahunan
+        document.getElementById('hargaTahunanInput').addEventListener('input', function () {
+            let formattedValue = formatCurrency(this.value);
+            this.value = formattedValue; // Update nilai di input
+        });
+
+    </script>
+    @endsection
