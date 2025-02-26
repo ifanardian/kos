@@ -53,10 +53,48 @@
             <div class="card-body">
                 <div class="text mb-3" >
                     <!-- Preview Foto -->
-                    <div id="panorama1" class="panorama"></div>
-                    <div id="panorama2" class="panorama"></div>
-                    <div id="panorama3" class="panorama"></div>
-                    
+                     <?php
+                        
+                        foreach($panorama as $p){
+                            echo" <div id='".$p->scene."' class='panorama'>".$p->text."</div>";
+                            $hotspots = '';
+                            $temp = DB::table('panorama_hotspots')->where('id_panorama',$p->id)->get();
+
+                            if($temp->isNotEmpty()){
+                                $hotspots= "'hotSpots': [";
+                                
+                                foreach($temp as $t){
+                                    // dd($t->yaw);
+                                    $hotspots .= "
+                                        {
+                                            'pitch': ".$t->pitch.",
+                                            'yaw': ".$t->yaw.",
+                                            'type': 'scene',
+                                            'text': '".$panorama[(int)$p->scene]->text."',
+                                            
+                                        },
+                                    ";
+                                    
+                                }
+                                $hotspots .="]";       
+                            }
+                            
+                            echo"
+                                <script>
+                                    pannellum.viewer('".$p->scene."', {
+                                        'type': 'equirectangular',
+                                        'panorama': '".asset('images/'.$p->namafile)."',
+                                        'autoLoad': true,
+                                        'yaw': ".$p->yaw.",  
+                                        'pitch':".$p->pitch.",
+                                        'hfov':".$p->hfov.",
+                                        ".$hotspots."
+
+                                    });
+                                </script>
+                                ";
+                        }
+                     ?>
                 </div>
 
                 <!-- Form Ganti Foto -->
@@ -128,48 +166,8 @@
             alert('Foto berhasil diunggah!');
             // Tambahkan logika unggah foto ke server di sini
         });
-
-        pannellum.viewer('panorama1', {
-            "type": "equirectangular",
-            "panorama": "{{ asset('images/panorama.jpeg') }}",
-            "autoLoad": true,
-            "yaw": 180,  // Menghadap ke kanan (0 = tengah, 90 = kanan, -90 = kiri)
-            "pitch": -11, // Menghadap sedikit ke atas (-90 = bawah, 90 = atas)
-            "hfov": 150,  // Zoom level (default 100, lebih kecil = lebih zoom)
-            "hotSpots": [{
-                                "pitch": -9.1,
-                                "yaw": 257,
-                                "type": "scene",
-                                "text": "Kamar Mandi",
-                                "sceneId": "kamarmandi"
-                            },
-                            {
-                                "pitch": -9.1,
-                                "yaw": 78,
-                                "type": "scene",
-                                "text": "Tempat Jemur",
-                                "sceneId": "jemur"
-                            }
-
-                        ]
-
-        });
-        pannellum.viewer('panorama2', {
-            "type": "equirectangular",
-            "panorama": "{{ asset('images/km.jpeg') }}",
-            "autoLoad": true,
-            "yaw": 145,  // Menghadap ke kanan (0 = tengah, 90 = kanan, -90 = kiri)
-            "pitch": -11, // Menghadap sedikit ke atas (-90 = bawah, 90 = atas)
-            "hfov": 150  // Zoom level (default 100, lebih kecil = lebih zoom)
-        });
-        pannellum.viewer('panorama3', {
-            "type": "equirectangular",
-            "panorama": "{{ asset('images/jmr.jpeg') }}",
-            "autoLoad": true,
-            "yaw": -40,  // Menghadap ke kanan (0 = tengah, 90 = kanan, -90 = kiri)
-            "pitch": -11, // Menghadap sedikit ke atas (-90 = bawah, 90 = atas)
-            "hfov": 150  // Zoom level (default 100, lebih kecil = lebih zoom)
-        });
+        
+        
 
     </script>
 <!-- /.container-fluid -->

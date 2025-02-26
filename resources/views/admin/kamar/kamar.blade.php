@@ -52,10 +52,8 @@
                     <i class='fas fa-plus fa-sm text-white-50'></i> Tambah Data
                 </button>
             </div>
-
                 <div class='row'>
                 <?php
-
                     if($msTipe){
                         foreach($msTipe as $harga){
                             echo"
@@ -182,6 +180,8 @@
         </div>
 
     </div>
+
+</div>
 
 <!-- /.container-fluid -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">

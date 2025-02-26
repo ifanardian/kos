@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\ConfirmBookingController;
 use App\Http\Controllers\Admin\SendEmailController;
 use App\Http\Controllers\Admin\AdminPaymentController;
 use App\Http\Controllers\Admin\KamarController;
-
+use App\Http\Controllers\Admin\KelolaWebsiteController;
 use App\Http\Controllers\AdminController;
 
 
@@ -55,6 +55,7 @@ Route::prefix('admin')->group(function () {
     //membuat untuk rill
     Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
     Route::get('penyewa', [ConfirmBookingController::class, 'penyewa'])->name('admin.penyewa');
+    Route::get('kelola-website', [KelolaWebsiteController::class, 'ShowKelolaWebsite'])->name('admin.kelolawebsite');
     // fiona
     Route::post('/penyewa-update', [ConfirmBookingController::class, 'updatePenyewa'])->name('admin.penyewa.update');
     Route::get('payment', [AdminPaymentController::class, 'showPayment'])->name('admin.payment');
