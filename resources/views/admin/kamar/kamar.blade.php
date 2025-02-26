@@ -47,12 +47,15 @@
         <div class='card shadow mb-4'>
             <div class='card-header py-3 d-flex flex-row align-items-center justify-content-between'>
                 <h6 class='m-0 font-weight-bold text-primary'>List Langganan Kos</h6>
-                <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-bs-toggle="modal"data-bs-target="#editModal">
+                <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                    data-bs-toggle="modal" data-bs-target="#editModal">
                     <i class='fas fa-plus fa-sm text-white-50'></i> Tambah Data
                 </button>
             </div>
+
                 <div class='row'>
                 <?php
+
                     if($msTipe){
                         foreach($msTipe as $harga){
                             echo"
@@ -86,7 +89,7 @@
                     }else{
                         echo"
                             <div class='card-body'>
-                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>TIDAK ADA DATA</h6>
                             </div>
                         ";
                     }
@@ -94,7 +97,6 @@
         ?>
         </div>
     </div>
-</div>
 
     <div class="col-xl col-lg-7">
         <div class="card shadow mb-4">
@@ -150,6 +152,7 @@
                     ";
                 }else{
                     echo"
+                    <div class='table-responsive'>
                         <table class='table table-sm'>
                             <thead>
                                 <tr>
@@ -164,7 +167,7 @@
                             <tbody>
                                 <tr >
                                     <td colspan='6' rowspan='2'>
-                                        <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                        <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>TIDAK ADA DATA</h6>
                                     </td>
                                 </tr>
                             </tbody>
@@ -175,10 +178,10 @@
             
             
             ?>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 <!-- /.container-fluid -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -280,3 +283,4 @@
     });
 </script>
 @endsection
+

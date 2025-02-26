@@ -91,7 +91,7 @@
                                     echo"
                                         <tr>
                                             <td colspan = '9'> 
-                                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>TIDAK ADA DATA</h6>
                                             </td>
                                         </tr>
                                     ";
