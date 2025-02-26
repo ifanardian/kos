@@ -251,11 +251,21 @@
                 <h5 class="modal-title" id="roomModalLabel">Tentukan Nomor Kamar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="modal-room-number" class="form-label">Nomor Kamar</label>
                     <select id="modal-room-number" class="form-control">
-                        <option value="">Pilih Nomor Kamar</option>
+                        <option value="" selected disabled>Pilih Nomor Kamar</option>
+                        <?php
+                            $kamar = DB::table('kamar')->where('status','F')->get();
+                            foreach($kamar as $k){
+                                echo"
+                                    <option value='".$k->id_kamar."'>No. ".$k->id_kamar."</option>
+                                ";
+                            }
+                        ?>
+                        
                     </select>
                     {{-- <label for="modal-room-number" class="form-label">Nomor Kamar</label>
           <input type="text" class="form-control" id="modal-room-number" placeholder="Masukkan nomor kamar"> --}}
@@ -300,26 +310,26 @@
             const modal = new bootstrap.Modal(document.getElementById('roomModal'));
             document.getElementById('no_form').value = itemId;
 
-            $("#modal-room-number").empty().append('<option value="">Tentukan Nomor Kamar</option>');
-            $.ajax({
-                url: "{{ route('admin.get_kamar_tersedia') }}",
-                type: "GET",
-                success: function (response) {
-                    console.log("Data kamar diterima:", response);
-                    let uniqueRooms = new Set(response); // Set otomatis menghapus duplikasi
+            // $("#modal-room-number").empty().append('<option value="">Tentukan Nomor Kamar</option>');
+            // $.ajax({
+            //     url: "{{ route('admin.get_kamar_tersedia') }}",
+            //     type: "GET",
+            //     success: function (response) {
+            //         console.log("Data kamar diterima:", response);
+            //         let uniqueRooms = new Set(response); // Set otomatis menghapus duplikasi
 
-                    uniqueRooms.forEach(no_kamar => {
-                        $("#modal-room-number").append(
-                            `<option value="${no_kamar}">${no_kamar}</option>`);
-                    });
+            //         uniqueRooms.forEach(no_kamar => {
+            //             $("#modal-room-number").append(
+            //                 `<option value="${no_kamar}">${no_kamar}</option>`);
+            //         });
 
-                    // Tampilkan modal setelah data kamar dimuat
-                    $("#roomModal").modal("show");
-                },
-                error: function (xhr, status, error) {
-                    console.error("Gagal mengambil data kamar:", error);
-                }
-            });
+            //         // Tampilkan modal setelah data kamar dimuat
+            //         $("#roomModal").modal("show");
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.error("Gagal mengambil data kamar:", error);
+            //     }
+            // });
 
             modal.show();
         } else {

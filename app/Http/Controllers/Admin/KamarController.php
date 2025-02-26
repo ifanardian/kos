@@ -23,4 +23,37 @@ class KamarController extends Controller
         // dd($kamar, $msTipe);
         return view('admin.kamar.kamar',compact('kamar','msTipe'));
     }
+
+    public function PostTipeLangganan(Request $request){
+        
+        $request->validate([
+            'harga' => 'required|numeric',
+            'bulan' => 'required|numeric',
+            'deskripsi' => 'required|string'
+        ]);
+        
+        DB::table('ms_tipe_kos')->insert([
+            'harga' => $request->harga,
+            'bulan' => $request->bulan,
+            'deskripsi'=> $request->deskripsi,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        return redirect()->back();
+    }
+
+    public function PostKamar(Request $request){
+        
+        $request->validate([
+            'noKamar' => 'required|numeric',
+        ]);
+        
+        DB::table('kamar')->insert([
+            'id_kamar' => $request->noKamar,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        return redirect()->back();
+    }
+
 }

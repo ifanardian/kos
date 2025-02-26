@@ -80,7 +80,7 @@
                                                     <input type='hidden' name='metode_pembayaran' value='" . $dt->metode_pembayaran . "'>
                                                     <select class='form-control' name='status' onchange='this.form.submit()'>
                                                         <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . ">Belum Terverifikasi</option>
-                                                        <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected' : '') . ">Terverifikasi</option>
+                                                        <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected ' : '') . ">Terverifikasi</option>
                                                     </select>
                                                 </form>
                                             </td>

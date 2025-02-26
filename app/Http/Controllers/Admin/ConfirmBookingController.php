@@ -91,6 +91,11 @@ class ConfirmBookingController extends Controller
                 'updated_at' => now(),
             ]);
             Mail::to($booking->email)->send(new SetPasswordMail($booking));
+            DB::table('kamar')
+            ->where('id_kamar', $request->room_number)
+            ->update([
+                'status' => 'T'
+            ]);
 
         }
 
