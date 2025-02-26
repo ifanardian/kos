@@ -259,28 +259,28 @@
         return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
-        // Fungsi untuk membersihkan format saat form disubmit
-        function cleanCurrencyInput() {
-            // Hapus titik sebelum pengiriman data
-            let hargaBulananInput = document.getElementById('hargaBulananInput');
-            let hargaTahunanInput = document.getElementById('hargaTahunanInput');
+    // Fungsi untuk membersihkan format saat form disubmit
+    function cleanCurrencyInput() {
+        // Hapus titik sebelum pengiriman data
+        let hargaBulananInput = document.getElementById('hargaBulananInput');
+        let hargaTahunanInput = document.getElementById('hargaTahunanInput');
 
-            // Hapus titik di input sebelum mengirimkan form
-            hargaBulananInput.value = hargaBulananInput.value.replace(/\D/g, '');
-            hargaTahunanInput.value = hargaTahunanInput.value.replace(/\D/g, '');
-        }
+        // Hapus titik di input sebelum mengirimkan form
+        hargaBulananInput.value = hargaBulananInput.value.replace(/\D/g, '');
+        hargaTahunanInput.value = hargaTahunanInput.value.replace(/\D/g, '');
+    }
 
-        // Menangani input pada Harga Bulanan
-        document.getElementById('hargaBulananInput').addEventListener('input', function () {
-            let formattedValue = formatCurrency(this.value);
-            this.value = formattedValue; // Update nilai di input
-        });
+    // Menangani input pada Harga Bulanan
+    document.getElementById('hargaBulananInput').addEventListener('input', function () {
+        let formattedValue = formatCurrency(this.value);
+        this.value = formattedValue; // Update nilai di input
+    });
 
-        // Menangani input pada Harga Tahunan
-        document.getElementById('hargaTahunanInput').addEventListener('input', function () {
-            let formattedValue = formatCurrency(this.value);
-            this.value = formattedValue; // Update nilai di input
-        });
+    // Menangani input pada Harga Tahunan
+    document.getElementById('hargaTahunanInput').addEventListener('input', function () {
+        let formattedValue = formatCurrency(this.value);
+        this.value = formattedValue; // Update nilai di input
+    });
+</script>
+@endsection
 
-    </script>
-    @endsection

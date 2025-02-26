@@ -93,13 +93,56 @@
         <script>
             pannellum.viewer('panorama', {
                 "default": {
-                    "firstScene": "beranda",
+                    <?php
+                        $defaultScene = $panorama->where('default', 1)->first();
+                        if ($defaultScene) {
+                            echo '"firstScene": "' . $defaultScene->scene . '",';
+                        }
+                    ?>
                     // "author": "Matthew Petroff",
                     "sceneFadeDuration": 1000,
                     "autoLoad": true
                 },
-
                 "scenes": {
+                    <?php
+                        foreach($panorama as $p){
+                            $hotspots = '';
+                            $temp = DB::table('panorama_hotspots')->where('id_panorama',$p->id)->get();
+
+                            if($temp->isNotEmpty()){
+                                $hotspots= "'hotSpots': [";
+                                
+                                foreach($temp as $t){
+                                    // dd($t->yaw);
+                                    $hotspots .= "{
+                                    'pitch': ".$t->pitch.",
+                                    'yaw': ".$t->yaw.",
+                                    'type': 'scene',
+                                    'text':'".$panorama[(int)$p->scene]->text."',
+                                    },";
+                                    
+                                }
+                                $hotspots .="]";       
+                            }
+                            // dd($hotspots);
+                            echo"
+                                ".$p->scene.": {
+                                'hfov':".$p->hfov.", //seberapa zoom gambar pas pertama kali diliat
+                                'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
+                                'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
+                                'type':'equirectangular',
+                                'panorama':'".asset('images/'.$p->namafile)."',
+                                ".$hotspots."
+                            },
+                            
+                            ";
+                        }
+                        
+                        
+                        
+                        
+                        
+                        ?>
                     "beranda": {
                         "hfov": 160, //seberapa zoom gambar pas pertama kali diliat
                         "pitch": -10, //seberapa tinggi/rendah letak panahnya (vertikal)
