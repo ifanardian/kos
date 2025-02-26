@@ -6,16 +6,18 @@
 
 <style>
     .nav-tabs .nav-link {
-    background-color: #ebe8e8; /* Warna abu-abu untuk tab nonaktif */
-    color: black;
-    transition: background-color 0.3s, color 0.3s;
-}
+        background-color: #ebe8e8;
+        /* Warna abu-abu untuk tab nonaktif */
+        color: black;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-.nav-tabs .nav-link.active {
-    background-color: #007bff !important; /* Warna biru untuk tab aktif */
-    color: white !important;
-    font-weight: bold;
-}
+    .nav-tabs .nav-link.active {
+        background-color: #007bff !important;
+        /* Warna biru untuk tab aktif */
+        color: white !important;
+        font-weight: bold;
+    }
 
 </style>
 <!-- Begin Page Content -->
@@ -95,9 +97,10 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+
+
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+                    tabindex="0">
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <table class="table table-sm">
@@ -119,10 +122,11 @@
                                         <td>{{$item->nama}}</td>
                                         <td>{{$item->no_telepon}}</td>
                                         <td>
-                                            <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
+                                            <span
+                                                class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
                                                 {{ $item->status_penyewaan ? 'Aktif' : 'Nonaktif' }}
                                             </span>
-                                        </td>                                        
+                                        </td>
                                         <td>{{$item->tanggal_menyewa}}</td>
                                         <td>{{$item->tanggal_berakhir}}</td>
                                         <td>
@@ -182,7 +186,7 @@
                         <div class="mb-3">
                             <label for="edit-tipe_kos" class="form-label">Tipe Kos</label>
                             <select class="form-control" id="edit-tipe_kos" name="tipe_kos" required>
-                            <?php
+                                <?php
                                 if($msTipe){
                                     foreach($msTipe as $t){
                                         echo"

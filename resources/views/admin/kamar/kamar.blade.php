@@ -47,7 +47,8 @@
         <div class='card shadow mb-4'>
             <div class='card-header py-3 d-flex flex-row align-items-center justify-content-between'>
                 <h6 class='m-0 font-weight-bold text-primary'>List Langganan Kos</h6>
-                <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-bs-toggle="modal"data-bs-target="#editModal">
+                <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                    data-bs-toggle="modal" data-bs-target="#editModal">
                     <i class='fas fa-plus fa-sm text-white-50'></i> Tambah Data
                 </button>
             </div>
@@ -86,7 +87,7 @@
                     }else{
                         echo"
                             <div class='card-body'>
-                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>TIDAK ADA DATA</h6>
                             </div>
                         ";
                     }
@@ -94,7 +95,6 @@
         ?>
         </div>
     </div>
-</div>
 
     <div class="col-xl col-lg-7">
         <div class="card shadow mb-4">
@@ -150,6 +150,7 @@
                     ";
                 }else{
                     echo"
+                    <div class='table-responsive'>
                         <table class='table table-sm'>
                             <thead>
                                 <tr>
@@ -164,7 +165,7 @@
                             <tbody>
                                 <tr >
                                     <td colspan='6' rowspan='2'>
-                                        <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>DATA BELUM ADA</h6>
+                                        <h6 class='m-0 font-weight-bold text-primary' style='text-align: center;';>TIDAK ADA DATA</h6>
                                     </td>
                                 </tr>
                             </tbody>
@@ -175,7 +176,9 @@
             
             
             ?>
+            </div>
         </div>
+
     </div>
 
 </div>
@@ -256,27 +259,28 @@
         return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
-    // Fungsi untuk membersihkan format saat form disubmit
-    function cleanCurrencyInput() {
-        // Hapus titik sebelum pengiriman data
-        let hargaBulananInput = document.getElementById('hargaBulananInput');
-        let hargaTahunanInput = document.getElementById('hargaTahunanInput');
+        // Fungsi untuk membersihkan format saat form disubmit
+        function cleanCurrencyInput() {
+            // Hapus titik sebelum pengiriman data
+            let hargaBulananInput = document.getElementById('hargaBulananInput');
+            let hargaTahunanInput = document.getElementById('hargaTahunanInput');
 
-        // Hapus titik di input sebelum mengirimkan form
-        hargaBulananInput.value = hargaBulananInput.value.replace(/\D/g, '');
-        hargaTahunanInput.value = hargaTahunanInput.value.replace(/\D/g, '');
-    }
+            // Hapus titik di input sebelum mengirimkan form
+            hargaBulananInput.value = hargaBulananInput.value.replace(/\D/g, '');
+            hargaTahunanInput.value = hargaTahunanInput.value.replace(/\D/g, '');
+        }
 
-    // Menangani input pada Harga Bulanan
-    document.getElementById('hargaBulananInput').addEventListener('input', function () {
-        let formattedValue = formatCurrency(this.value);
-        this.value = formattedValue; // Update nilai di input
-    });
+        // Menangani input pada Harga Bulanan
+        document.getElementById('hargaBulananInput').addEventListener('input', function () {
+            let formattedValue = formatCurrency(this.value);
+            this.value = formattedValue; // Update nilai di input
+        });
 
-    // Menangani input pada Harga Tahunan
-    document.getElementById('hargaTahunanInput').addEventListener('input', function () {
-        let formattedValue = formatCurrency(this.value);
-        this.value = formattedValue; // Update nilai di input
-    });
-</script>
-@endsection
+        // Menangani input pada Harga Tahunan
+        document.getElementById('hargaTahunanInput').addEventListener('input', function () {
+            let formattedValue = formatCurrency(this.value);
+            this.value = formattedValue; // Update nilai di input
+        });
+
+    </script>
+    @endsection

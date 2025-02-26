@@ -11,24 +11,24 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
- .sidebar {
-  width: 250px;
-  transition: width 0.3s ease;
+.sidebar {
+    width: 250px;
+    transition: width 0.3s ease;
 }
 
 .sidebar.toggled {
-  width: 80px;
+    width: 80px;
 }
 
 .sidebar .nav-item span {
-  display: inline;
-  transition: opacity 0.3s ease;
+    display: inline;
+    transition: opacity 0.3s ease;
 }
 
 .sidebar.toggled .nav-item span {
-  opacity: 0;
-  visibility: hidden;
-  width: 0;
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
 }
 
 /* Rotasi panah */
@@ -4568,7 +4568,7 @@ input[type="button"].btn-block {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 10rem;
 }
 
 .navbar .container,
@@ -11369,6 +11369,7 @@ a:focus {
 .dropdown.no-arrow .dropdown-toggle::after {
     display: none;
 }
+
 
 .sidebar .nav-item.dropdown .dropdown-toggle::after,
 .topbar .nav-item.dropdown .dropdown-toggle::after {
