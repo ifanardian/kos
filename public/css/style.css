@@ -1292,12 +1292,20 @@ ul {
         padding: 20px; /* Padding lebih kecil untuk mobile */
         margin-bottom:  8rem; /* Margin lebih kecil untuk mobile */
     }
+
+    #panorama-section .section_tittle {
+        margin-bottom: 3rem;
+    }
 }
 
 @media (min-width: 768px) {
     #panorama-section {
         padding: 80px; /* Padding lebih besar untuk desktop */
         margin-bottom: 5rem; /* Margin lebih besar untuk desktop */
+    }
+
+    #panorama-section .section_tittle {
+        margin-bottom: 3rem;
     }
 }
 
@@ -1374,7 +1382,7 @@ ul {
     margin: 0 0 5px;
     overflow: hidden;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 19px;
     color: #000000;
     z-index: 2;
     position: relative;
@@ -1538,6 +1546,8 @@ ul {
 
 /* END GRID */
 
+/* KATEGORI KAMAR */
+
 /**************** FEATURE css start ****************/
 /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
 .feature_part .single_feature_post_text {
@@ -1546,7 +1556,6 @@ ul {
     background-color: #163e6f;
     border-radius: 30px;
     margin-bottom: 30px;
-    /* position: relative; */
     height: 300px;
 }
 
@@ -1610,15 +1619,13 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px; /* Tambahkan jarak antar card */
-    margin-top: 3rem; /* Jarak antara card kategori kamar dan elemen sebelumnya */
-    padding: 20px 0; /* Padding untuk card kategori kamar */
-    position: relative; /* Pastikan posisi relatif */
-    z-index: 1; /* Pastikan card kategori berada di atas */
+    gap: 20px; 
+    position: relative;
+    z-index: 1; 
 }
 
 .feature_part .single_feature_post_text h3 {
-    font-size: 30px;
+    font-size: 27px;
     font-weight: 700;
     margin-top: 21px;
     color: #e0e0a7;
@@ -1669,33 +1676,90 @@ ul {
 @media (max-width: 576px) {
 
     /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text img {
-        max-height: 247px;
+    .feature_part .single_feature_post_text {
+        max-height: 200px;
         right: 0;
         left: 0;
         margin: 0 auto;
+    }
+
+    .feature_part .single_feature_post_text h3 {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text .price-container {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text a {
+        font-size: 12px;
+    }
+
+    .feature_part .section_tittle h2 {
+        margin-bottom: 3rem;
+        font-size: 26px;
     }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 
     /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text img {
-        max-height: 195px;
+    .feature_part .single_feature_post_text {
+        max-height: 270px;
         right: 0;
         left: 0;
         margin: 0 auto;
+    }
+
+    .feature_part .single_feature_post_text h3 {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text .price-container {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text a {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .feature_part .section_tittle h2 {
+        margin-bottom: 2rem;
+        font-size: 26px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
     /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text img {
-        max-height: 195px;
+    .feature_part .single_feature_post_text {
+        max-height: 290px;
         right: 0;
         left: 0;
         margin: 0 auto;
+    }
+
+    .feature_part .single_feature_post_text h3 {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text .price-container {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text a {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .feature_part .section_tittle h2 {
+        margin-bottom: 2rem;
+        font-size: 30px;
+    }
+
+    .feature_part .section_tittle {
+        margin-bottom: 2rem;
     }
 }
 
@@ -1708,6 +1772,12 @@ ul {
         left: 0;
         margin: 0 auto;
     }
+
+    .feature_part .section_tittle h2 {
+        margin-bottom: 2rem;
+        font-size: 35px;
+    }
+
 }
 
 /* line 103, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
