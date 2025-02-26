@@ -1283,7 +1283,8 @@ ul {
 }
 
 /* Responsive styles */
-@media (max-width: 767.98px) {
+
+@media (max-width: 576px) {
     #panorama {
         padding-bottom: 150%; /* Rasio aspek 4:3 untuk mobile */
     }
@@ -1298,10 +1299,35 @@ ul {
     }
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    #panorama {
+        padding-bottom: 100%; /* Rasio aspek 4:3 untuk mobile */
+    }
+
     #panorama-section {
-        padding: 80px; /* Padding lebih besar untuk desktop */
-        margin-bottom: 5rem; /* Margin lebih besar untuk desktop */
+        padding: 20px; /* Padding lebih kecil untuk mobile */
+        margin-bottom:  8rem; /* Margin lebih kecil untuk mobile */
+    }
+
+    #panorama-section .section_tittle {
+        margin-bottom: 3rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #panorama {
+        padding-bottom: 90%; /* Rasio aspek 4:3 untuk mobile */
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    #panorama {
+        padding-bottom: 110%; /* Rasio aspek 4:3 untuk mobile */
+    }
+
+    #panorama-section {
+        padding: 20px; /* Padding lebih kecil untuk mobile */
+        margin-bottom:  8rem; /* Margin lebih kecil untuk mobile */
     }
 
     #panorama-section .section_tittle {
@@ -1631,14 +1657,6 @@ ul {
     color: #e0e0a7;
 }
 
-@media (max-width: 576px) {
-
-    /* line 30, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text h3 {
-        margin-top: 10px;
-    }
-}
-
 /* line 46, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
 .feature_part .single_feature_post_text .feature_btn {
     text-decoration: none;
@@ -1685,6 +1703,7 @@ ul {
 
     .feature_part .single_feature_post_text h3 {
         font-size: 22px;
+        margin-top: 10px;
     }
 
     .feature_part .single_feature_post_text .price-container {
@@ -1771,11 +1790,12 @@ ul {
         right: 0;
         left: 0;
         margin: 0 auto;
+        margin-top: 5rem;
     }
 
     .feature_part .section_tittle h2 {
-        margin-bottom: 2rem;
-        font-size: 35px;
+        font-size: 33px;
+        margin-top: 5rem;
     }
 
 }
