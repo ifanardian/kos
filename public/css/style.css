@@ -1355,31 +1355,31 @@ ul {
     overflow: hidden;
     position: relative;
 }
+
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_date {
     text-decoration: none;
     color: #FFF;
 }
+
 .ag-courses-item_link:hover .ag-courses-item_bg {
     -webkit-transform: scale(10);
     -ms-transform: scale(10);
     transform: scale(10);
 }
+
 .ag-courses-item_title {
     text-decoration: none;
-
     min-height: 20px;
     margin: 0 0 5px;
-
     overflow: hidden;
-
     font-weight: bold;
     font-size: 18px;
     color: #000000;
-
     z-index: 2;
     position: relative;
 }
+
 .ag-courses-item_date-box {
     font-size: 18px;
     color: #FFF;
@@ -1387,6 +1387,7 @@ ul {
     z-index: 2;
     position: relative;
 }
+
 .ag-courses-item_date {
     font-weight: bold;
     color: #f9b234;
@@ -1395,6 +1396,7 @@ ul {
     -o-transition: color .5s ease;
     transition: color .5s ease
 }
+
 .ag-courses-item_bg {
     height: 128px;
     width: 128px;
@@ -1411,56 +1413,62 @@ ul {
     -o-transition: all .5s ease;
     transition: all .5s ease;
 }
+
 .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
     background-color: #3ecd5e;
 }
+
 .ag-courses_item:nth-child(3n) .ag-courses-item_bg {
     background-color: #e44002;
 }
+
 .ag-courses_item:nth-child(4n) .ag-courses-item_bg {
     background-color: #952aff;
 }
+
 .ag-courses_item:nth-child(5n) .ag-courses-item_bg {
     background-color: #cd3e94;
 }
+
 .ag-courses_item:nth-child(6n) .ag-courses-item_bg {
     background-color: #4c49ea;
 }
 
-
-
 @media only screen and (max-width: 979px) {
     .ag-courses_item {
-    -ms-flex-preferred-size: calc(50% - 30px);
-    flex-basis: calc(50% - 30px);
+        -ms-flex-preferred-size: calc(50% - 30px);
+        flex-basis: calc(50% - 30px);
     }
+    
     .ag-courses-item_title {
-    font-size: 24px;
+        font-size: 18px;
+        min-height: 1rem;
+        line-height: 1;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .ag-format-container {
-    width: 96%;
+        width: 96%;
     }
 
 }
+
 @media only screen and (max-width: 639px) {
     .ag-courses_item {
-    -ms-flex-preferred-size: 100%;
-    flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
     }
     .ag-courses-item_title {
-    min-height: 72px;
-    line-height: 1;
-
-    font-size: 24px;
+        min-height: 1.5rem;
+        line-height: 1;
+        font-size: 18px;
     }
     .ag-courses-item_link {
-    padding: 22px 40px;
+        padding: 22px 40px;
     }
     .ag-courses-item_date-box {
-    font-size: 16px;
+        font-size: 16px;
     }
 }
 /* END CARD FASIL */
