@@ -47,6 +47,7 @@
                     <div class="card shadow mb-4">
                         <!-- Card Body -->
                         <div class="card-body">
+                            <div class="table-responsive">
                             <table class="table table-sm">
                                 <thead class="thead-center">
                                     <tr>
@@ -94,6 +95,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,6 +105,7 @@
                     tabindex="0">
                     <div class="card shadow mb-4">
                         <div class="card-body">
+                            <div class="table-responsive">
                             <table class="table table-sm">
                                 <thead class="thead-center">
                                     <tr>
@@ -151,6 +154,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -286,6 +290,8 @@
             // const ktpPreview = document.getElementById('preview-ktp');
             // ktpPreview.firstElementChild.src = ktpUrl || ''; 
             console.log("KTP URL:", ktpUrl);
+            console.log("statusPenyewaan: ", statusPenyewaan);
+            
         });
 
         // Preview foto KTP baru yang diunggah

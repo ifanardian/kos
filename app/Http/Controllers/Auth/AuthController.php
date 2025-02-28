@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users;
+use App\Models\Penyewa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,22 @@ class AuthController extends Controller
             'email' => ['required'],
             'password' => ['required'],
         ]);
+
+        $penyewa = Penyewa::where('email', $request->email)->first();
+
+        // Jika email tidak terdaftar di tabel penyewa
+        if (!$penyewa) {
+            return back()->withErrors([
+                'error' => 'Email tidak terdaftar.',
+            ]);
+        }
+        
+        if ($penyewa && !$penyewa->status_penyewaan) {
+            return back()->withErrors([
+                'error' => 'Akun Anda nonaktif dan tidak bisa login.',
+            ]);
+        }
+        
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
     

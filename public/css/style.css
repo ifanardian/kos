@@ -556,33 +556,6 @@ ul {
 ============================================================================================ */
 
 /* line 38, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_button.scss */
-.btn_3 {
-    display: inline-block;
-    padding: 9px 42px;
-    border-radius: 50px;
-    background-image: linear-gradient(16deg, #031d34 0%, #054592 64%, #5280a2 100%);
-    border: 1px solid #ecfdff;
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff !important;
-    text-transform: uppercase;
-    font-weight: 400;
-}
-
-.btn_3 {
-    text-decoration: none;
-    width: 300px;
-    /* Atur lebar tombol */
-    padding: 15px 0;
-    text-transform: uppercase;
-    text-align: center;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-}
 
 /* line 52, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_button.scss */
 .btn_3:hover {
@@ -1610,7 +1583,7 @@ ul {
     }
     
     .ag-courses-item_title {
-        font-size: 18px;
+        font-size: 19px;
         min-height: 1rem;
         line-height: 1;
     }
@@ -2529,7 +2502,16 @@ ul {
     border-radius: 30px;
     /* Membuat sudut melengkung */
     cursor: pointer;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    display: inline-block;
+    background-image: linear-gradient(16deg, #031d34 0%, #054592 64%, #5280a2 100%);
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff !important;
 }
+
 
 @media (max-width: 991px) {
 
