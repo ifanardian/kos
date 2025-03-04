@@ -96,7 +96,7 @@
                     <?php
                         $defaultScene = $panorama->where('default', 1)->first();
                         if ($defaultScene) {
-                            echo '"firstScene": "' . $defaultScene->scene . '",';
+                            echo '"firstScene": "' . $defaultScene->id . '",';
                         }
                     ?>
                     // "author": "Matthew Petroff",
@@ -107,34 +107,40 @@
                     <?php
                         foreach($panorama as $p){
                             $hotspots = '';
-                            $temp = DB::table('panorama_hotspots')->where('id_panorama',$p->id)->get();
-
-                            if($temp->isNotEmpty()){
+                            $temp = DB::Select("
+                                SELECT h.pitch, h.yaw, p.text, h.scene
+                                FROM panorama_hotspots h
+                                JOIN ms_panorama p ON h.scene = p.id
+                                WHERE h.id_panorama = ".$p->id.";
+                            ");
+                            // dd($temp);
+                            if(count($temp) > 0){
                                 $hotspots= "'hotSpots': [";
                                 
                                 foreach($temp as $t){
-                                    // dd($t->yaw);
+                                    // dd($t->scene);
                                     $hotspots .= "{
-                                    'pitch': ".$t->pitch.",
-                                    'yaw': ".$t->yaw.",
-                                    'type': 'scene',
-                                    'text':'".$panorama[(int)$p->scene]->text."',
+                                    'pitch'     : ".$t->pitch.",
+                                    'yaw'       : ".$t->yaw.",
+                                    'type'      : 'scene',
+                                    'text'      : '".$t->text."',
+                                    'sceneId'   : '".$t->scene."'
                                     },";
                                     
                                 }
                                 $hotspots .="]";       
                             }
-                            // dd($hotspots);
                             echo"
-                                ".$p->scene.": {
-                                    'hfov':".$p->hfov.", //seberapa zoom gambar pas pertama kali diliat
-                                    'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
-                                    'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
-                                    'type':'equirectangular',
-                                    'panorama':'".asset('images/'.$p->namafile)."',
-                                    ".$hotspots."
-                                },
-                                
+                                ".$p->id.": {
+                                'hfov':".$p->hfov.", //seberapa zoom gambar pas pertama kali diliat
+                                'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
+                                'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
+                                'type':'equirectangular',
+                                'panorama':'".asset('images/panorama/'.$p->namafile)."',
+                                ".$hotspots."
+                            },
+                            
+
                             ";
                         }
                         
