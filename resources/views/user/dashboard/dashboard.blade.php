@@ -96,7 +96,7 @@
                     <?php
                         $defaultScene = $panorama->where('default', 1)->first();
                         if ($defaultScene) {
-                            echo '"firstScene": "' . $defaultScene->scene . '",';
+                            echo '"firstScene": "' . $defaultScene->id . '",';
                         }
                     ?>
                     // "author": "Matthew Petroff",
@@ -107,31 +107,36 @@
                     <?php
                         foreach($panorama as $p){
                             $hotspots = '';
-                            $temp = DB::table('panorama_hotspots')->where('id_panorama',$p->id)->get();
-
-                            if($temp->isNotEmpty()){
+                            $temp = DB::Select("
+                                SELECT h.pitch, h.yaw, p.text, h.scene
+                                FROM panorama_hotspots h
+                                JOIN ms_panorama p ON h.scene = p.id
+                                WHERE h.id_panorama = ".$p->id.";
+                            ");
+                            // dd($temp);
+                            if(count($temp) > 0){
                                 $hotspots= "'hotSpots': [";
                                 
                                 foreach($temp as $t){
-                                    // dd($t->yaw);
+                                    // dd($t->scene);
                                     $hotspots .= "{
-                                    'pitch': ".$t->pitch.",
-                                    'yaw': ".$t->yaw.",
-                                    'type': 'scene',
-                                    'text':'".$panorama[(int)$p->scene]->text."',
+                                    'pitch'     : ".$t->pitch.",
+                                    'yaw'       : ".$t->yaw.",
+                                    'type'      : 'scene',
+                                    'text'      : '".$t->text."',
+                                    'sceneId'   : '".$t->scene."'
                                     },";
                                     
                                 }
                                 $hotspots .="]";       
                             }
-                            // dd($hotspots);
                             echo"
-                                ".$p->scene.": {
+                                ".$p->id.": {
                                 'hfov':".$p->hfov.", //seberapa zoom gambar pas pertama kali diliat
                                 'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
                                 'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
                                 'type':'equirectangular',
-                                'panorama':'".asset('images/'.$p->namafile)."',
+                                'panorama':'".asset('images/panorama/'.$p->namafile)."',
                                 ".$hotspots."
                             },
                             
@@ -143,82 +148,7 @@
                         
                         
                         ?>
-                    "beranda": {
-                        "hfov": 160, //seberapa zoom gambar pas pertama kali diliat
-                        "pitch": -10, //seberapa tinggi/rendah letak panahnya (vertikal)
-                        "yaw": 80, //sudut mana yang diliat pertama kali (horizontal)
-                        "type": "equirectangular",
-                        "panorama": "{{ asset('images/panorama.jpeg') }}",
-                        "hotSpots": [{
-                                "pitch": -9.1,
-                                "yaw": 257,
-                                "type": "scene",
-                                "text": "Kamar Mandi",
-                                "sceneId": "kamarmandi"
-                            },
-                            {
-                                "pitch": -9.1,
-                                "yaw": 78,
-                                "type": "scene",
-                                "text": "Tempat Jemur",
-                                "sceneId": "jemur"
-                            }
-
-                        ]
-                    },
-
-                    "kamarmandi": {
-                        "hfov": 120,
-                        "pitch": -12,
-                        "yaw": 130,
-                        "type": "equirectangular",
-                        "panorama": "{{ asset('images/km.jpeg') }}",
-                        "hotSpots": [{
-                                "pitch": -8,
-                                "yaw": 217,
-                                "type": "scene",
-                                "text": "Tempat Jemur",
-                                "sceneId": "jemur",
-                                "targetYaw": -23,
-                                "targetPitch": 2
-                            },
-                            {
-                                "pitch": -18,
-                                "yaw": 217,
-                                "type": "scene",
-                                "text": "Beranda",
-                                "sceneId": "beranda",
-                                "targetYaw": -25, //scene pertama kali (horizontal)
-                                "targetPitch": -1 //seberapa ndangak (vertikal)
-                            }
-                        ]
-                    },
-                    "jemur": {
-                        "hfov": 120,
-                        "pitch": -12,
-                        "yaw": 355.5,
-                        "type": "equirectangular",
-                        "panorama": "{{ asset('images/jmr.jpeg') }}",
-                        "hotSpots": [{
-                                "pitch": -4,
-                                "yaw": -6.5,
-                                "type": "scene",
-                                "text": "Kamar Mandi",
-                                "sceneId": "kamarmandi",
-                                "targetYaw": 130,
-                                "targetPitch": -5
-                            },
-                            {
-                                "pitch": -12, //seberapa naik panahnya
-                                "yaw": -6,
-                                "type": "scene",
-                                "text": "Beranda",
-                                "sceneId": "beranda",
-                                "targetYaw": -94, //scene pertama kali (horizontal)
-                                "targetPitch": -5 //seberapa ndangak (vertikal)
-                            }
-                        ]
-                    }
+                    
                 }
             });
 
