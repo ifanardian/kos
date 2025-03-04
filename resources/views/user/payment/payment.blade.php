@@ -149,7 +149,7 @@
                     <div class="order_details_iner">
                         <div class="order_header">
                             <h3>Order Details</h3>
-                            <a class="btn_3" href="{{ route('cobatagihan') }}" >HISTORY PEMBAYARAN</a>
+                            <a class="btn_3" style="text-decoration: none;" href="{{ route('cobatagihan') }}" >HISTORY PEMBAYARAN</a>
                         </div>
                         {{-- <button class="btn_3" type="submit">LIHAT TAGIHAN BULAN SEBELUMNYA</button>
                         <h3>Order Details</h3> --}}

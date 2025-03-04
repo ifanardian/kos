@@ -11,11 +11,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
-.sidebar {
-    width: 250px;
-    transition: width 0.3s ease;
-}
-
 .sidebar.toggled {
     width: 80px;
 }
@@ -11374,7 +11369,7 @@ a:focus {
 .sidebar .nav-item.dropdown .dropdown-toggle::after,
 .topbar .nav-item.dropdown .dropdown-toggle::after {
     width: 1rem;
-    text-align: center;
+    /* text-align: center; */
     float: right;
     vertical-align: 0;
     border: 0;
@@ -11413,6 +11408,7 @@ a:focus {
 }
 
 .topbar #sidebarToggleTop {
+    margin: 0;
     height: 2.5rem;
     width: 2.5rem;
 }
@@ -11577,7 +11573,7 @@ a:focus {
 }
 
 .sidebar .nav-item .nav-link {
-    text-align: center;
+    text-align: center; 
     padding: 0.75rem 1rem;
     width: 6.5rem;
 }
@@ -11752,6 +11748,11 @@ a:focus {
 }
 
 @media (min-width: 768px) {
+    .topbar #sidebarToggleTop {
+        margin-right: auto; /* Mengatur margin-right menjadi auto untuk memindahkan burger menu ke kiri */
+        margin-left: 1rem; 
+    }
+    
     .sidebar {
         width: 14rem !important;
     }

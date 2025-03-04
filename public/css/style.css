@@ -556,33 +556,6 @@ ul {
 ============================================================================================ */
 
 /* line 38, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_button.scss */
-.btn_3 {
-    display: inline-block;
-    padding: 9px 42px;
-    border-radius: 50px;
-    background-image: linear-gradient(16deg, #031d34 0%, #054592 64%, #5280a2 100%);
-    border: 1px solid #ecfdff;
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff !important;
-    text-transform: uppercase;
-    font-weight: 400;
-}
-
-.btn_3 {
-    text-decoration: none;
-    width: 300px;
-    /* Atur lebar tombol */
-    padding: 15px 0;
-    text-transform: uppercase;
-    text-align: center;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-}
 
 /* line 52, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_button.scss */
 .btn_3:hover {
@@ -709,13 +682,6 @@ ul {
     color: #556d81;
 }
 
-/* .navbar .navbar-toggler .menu_icon {
-    font-size: 1.8rem;
-    color: #000;
-} */
-
-
-
 /* line 14, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
 .main_menu .navbar {
     position: relative;
@@ -746,11 +712,85 @@ ul {
     margin-right: 10px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 576px) {
+
+    /* line 273, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu {
+        padding: 10px 0px;
+    }
+
+    .home_menu .main-menu-item {
+        padding-left: 0px;
+    }
+
+    /* line 202, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu .main-menu-item {
+        text-align: left !important;
+    }
+
+    /* line 205, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu .main-menu-item .nav-item {
+        padding: 10px 15px !important;
+        /* text-shadow: 3px 3px 5px rgba(207, 99, 99, 0.7);   */
+        color: #000;
+    }
+
+    /* line 208, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu .main-menu-item .nav-item .nav-link {
+        padding: 5px 15px !important;
+        /* text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.7);   */
+        color: #000;
+        margin: 10px 0;
+    }
+
+    .navbar .navbar-collapse {
+        background-color: #88bedadb;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 100%; 
+    }
+
+    /* line 245, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .navbar .navbar-brand img {
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: inline-block;
+        /* top: 0; */
+    }
+
+    .navbar .navbar-brand {
+        white-space: nowrap;
+        margin-left: 3rem;
+    }
+
+    /* line 255, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .navbar .navbar-toggler {
+        border-color: transparent;
+        position: absolute;
+        left: 0;
+        float: left;
+        border: none;
+        outline: none;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+    /* line 267, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu a i {
+        margin-left: 13px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
 
     /* line 194, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
     .main_menu {
-        padding: 10px 0px;
+        padding: 12px 0px;
     }
 
     /* line 198, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
@@ -815,23 +855,9 @@ ul {
         margin-left: auto;
         margin-right: 10px;
     }
-
-    /* line 262, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
-    /* .navbar-toggler .menu_icon {
-        color: #000;
-    } */
-
     /* line 267, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
     .main_menu a i {
         margin-left: 13px;
-    }
-}
-
-@media (max-width: 576px) {
-
-    /* line 273, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
-    .main_menu {
-        padding: 10px 0px;
     }
 }
 
@@ -839,7 +865,73 @@ ul {
 
     /* line 279, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
     .main_menu {
-        padding: 20px 0px;
+        padding: 12px 0px;
+    }
+
+    .home_menu .main-menu-item {
+        padding-left: 0px;
+    }
+
+    /* line 202, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu .main-menu-item {
+        text-align: left !important;
+    }
+
+    /* line 205, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu .main-menu-item .nav-item {
+        padding: 10px 15px !important;
+        /* text-shadow: 3px 3px 5px rgba(207, 99, 99, 0.7);   */
+        color: #000;
+    }
+
+    /* line 208, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu .main-menu-item .nav-item .nav-link {
+        padding: 5px 15px !important;
+        /* text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.7);   */
+        color: #000;
+        margin: 10px 0;
+    }
+
+    .navbar .navbar-collapse {
+        background-color: #88bedadb;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 100%; 
+    }
+
+    /* line 245, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .navbar .navbar-brand img {
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: inline-block;
+        /* top: 0; */
+    }
+
+    .navbar .navbar-brand {
+        white-space: nowrap;
+        margin-left: 3rem;
+    }
+
+    /* line 255, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .navbar .navbar-toggler {
+        border-color: transparent;
+        position: absolute;
+        left: 0;
+        float: left;
+        border: none;
+        outline: none;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+    /* line 267, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
+    .main_menu a i {
+        margin-left: 13px;
     }
 }
 
@@ -918,8 +1010,10 @@ ul {
     color: #ff3368 !important;
 }
 
-/**************** banner part css start ****************/
+/* BANNER HOME */
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_banner.scss */
+
+/* BANNER VIDEO */
 .banner_video {
     position: absolute;
     /* Pastikan video menjadi background */
@@ -944,23 +1038,7 @@ ul {
     object-fit: cover;
 }
 
-/* Default styles for all devices */
-/* .banner_part {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    min-height: 100vh;
-    background-image: url("{{ asset('images/houses.png') }}");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    overflow: hidden;
-    width: 100%;
-    height: auto;
-} */
+/* END BANNER */
 
 /* Styles for tablets (768px - 1024px) */
 @media (max-width: 1024px) {
@@ -1032,7 +1110,7 @@ ul {
 }
 
 @media (max-width: 768px) {
-    .banner_text_iner p {
+    .banner_part .single_banner_slider .banner_text .banner_text_iner p {
         white-space: normal; /* Izinkan teks turun ke baris berikutnya pada layar kecil */
         word-break: break-word; /* Pecah kata jika terlalu panjang */
     }
@@ -1073,10 +1151,20 @@ ul {
 @media (max-width: 576px) {
 
     /* line 21, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_banner.scss */
-    .banner_part .single_banner_slider .banner_text h1 {
-        font-size: 25px;
+    .banner_part .single_banner_slider .banner_text .banner_text_iner h1 {
+        font-size: 30px;
         margin-bottom: 15px;
         line-height: 1.3;
+    }
+
+    .banner_part .single_banner_slider .banner_text .banner_text_iner p {
+        font-size: 18px;
+        white-space: normal;
+        margin-bottom: 2rem;
+    }
+
+    .banner_part .single_banner_slider .banner_text .banner_text_iner .btn_2 {
+        width: 80px;
     }
 }
 
@@ -1088,6 +1176,16 @@ ul {
         margin-bottom: 15px;
         line-height: 1.3;
     }
+
+    .banner_part .single_banner_slider .banner_text .banner_text_iner p {
+        font-size: 18px;
+        white-space: normal;
+        margin-bottom: 2rem;
+    }
+
+    .banner_part .single_banner_slider .banner_text .banner_text_iner .btn_2 {
+        width: 140px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -1097,6 +1195,15 @@ ul {
         font-size: 40px;
         margin-bottom: 15px;
         line-height: 1.3;
+    }
+
+    .banner_part .single_banner_slider .banner_text .banner_text_iner p {
+        font-size: 18px;
+        margin-bottom: 4rem;
+    }
+
+    .banner_part .single_banner_slider .banner_text .banner_text_iner .btn_2 {
+        width: 140px;
     }
 }
 
@@ -1264,6 +1371,7 @@ ul {
     padding: 40px 40px;
     justify-content: center;
     place-items: center;
+    margin-bottom: 8rem;
 }
 
 #panorama {
@@ -1283,7 +1391,8 @@ ul {
 }
 
 /* Responsive styles */
-@media (max-width: 767.98px) {
+
+@media (max-width: 576px) {
     #panorama {
         padding-bottom: 150%; /* Rasio aspek 4:3 untuk mobile */
     }
@@ -1292,12 +1401,45 @@ ul {
         padding: 20px; /* Padding lebih kecil untuk mobile */
         margin-bottom:  8rem; /* Margin lebih kecil untuk mobile */
     }
+
+    #panorama-section .section_tittle {
+        margin-bottom: 3rem;
+    }
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    #panorama {
+        padding-bottom: 100%; /* Rasio aspek 4:3 untuk mobile */
+    }
+
     #panorama-section {
-        padding: 80px; /* Padding lebih besar untuk desktop */
-        margin-bottom: 5rem; /* Margin lebih besar untuk desktop */
+        padding: 20px; /* Padding lebih kecil untuk mobile */
+        margin-bottom:  8rem; /* Margin lebih kecil untuk mobile */
+    }
+
+    #panorama-section .section_tittle {
+        margin-bottom: 3rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #panorama {
+        padding-bottom: 90%; /* Rasio aspek 4:3 untuk mobile */
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    #panorama {
+        padding-bottom: 90%; /* Rasio aspek 4:3 untuk mobile */
+    }
+
+    #panorama-section {
+        padding: 20px; /* Padding lebih kecil untuk mobile */
+        margin-bottom: 8rem; /* Margin lebih kecil untuk mobile */
+    }
+
+    #panorama-section .section_tittle {
+        margin-bottom: 3rem;
     }
 }
 
@@ -1355,31 +1497,31 @@ ul {
     overflow: hidden;
     position: relative;
 }
+
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_date {
     text-decoration: none;
     color: #FFF;
 }
+
 .ag-courses-item_link:hover .ag-courses-item_bg {
     -webkit-transform: scale(10);
     -ms-transform: scale(10);
     transform: scale(10);
 }
+
 .ag-courses-item_title {
     text-decoration: none;
-
     min-height: 20px;
     margin: 0 0 5px;
-
     overflow: hidden;
-
     font-weight: bold;
-    font-size: 18px;
+    font-size: 19px;
     color: #000000;
-
     z-index: 2;
     position: relative;
 }
+
 .ag-courses-item_date-box {
     font-size: 18px;
     color: #FFF;
@@ -1387,6 +1529,7 @@ ul {
     z-index: 2;
     position: relative;
 }
+
 .ag-courses-item_date {
     font-weight: bold;
     color: #f9b234;
@@ -1395,6 +1538,7 @@ ul {
     -o-transition: color .5s ease;
     transition: color .5s ease
 }
+
 .ag-courses-item_bg {
     height: 128px;
     width: 128px;
@@ -1411,56 +1555,62 @@ ul {
     -o-transition: all .5s ease;
     transition: all .5s ease;
 }
+
 .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
     background-color: #3ecd5e;
 }
+
 .ag-courses_item:nth-child(3n) .ag-courses-item_bg {
     background-color: #e44002;
 }
+
 .ag-courses_item:nth-child(4n) .ag-courses-item_bg {
     background-color: #952aff;
 }
+
 .ag-courses_item:nth-child(5n) .ag-courses-item_bg {
     background-color: #cd3e94;
 }
+
 .ag-courses_item:nth-child(6n) .ag-courses-item_bg {
     background-color: #4c49ea;
 }
 
-
-
 @media only screen and (max-width: 979px) {
     .ag-courses_item {
-    -ms-flex-preferred-size: calc(50% - 30px);
-    flex-basis: calc(50% - 30px);
+        -ms-flex-preferred-size: calc(50% - 30px);
+        flex-basis: calc(50% - 30px);
     }
+    
     .ag-courses-item_title {
-    font-size: 24px;
+        font-size: 19px;
+        min-height: 1rem;
+        line-height: 1;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .ag-format-container {
-    width: 96%;
+        width: 96%;
     }
 
 }
+
 @media only screen and (max-width: 639px) {
     .ag-courses_item {
-    -ms-flex-preferred-size: 100%;
-    flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
     }
     .ag-courses-item_title {
-    min-height: 72px;
-    line-height: 1;
-
-    font-size: 24px;
+        min-height: 1.5rem;
+        line-height: 1;
+        font-size: 18px;
     }
     .ag-courses-item_link {
-    padding: 22px 40px;
+        padding: 22px 40px;
     }
     .ag-courses-item_date-box {
-    font-size: 16px;
+        font-size: 16px;
     }
 }
 /* END CARD FASIL */
@@ -1490,17 +1640,32 @@ ul {
     max-width: calc(33.33% - 20px);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 576px) {
+    .column {
+        flex: 1 1 100%; /* 1 kolom untuk mobile */
+        max-width: 100%;
+    }    
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 90%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
     .column {
         flex: 1 1 calc(50% - 20px); /* 2 kolom untuk tablet */
         max-width: calc(50% - 20px);
     }
 }
 
-@media (max-width: 767px) {
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
     .column {
-        flex: 1 1 100%; /* 1 kolom untuk mobile */
-        max-width: 100%;
+        flex: 1 1 calc(50% - 20px); /* 2 kolom untuk tablet */
+        max-width: 90%;
     }
 }
 
@@ -1510,25 +1675,11 @@ ul {
     width: 100%;
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-    .column {
-        -ms-flex: 50%;
-        flex: 50%;
-        max-width: 50%;
-    }
-}
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-    .column {
-        -ms-flex: 100%;
-        flex: 100%;
-        max-width: 100%;
-    }
-}
 
 /* END GRID */
+
+/* KATEGORI KAMAR */
 
 /**************** FEATURE css start ****************/
 /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
@@ -1538,34 +1689,7 @@ ul {
     background-color: #163e6f;
     border-radius: 30px;
     margin-bottom: 30px;
-    /* position: relative; */
     height: 300px;
-}
-
-@media (max-width: 576px) {
-
-    /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text {
-        padding: 35px 20px;
-    }
-}
-
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-
-    /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text {
-        /* height: 300px; */
-        padding: 35px 20px;
-    }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-
-    /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text {
-        height: 300px;
-        padding: 35px 20px;
-    }
 }
 
 .price-container {
@@ -1602,26 +1726,16 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px; /* Tambahkan jarak antar card */
-    margin-top: 3rem; /* Jarak antara card kategori kamar dan elemen sebelumnya */
-    padding: 20px 0; /* Padding untuk card kategori kamar */
-    position: relative; /* Pastikan posisi relatif */
-    z-index: 1; /* Pastikan card kategori berada di atas */
+    gap: 20px; 
+    position: relative;
+    z-index: 1; 
 }
 
 .feature_part .single_feature_post_text h3 {
-    font-size: 30px;
+    font-size: 27px;
     font-weight: 700;
     margin-top: 21px;
     color: #e0e0a7;
-}
-
-@media (max-width: 576px) {
-
-    /* line 30, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text h3 {
-        margin-top: 10px;
-    }
 }
 
 /* line 46, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
@@ -1661,37 +1775,111 @@ ul {
 @media (max-width: 576px) {
 
     /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text img {
-        max-height: 247px;
+    .feature_part .single_feature_post_text {
+        max-height: 230px;
         right: 0;
         left: 0;
         margin: 0 auto;
+        padding: 15px 0;
+    }
+
+    .feature_part .single_feature_post_text h3 {
+        font-size: 22px;
+        margin-top: 10px;
+    }
+
+    .feature_part .single_feature_post_text .price-container {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text a {
+        font-size: 12px;
+    }
+
+    .feature_part .section_tittle h2 {
+        margin-bottom: 3rem;
+        font-size: 26px;
     }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 
     /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text img {
-        max-height: 195px;
+    .feature_part .single_feature_post_text {
+        max-height: 250px;
         right: 0;
         left: 0;
         margin: 0 auto;
+        padding: 15px 0;
+    }
+
+    .feature_part .single_feature_post_text h3 {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text .price-container {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text a {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .feature_part .section_tittle h2 {
+        margin-bottom: 2rem;
+        font-size: 26px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
     /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
-    .feature_part .single_feature_post_text img {
-        max-height: 195px;
+    .feature_part .single_feature_post_text {
+        max-height: 260px;
         right: 0;
         left: 0;
         margin: 0 auto;
+        padding: 15px 0;
+    }
+
+    .feature_part .single_feature_post_text h3 {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text .price-container {
+        font-size: 22px;
+    }
+
+    .feature_part .single_feature_post_text a {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .feature_part .section_tittle h2 {
+        margin-bottom: 2rem;
+        font-size: 30px;
+    }
+
+    .feature_part .section_tittle {
+        margin-bottom: 2rem;
     }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .feature_part .single_feature_post_text {
+        max-height: 270px;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+
+    .feature_part .single_feature_post_text:hover .feature_btn {
+        bottom: 1rem;
+        opacity: 1;
+        visibility: visible;
+    }
 
     /* line 68, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
     .feature_part .single_feature_post_text img {
@@ -1700,11 +1888,17 @@ ul {
         left: 0;
         margin: 0 auto;
     }
+
+    .feature_part .section_tittle h2 {
+        font-size: 33px;
+        margin-top: 5rem;
+    }
+
 }
 
 /* line 103, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
 .feature_part .single_feature_post_text:hover .feature_btn {
-    bottom: 50px;
+    bottom: 5rem;
     opacity: 1;
     visibility: visible;
 }
@@ -2308,7 +2502,16 @@ ul {
     border-radius: 30px;
     /* Membuat sudut melengkung */
     cursor: pointer;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    display: inline-block;
+    background-image: linear-gradient(16deg, #031d34 0%, #054592 64%, #5280a2 100%);
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff !important;
 }
+
 
 @media (max-width: 991px) {
 
