@@ -58,7 +58,8 @@ Route::prefix('admin')->group(function () {
     Route::get('kelola-website', [KelolaWebsiteController::class, 'ShowKelolaWebsite'])->name('admin.kelolawebsite');
     Route::post('kelola-website', [KelolaWebsiteController::class, 'PostPanorama'])->name('post.admin.kelolawebsite');
     Route::post('kelola-website/detail', [KelolaWebsiteController::class, 'DetailKelolaWebsite'])->name('admin.detail.kelolawebsite');
-    Route::post('kelola-website/save/hotspots', [KelolaWebsiteController::class, 'SaveHotspots'])->name('admin.save.Hotspots');
+    Route::post('kelola-website/hotspots/save', [KelolaWebsiteController::class, 'SaveHotspots'])->name('admin.save.Hotspots');
+    Route::post('kelola-website/hotspots/delete', [KelolaWebsiteController::class, 'DeleteHotspots'])->name('admin.delete.Hotspots');
     
     // fiona
     Route::post('/penyewa-update', [ConfirmBookingController::class, 'updatePenyewa'])->name('admin.penyewa.update');

@@ -94,8 +94,10 @@ class KelolaWebsiteController extends Controller{
         ]);
         if($request->input('hotspots')){
             // var_dump($request->input('hotspots'));
+            $a = 0;
             foreach($request->input('hotspots') as $h){
                 if (isset($h['id'])) {
+                    $a++;
                     DB::table('panorama_hotspots')->where('id',$h['id'])
                     ->update([
                         'pitch'=>$h['pitch'],
@@ -103,6 +105,7 @@ class KelolaWebsiteController extends Controller{
                         'scene'=>$h['scene'],
                     ]);
                 }else if(isset($h['pitch']) && isset($h['yaw']) && isset($h['scene'])){
+                    $a++;
                     DB::table('panorama_hotspots')->insert([
                         'id_panorama'=>$request->input('id'),
                         'pitch'=> $h['pitch'],
@@ -113,5 +116,17 @@ class KelolaWebsiteController extends Controller{
             }
         }
         return true;
+    }
+
+    public function DeleteHotspots(Request $request){
+        $request->validate([
+            'id' => 'required|numeric',
+        ]);
+        $deleted = DB::table('panorama_hotspots')->where('id',$request->input('id'))->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'Data berhasil dihapus'], 200);
+        } else {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
     }
 }

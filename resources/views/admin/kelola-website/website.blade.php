@@ -359,8 +359,12 @@
 
         // Event listener untuk tombol hapus
         hotspotDiv.querySelector(".remove-hotspot").addEventListener("click", function () {
-            hotspotDiv.remove();
-            removeHotspotFromViewer(hotspotId.id);
+            
+            // console.log('id:'+hotspotId.id);
+            let status = removeHotspotFromViewer(hotspotId.id);
+            if(status){
+                hotspotDiv.remove();
+            }
         });
 
         console.log("Hotspot ditambahkan dengan ID:", hotspotId.id);
@@ -415,8 +419,34 @@ function updatePannellumHotspots(hotspots) {
 
 // Fungsi untuk menghapus hotspot dari viewer
 function removeHotspotFromViewer(hotspotId) {
-    let hotspots = viewer.getConfig().hotSpots.filter(h => h.id !== hotspotId);
-    updatePannellumHotspots(hotspots);
+    //let hotspots = viewer.getConfig().hotSpots.filter(h => h.id !== hotspotId);
+    // console.log(hotspotId);
+    status = true;
+    if (!isNaN(hotspotId)) {
+        let formData = new FormData();
+        formData.append('id',hotspotId);
+        $.ajax({
+            url: '{{ route("admin.delete.Hotspots") }}', // Gantilah dengan URL endpoint Laravel Anda
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('Hotspot berhasil dihapus!');
+                console.log(response);
+            }, 
+            error: function(xhr) {
+                status = false;
+                // alert('Gagal menghapus hotspot!');
+                // console.error(xhr.responseText);
+            }
+        });
+    }
+    return status;
+    //updatePannellumHotspots(hotspots);
 }
 
 function saveHotspots() {
@@ -429,7 +459,6 @@ function saveHotspots() {
     document.querySelectorAll(".hotspot-item").forEach((item, index) => {
         let idValue = item.querySelector("[name='id_hotspots']").value;
     
-        // Jika id adalah angka, tambahkan ke formData
         if (!isNaN(idValue) && idValue.trim() !== "") {
             formData.append(`hotspots[${index}][id]`, idValue);
         }
