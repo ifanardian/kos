@@ -212,10 +212,13 @@
                         <div class="mb-3">
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
-                                <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
-                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}"
-                                        alt="KTP" style="width:150px;height:auto;">
-                                </a>
+                                @if (!empty($item->ktp))
+                                    <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
+                                        <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}" alt="KTP" style="width:150px;height:auto;">
+                                    </a>
+                                @else
+                                    <p>Tidak ada KTP tersedia</p>
+                                @endif
                             </div>
                             <input type="file" class="form-control" id="edit-ktp" name="ktp" accept="image/*">
                         </div>

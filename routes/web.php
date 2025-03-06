@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route::get('/checkout', [controller_checkout::class, 'checkout'])->name('checkout'); 
 });
 
+
 Route::prefix('admin')->group(function () {
     Route::get('/', [IndexController::class, 'showIndex'])->name('admin.dashboard');
     Route::get('ktp/{filename}', [ConfirmBookingController::class, 'showKtp'])->name('admin.ktp');
@@ -59,7 +60,7 @@ Route::prefix('admin')->group(function () {
     Route::post('kelola-website', [KelolaWebsiteController::class, 'PostPanorama'])->name('post.admin.kelolawebsite');
     Route::post('kelola-website/detail', [KelolaWebsiteController::class, 'DetailKelolaWebsite'])->name('admin.detail.kelolawebsite');
     Route::post('kelola-website/hotspots/save', [KelolaWebsiteController::class, 'SaveHotspots'])->name('admin.save.Hotspots');
-    Route::post('kelola-website/hotspots/delete', [KelolaWebsiteController::class, 'DeleteHotspots'])->name('admin.delete.Hotspots');
+    Route::post('kelola-website/hotspots/delete', [KelolaWebsiteController::class, 'DeletePanorama'])->name('admin.delete.panorama');
     
     // fiona
     Route::post('/penyewa-update', [ConfirmBookingController::class, 'updatePenyewa'])->name('admin.penyewa.update');
