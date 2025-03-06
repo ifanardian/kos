@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
-use function Laravel\Prompts\select;
-
 class KelolaWebsiteController extends Controller{
     public function ShowKelolaWebsite(){
         $panorama = DB::table('ms_panorama')->get();
@@ -80,53 +78,92 @@ class KelolaWebsiteController extends Controller{
     public function SaveHotspots(Request $request){
         $request->validate([
             'id' => 'required|numeric',
+            'default' => 'string',
+            'text'=>'required|string',
             'yaw' => 'required|numeric',
             'pitch' => 'required|numeric',
             'hfov' => 'required|numeric',
-            'hotspots' => 'array'
+            'dihapus' => 'array',
+            'hotspots' => 'array',
+            
         ]);
+        // var_dump((bool)$request->input('default'));
+        var_dump("sebelum if ". (int)$request->input('default'));
+        if((int)$request->input('default')==1){
+            echo"setelah if";
+            DB::table('ms_panorama')->update(['default'=>0]);
+            DB::table('ms_panorama')->where('id',$request->input('id'))->update([
+                'default'=>1,
+                'yaw'=>$request->input('yaw'),
+                'pitch'=>$request->input('pitch'),
+                'hfov'=>$request->input('hfov')*-1,
+                'text'=>$request->input('text')
+            ]);
+        }else{
+            DB::table('ms_panorama')->where('id',$request->input('id'))->update([
+                'yaw'=>$request->input('yaw'),
+                'pitch'=>$request->input('pitch'),
+                'hfov'=>$request->input('hfov')*-1,
+                'text'=>$request->input('text')
+            ]);
+        }
 
-        DB::table('ms_panorama')->where('id',$request->input('id'))
-        ->update([
-            'yaw'=>$request->input('yaw'),
-            'pitch'=>$request->input('pitch'),
-            'hfov'=>$request->input('hfov')*-1,
-        ]);
         if($request->input('hotspots')){
-            // var_dump($request->input('hotspots'));
-            $a = 0;
             foreach($request->input('hotspots') as $h){
                 if (isset($h['id'])) {
-                    $a++;
                     DB::table('panorama_hotspots')->where('id',$h['id'])
                     ->update([
-                        'pitch'=>$h['pitch'],
-                        'yaw'=>$h['yaw'],
-                        'scene'=>$h['scene'],
+                        'pitch'=>(float)$h['pitch'],
+                        'yaw'=>(float)$h['yaw'],
+                        'scene'=>(int)$h['scene'],
                     ]);
                 }else if(isset($h['pitch']) && isset($h['yaw']) && isset($h['scene'])){
-                    $a++;
                     DB::table('panorama_hotspots')->insert([
                         'id_panorama'=>$request->input('id'),
-                        'pitch'=> $h['pitch'],
-                        'yaw'=>$h['yaw'],
-                        'scene'=>$h['scene']
+                        'pitch'=>(float) $h['pitch'],
+                        'yaw'=>(float) $h['yaw'],
+                        'scene'=>(int) $h['scene']
                     ]);
                 }
+            }
+        }
+
+        if($request->input('dihapus')){
+            
+            foreach($request->input('dihapus') as $h){
+                DB::table('panorama_hotspots')->where('id',$h)->delete();
             }
         }
         return true;
     }
 
-    public function DeleteHotspots(Request $request){
+    public function DeletePanorama(Request $request){
         $request->validate([
             'id' => 'required|numeric',
         ]);
-        $deleted = DB::table('panorama_hotspots')->where('id',$request->input('id'))->delete();
-        if ($deleted) {
-            return response()->json(['message' => 'Data berhasil dihapus'], 200);
-        } else {
-            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        $idToDelete = $request->input('id');
+
+        $panorama = DB::table('ms_panorama')->select('default')->where('id', $idToDelete)->first();
+
+        if ($panorama && $panorama->default == 1) {
+            $newDefault = DB::table('ms_panorama')
+                ->where('id', '!=', $idToDelete)
+                ->orderBy('id', 'asc')
+                ->first();
+
+            if ($newDefault) {
+                DB::table('ms_panorama')->where('id', $newDefault->id)->update(['default' => 1]);
+            }
         }
+        DB::table('panorama_hotspots')
+        ->where('id_panorama', $idToDelete)
+        ->orWhere('scene', $idToDelete)
+        ->delete();
+
+        DB::table('ms_panorama')->where('id', $idToDelete)->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus'], 200);
     }
+
+
 }

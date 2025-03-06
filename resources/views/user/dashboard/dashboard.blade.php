@@ -239,6 +239,7 @@
     </div>
 </div>
 
+
 {{-- KATEGORI KAMAR --}}
 @php
 $hargaBulanan = \App\Models\MsTipeKos::where('bulan', 1)->first();
