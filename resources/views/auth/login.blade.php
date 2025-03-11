@@ -88,7 +88,7 @@
         #chk{
             display: none;
         }
-        .signup{
+        .login{
             position: relative;
             width:100%;
             height: 100%;
@@ -115,7 +115,7 @@
             outline: none;
             border-radius: 5px;
         }
-        .signup button{
+        .login .btn-submit{
             width: 40%;
             height: 40px;
             margin: 10px auto;
@@ -132,24 +132,24 @@
             transition: .2s ease-in;
             cursor: pointer;
         }
-        button:hover{
+        .btn-submit:hover{
             background: #174054;
         }
-        .login{
+        .reset{
             height: 460px;
             background: #102d3b;
             border-radius: 60% / 10%;
             transform: translateY(-180px);
             transition: .8s ease-in-out;
         }
-        .login label{
+        .reset label{
             /* margin: 1rem; */
             white-space: nowrap;
             color: #ffffff;
             font-size: 1.9em;
             transform: scale(.6);
         }
-        .login button{
+        .reset .btn-reset{
             width: 50%;
             height: 40px;
             margin: 10px auto;
@@ -167,26 +167,25 @@
             cursor: pointer;
         }
 
-        #chk:checked ~ .login{
+        #chk:checked ~ .reset{
             transform: translateY(-500px);
         }
-        #chk:checked ~ .login label{
+        #chk:checked ~ .reset label{
             transform: scale(1);	
         }
-        #chk:checked ~ .signup label{
+        #chk:checked ~ .login label{
             padding: 80px;
             transform: scale(.6);
         }
-        .btn-close-custom {
+        /* .btn-close-custom {
             background: none;
             border: none;
-            font-size: 1.5rem; /* Ukuran ikon silang */
-            font-weight: bold;
-            color: #000; /* Warna ikon */
+            font-size: 0.5rem; 
+            color: #000; 
             line-height: 1;
             padding: 0;
             cursor: pointer;
-        }
+        } */
 
         
     </style>
@@ -196,7 +195,7 @@
     <div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
-			<div class="signup">
+			<div class="login">
                 {{-- @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -219,14 +218,18 @@
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
-                        <button type="button" class="btn-close-custom" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
-                @if ($errors->has('error'))
+                @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ $errors->first('error') }}
-                        <button type="button" class="btn-close-custom" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
@@ -235,16 +238,16 @@
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email" name="email" placeholder="Email" id="email" required="" >
 					<input type="password" name="password" placeholder="Password" id="password" required="">
-					<button type="submit" value="submit">LOGIN</button>
+					<button type="submit" class="btn-submit" value="submit">LOGIN</button>
 				</form>
 			</div>
 
-			<div class="login">
+			<div class="reset">
 				<form method="POST" action="{{ route('password.email') }}">
                     @csrf
 					<label for="chk" aria-hidden="true">Lupa Password</label>
 					<input type="email" name="email" placeholder="Email" required="">
-					<button>RESET PASSWORD</button>
+					<button class="btn-reset">RESET PASSWORD</button>
 				</form>
 			</div>
 	</div>
