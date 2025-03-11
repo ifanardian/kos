@@ -6,26 +6,27 @@
 
 @push('styles')
 <style>
-        .panorama-container {
-            position: relative;
-            width: calc(25% - 10px);
-            min-width: 100px;
-            background: #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 5px;
-            cursor: pointer;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 16px;
-        }
-    </style>
+    .panorama-container {
+        position: relative;
+        width: calc(25% - 10px);
+        min-width: 100px;
+        background: #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 5px;
+        cursor: pointer;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+</style>
 @endpush
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    
+
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Website</h1>
@@ -41,8 +42,9 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Virtual Tour 360<sup>°</sup></h6>
                 <div class="dropdown no-arrow">
-                    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"data-bs-toggle="modal" data-bs-target="#tambahModal">
-                        <i class='fas fa-plus fa-sm text-white-50'></i> 
+                    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                        data-bs-toggle="modal" data-bs-target="#tambahModal">
+                        <i class='fas fa-plus fa-sm text-white-50'></i>
                         Tambah Data
                     </button>
                 </div>
@@ -51,7 +53,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="row">
-                     <?php
+                    <?php
                         foreach($panorama as $p){
                             $default = "";
                             if($p->default){
@@ -132,8 +134,8 @@
                 <h5 class="modal-title" id="modal">Tambah Data Kamar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="msTipeKos" action="{{route('post.admin.kelolawebsite')}}" method="POST" enctype="multipart/form-data"
-                enctype="multipart/form-data">
+            <form id="msTipeKos" action="{{route('post.admin.kelolawebsite')}}" method="POST"
+                enctype="multipart/form-data" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -142,21 +144,24 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label" style="padding: 5px;">Gambar</label>
-                        <input style="width: min-content;" type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*" onchange="previewPanorama(event)">
+                        <input style="width: min-content;" type="file" class="form-control-file" id="gambar"
+                            name="gambar" accept="image/*" onchange="previewPanorama(event)">
                     </div>
                     <div class="mb-3" id="containerPreview" style="display:none; ">
                         <label for="gambar" class="form-label" style="padding: 5px;">Preview Gambar Ketika Load</label>
-                        <div style="padding: 5px; border: 2px solid grey;">   
+                        <div style="padding: 5px; border: 2px solid grey;">
                             <div id='preview' style="height: 300px; width: calc(100% - 10px); margin: 5px;"></div>
-    
+
                             <label for="yaw" class="form-label" style="padding: 5px;">Horisontal</label>
-                            <input type="range" class="form-range" id="yaw" name="yaw" min="-180" max="180" step="0.5" >
-    
+                            <input type="range" class="form-range" id="yaw" name="yaw" min="-180" max="180" step="0.5">
+
                             <label for="pitch" class="form-label" style="padding: 5px;">Vertikal</label>
-                            <input type="range" class="form-range" name="pitch" id="pitch" min="-90" max="90" step="0.5" >
-    
+                            <input type="range" class="form-range" name="pitch" id="pitch" min="-90" max="90"
+                                step="0.5">
+
                             <label for="hfov" class="form-label" style="padding: 5px;">Zoom</label>
-                            <input type="range" class="form-range" name="hfov" id="hfov" min="-120" max="-50" step="0.5">
+                            <input type="range" class="form-range" name="hfov" id="hfov" min="-120" max="-50"
+                                step="0.5">
                         </div>
                     </div>
                 </div>
@@ -196,15 +201,18 @@
                     </div>
                     <div class="mb-3" id="containerPreview2" style="display:none; ">
                         <label for="gambar" class="form-label" style="padding: 5px;">Preview Gambar Ketika Load</label>
-                        <div class="border p-3">   
+                        <div class="border p-3">
                             <div id='previewedit' style="height: 300px; width: calc(100% - 10px); margin: 5px;"></div>
                             <label for="yawedit" class="form-label" style="padding: 5px;">Horisontal</label>
-                            <input type="range" class="form-range" id="yawedit" name="yawedit" min="-180" max="180" step="0.5" >
+                            <input type="range" class="form-range" id="yawedit" name="yawedit" min="-180" max="180"
+                                step="0.5">
                             <label for="pitchedit" class="form-label" style="padding: 5px;">Vertikal</label>
-                            <input type="range" class="form-range" name="pitchedit" id="pitchedit" min="-90" max="90" step="0.5" >
-    
+                            <input type="range" class="form-range" name="pitchedit" id="pitchedit" min="-90" max="90"
+                                step="0.5">
+
                             <label for="hfovedit" class="form-label" style="padding: 5px;">Zoom</label>
-                            <input type="range" class="form-range" name="hfovedit" id="hfovedit" min="-120" max="-50" step="0.5">
+                            <input type="range" class="form-range" name="hfovedit" id="hfovedit" min="-120" max="-50"
+                                step="0.5">
                         </div>
                     </div>
                     <div class="mb-3">
@@ -224,8 +232,11 @@
 </div>
 
 <script>
-    let viewer =''
-    const BaseUrl = {!! json_encode(asset('images/panorama/').'/') !!};
+    let viewer = ''
+    const BaseUrl = {
+        !!json_encode(asset('images/panorama/').
+            '/') !!
+    };
     let Tempimg = '';
 
     function previewPanorama(event) {
@@ -237,8 +248,8 @@
                 const imageUrl = e.target.result;
 
                 document.getElementById("containerPreview").style.display = "block";
-                
-                if(viewer != ''){
+
+                if (viewer != '') {
                     viewer.destroy();
                 }
                 // Buat viewer baru
@@ -246,18 +257,18 @@
                     'type': 'equirectangular',
                     'panorama': imageUrl,
                     'autoLoad': true,
-                    'yaw': 0,                   // Kunci posisi yaw
-                    'pitch': 0,                 // Kunci posisi pitch
+                    'yaw': 0, // Kunci posisi yaw
+                    'pitch': 0, // Kunci posisi pitch
                     'hfov': 85,
-                    'draggable': false,          // Nonaktifkan drag dengan mouse
-                    'mouseZoom': false,         // Nonaktifkan zoom dengan scroll
-                    'showControls': false,       // Sembunyikan tombol navigasi
+                    'draggable': false, // Nonaktifkan drag dengan mouse
+                    'mouseZoom': false, // Nonaktifkan zoom dengan scroll
+                    'showControls': false, // Sembunyikan tombol navigasi
                 });
 
                 // Set nilai input sesuai dengan posisi awal
                 document.getElementById("yaw").value = viewer.getYaw();
                 document.getElementById("pitch").value = viewer.getPitch();
-                document.getElementById("hfov").value = viewer.getHfov()*-1;
+                document.getElementById("hfov").value = viewer.getHfov() * -1;
             };
             reader.readAsDataURL(file);
         }
@@ -273,9 +284,9 @@
     });
 
     document.getElementById("hfov").addEventListener("input", function () {
-        if (viewer) viewer.setHfov(parseFloat(this.value)*-1);
+        if (viewer) viewer.setHfov(parseFloat(this.value) * -1);
     });
-    
+
     function editPanorama(id) {
         let hotspotContainer = document.getElementById("hotspotContainer");
         hotspotContainer.innerHTML = "";
@@ -290,21 +301,21 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function(response) {
-            const panorama = response.detail;
-            panorama.namafile = BaseUrl + panorama.namafile;
-            Tempimg = panorama.namafile;
-            showPannellum(panorama,response.hotspots)
+            success: function (response) {
+                const panorama = response.detail;
+                panorama.namafile = BaseUrl + panorama.namafile;
+                Tempimg = panorama.namafile;
+                showPannellum(panorama, response.hotspots)
 
-            
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-        }
+
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
         });
     }
 
-    function showPannellum(data,hotspots){
+    function showPannellum(data, hotspots) {
         if (viewer) {
             viewer.destroy();
         }
@@ -335,7 +346,7 @@
         
         if(Array.isArray(hotspots) && hotspots.length > 0){
             hotspots.forEach(element => {
-                
+
                 addHotspot(element)
             });
         }
@@ -351,13 +362,13 @@
     });
 
     document.getElementById("hfovedit").addEventListener("input", function () {
-        if (viewer) viewer.setHfov(parseFloat(this.value)*-1);
+        if (viewer) viewer.setHfov(parseFloat(this.value) * -1);
     });
 
     function addHotspot(hotspotId = {}) {
         let hotspotContainer = document.getElementById("hotspotContainer");
 
-        if (Object.keys(hotspotId).length ===0) {
+        if (Object.keys(hotspotId).length === 0) {
             hotspotId = {
                 id: "hotspot-" + Date.now(),
                 yaw: 0,
@@ -417,7 +428,7 @@
 
         console.log("Hotspot ditambahkan dengan ID:", hotspotId.id);
     }
-    
+
     document.getElementById("addHotspot").addEventListener("click", function () {
         addHotspot();
     });

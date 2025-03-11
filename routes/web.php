@@ -31,6 +31,8 @@ Route::post('/booking', [BookingController::class, 'store'])->name('checkout.sto
 
 Route::get('/password/create', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showCreatePasswordForm'])->name('password.create');
 Route::post('/password/create', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'storeNewPassword'])->name('password.store');
+// fiona coba lupa password
+Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
