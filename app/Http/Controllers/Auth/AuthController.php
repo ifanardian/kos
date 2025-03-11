@@ -36,11 +36,11 @@ class AuthController extends Controller
             ]);
         }
         
-        if ($penyewa && !$penyewa->status_penyewaan) {
-            return back()->withErrors([
-                'error' => 'Akun Anda nonaktif dan tidak bisa login.',
-            ]);
-        }
+        // if ($penyewa && !$penyewa->status_penyewaan) {
+        //     return back()->withErrors([
+        //         'error' => 'Akun Anda nonaktif dan tidak bisa login.',
+        //     ]);
+        // }
         
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();

@@ -82,7 +82,7 @@
                                 {{-- <option value="{{ $tipe->id }}">{{ $tipe->deskripsi	}} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
                                 </option> --}}
                                 {{-- fiona coba --}}
-                                <option value="{{ $tipe->id }}" {{ $selectedTipe == $tipe->id ? 'selected' : '' }}>
+                                <option value="{{ $tipe->id }}" {{-- $selectedTipe == $tipe->id ? 'selected' : '' --}}>
                                     {{ $tipe->deskripsi }} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
                                 </option>
                                 {{-- <option value="{{ $tipe->id }}" {{ old('tipe_kos') == $tipe->id ? 'selected' : '' }}>

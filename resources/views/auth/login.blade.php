@@ -177,8 +177,18 @@
             padding: 80px;
             transform: scale(.6);
         }
+        .btn-close-custom {
+            background: none;
+            border: none;
+            font-size: 1.5rem; /* Ukuran ikon silang */
+            font-weight: bold;
+            color: #000; /* Warna ikon */
+            line-height: 1;
+            padding: 0;
+            cursor: pointer;
+        }
 
-
+        
     </style>
 </head>
 
@@ -187,17 +197,36 @@
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-                @if (session('success'))
+                {{-- @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
+                <!-- Tampilkan pesan error jika ada -->
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif --}}
+                
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close-custom" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 @if ($errors->has('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ $errors->first('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close-custom" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
@@ -211,7 +240,8 @@
 			</div>
 
 			<div class="login">
-				<form>
+				<form method="POST" action="{{ route('password.email') }}">
+                    @csrf
 					<label for="chk" aria-hidden="true">Lupa Password</label>
 					<input type="email" name="email" placeholder="Email" required="">
 					<button>RESET PASSWORD</button>
@@ -276,9 +306,8 @@
     </section> --}}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    </script>
 </body>
 
 </html>

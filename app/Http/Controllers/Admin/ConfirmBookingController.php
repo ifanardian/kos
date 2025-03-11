@@ -27,8 +27,7 @@ class ConfirmBookingController extends Controller
     //     return view('admin.confirm-booking.index', compact('data'));   
     // }
 
-    public function verifikasiBooking()
-    {
+    public function verifikasiBooking(){
         // LAMA
         // $data = Booking::orderByRaw("FIELD(status, 'PENDING') DESC")->orderBy('created_at', 'asc')->get();
         // $tipe = Mstipekos::all();
@@ -42,10 +41,8 @@ class ConfirmBookingController extends Controller
         return view('admin.admin-verifikasi', compact('pending', 'approved', 'rejected', 'tipe'));
     }
 
-    public function showKtp($filename)
-    {
+    public function showKtp($filename){
         if (Storage::disk('local')->exists('ktp/' . $filename)) {
-            // Menyajikan file secara aman
             $file = Storage::disk('local')->get('ktp/' . $filename);
             return Response::make($file, 200, [
                 'Content-Type' => 'image/jpeg',  // Sesuaikan dengan tipe file
@@ -55,13 +52,11 @@ class ConfirmBookingController extends Controller
         abort(404);
     }
 
-    public function updateStatusBooking(Request $request)
-    {
+    public function updateStatusBooking(Request $request){
         $booking = Booking::find($request->id);
         $booking->status = $request->status;
         
         if ($booking->status == "APPROVED") {
-            // Add user to 'users' table with null password initially
             Users::create([
                 'email' => $booking->email,
                 'password' => null, // Password akan diatur oleh user

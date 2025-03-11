@@ -31,6 +31,8 @@ Route::post('/booking', [BookingController::class, 'store'])->name('checkout.sto
 
 Route::get('/password/create', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showCreatePasswordForm'])->name('password.create');
 Route::post('/password/create', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'storeNewPassword'])->name('password.store');
+// fiona coba lupa password
+Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -39,6 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/payment-history', [PaymentController::class, 'historyPembayaran'])->name('payment.history');
     // Route::get('/checkout', [controller_checkout::class, 'checkout'])->name('checkout'); 
 });
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [IndexController::class, 'showIndex'])->name('admin.dashboard');
@@ -58,7 +61,8 @@ Route::prefix('admin')->group(function () {
     Route::get('kelola-website', [KelolaWebsiteController::class, 'ShowKelolaWebsite'])->name('admin.kelolawebsite');
     Route::post('kelola-website', [KelolaWebsiteController::class, 'PostPanorama'])->name('post.admin.kelolawebsite');
     Route::post('kelola-website/detail', [KelolaWebsiteController::class, 'DetailKelolaWebsite'])->name('admin.detail.kelolawebsite');
-    Route::post('kelola-website/save/hotspots', [KelolaWebsiteController::class, 'SaveHotspots'])->name('admin.save.Hotspots');
+    Route::post('kelola-website/hotspots/save', [KelolaWebsiteController::class, 'SaveHotspots'])->name('admin.save.Hotspots');
+    Route::post('kelola-website/hotspots/delete', [KelolaWebsiteController::class, 'DeletePanorama'])->name('admin.delete.panorama');
     
     // fiona
     Route::post('/penyewa-update', [ConfirmBookingController::class, 'updatePenyewa'])->name('admin.penyewa.update');

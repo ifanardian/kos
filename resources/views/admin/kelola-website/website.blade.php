@@ -55,8 +55,13 @@
                 <div class="row">
                     <?php
                         foreach($panorama as $p){
+                            $default = "";
+                            if($p->default){
+                                $default ="style=background-color:lightgreen";
+                            }
                             echo' 
-                            <div class="panorama-container">
+                            <div class="panorama-container" '.$default.'>
+
                                 <div data-bs-toggle="modal" data-bs-target="#editModal" 
                                     onclick="editPanorama('.$p->id.')">
                                     '.$p->text.'
@@ -70,6 +75,7 @@
         </div>
     </div>
 
+    Card PhotoGrid
     <div class="col-xl col-lg-7">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
@@ -85,9 +91,26 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="text-center mb-3">
+                    <table class='table table-sm'>
+                        <thead>
+                            <tr>
+                                <th scope='col'>Gambar</th>
+                                <th scope='col'style="width: 50%;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="{{ asset('images/display8.jpeg') }}" alt="" style="max-height: 100px;">
+                                </td>
+                                <td><button></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <!-- Preview Foto -->
-                    <img id="currentPhoto" src="img/default-photo.png" alt="Foto Saat Ini"
-                        style="max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px; border-radius: 8px;">
+                    <!-- <img id="currentPhoto" src="img/default-photo.png" alt="Foto Saat Ini" -->
+                        <!-- style="max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px; border-radius: 8px;"> -->
                 </div>
                 <!-- Form Ganti Foto -->
                 <!-- <form id="photoForm" enctype="multipart/form-data">
@@ -155,15 +178,23 @@
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel2">UPDATE GAMBAR</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="editId">
+                    <div class="mb-3">
+                        <label class="form-label">Set as Default</label>
+                        <div>
+                            <input type="radio" id="defaultYes" name="isDefault" value="1">
+                            <label for="defaultYes">Ya</label>
+
+                            <input type="radio" id="defaultNo" name="isDefault" value="0">
+                            <label for="defaultNo">Tidak</label>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="editText" class="form-label">Judul Panorama</label>
                         <input type="text" class="form-control" id="editText">
@@ -172,7 +203,6 @@
                         <label for="gambar" class="form-label" style="padding: 5px;">Preview Gambar Ketika Load</label>
                         <div class="border p-3">
                             <div id='previewedit' style="height: 300px; width: calc(100% - 10px); margin: 5px;"></div>
-
                             <label for="yawedit" class="form-label" style="padding: 5px;">Horisontal</label>
                             <input type="range" class="form-range" id="yawedit" name="yawedit" min="-180" max="180"
                                 step="0.5">
@@ -193,6 +223,7 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deletePanorama()">Hapus</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                 <button type="button" class="btn btn-primary" onclick="saveHotspots()">Simpan</button>
             </div>
@@ -300,12 +331,20 @@
             'mouseZoom': false,
             'showControls': false,
         });
-        document.getElementById("editText").value = data.text;
+        document.getElementById(data.default ? "defaultYes" : "defaultNo").checked = true;
+        document.getElementById("defaultNo").disabled = false;
+        if (data.default == 1) {
+            console.log('default : ',data.default)
+            // document.getElementById("defaultYes").disabled = true;
+            document.getElementById("defaultNo").disabled = true;
+        }
+        document.getElementById("editText").value  = data.text;
         document.getElementById("yawedit").value = Number(data.yaw);
         document.getElementById("pitchedit").value = Number(data.pitch);
-        document.getElementById("hfovedit").value = Number(data.hfov) * -1;
-        console.log(hotspots.id)
-        if (Array.isArray(hotspots) && hotspots.length > 0) {
+        document.getElementById("hfovedit").value = Number(data.hfov)*-1;
+
+        
+        if(Array.isArray(hotspots) && hotspots.length > 0){
             hotspots.forEach(element => {
 
                 addHotspot(element)
@@ -337,7 +376,7 @@
                 scene: ""
             };
         }
-
+        
         let hotspotDiv = document.createElement("div");
         hotspotDiv.classList.add("hotspot-item", "mb-3");
         hotspotDiv.setAttribute("data-hotspot-id", hotspotId.id);
@@ -346,20 +385,30 @@
             <div class="border p-3">
                 <input type="hidden" class="form-control mb-2" name="id_hotspots" value="${hotspotId.id}">
 
-                <label class="form-label">Pitch</label>
-                <input type="number" class="form-control mb-2 hotspot-input" name="pitch[]" step="0.5" min="-90" max="90" data-hotspot-id="${hotspotId.id}" value="${hotspotId.pitch}">
-
-                <label class="form-label">Yaw</label>
-                <input type="number" class="form-control mb-2 hotspot-input" name="yaw[]" step="0.5" min="-180" max="180" data-hotspot-id="${hotspotId.id}" value="${hotspotId.yaw}">
+                <label class="form-label">Horisontal</label>
+                <input type="range" class="form-range mb-2 hotspot-input" name="yaw[]" step="0.5" min="-179" max="180" data-hotspot-id="${hotspotId.id}" value="${hotspotId.yaw}">
+                
+                <label class="form-label">Vertikal</label>
+                <input type="range" class="form-range mb-2 hotspot-input" name="pitch[]" step="0.5" min="-89" max="90" data-hotspot-id="${hotspotId.id}" value="${hotspotId.pitch}">
 
                 <label class="form-label">Scene</label>
-                <input type="text" class="form-control mb-2 hotspot-input" name="scene[]" data-hotspot-id="${hotspotId.id}" value="${hotspotId.scene}">
-
+                <select class="form-control mb-2 hotspot-input" name="scene[]" data-hotspot-id="${hotspotId.id}">
+                    <option value="">Pilih Scene</option>
+                    @foreach (DB::table('ms_panorama')->get() as $scene)
+                        <option value="{{ $scene->id }}">
+                            {{ $scene->text }}
+                        </option>
+                    @endforeach
+                </select>
                 <button type="button" class="btn btn-danger btn-sm remove-hotspot">Hapus</button>
             </div>
         `;
-
         hotspotContainer.appendChild(hotspotDiv);
+
+        let selectElement = document.querySelector(`select[data-hotspot-id="${hotspotId.id}"]`);
+        if (selectElement) {
+            selectElement.value = hotspotId.scene;
+        }
 
         // Tambahkan event listener ke input baru
         hotspotDiv.querySelectorAll(".hotspot-input").forEach(input => {
@@ -370,8 +419,11 @@
 
         // Event listener untuk tombol hapus
         hotspotDiv.querySelector(".remove-hotspot").addEventListener("click", function () {
-            hotspotDiv.remove();
-            removeHotspotFromViewer(hotspotId.id);
+
+            let status = removeHotspotFromViewer(hotspotId.id);
+            if(status){
+                hotspotDiv.remove();
+            }
         });
 
         console.log("Hotspot ditambahkan dengan ID:", hotspotId.id);
@@ -385,19 +437,21 @@
     function updateHotspotPreview() {
         let hotspotContainer = document.getElementById("hotspotContainer");
         let hotspots = [];
-
+        
         hotspotContainer.querySelectorAll(".hotspot-item").forEach(item => {
             let hotspotId = item.getAttribute("data-hotspot-id");
             let yaw = parseFloat(item.querySelector("[name='yaw[]']").value) || 0;
             let pitch = parseFloat(item.querySelector("[name='pitch[]']").value) || 0;
             let scene = item.querySelector("[name='scene[]']").value || "";
+            let sceneSelect = item.querySelector("[name='scene[]']");
+            let sceneText = sceneSelect.options[sceneSelect.selectedIndex].text;
 
             hotspots.push({
                 id: hotspotId,
                 pitch: pitch,
                 yaw: yaw,
                 type: "scene",
-                text: scene,
+                text: sceneText,
             });
         });
 
@@ -412,11 +466,11 @@
         }
         viewer = pannellum.viewer('previewedit', {
             'type': 'equirectangular',
-            'panorama': Tempimg,
+            'panorama': Tempimg, 
             'autoLoad': true,
             'yaw': Number(document.getElementById("yawedit").value),
             'pitch': Number(document.getElementById("pitchedit").value),
-            'hfov': Number(document.getElementById("hfovedit").value) * -1,
+            'hfov': Number(document.getElementById("hfovedit").value)*-1,
             'draggable': false,
             'mouseZoom': false,
             'showControls': false,
@@ -424,23 +478,37 @@
         });
     }
 
+    let datadihapus = [];
     // Fungsi untuk menghapus hotspot dari viewer
     function removeHotspotFromViewer(hotspotId) {
-        let hotspots = viewer.getConfig().hotSpots.filter(h => h.id !== hotspotId);
-        updatePannellumHotspots(hotspots);
+        //let hotspots = viewer.getConfig().hotSpots.filter(h => h.id !== hotspotId);
+        // console.log(hotspotId);
+    
+        if (!isNaN(hotspotId)) {
+            datadihapus.push(hotspotId);
+        }
+        console.log(datadihapus);
+        return true;
+        //updatePannellumHotspots(hotspots);
     }
 
     function saveHotspots() {
         let formData = new FormData();
-        formData.append('id', document.getElementById("editId").value);
-        formData.append('yaw', document.getElementById("yawedit").value);
-        formData.append('pitch', document.getElementById("pitchedit").value);
-        formData.append('hfov', document.getElementById("hfovedit").value);
+        formData.append('id',document.getElementById("editId").value);
+        formData.append('default',document.querySelector('input[name="isDefault"]:checked').value);
+        formData.append('text',document.getElementById("editText").value);
+        formData.append('yaw',document.getElementById("yawedit").value);
+        formData.append('pitch',document.getElementById("pitchedit").value);
+        formData.append('hfov',document.getElementById("hfovedit").value);
+        datadihapus.forEach((item, index) => {
+            // console.log(item)
+            formData.append(`dihapus[${index}]`,item);
+        });
+
         // Ambil semua hotspot dari form
         document.querySelectorAll(".hotspot-item").forEach((item, index) => {
             let idValue = item.querySelector("[name='id_hotspots']").value;
-
-            // Jika id adalah angka, tambahkan ke formData
+        
             if (!isNaN(idValue) && idValue.trim() !== "") {
                 formData.append(`hotspots[${index}][id]`, idValue);
             }
@@ -458,16 +526,53 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function (response) {
+            success: function(response) {
                 alert('Hotspot berhasil disimpan!');
                 console.log(response);
-            },
-            error: function (xhr) {
+            }, 
+            error: function(xhr) {
                 alert('Gagal menyimpan hotspot!');
                 console.error(xhr.responseText);
             }
         });
+        let modal = document.querySelector('.modal.show'); // Cari modal yang sedang terbuka
+        let modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) {
+            modalInstance.hide();
+            location.reload(true);
+
+        }
     }
 
+    function deletePanorama(){
+        let formData = new FormData();
+        formData.append('id',document.getElementById("editId").value);
+        $.ajax({
+            url: '{{ route("admin.delete.panorama") }}', // Gantilah dengan URL endpoint Laravel Anda
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('Hotspot berhasil disimpan!');
+                console.log(response);
+            }, 
+            error: function(xhr) {
+                alert('Gagal menyimpan hotspot!');
+                console.error(xhr.responseText);
+            }
+        });
+
+        let modal = document.querySelector('.modal.show'); // Cari modal yang sedang terbuka
+        let modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) {
+            modalInstance.hide();
+            location.reload(true);
+        }
+    }
 </script>
+
 @endsection
