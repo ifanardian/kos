@@ -81,7 +81,7 @@
         .main{
             width: 450px;
             height: 500px;
-            background: #e5f4fb;
+            background: #e5f4fb26;
             overflow: hidden;border-radius: 10px;
             box-shadow: 5px 20px 50px #000;
         }
@@ -94,7 +94,7 @@
             height: 100%;
         }
         label{
-            color: #143443;
+            color: #000017;
             font-size: 2em;
             justify-content: center;
             display: flex;
@@ -122,7 +122,7 @@
             justify-content: center;
             display: block;
             color: #fff;
-            background: #174054;
+            background: #000017;
             font-size: 1em;
             font-weight: bold;
             margin-top: 40px;
@@ -137,7 +137,8 @@
         }
         .reset{
             height: 460px;
-            background: #102d3b;
+            background: #000017;
+            /* #102d3b; */
             border-radius: 60% / 10%;
             transform: translateY(-180px);
             transition: .8s ease-in-out;
@@ -150,7 +151,7 @@
             transform: scale(.6);
         }
         .reset .btn-reset{
-            width: 50%;
+            width: 40%;
             height: 40px;
             margin: 10px auto;
             justify-content: center;
@@ -171,7 +172,7 @@
             transform: translateY(-500px);
         }
         #chk:checked ~ .reset label{
-            transform: scale(1);	
+            transform: scale(.9);	
         }
         #chk:checked ~ .login label{
             padding: 80px;
