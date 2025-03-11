@@ -24,21 +24,20 @@ class AdminPaymentController extends Controller
     {
         // dd($request->all()); 
         $request->validate([
-            'email' => 'required|email',
+            'id_penyewa' => 'required|integer',
             'periode_tagihan' => 'required|string',
-            'metode_pembayaran' => 'required|string',
             'status' => 'required|boolean',
         ]);
         if ($request->status == 1) {
                 
             $penyewa = DB::table('penyewa')
-                ->where('email', $request->email)
+                ->where('id', $request->id_penyewa)
                 ->first();
             $langganan = DB::table('ms_tipe_kos')
                 ->where('id', $penyewa->tipe_kos)
                 ->first();
             DB::table('penyewa')
-                ->where('email', $request->email)
+                ->where('id', $request->id_penyewa)
                 ->update([
                     'tanggal_jatuh_tempo' => \Carbon\Carbon::parse($penyewa->tanggal_jatuh_tempo)->addMonths($langganan->bulan)->format('Y-m-d'),
                 ]);
@@ -46,7 +45,7 @@ class AdminPaymentController extends Controller
             // dd($request->all());
             if ($request->metode_pembayaran == 'Transfer') {
                 DB::table('payments')
-                ->where('email', $request->email)
+                ->where('id_penyewa', $request->id_penyewa)
                 ->where('periode_tagihan', $request->periode_tagihan)
                 ->update([
                     'status_verifikasi' => $request->status,
@@ -54,7 +53,7 @@ class AdminPaymentController extends Controller
                 ]);  
             }else{
                 DB::table('payments')
-                ->where('email', $request->email)
+                ->where('id_penyewa', $request->id_penyewa)
                 ->where('periode_tagihan', $request->periode_tagihan)
                 ->update([
                     'tanggal_pembayaran' => date('Y-m-d'),
@@ -64,7 +63,7 @@ class AdminPaymentController extends Controller
             }
         }else{
             DB::table('payments')
-                ->where('email', $request->email)
+                ->where('id_penyewa', $request->id_penyewa)
                 ->where('periode_tagihan', $request->periode_tagihan)
                 ->update([
                     'status_verifikasi' => $request->status,
@@ -87,5 +86,14 @@ class AdminPaymentController extends Controller
             ]);
         }
         abort(404);
+    }
+
+    public function getHistoryPembayaran($id){
+        $data = DB::table('payments')
+            ->where('id_penyewa', $id)
+            ->orderBy('periode_tagihan', 'desc')
+            ->get();
+        
+        return response()->json($data);
     }
 }

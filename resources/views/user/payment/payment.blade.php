@@ -90,7 +90,7 @@
                             {{-- saat baru pertama kali bayar kos --}}
                             @if ($isFirstPayment)
                                 <li>
-                                    <p>order number</p><span>: {{$payment->email}}_{{$payment->periode_tagihan}}</span>
+                                    <p>order number</p><span>: {{$payment->id_penyewa}}_{{$payment->periode_tagihan}}</span>
                                 </li>
                                 <li>
                                     <p>Tanggal Jatuh Tempo</p><span>:
@@ -214,7 +214,7 @@
                                         accept=".jpg, .jpeg, .png" disabled />
                                 </p>
                             </div>
-                            <input type="hidden" name="email" value="{{ $payment->email }}">
+                            <input type="hidden" name="id_penyewa" value="{{ $payment->id_penyewa }}">
                             <input type="hidden" name="periode_tagihan" value="{{ $payment->periode_tagihan }}">
                             <div class="password text-center">
                                 <button class="btn_3" type="submit">BAYAR</button>

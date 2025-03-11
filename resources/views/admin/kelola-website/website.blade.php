@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    Card PhotoGrid
+    <!-- Card PhotoGrid -->
     <div class="col-xl col-lg-7">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->

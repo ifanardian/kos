@@ -29,17 +29,17 @@ class PaymentController extends Controller
         // fiona coba bulanan
         $user = Auth::user();
         $payment = DB::table('payments')
-            ->where('email', $user->email)
+            ->where('id_penyewa', $user->id_penyewa)
             ->whereNull('metode_pembayaran') // Tagihan yang belum dibayar
             ->orderBy('periode_tagihan', 'desc')
             ->first();
     
-        $detailPenyewa = Penyewa::where('email', $user->email)->first();
+        $detailPenyewa = Penyewa::where('id', $user->id_penyewa)->first();
     
         if (!$payment) {
             // Jika tidak ada tagihan baru, ambil informasi pembayaran terakhir
             $payment = DB::table('payments')
-                ->where('email', $user->email)
+                ->where('id_penyewa', $user->id_penyewa)
                 ->orderBy('periode_tagihan', 'desc')
                 ->first();
     
@@ -59,7 +59,7 @@ class PaymentController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'email' => 'required|email',
+            'id_penyewa' => 'required|integer',
             'periode_tagihan' => 'required|string',
             'metode_pembayaran' => 'required|string',
             'bukti_tf' => 'nullable|mimes:jpg,jpeg,png|max:2048',
@@ -72,13 +72,14 @@ class PaymentController extends Controller
         }
 
         DB::table('payments')
-            ->where('email', $request->email)
+            ->where('id_penyewa', $request->id_penyewa)
             ->where('periode_tagihan', $request->periode_tagihan)
+            ->whereNull('metode_pembayaran')   
             ->update([
                 'metode_pembayaran' => $request->metode_pembayaran,
                 'bukti_pembayaran' => $request->metode_pembayaran == 'Transfer' ? $fileName : null,
                 'tanggal_pembayaran' => $request->metode_pembayaran == 'Transfer' ? date('Y-m-d') : null,
-                'status_verifikasi' => false,
+                'status_verifikasi' => null,
                 'updated_at' => now(),
             ]);        
         return redirect()->route('dashboard')->with('success', 'Pembayaran Anda berhasil dilakukan. Harap menunggu verifikasi.');
@@ -86,10 +87,10 @@ class PaymentController extends Controller
 
     public function historyPembayaran()
     {
-        $user = Auth::user()->email;
+        $user = Auth::user()->id_penyewa;
         // $userEmail = auth()->user()->email; // Ambil email pengguna yang login
         $paymentHistory = DB::table('payments')
-            ->where('email', $user)
+            ->where('id_penyewa', $user)
             ->orderBy('periode_tagihan', 'desc')
             ->get();
 
