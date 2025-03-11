@@ -15,8 +15,9 @@ use App\Models\Mstipekos;
 use App\Models\Penyewa;
 use App\Models\Users;
 use App\Models\Payments;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 
 class ConfirmBookingController extends Controller
 {
@@ -52,51 +53,60 @@ class ConfirmBookingController extends Controller
         abort(404);
     }
 
-    public function updateStatusBooking(Request $request){
-        $booking = Booking::find($request->id);
-        $booking->status = $request->status;
-        
-        if ($booking->status == "APPROVED") {
-            Users::create([
-                'email' => $booking->email,
-                'password' => null, // Password akan diatur oleh user
-            ]);
+    public function updateStatusBooking(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $booking = Booking::find($request->id);
+            $booking->status = $request->status;
 
-            Penyewa::create([
-                'email' => $booking->email,
-                'nama' => $booking->nama_lengkap,
-                'no_telepon' => $booking->no_hp,
-                'no_kamar' => $request->room_number,
-                'tipe_kos' => $booking->tipe_kos,
-                'alamat' => $booking->alamat,
-                'ktp' => $booking->ktp,
-                'tanggal_booking' => $booking->created_at->format('Y-m-d'),
-                'tanggal_menyewa' => $booking->periode_penempatan,
-                'tanggal_jatuh_tempo' => $booking->periode_penempatan,
-                'tanggal_berakhir' => null,
-            ]);
-            
-            $tipekos = Mstipekos::where('id', $booking->tipe_kos)->first();
+            if ($booking->status == "APPROVED") {
+                $penyewa = Penyewa::create([
+                    'email' => $booking->email,
+                    'nama' => $booking->nama_lengkap,
+                    'no_telepon' => $booking->no_hp,
+                    'no_kamar' => $request->room_number,
+                    'tipe_kos' => $booking->tipe_kos,
+                    'alamat' => $booking->alamat,
+                    'ktp' => $booking->ktp,
+                    'tanggal_booking' => $booking->created_at->format('Y-m-d'),
+                    'tanggal_menyewa' => $booking->periode_penempatan,
+                    'tanggal_jatuh_tempo' => $booking->periode_penempatan,
+                    'tanggal_berakhir' => null,
+                ]);
 
-            DB::table('payments')->insert([
-                'email' => $booking->email,
-                'periode_tagihan' => $booking->periode_penempatan,
-                'total_tagihan' => $tipekos->harga,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-            Mail::to($booking->email)->send(new SetPasswordMail($booking));
-            DB::table('kamar')
-            ->where('id_kamar', $request->room_number)
-            ->update([
-                'status' => 'T'
-            ]);
+                DB::table('users')->insert([
+                    'id_penyewa' => $penyewa->id,
+                    'email' => $booking->email,
+                    'password' => null, // Password akan diatur oleh user
+                ]);
 
+                $tipekos = Mstipekos::where('id', $booking->tipe_kos)->first();
+
+                DB::table('payments')->insert([
+                    'id_penyewa' => $penyewa->id,
+                    'periode_tagihan' => $booking->periode_penempatan,
+                    'total_tagihan' => $tipekos->harga,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                DB::table('kamar')
+                    ->where('id_kamar', $request->room_number)
+                    ->update(['status' => 'T']);
+                Mail::to($booking->email)->send(new SetPasswordMail($booking));
+            }
+
+            $booking->save();
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Status booking berhasil diperbarui.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        $booking->save();
-        return redirect()->back();
     }
+
 
     public function getKamarTersedia()
     {
@@ -142,12 +152,13 @@ class ConfirmBookingController extends Controller
             'alamat' => 'required|string',
             'tanggal_menyewa' => 'required|date',
             'tanggal_berakhir' => 'nullable|date',
+            'no_kamar'=>'required',
             'status_penyewaan' => 'required|boolean',
             'ktp' => 'nullable|mimes:jpeg,png,jpg|max:2048', // Validasi file
         ]);
 
-        $penyewa = Penyewa::findOrFail($request->id);
-
+        // $penyewa = Penyewa::findOrFail($request->id);
+        $penyewa = Penyewa::find($request->id);
         // Jika ada file KTP baru, simpan dan ganti file lama
         if ($request->hasFile('ktp')) {
             // $fileName = time() . '_' . $request->ktp->getClientOriginalName();
@@ -155,8 +166,6 @@ class ConfirmBookingController extends Controller
             $ktp = $request->file('ktp');
             $fileName =$request->email.'-'.time().'.'.$ktp->extension();
             $filePath = $ktp->storeAs('ktp', $fileName, 'local');
-            
-
             // Hapus file lama jika ada
             if ($penyewa->ktp) {
                 Storage::disk('local')->delete('ktp/' . $penyewa->ktp);
@@ -164,23 +173,35 @@ class ConfirmBookingController extends Controller
 
             $penyewa->ktp = $fileName;
         }
-
+        if(!$request->status_penyewaan){
+            $penyewa->tanggal_berakhir = Carbon::now()->toDateString();
+            DB::table('kamar')->where('id_kamar',$penyewa->no_kamar)->update(['status'=>'F']);
+            DB::table('users')->where('email',$penyewa->email)->delete();
+            $penyewa->status_penyewaan =$request->status_penyewaan;
+        }
+        if($penyewa->no_kamar != $request->no_kamar){
+            DB::table('kamar')->where('id_kamar',$penyewa->no_kamar)->update(['status'=>'F']);
+            DB::table('kamar')->where('id_kamar',$request->no_kamar)->update(['status'=>'T']);
+            $penyewa->no_kamar= $request->no_kamar;
+        }
+        $penyewa->no_telepon = $request->no_telepon;
+        $penyewa->tipe_kos = $request->tipe_kos;
+        $penyewa->alamat = $request->alamat;
+        $penyewa->tanggal_menyewa = $request->tanggal_menyewa;
+        $penyewa->nama = $request->nama;
+        
         $penyewa->save();
-
-        Penyewa::where('id', $request->id)->update([
-            'nama' => $request->nama,
-            'no_telepon' => $request->no_telepon,
-            'tipe_kos' => $request->tipe_kos,
-            'alamat' => $request->alamat,
-            'tanggal_menyewa' => $request->tanggal_menyewa,
-            'tanggal_berakhir' => $request->tanggal_berakhir,
-            'status_penyewaan' => $request->status_penyewaan,
-            'ktp' => isset($fileName) ? $fileName : $penyewa->ktp, 
-        ]);
-
         return redirect()->back()->with('success', 'Data penyewa berhasil diperbarui.');
     }
 
+    public function detailPenyewa($id = null){
+        $detail = DB::table('penyewa')->where('id',$id)->first();
+
+        return response()->json($detail, 200);
+
+        
+        
+    }
 
 
 }

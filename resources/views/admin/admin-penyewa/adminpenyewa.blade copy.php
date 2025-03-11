@@ -59,7 +59,7 @@
                                         <th scope="col">Nomor Telepon</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Tanggal Mulai Sewa</th>
-                                        <th scope="col">Sisa Langganan</th>
+                                        <th scope="col">Tanggal Berakhir</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -70,35 +70,28 @@
                                         <td>{{$item->nama}}</td>
                                         <td>{{$item->no_telepon}}</td>
                                         <td>
-                                            @if($item->tanggal_menyewa < \Carbon\Carbon::now()->format('Y-m-d'))
                                             <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
                                                 {{ $item->status_penyewaan ? 'Aktif' : 'Nonaktif' }}
                                             </span>
-                                            @else
-                                            <span class="text-warning">Calon Penghuni</span>
-                                            @endif
                                         </td>
                                         <td>{{$item->tanggal_menyewa}}</td>
-                                        @if($item->tanggal_menyewa < \Carbon\Carbon::now()->format('Y-m-d'))
-                                        <td>{{ \Carbon\Carbon::now()->startOfDay()->diffInDays(\Carbon\Carbon::parse($item->tanggal_jatuh_tempo)->startOfDay())}} hari</td>
-                                        @else
-                                        <td>Belum Aktif</td>
-                                        @endif
+                                        <td>{{$item->tanggal_berakhir}}</td>
                                         <td>
                                             <div class="container">
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#editModal"
+                                                    data-bs-target="#editModal" data-email="{{ $item->email }}"
+                                                    data-nama="{{ $item->nama }}"
+                                                    data-no_telepon="{{ $item->no_telepon }}"
+                                                    data-tipe_kos="{{ $item->tipe_kos }}"
+                                                    data-alamat="{{ $item->alamat }}"
+                                                    data-ktp-url="{{$item->ktp}}"
+                                                    data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
+                                                    data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
+                                                    data-status_penyewaan="{{ $item->status_penyewaan }}"
+                                                    data-no_kamar="{{$item->no_kamar}}"
                                                     data-id="{{ $item->id }}">
                                                     <i class="bi bi-pencil-fill"></i> Edit
                                                 </button>
-                                                
-                                                    
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#tagihanModal" data-status="{{ $item->status_penyewaan }}"
-                                                    data-id2="{{ $item->id }}">
-                                                    <i class="bi-plus-circle-fill"></i> Tagihan
-                                                </button>
-                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -146,17 +139,19 @@
                                             <div class="container">
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#editModal" data-email="{{ $item->email }}"
+                                                    data-nama="{{ $item->nama }}"
+                                                    data-no_telepon="{{ $item->no_telepon }}"
+                                                    data-tipe_kos="{{ $item->tipe_kos }}"
+                                                    data-alamat="{{ $item->alamat }}"
+                                                    data-ktp-url="{{ $item->ktp}}"
+                                                    data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
+                                                    data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
+                                                    data-status_penyewaan="{{ $item->status_penyewaan }}"
+                                                    data-tanggal_berakhir="{{ $item->tanggal_berakhir }}"
                                                     data-id="{{ $item->id }}">
-                                                    <i class="bi bi-pencil-fill"></i> {{ $item->status_penyewaan ? 'Edit' : 'Detail' }}
+                                                    <i class="bi bi-pencil-fill"></i> Edit
                                                 </button>
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#tagihanModal" data-status="{{ $item->status_penyewaan }}"
-                                                    data-id2="{{ $item->id }}">
-                                                    <i class="bi-plus-circle-fill"></i> Tagihan
-                                                </button>
-                                               
                                             </div>
-                                           
                                         </td>
                                     </tr>
                                     @endforeach
@@ -236,30 +231,10 @@
                             <input type="date" class="form-control" id="edit-tanggal_menyewa" name="tanggal_menyewa"
                                 required>
                         </div>
-                        <div class="mb-3" id="tanggalBerakhir" style="display: none;">
-                            <label for="edit-tanggal_berakhir" class="form-label" >Tanggal Berakhir</label>
+                        <div class="mb-3">
+                            <label for="edit-tanggal_berakhir" class="form-label">Tanggal Berakhir</label>
                             <input type="date" class="form-control" id="edit-tanggal_berakhir" name="tanggal_berakhir">
                         </div>
-                        <div class="mb-3">
-                            <label for="edit-no_kamar" class="form-label">No Kamar</label>
-                            <select class="form-control" id="edit-no_kamar" name="no_kamar" required>
-                                <?php
-                                $kamar = DB::table('kamar')->where('status','F')->get();
-                                if($kamar){
-                                    foreach($kamar as $t){
-                                        echo"
-                                            <option value='". $t->id_kamar ."'  > No. ".$t->id_kamar ."</option>
-                                        ";
-                                    }
-                                }else{
-                                    echo"
-                                        <option value='' selected>Belum Ada Pilihan Tipe Kos</option>
-                                    ";
-                                }
-                            ?>
-                            </select>
-                        </div>
-                        
                         <div class="mb-3">
                             <label for="edit-status_penyewaan" class="form-label">Status Penyewaan</label>
                             <select class="form-control" id="edit-status_penyewaan" name="status_penyewaan">
@@ -277,44 +252,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
-<div class="modal fade" id="tagihanModal" tabindex="-1" aria-labelledby="tagihanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> <!-- Tambahkan modal-lg agar lebih lebar -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tagihanModalLabel">Detail Tagihan Penyewa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            
-                <div class="modal-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Periode</th>
-                                <th>Tanggal Pembayaran</th>
-                                <th>Status Pembayaran</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tagihanTableBody">
-                            <!-- Data akan diisi melalui JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            <form id="tagihanForm" action="{{ route('admin.penyewa.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="id" id="tagihan-id">
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn-tagihan" >Tagih</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Oke</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -322,48 +259,40 @@
         const editModal = document.getElementById('editModal');
         editModal.addEventListener('show.bs.modal', function (event) {
             const button = event.relatedTarget;
-            let id = button.getAttribute('data-id');
-            document.getElementById('edit-id').value = id;
 
-            $.ajax({
-            url: "{{ route('admin.penyewa.aktif',['']) }}/"+id,
-            method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                const selectElement = document.getElementById("edit-no_kamar");
-                const newValue = response.no_kamar;
-                let optionExists = [...selectElement.options].some(option => option.value === newValue);
-                if (!optionExists) {
-                    let newOption = document.createElement("option");
-                    newOption.value = newValue;
-                    newOption.textContent = "No. "+newValue;
-                    selectElement.appendChild(newOption);
-                }
-                selectElement.value = newValue;
-                document.getElementById("edit-ktp").hidden = false;
-                document.getElementById('edit-email').value = response.email;
-                document.getElementById('edit-nama').value = response.nama;
-                document.getElementById('edit-no_telepon').value = response.no_telepon;
-                document.getElementById('edit-tipe_kos').value = response.tipe_kos;
-                document.getElementById('edit-alamat').value = response.alamat;
-                document.getElementById('edit-tanggal_menyewa').value = response.tanggal_menyewa;
-                document.getElementById('edit-status_penyewaan').value = response.status_penyewaan;
-                
-                if(response.tanggal_berakhir && !response.status_penyewaan){
-                    document.getElementById("tanggalBerakhir").hidden = false;
-                    document.getElementById("edit-tanggal_berakhir").value = response.tanggal_berakhir;
-                    document.getElementById("edit-ktp").hidden = true;
-                    document.querySelectorAll("#editForm input, #editForm select, #editForm textarea").forEach(element => {
-                        element.setAttribute("disabled", "true");
-                    });
-                }
-            },
-            error: function(xhr, status, error) {
-                // console.error(xhr.responseText);
+            // Ambil data dari tombol
+            const statusPenyewaan = button.getAttribute('data-status_penyewaan');
+            if(statusPenyewaan){
+                const tanggalBerakhir = button.getAttribute('data-no_kamar');
+
+            }else{
+                const tanggalBerakhir = button.getAttribute('data-tanggal_berakhir');
+                document.getElementById('edit-tanggal_berakhir').value = tanggalBerakhir;
+                document.getElementById('edit-tanggal_berakhir').disabled= true;
             }
-            });
+            const id = button.getAttribute('data-id');
+            const email = button.getAttribute('data-email');
+            const nama = button.getAttribute('data-nama');
+            const noTelepon = button.getAttribute('data-no_telepon');
+            const tipeKos = button.getAttribute('data-tipe_kos');
+            const alamat = button.getAttribute('data-alamat');
+            const tanggalMenyewa = button.getAttribute('data-tanggal_menyewa');
+            const ktpUrl = button.getAttribute('data-ktp-url');
+
+            // Isi data ke dalam modal
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-email').value = email;
+            document.getElementById('edit-nama').value = nama;
+            document.getElementById('edit-no_telepon').value = noTelepon;
+            document.getElementById('edit-tipe_kos').value = tipeKos;
+            document.getElementById('edit-alamat').value = alamat;
+            document.getElementById('edit-tanggal_menyewa').value = tanggalMenyewa;
+            
+            document.getElementById('edit-status_penyewaan').value = statusPenyewaan;
+
+            console.log("KTP URL:", ktpUrl);
+            console.log("statusPenyewaan: ", statusPenyewaan);
+            
         });
 
         // Preview foto KTP baru yang diunggah
@@ -378,54 +307,6 @@
             }
         });
 
-
-        const tagihanModal = document.getElementById('tagihanModal');
-        tagihanModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            let id2 = button.getAttribute('data-id2');
-            let status = button.getAttribute('data-status');
-            document.getElementById('tagihan-id').value = id2;
-            console.log(status)
-            if(status == 1){
-                document.getElementById('btn-tagihan').style.display = 'block';
-            }else{
-                document.getElementById('btn-tagihan').style.display = 'none';
-            }
-
-            let tableBody = document.getElementById("tagihanTableBody");
-            tableBody.innerHTML = "<tr><td colspan='4' class='text-center'>Loading...</td></tr>";
-            $.ajax({
-            url: "{{ route('admin.pembayaran.history',['']) }}/"+id2,
-            method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                tableBody.innerHTML = ""; // Kosongkan isi tabel sebelum diisi ulang
-
-                if (response.length === 0) {
-                    tableBody.innerHTML = "<tr><td colspan='4' class='text-center'>Tidak ada tagihan</td></tr>";
-                } else {
-                    response.forEach((item, index) => {
-                        let statusBadge = item.status_verifikasi === 1
-                            ? '<span class="badge bg-success">Lunas</span>'
-                            : '<span class="badge bg-danger">Belum Lunas</span>';
-
-                        let row = `
-                            <tr>
-                                <td>${index + 1}</td>
-                                <td>${item.periode_tagihan}</td>
-                                <td>${item.tanggal_pembayaran}</td>
-                                <td>${statusBadge}</td>
-                                
-                            </tr>
-                        `;
-                        tableBody.innerHTML += row;
-                    });
-                }
-            }
-            });
-        });
     </script>
 
     @endsection

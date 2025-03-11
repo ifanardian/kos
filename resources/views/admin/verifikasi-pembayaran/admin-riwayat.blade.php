@@ -45,9 +45,9 @@
                                             echo "<tr style='color: Green;'>";
                                         }
                                         echo "
-                                            <td>" . $dt->email . "</td>
-                                            <td>" . DB::table('penyewa')->where('email', $dt->email)->value('nama') . "</td>
-                                            <td>" . DB::table('penyewa')->where('email', $dt->email)->value('no_kamar') . "</td>
+                                            <td>" . DB::table('penyewa')->where('id', $dt->id_penyewa)->value('email') . "</td>
+                                            <td>" . DB::table('penyewa')->where('id', $dt->id_penyewa)->value('nama') . "</td>
+                                            <td>" . DB::table('penyewa')->where('id', $dt->id_penyewa)->value('no_kamar') . "</td>
                                             <td>" . $dt->tanggal_pembayaran . "</td>
                                             <td>" . $dt->periode_tagihan . "</td>
                                             <td>" . $dt->total_tagihan . "</td>
@@ -75,12 +75,12 @@
                                             <td>
                                                 <form action='" . route('admin.action.pembayaran') . "' method='POST'>
                                                     " . csrf_field() . "
-                                                    <input type='hidden' name='email' value='" . $dt->email . "'>
+                                                    <input type='hidden' name='id_penyewa' value='" . $dt->id_penyewa . "'>
                                                     <input type='hidden' name='periode_tagihan' value='" . $dt->periode_tagihan . "'>
-                                                    <input type='hidden' name='metode_pembayaran' value='" . $dt->metode_pembayaran . "'>
-                                                    <select class='form-control' name='status' onchange='this.form.submit()'>
-                                                        <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . ">Belum Terverifikasi</option>
-                                                        <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected ' : '') . ">Terverifikasi</option>
+                                                    <select class='form-control' name='status' onchange='this.form.submit()' ".($dt->status_verifikasi == '0'||$dt->status_verifikasi == '1' ? 'disabled' : '' ).">
+                                                        <option value=''" . ($dt->status_verifikasi == null ? 'selected' : '') .">Pilih</option>
+                                                        <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . " style='color:red;'>Ditolak</option>
+                                                        <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected ' : '') . " style='color:green;'>Disetuji</option>
                                                     </select>
                                                 </form>
                                             </td>

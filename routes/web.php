@@ -58,6 +58,8 @@ Route::prefix('admin')->group(function () {
     //membuat untuk rill
     Route::get('verifikasi-booking', [ConfirmBookingController::class, 'verifikasiBooking'])->name('admin.verifikasi.booking');
     Route::get('penyewa', [ConfirmBookingController::class, 'penyewa'])->name('admin.penyewa');
+    Route::get('penyewa/aktif/{id}', [ConfirmBookingController::class, 'detailPenyewa'])->name('admin.penyewa.aktif');
+
     Route::get('kelola-website', [KelolaWebsiteController::class, 'ShowKelolaWebsite'])->name('admin.kelolawebsite');
     Route::post('kelola-website', [KelolaWebsiteController::class, 'PostPanorama'])->name('post.admin.kelolawebsite');
     Route::post('kelola-website/detail', [KelolaWebsiteController::class, 'DetailKelolaWebsite'])->name('admin.detail.kelolawebsite');
@@ -68,6 +70,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/penyewa-update', [ConfirmBookingController::class, 'updatePenyewa'])->name('admin.penyewa.update');
     Route::get('payment', [AdminPaymentController::class, 'showPayment'])->name('admin.payment');
     Route::post('payment', [AdminPaymentController::class, 'actionPayment'])->name('admin.action.pembayaran');
+    Route::get('payment/history/{id}', [AdminPaymentController::class, 'getHistoryPembayaran'])->name('admin.pembayaran.history');
     Route::get('tf/{filename}', [AdminPaymentController::class, 'showbuktitf'])->name('admin.buktitf');
 });
 
