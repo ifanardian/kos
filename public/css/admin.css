@@ -11404,13 +11404,26 @@ a:focus {
 }
 
 .topbar {
-    height: 4.375rem;
+    display: flex;
+    justify-content: space-between; /* Menyusun elemen ke kiri dan kanan */
+    align-items: center;
+    padding: 0 1rem; /* Tambahkan padding agar tidak terlalu mepet */
 }
 
 .topbar #sidebarToggleTop {
-    margin: 0;
-    height: 2.5rem;
-    width: 2.5rem;
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none; /* Pastikan tetap normal */
+}
+
+.topbar .navbar-nav {
+    margin-left: auto; /* Pastikan elemen logout tetap di kanan */
+}
+
+.topbar .nav-item {
+    display: flex;
+    align-items: center; /* Biar logo logout tetap sejajar */
 }
 
 .topbar #sidebarToggleTop:hover {
@@ -11649,6 +11662,16 @@ a:focus {
     color: #4e73df;
     font-weight: 700;
 }
+
+.sidebar.toggled {
+    width: 0 !important;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+}
+
+/* .sidebar.toggled .nav-item {
+    display: none;
+} */
 
 .sidebar #sidebarToggle {
     width: 2.5rem;

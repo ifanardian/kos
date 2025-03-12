@@ -20,24 +20,18 @@ class ForgotPasswordMail extends Mailable
     {
         $this->user = $user;
         
-        // dd($this->user); // Cek apakah objek user ada dan memiliki email
+        // dd($this->user);
     }
 
     public function build()
     {
-        // Log::info('Mengirim email ke: ' . $this->user->email);
-        
         Log::info('Mengirim email ke: ' . ($this->user->email ?? 'Email kosong'));
 
-        // if (empty($this->user->email)) {
-        //     Log::error('Gagal mengirim email: Email kosong atau tidak valid.');
-        //     return $this; // Jangan lanjutkan pengiriman jika email kosong
-        // }
         $url_setpassword = route('password.create', ['email' => $this->user->email]);
         Log::info('URL set password: ' . $url_setpassword);
 
         return $this->subject('Reset Password Anda')
-                    ->to($this->user->email) // Pastikan email valid
+                    ->to($this->user->email) 
                     ->view('emails.forget_password')
                     ->with([
                         'email' => $this->user->email,

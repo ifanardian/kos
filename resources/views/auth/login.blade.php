@@ -138,13 +138,11 @@
         .reset{
             height: 460px;
             background: #000017;
-            /* #102d3b; */
             border-radius: 60% / 10%;
             transform: translateY(-180px);
             transition: .8s ease-in-out;
         }
         .reset label{
-            /* margin: 1rem; */
             white-space: nowrap;
             color: #ffffff;
             font-size: 1.9em;

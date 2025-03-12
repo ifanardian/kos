@@ -14,17 +14,17 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-        
-        <!-- ifan add -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <!-- end -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- ifan add -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- end -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 
     <!-- Custom styles for this template-->
@@ -42,7 +42,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                href="{{ route('admin.dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                 </div>
                 <div class="sidebar-brand-text mx-3">ADMIN FORTUNA</div>
@@ -58,27 +59,16 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                INTERFACE
-            </div>
-
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.kelolawebsite') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kelola Website</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.penyewa') }}" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="{{ route('admin.penyewa') }}" data-bs-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data Penghuni</span>
                 </a>
@@ -86,8 +76,8 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.kelola_kamar') }}" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="{{ route('admin.kelola_kamar') }}" data-bs-toggle="collapse"
+                    data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Kelola Kamar</span>
                 </a>
@@ -95,8 +85,8 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.payment') }}" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="{{ route('admin.payment') }}" data-bs-toggle="collapse"
+                    data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Riwayat Pembayaran</span>
                 </a>
@@ -127,32 +117,30 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex justify-content-between">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <!-- Sidebar Toggle (Burger Menu) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle">
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Navbar -->
+                    <!-- Logout Button -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-800 large">LOGOUT</span>
-                                <img width="20" height="20" src="https://img.icons8.com/fluency-systems-filled/100/exit.png" alt="exit"/>
+                            <a class="nav-link" href="#" id="userDropdown">
+                                <span class="mr-2 d-none d-lg-inline" style="color: #000000; font-weight: bold;">LOGOUT</span>
+                                <i class="fa-solid fa-arrow-right-from-bracket" style="color: #4a6fdc"></i>
                             </a>
                         </li>
-
                     </ul>
 
                 </nav>
+
                 <!-- End of Topbar -->
 
                 <main>
-                    @yield('content') <!-- The content of individual pages will be injected here -->
+                    @yield('content')
+                    <!-- The content of individual pages will be injected here -->
                 </main>
 
             </div>
@@ -189,18 +177,8 @@
         </div>
     </div>
 
-    
+
     <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const sidebar = document.getElementById("accordionSidebar");
-            const toggleButton = document.getElementById("sidebarToggle");
-
-            toggleButton.addEventListener("click", function () {
-                sidebar.classList.toggle("toggled");
-            });
-        });
-
         document.addEventListener("DOMContentLoaded", function () {
             const sidebar = document.getElementById("accordionSidebar");
             const sidebarToggle = document.getElementById("sidebarToggle");
@@ -210,19 +188,17 @@
                 sidebar.classList.toggle("toggled");
             }
 
-            // Toggle sidebar saat tombol di sidebar ditekan
             if (sidebarToggle) {
                 sidebarToggle.addEventListener("click", toggleSidebar);
             }
 
-            // Toggle sidebar saat tombol burger di navbar ditekan
             if (sidebarToggleTop) {
                 sidebarToggleTop.addEventListener("click", toggleSidebar);
             }
         });
 
-        
     </script>
+
 
 </body>
 
