@@ -21,19 +21,8 @@ use Carbon\Carbon;
 
 class ConfirmBookingController extends Controller
 {
-    // public function index()
-    // {
-    //     $data = Booking::all();
-
-    //     return view('admin.confirm-booking.index', compact('data'));   
-    // }
 
     public function verifikasiBooking(){
-        // LAMA
-        // $data = Booking::orderByRaw("FIELD(status, 'PENDING') DESC")->orderBy('created_at', 'asc')->get();
-        // $tipe = Mstipekos::all();
-        // return view('admin.admin-verifikasi', compact('data', 'tipe'));
-
         $pending = Booking::where('status', 'PENDING')->orderBy('created_at', 'asc')->get();
         $approved = Booking::where('status', 'APPROVED')->orderBy('created_at', 'asc')->get();
         $rejected = Booking::where('status', 'REJECTED')->orderBy('created_at', 'asc')->get();
@@ -55,12 +44,18 @@ class ConfirmBookingController extends Controller
 
     public function updateStatusBooking(Request $request)
     {
+        $request->validate([
+            'id' => 'required|integer',
+            'status' => 'required|string',
+            'room_number' => 'nullable|integer',
+            'alasan_ditolak'=>'nullable|string',
+        ]);
+        
         DB::beginTransaction();
         try {
             $booking = Booking::find($request->id);
             $booking->status = $request->status;
-
-            if ($booking->status == "APPROVED") {
+            if ($request->status == "APPROVED") {
                 $penyewa = Penyewa::create([
                     'email' => $booking->email,
                     'nama' => $booking->nama_lengkap,
@@ -69,40 +64,45 @@ class ConfirmBookingController extends Controller
                     'tipe_kos' => $booking->tipe_kos,
                     'alamat' => $booking->alamat,
                     'ktp' => $booking->ktp,
+                    'status_penyewaan' => 1,
                     'tanggal_booking' => $booking->created_at->format('Y-m-d'),
                     'tanggal_menyewa' => $booking->periode_penempatan,
                     'tanggal_jatuh_tempo' => $booking->periode_penempatan,
                     'tanggal_berakhir' => null,
                 ]);
-
                 DB::table('users')->insert([
                     'id_penyewa' => $penyewa->id,
                     'email' => $booking->email,
-                    'password' => null, // Password akan diatur oleh user
+                    'password' => null,
                 ]);
-
                 $tipekos = Mstipekos::where('id', $booking->tipe_kos)->first();
-
                 DB::table('payments')->insert([
+                    'id_kamar' => $request->room_number,
                     'id_penyewa' => $penyewa->id,
                     'periode_tagihan' => $booking->periode_penempatan,
                     'total_tagihan' => $tipekos->harga,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-
                 DB::table('kamar')
                     ->where('id_kamar', $request->room_number)
                     ->update(['status' => 'T']);
-                Mail::to($booking->email)->send(new SetPasswordMail($booking));
+                // dd("before email sent");
+                Mail::to($booking->email)->send(new SetPasswordMail($booking,'approved',null));
+                // dd("email sent");
             }
-
+            if ($request->status == "REJECTED") {
+                mail::to($booking->email)->send(new SetPasswordMail($booking,'rejected',$request->alasan_ditolak));
+                
+                // dd("email sent");
+            }
             $booking->save();
-
             DB::commit();
             return redirect()->back()->with('success', 'Status booking berhasil diperbarui.');
         } catch (\Exception $e) {
+            
             DB::rollBack();
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
@@ -120,18 +120,13 @@ class ConfirmBookingController extends Controller
 
     public function penyewa()
     {
-        // $penghuniAktif = Penyewa::where('status_penyewaan', 1)->get();
-        // $penghuniRiwayat = Penyewa::where('status_penyewaan', 0)->get();
-        $penghuniAktif = DB::select("
-                SELECT p.*
-                FROM penyewa p
-                WHERE p.status_penyewaan = 1
-            ");
-        $penghuniRiwayat = DB::select("
-                SELECT p.*
-                FROM penyewa p
-                WHERE p.status_penyewaan = 0
-            ");
+        $penghuniAktif = DB::table('penyewa')
+            ->wherenull('tanggal_berakhir')
+            ->get();
+
+        $penghuniRiwayat = DB::table('penyewa')
+        ->wherenotnull('tanggal_berakhir')
+        ->get();
         $msTipe = DB::select("
                 SELECT id, deskripsi
                 FROM ms_tipe_kos
@@ -143,7 +138,6 @@ class ConfirmBookingController extends Controller
 
     public function updatePenyewa(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'id' => 'required|integer',
             'nama' => 'required|string',
@@ -154,19 +148,13 @@ class ConfirmBookingController extends Controller
             'tanggal_berakhir' => 'nullable|date',
             'no_kamar'=>'required',
             'status_penyewaan' => 'required|boolean',
-            'ktp' => 'nullable|mimes:jpeg,png,jpg|max:2048', // Validasi file
+            'ktp' => 'nullable|mimes:jpeg,png,jpg|max:2048',
         ]);
-
-        // $penyewa = Penyewa::findOrFail($request->id);
         $penyewa = Penyewa::find($request->id);
-        // Jika ada file KTP baru, simpan dan ganti file lama
         if ($request->hasFile('ktp')) {
-            // $fileName = time() . '_' . $request->ktp->getClientOriginalName();
-            // $request->ktp->storeAs('ktp', $fileName, 'local');
             $ktp = $request->file('ktp');
             $fileName =$request->email.'-'.time().'.'.$ktp->extension();
             $filePath = $ktp->storeAs('ktp', $fileName, 'local');
-            // Hapus file lama jika ada
             if ($penyewa->ktp) {
                 Storage::disk('local')->delete('ktp/' . $penyewa->ktp);
             }

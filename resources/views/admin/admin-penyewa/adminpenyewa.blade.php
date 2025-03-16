@@ -70,16 +70,19 @@
                                         <td>{{$item->nama}}</td>
                                         <td>{{$item->no_telepon}}</td>
                                         <td>
-                                            @if($item->tanggal_menyewa < \Carbon\Carbon::now()->format('Y-m-d'))
-                                            <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
-                                                {{ $item->status_penyewaan ? 'Aktif' : 'Nonaktif' }}
-                                            </span>
-                                            @else
+                                            <?php
+                                             $now = \Carbon\Carbon::now()->format('Y-m-d');
+                                             ?>
+                                            @if($now>=$item->tanggal_menyewa &&  $item->tanggal_berakhir == null && $item->status_penyewaan == 1 && $item->tanggal_jatuh_tempo>$now)
+                                            <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">Aktif</span>
+                                            @elseif($item->tanggal_menyewa > $now && $item->tanggal_berakhir == null  && $item->status_penyewaan == 1) 
                                             <span class="text-warning">Calon Penghuni</span>
+                                            @elseif($item->tanggal_menyewa <= $now && $item->tanggal_berakhir == null && $item->status_penyewaan == 1 && $item->tanggal_jatuh_tempo<$now)
+                                            <span class="text-danger">Belum bayar</span>
                                             @endif
                                         </td>
                                         <td>{{$item->tanggal_menyewa}}</td>
-                                        @if($item->tanggal_menyewa < \Carbon\Carbon::now()->format('Y-m-d'))
+                                        @if($item->tanggal_menyewa <= \Carbon\Carbon::now()->format('Y-m-d'))
                                         <td>{{ \Carbon\Carbon::now()->startOfDay()->diffInDays(\Carbon\Carbon::parse($item->tanggal_jatuh_tempo)->startOfDay())}} hari</td>
                                         @else
                                         <td>Belum Aktif</td>
@@ -301,14 +304,15 @@
                         </tbody>
                     </table>
                 </div>
-            <form id="tagihanForm" action="{{ route('admin.penyewa.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="id" id="tagihan-id">
+           
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn-tagihan" >Tagih</button>
+                    <form id="tagihanForm" action="{{ route('admin.pemabayaran.tagih') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="id" id="tagihan-id">
+                        <button type="submit" class="btn btn-primary" id="btn-tagihan" >Ingatkan</button>
+                    </form>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Oke</button>
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -415,7 +419,7 @@
                             <tr>
                                 <td>${index + 1}</td>
                                 <td>${item.periode_tagihan}</td>
-                                <td>${item.tanggal_pembayaran}</td>
+                                <td>${item.tanggal_pembayaran ? item.tanggal_pembayaran : ""}</td>
                                 <td>${statusBadge}</td>
                                 
                             </tr>

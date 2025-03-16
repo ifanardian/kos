@@ -7,32 +7,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InvoiceMail;
+use App\Mail\AlertPaymentMail;
+
 class AdminPaymentController extends Controller
 {
     public function showPayment()
     {
-        // dd('masuk');
         $data =  DB::table('payments')
             ->orderby('status_verifikasi', 'desc')
             ->orderBy('periode_tagihan', 'desc')
             ->get();
-        // dd($payment);
         return view('admin.verifikasi-pembayaran.admin-riwayat', compact('data'));
     }
 
     public function actionPayment(Request $request)
     {
-        // dd($request->all()); 
         $request->validate([
             'id_penyewa' => 'required|integer',
             'periode_tagihan' => 'required|string',
             'status' => 'required|boolean',
         ]);
+        $penyewa = DB::table('penyewa')
+            ->where('id', $request->id_penyewa)
+            ->first();
         if ($request->status == 1) {
-                
-            $penyewa = DB::table('penyewa')
-                ->where('id', $request->id_penyewa)
-                ->first();
+
             $langganan = DB::table('ms_tipe_kos')
                 ->where('id', $penyewa->tipe_kos)
                 ->first();
@@ -41,13 +43,12 @@ class AdminPaymentController extends Controller
                 ->update([
                     'tanggal_jatuh_tempo' => \Carbon\Carbon::parse($penyewa->tanggal_jatuh_tempo)->addMonths($langganan->bulan)->format('Y-m-d'),
                 ]);
-            
-            // dd($request->all());
             if ($request->metode_pembayaran == 'Transfer') {
                 DB::table('payments')
                 ->where('id_penyewa', $request->id_penyewa)
                 ->where('periode_tagihan', $request->periode_tagihan)
                 ->update([
+                    'tanggal_pembayaran' => date('Y-m-d'),
                     'status_verifikasi' => $request->status,
                     'updated_at' => now(),
                 ]);  
@@ -69,19 +70,18 @@ class AdminPaymentController extends Controller
                     'status_verifikasi' => $request->status,
                     'updated_at' => now(),
                 ]);
-        }    
+        }
+        Mail::to($penyewa->email)->send(new InvoiceMail($penyewa, $request->status));
         return redirect()->back();
     }
 
     public function showbuktitf($filename)
     {   
         $email = explode('-', $filename)[0];
-        // dd($email);
         if (Storage::disk('local')->exists('bukti pembayaran/'.$email.'/' . $filename)) {
-            // Menyajikan file secara aman
             $file = Storage::disk('local')->get('bukti pembayaran/'.$email.'/' . $filename);
             return Response::make($file, 200, [
-                'Content-Type' => 'image/jpeg',  // Sesuaikan dengan tipe file
+                'Content-Type' => 'image/jpeg',
                 'Content-Disposition' => 'inline; filename="' . $filename . '"',
             ]);
         }
@@ -95,5 +95,17 @@ class AdminPaymentController extends Controller
             ->get();
         
         return response()->json($data);
+    }
+
+    public function makeTagihPembayaran(Request $request){
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+        $penyewa = DB::table('penyewa')
+            ->where('id', $request->id)
+            ->first();
+        Mail::to($penyewa->email)->send(new AlertPaymentMail($penyewa));
+        // dd('berhasil');
+        return redirect()->back();
     }
 }
