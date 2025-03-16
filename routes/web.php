@@ -72,6 +72,8 @@ Route::prefix('admin')->group(function () {
     Route::post('payment', [AdminPaymentController::class, 'actionPayment'])->name('admin.action.pembayaran');
     Route::get('payment/history/{id}', [AdminPaymentController::class, 'getHistoryPembayaran'])->name('admin.pembayaran.history');
     Route::get('tf/{filename}', [AdminPaymentController::class, 'showbuktitf'])->name('admin.buktitf');
+    Route::post('payment/tagih', [AdminPaymentController::class, 'makeTagihPembayaran'])->name('admin.pemabayaran.tagih');
+
 });
 
 

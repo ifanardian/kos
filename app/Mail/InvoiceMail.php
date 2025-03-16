@@ -17,9 +17,10 @@ class InvoiceMail extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $status)
     {
         $this->userdetail = $user;
+        $this->userdetail->status = $status;
     }
 
     /**
@@ -29,8 +30,9 @@ class InvoiceMail extends Mailable
      */
     public function build()
     {
+        $subject = $this->userdetail->status == '1' ? 'Pembayaran Berhasil' : 'Pembayaran Gagal';
         return $this->view('emails.invoice')
-                    ->with(['user' => $this->userdetail])
-                    ->subject('Invoice Pembelian Anda');
+                    ->with(['user' => $this->userdetail, 'status' => $this->userdetail->status])
+                    ->subject($subject);
     }
 }

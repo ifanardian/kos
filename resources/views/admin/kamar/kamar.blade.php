@@ -119,7 +119,6 @@
                                         <th scope='col'>Penyewa</th>
                                         <th scope='col'>Tipe Kamar</th>
                                         <th scope='col'>Jatuh Tempo</th>
-                                        <th scope='col'>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -137,9 +136,7 @@
                                 <td>". $nama ."</td>
                                 <td>". $deskripsi ."</td>
                                 <td>". $tanggal ."</td>
-                                <td>
-                                    <button>Tombol</button>
-                                </td>
+                              
                             </tr>
                         ";
                     }
@@ -159,7 +156,6 @@
                                     <th scope='col'>Penyewa</th>
                                     <th scope='col'>Tipe Kamar</th>
                                     <th scope='col'>Jatuh Tempo</th>
-                                    <th scope='col'>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

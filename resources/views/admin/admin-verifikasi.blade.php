@@ -102,6 +102,7 @@
                                                     @csrf
                                                     <input type="hidden" id="id" name="id" value="{{ $item->id }}">
                                                     <input type="hidden" id="room_number" name="room_number" value="">
+                                                    <input type="hidden" id="alasan_ditolak" name="alasan_ditolak" value="">
                                                     <select class="form-control" name="status"
                                                         id="status-select-{{ $item->id }}"
                                                         onchange="handleStatusChange(this, '{{ $item->id }}')">
@@ -279,7 +280,8 @@
         </div>
     </div>
 </div>
-<!-- Modal for Confirmation -->
+
+
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -289,7 +291,9 @@
                     onclick="cancelStatus()"></button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin mengubah status?
+                <p>Apakah anda yakin ingin menolak pemesanan ini?</p>
+                <p>Alasan penolakan:</p>
+                <textarea class="form-control" id="alasan" name="alasan" rows="3"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
@@ -306,34 +310,10 @@
 <script>
     function handleStatusChange(selectElement, itemId) {
         if (selectElement.value === "APPROVED") {
-            // Tampilkan modal jika status APPROVED dipilih
             const modal = new bootstrap.Modal(document.getElementById('roomModal'));
             document.getElementById('no_form').value = itemId;
-
-            // $("#modal-room-number").empty().append('<option value="">Tentukan Nomor Kamar</option>');
-            // $.ajax({
-            //     url: "{{ route('admin.get_kamar_tersedia') }}",
-            //     type: "GET",
-            //     success: function (response) {
-            //         console.log("Data kamar diterima:", response);
-            //         let uniqueRooms = new Set(response); // Set otomatis menghapus duplikasi
-
-            //         uniqueRooms.forEach(no_kamar => {
-            //             $("#modal-room-number").append(
-            //                 `<option value="${no_kamar}">${no_kamar}</option>`);
-            //         });
-
-            //         // Tampilkan modal setelah data kamar dimuat
-            //         $("#roomModal").modal("show");
-            //     },
-            //     error: function (xhr, status, error) {
-            //         console.error("Gagal mengambil data kamar:", error);
-            //     }
-            // });
-
             modal.show();
         } else {
-            // Jika status selain APPROVED, langsung submit form
             const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
             document.getElementById('no_form').value = itemId;
             confirmModal.show();
@@ -342,6 +322,7 @@
 
     function submitForm2() {
         const formId = document.getElementById('form-update-status-' + document.getElementById('no_form').value);
+        $('#alasan_ditolak').val($('#alasan').val());
         formId.submit();
     }
 
