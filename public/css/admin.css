@@ -11,6 +11,17 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+ .nav-item a:hover,
+ .nav-item a:focus {
+     font-weight: bold;
+     /* color: #ff3368; */
+ }
+ 
+ .nav-item a.active {
+     font-weight: bold;
+     /* color: #ff3368; */
+ }
+
 .sidebar.toggled {
     width: 80px;
 }

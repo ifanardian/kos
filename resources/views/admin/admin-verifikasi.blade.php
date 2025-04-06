@@ -153,8 +153,8 @@
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->nama_lengkap }}</td>
                                             <td>{{ $item->no_hp }}</td>
-                                            <td>{{$item->email}}</td>
-                                            <td>{{$item->alamat}}</td>
+                                            <td>{{ $item->email}}</td>
+                                            <td>{{ $item->alamat}}</td>
                                             <td>
                                                 @foreach($tipe as $t)
                                                 @if($item->tipe_kos == $t->id)

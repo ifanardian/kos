@@ -53,47 +53,44 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.kelolawebsite' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.kelolawebsite') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kelola Website</span></a>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.penyewa') }}" data-bs-toggle="collapse"
-                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.penyewa' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.penyewa') }}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data Penghuni</span>
                 </a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.kelola_kamar') }}" data-bs-toggle="collapse"
-                    data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.kelola_kamar' ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="{{ route('admin.kelola_kamar') }}" >
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Kelola Kamar</span>
                 </a>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.payment') }}" data-bs-toggle="collapse"
-                    data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.payment' ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="{{ route('admin.payment') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Riwayat Pembayaran</span>
                 </a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.verifikasi.booking' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.verifikasi.booking') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Verifikasi Calon Penghuni</span></a>
