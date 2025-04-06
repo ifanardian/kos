@@ -53,13 +53,13 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ Route::currentRouteName() == 'admin.kelolawebsite' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.kelolawebsite') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kelola Website</span></a>
