@@ -54,7 +54,7 @@
                                     if($user){
                                         echo'
                                             <li class="nav-item">
-                                                <a class="nav-link" href="'. route('checkout.store') .'">Tagihan</a>
+                                                <a class="nav-link" href="'. route('booking') .'">Tagihan</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="'. route('logout') .'">Logout</a>

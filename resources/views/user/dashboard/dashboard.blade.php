@@ -85,78 +85,71 @@
 </section>
 
 {{-- VIRTUAL TOUR --}}
-<div id="panorama-section">
-    <div class="section_tittle text-center">
-        <h2>Virtual Tour 360<sup>°</sup></h2>
-    </div>
-    <div id="panorama" class="align-center">
+<?php if(isset($panorama) && $panorama->count() > 0): ?>
+    <div id="panorama-section">
+        <div class="section_tittle text-center">
+            <h2>Virtual Tour 360<sup>°</sup></h2>
+        </div>
+        <div id="panorama" class="align-center">
         <script>
-            pannellum.viewer('panorama', {
-                "default": {
-                    <?php
-                        $defaultScene = $panorama->where('default', 1)->first();
-                        if ($defaultScene) {
-                            echo '"firstScene": "' . $defaultScene->id . '",';
-                        }
-                    ?>
-                    // "author": "Matthew Petroff",
-                    "sceneFadeDuration": 1000,
-                    "autoLoad": true
-                },
-                "scenes": {
-                    <?php
-                        foreach($panorama as $p){
-                            $hotspots = '';
-                            $temp = DB::Select("
-                                SELECT h.pitch, h.yaw, p.text, h.scene
-                                FROM panorama_hotspots h
-                                JOIN ms_panorama p ON h.scene = p.id
-                                WHERE h.id_panorama = ".$p->id.";
-                            ");
-                            // dd($temp);
-                            if(count($temp) > 0){
-                                $hotspots= "'hotSpots': [";
-                                
-                                foreach($temp as $t){
-                                    // dd($t->scene);
-                                    $hotspots .= "{
-                                    'pitch'     : ".$t->pitch.",
-                                    'yaw'       : ".$t->yaw.",
-                                    'type'      : 'scene',
-                                    'text'      : '".$t->text."',
-                                    'sceneId'   : '".$t->scene."'
-                                    },";
-                                    
-                                }
-                                $hotspots .="]";       
+                pannellum.viewer('panorama', {
+                    "default": {
+                        <?php
+                            $defaultScene = $panorama->where('default', 1)->first();
+                            if ($defaultScene) {
+                                echo '"firstScene": "' . $defaultScene->id_panorama . '",';
                             }
-                            echo"
-                                ".$p->id.": {
-                                'hfov':".$p->hfov.", //seberapa zoom gambar pas pertama kali diliat
-                                'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
-                                'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
-                                'type':'equirectangular',
-                                'panorama':'".asset('images/panorama/'.$p->namafile)."',
-                                ".$hotspots."
-                            },
-                            
-
-                            ";
-                        }
-                        
-                        
-                        
-                        
-                        
                         ?>
-                    
-                }
-            });
-
+                        // "author": "Matthew Petroff",
+                        "sceneFadeDuration": 1000,
+                        "autoLoad": true
+                    },
+                    "scenes": {
+                        <?php
+                            foreach($panorama as $p){
+                                $hotspots = '';
+                                // $temp = DB::Select("
+                                //     SELECT h.pitch, h.yaw, p.text, h.scene
+                                //     FROM panorama_hotspots h
+                                //     JOIN ms_panorama p ON h.scene = p.id
+                                //     WHERE h.id_panorama = ".$p->id.";
+                                // ");
+                                $temp = $p->hotspots;
+                                // dd($p);
+                                if(count($temp) > 0){
+                                    $hotspots = "'hotSpots': [";
+                                    
+                                    foreach($temp as $t){
+                                        // dd($t->scenePanorama);
+                                        $hotspots .= "{
+                                            'pitch'     : ".$t->pitch.",
+                                            'yaw'       : ".$t->yaw.",
+                                            'type'      : 'scene',
+                                            'text'      : '".$t->scenePanorama->text."',
+                                            'sceneId'   : '".$t->scene."'
+                                        },";
+                                    }
+                                    $hotspots .= "]";       
+                                }
+                                echo "
+                                    ".$p->id_panorama.": {
+                                        'hfov':".$p->hfov.", //seberapa zoom gambar pas pertama kali diliat
+                                        'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
+                                        'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
+                                        'type':'equirectangular',
+                                        'panorama':'".asset('images/panorama/'.$p->namafile)."',
+                                        ".$hotspots."
+                                    },
+                                ";
+                            }
+                        ?>
+                    }
+                });
+            
         </script>
+        </div>
     </div>
-</div>
-
+<?php endif; ?>
 {{-- CARD FASILITAS --}}
 <div class="ag-format-container mt-4 mb-5">
     <div class="ag-courses_box">
@@ -239,52 +232,36 @@
     </div>
 </div>
 
-
-{{-- KATEGORI KAMAR --}}
-@php
-$hargaBulanan = \App\Models\MsTipeKos::where('bulan', 1)->first();
-$hargaTahunan = \App\Models\MsTipeKos::where('bulan', 12)->first();
-@endphp
-<div class="feature_part padding_top_feature dark-bg mb-5 pb-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-                <div class="section_tittle text-center">
-                    <h2>Kategori Kamar</h2>
+@if($MsTipeKos->isNotEmpty())
+    <div class="feature_part padding_top_feature dark-bg mb-5 pb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="section_tittle text-center">
+                        <h2>Kategori Kamar</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-                <div class="single_feature_post_text text-center">
-                    <h3>BULANAN</h3>
-                    <div class="price-container">
-                        <p>
-                            <span class="price">Rp {{ number_format($hargaBulanan->harga ?? 400000, 0, ',', '.') }}</span>
-                            <span class="period">/ Bulan</span>
-                        </p>
-                        <p style="color: beige">Sisa Kamar: {} </p>
+            <div class="row align-items-center justify-content-center">
+                @foreach($MsTipeKos as $m)
+                    <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                        <div class="single_feature_post_text text-center">
+                            <h3>{{ $m->deskripsi }}</h3>
+                            <div class="price-container">
+                                <p>
+                                    <span class="price">Rp {{number_format($m->harga ?? 400000, 0, ',', '.')}}</span>
+                                    <span class="period">/ {{ $m->bulan }} bulan</span>
+                                </p>
+                                <p style="color: beige">Sisa Kamar: {} </p>
+                            </div>
+                            <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
+                        </div>
                     </div>
-                    <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-                <div class="single_feature_post_text text-center">
-                    <h3>TAHUNAN</h3>
-                    <div class="price-container">
-                        <p>
-                            <span class="price">Rp {{ number_format($hargaTahunan->harga ?? 4400000, 0, ',', '.') }}</span>
-                            <span class="period">/ Tahun</span>
-                        </p>
-                        <p style="color: beige">Sisa Kamar: {} </p>
-                    </div>
-                    <a href="{{ route('booking', ['tipe_kos' => '2']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-</div>
-
+@endif
 @endsection
 
 {{-- @push('scripts')

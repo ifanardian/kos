@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Kamar;
+use App\Models\Booking;
 
 class IndexController extends Controller
 {
     public function showIndex(){
-        $totalKamar = DB::table('kamar')->count();
-        $kamarTerisi = DB::table('kamar')->where('status', 'T')->count();
+        $totalKamar = Kamar::count();
+        $kamarTerisi = Kamar::where('status', 'T')->count();
         $kamarKosong = $totalKamar - $kamarTerisi;
-        $totalPending = DB::table('bookings')->where('status', 'PENDING')->count();
+        $totalPending = Booking::where('status', 'PENDING')->count();
         return view('admin.dashboard.dashboard',compact('totalKamar','kamarTerisi','kamarKosong', 'totalPending'));
     }
 }

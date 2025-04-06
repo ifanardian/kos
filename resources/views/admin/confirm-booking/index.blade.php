@@ -28,13 +28,13 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->alamat }}</td>
                     <td>
-                        <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" >
-                            <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" alt="KTP" style="width:100px;height:auto;">
+                        <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}" >
+                            <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}" alt="KTP" style="width:100px;height:auto;">
                         </a>
                     </td>
                     <td>{{ $item->tanggal_pesan }}</td>
                     <td>
-                    <form id="form-update-status" action="{{ route('admin.verifikasi.booking') }}" method="POST">
+                    <form id="form-update-status" action="{{ route('admin.booking') }}" method="POST">
                         @csrf
                         <input type="hidden" id="id" name="id" value="{{ $item->id }}">
                         <select name="status" onchange="this.form.submit()">

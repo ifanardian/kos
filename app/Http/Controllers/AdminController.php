@@ -12,24 +12,10 @@ class AdminController extends Controller
     {
         $hargaBulanan = MsTipeKos::where('bulan', 1)->first();
         $hargaTahunan = MsTipeKos::where('bulan', 12)->first();
-        return view('admin.kelola_kamar', compact('hargaBulanan', 'hargaTahunan'));
+        return view('admin.kelolakamar', compact('hargaBulanan', 'hargaTahunan'));
     }
 
-    public function updateTipeKos(Request $request)
-    {
-        $request->validate([
-            'harga' => 'required|numeric|min:100000',
-            'tipe' => 'required|in:bulanan,tahunan',
-        ]);
-
-        // Tentukan bulan berdasarkan tipe
-        $bulan = $request->tipe === 'bulanan' ? 1 : 12;
-
-        // Update harga berdasarkan bulan
-        MsTipeKos::where('bulan', $bulan)->update(['harga' => $request->harga]);
-
-        return redirect()->back()->with('success', 'Harga berhasil diperbarui.');
-    }
+    
     
     public function dashboardAdmin()
     {

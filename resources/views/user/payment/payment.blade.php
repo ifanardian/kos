@@ -68,7 +68,7 @@
                             echo "
                                 <p>Silahkan lakukan pembayaran pertama untuk aktivasi proses pemesanan. <br> 
                                 <span>Pembayaran paling lambat pada 
-                                 ".\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') ."</span></p>";
+                                 ".\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->format('d M Y') ."</span></p>";
                         }
                         elseif(\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->diffInDays(\Carbon\Carbon::now()) > 0){
                             echo "
@@ -112,7 +112,7 @@
                                 <li>
                                     <p>Tipe Kos</p>
                                     <span>:
-                                        {{ DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
+                                        {{ DB::table('ms_tipe_kos')->where('id_tipe_kos', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
                                 </li>
                                 <li>
                                     <p>Periode Penempatan</p>
@@ -143,7 +143,7 @@
                                 </li>
                                 <li>
                                     <p>Tipe Langganan</p>
-                                    <span>: {{ DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
+                                    <span>: {{ DB::table('ms_tipe_kos')->where('id_tipe_kos', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
                                 </li>
                             @endif
                         </ul>
@@ -212,7 +212,7 @@
                 <div class="col-lg-4" id="pembayaran" style="display: none;">
                     <div class="order_box"  >
                         <h2>OPSI PEMBAYARAN</h2>
-                        <form action="{{ route('payment.action') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('tagihan') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="payment_item">
                                 <div class="radion_btn">
