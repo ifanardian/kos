@@ -73,7 +73,7 @@
                                     <tbody>
                                         @foreach($pending as $item)
                                         <tr>
-                                            <th scope="row">{{ $item->id }}</th>
+                                            <th scope="row">{{ $item->id_booking }}</th>
                                             <td>{{ $item->nama_lengkap }}</td>
                                             <td>{{ $item->no_hp }}</td>
                                             <td>{{$item->email}}</td>
@@ -81,7 +81,7 @@
                                             <td>
                                                 <?php
                                                 foreach($tipe as $t){
-                                                    if($item->tipe_kos == $t->id){
+                                                    if($item->tipe_kos == $t->id_tipe_kos){
                                                     echo $t->deskripsi;
                                                     }
                                                 }
@@ -89,22 +89,23 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}">
-                                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
+                                                    <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
                                             </td>
                                             <td>{{ $item->created_at }}</td>
                                             <td>{{ $item->periode_penempatan }}</td>
                                             <td>
-                                                <form id="form-update-status-{{ $item->id }}"
-                                                    action="{{ route('admin.update.statusbooking') }}" method="POST">
+                                                <form id="form-update-status-{{ $item->id_booking }}"
+                                                    action="{{ route('admin.booking') }}" method="POST">
                                                     @csrf
-                                                    <input type="hidden" id="id" name="id" value="{{ $item->id }}">
-                                                    <input type="hidden" id="room_number" name="room_number" value="">
+                                                    <input type="hidden" id="id" name="id_booking" value="{{ $item->id_booking }}">
+                                                    <input type="hidden" id="id_kamar" name="id_kamar" value="">
+                                                    <input type="hidden" id="alasan_ditolak" name="alasan_ditolak" value="">
                                                     <select class="form-control" name="status"
-                                                        id="status-select-{{ $item->id }}"
-                                                        onchange="handleStatusChange(this, '{{ $item->id }}')">
+                                                        id="status-select-{{ $item->id_booking }}"
+                                                        onchange="handleStatusChange(this, '{{ $item->id_booking }}')">
                                                         <option value="PENDING"
                                                             {{ $item->status == 'PENDING' ? 'selected' : '' }}>PENDING
                                                         </option>
@@ -150,21 +151,21 @@
                                     <tbody>
                                         @foreach($approved as $item)
                                         <tr>
-                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->id_booking }}</td>
                                             <td>{{ $item->nama_lengkap }}</td>
                                             <td>{{ $item->no_hp }}</td>
                                             <td>{{ $item->email}}</td>
                                             <td>{{ $item->alamat}}</td>
                                             <td>
                                                 @foreach($tipe as $t)
-                                                @if($item->tipe_kos == $t->id)
+                                                @if($item->tipe_kos == $t->id_tipe_kos)
                                                 {{ $t->deskripsi }}
                                                 @endif
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}">
-                                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
+                                                    <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
                                             </td>
@@ -204,21 +205,21 @@
                                     <tbody>
                                         @foreach($rejected as $item)
                                         <tr>
-                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->id_booking }}</td>
                                             <td>{{ $item->nama_lengkap }}</td>
                                             <td>{{ $item->no_hp }}</td>
                                             <td>{{$item->email}}</td>
                                             <td>{{$item->alamat}}</td>
                                             <td>
                                                 @foreach($tipe as $t)
-                                                @if($item->tipe_kos == $t->id)
+                                                @if($item->tipe_kos == $t->id_tipe_kos)
                                                 {{ $t->deskripsi }}
                                                 @endif
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}">
-                                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
+                                                    <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
                                             </td>
@@ -279,7 +280,8 @@
         </div>
     </div>
 </div>
-<!-- Modal for Confirmation -->
+
+
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -289,7 +291,9 @@
                     onclick="cancelStatus()"></button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin mengubah status?
+                <p>Apakah anda yakin ingin menolak pemesanan ini?</p>
+                <p>Alasan penolakan:</p>
+                <textarea class="form-control" id="alasan" name="alasan" rows="3"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
@@ -306,34 +310,10 @@
 <script>
     function handleStatusChange(selectElement, itemId) {
         if (selectElement.value === "APPROVED") {
-            // Tampilkan modal jika status APPROVED dipilih
             const modal = new bootstrap.Modal(document.getElementById('roomModal'));
             document.getElementById('no_form').value = itemId;
-
-            // $("#modal-room-number").empty().append('<option value="">Tentukan Nomor Kamar</option>');
-            // $.ajax({
-            //     url: "{{ route('admin.get_kamar_tersedia') }}",
-            //     type: "GET",
-            //     success: function (response) {
-            //         console.log("Data kamar diterima:", response);
-            //         let uniqueRooms = new Set(response); // Set otomatis menghapus duplikasi
-
-            //         uniqueRooms.forEach(no_kamar => {
-            //             $("#modal-room-number").append(
-            //                 `<option value="${no_kamar}">${no_kamar}</option>`);
-            //         });
-
-            //         // Tampilkan modal setelah data kamar dimuat
-            //         $("#roomModal").modal("show");
-            //     },
-            //     error: function (xhr, status, error) {
-            //         console.error("Gagal mengambil data kamar:", error);
-            //     }
-            // });
-
             modal.show();
         } else {
-            // Jika status selain APPROVED, langsung submit form
             const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
             document.getElementById('no_form').value = itemId;
             confirmModal.show();
@@ -342,6 +322,7 @@
 
     function submitForm2() {
         const formId = document.getElementById('form-update-status-' + document.getElementById('no_form').value);
+        $('#alasan_ditolak').val($('#alasan').val());
         formId.submit();
     }
 
@@ -358,7 +339,7 @@
         }
 
         let itemId = document.getElementById('no_form').value;
-        document.getElementById('form-update-status-' + itemId).querySelector('#room_number').value = roomNumberInput;
+        document.getElementById('form-update-status-' + itemId).querySelector('#id_kamar').value = roomNumberInput;
         document.getElementById('form-update-status-' + itemId).submit();
     }
 

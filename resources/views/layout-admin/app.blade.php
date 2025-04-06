@@ -66,32 +66,35 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item {{ Route::currentRouteName() == 'admin.penyewa' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.penyewa') }}">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('admin.penyewa') }}" 
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data Penghuni</span>
                 </a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item {{ Route::currentRouteName() == 'admin.kelola_kamar' ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="{{ route('admin.kelola_kamar') }}" >
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('admin.kelolakamar') }}" 
+                    data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Kelola Kamar</span>
                 </a>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item {{ Route::currentRouteName() == 'admin.payment' ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="{{ route('admin.payment') }}">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('admin.payment') }}"
+                    data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Riwayat Pembayaran</span>
                 </a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item {{ Route::currentRouteName() == 'admin.verifikasi.booking' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.verifikasi.booking') }}">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.booking') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Verifikasi Calon Penghuni</span></a>
             </li>
@@ -124,7 +127,7 @@
                     <!-- Logout Button -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link" href="#" id="userDropdown">
+                                <a class="nav-link" href="{{ route('logout') }}" id="userDropdown">
                                 <span class="mr-2 d-none d-lg-inline" style="color: #000000; font-weight: bold;">LOGOUT</span>
                                 <i class="fa-solid fa-arrow-right-from-bracket" style="color: #4a6fdc"></i>
                             </a>

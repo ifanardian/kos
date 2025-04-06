@@ -15,53 +15,36 @@ class SetPasswordMail extends Mailable
 
     public $booking;
 
-    public function __construct($booking)
+    public function __construct($booking,$status,$alasan_ditolak)
     {
         $this->booking = $booking;
-        
+        $this->status = $status;
+        $this->alasan_ditolak = $alasan_ditolak;
     }
 
     public function build()
     {
-        $url_setpassword = route('password.create', ['email' => $this->booking->email]);
-        $url_payment = route('tagihan');
-
-        return $this->subject('Buat Password untuk Akun Anda')
-                    ->view('emails.set_password')
+        // dd($this->status);
+        if($this->status == "rejected"){
+            return $this->subject('Pemesanan Anda Ditolak')
+                    ->view('emails.reject_booking')
                     ->with([
                         'email' => $this->booking->email,
-                        'url_setpassword' => $url_setpassword,
-                        'url_payment' => $url_payment,
+                        'alasan_ditolak' => $this->alasan_ditolak,
                     ]);
+        }
+        else if($this->status == "approved"){
+            // dd($this->status);
+            $url_setpassword = route('password.create', ['email' => $this->booking->email]);
+            $url_payment = route('tagihan');
+
+            return $this->subject('Buat Password untuk Akun Anda')
+                        ->view('emails.set_password')
+                        ->with([
+                            'email' => $this->booking->email,
+                            'url_setpassword' => $url_setpassword,
+                            'url_payment' => $url_payment,
+                        ]);
+        }   
     }
-
-    // /**
-    //  * Get the message envelope.
-    //  */
-    // public function envelope(): Envelope
-    // {
-    //     return new Envelope(
-    //         subject: 'Set Password Mail',
-    //     );
-    // }
-
-    // /**
-    //  * Get the message content definition.
-    //  */
-    // public function content(): Content
-    // {
-    //     return new Content(
-    //         view: 'view.name',
-    //     );
-    // }
-
-    // /**
-    //  * Get the attachments for the message.
-    //  *
-    //  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-    //  */
-    // public function attachments(): array
-    // {
-    //     return [];
-    // }
 }

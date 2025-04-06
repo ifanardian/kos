@@ -64,14 +64,14 @@
                                                 <h6 class='m-0 font-weight-bold text-primary'>Harga Kos ".$harga->deskripsi."</h6>
                                             </div>
                                             <div class='card-body'>
-                                                <form action='".route('admin.harga_kamar.update')."' method='POST'
+                                                <form action='".route('admin.kelolakamar.tipekos.update')."' method='POST'
                                                     onsubmit='cleanCurrencyInput()'>
                                                     ".csrf_field()."
-                                                    <input type='hidden' name='tipe' value='bulanan'>
+                                                    <input type='hidden' name='id_tipe_kos' value='".$harga->id_tipe_kos."'>
                                                     <div class='text-center mb-3'>
                                                         <div class='input-container'>
                                                             <span class='price-text'>Rp</span>
-                                                            <input type='text' class='form-control' name='harga' id='hargaBulananInput' style='width: 145px;'
+                                                            <input type='text' class='form-control' name='harga' id='harga".$harga->deskripsi."Input' style='width: 145px;'
                                                                 value='".number_format($harga->harga, 0, ',', '.')."' required>
                                                         </div>
                                                         <br>
@@ -119,7 +119,6 @@
                                         <th scope='col'>Penyewa</th>
                                         <th scope='col'>Tipe Kamar</th>
                                         <th scope='col'>Jatuh Tempo</th>
-                                        <th scope='col'>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,9 +126,9 @@
                     
                     foreach($kamar as $k){
                         $status = $k->status === 'T' ? 'Tersewa' : 'Kosong';
-                        $nama = $k->nama ?? '-';
-                        $deskripsi = $k->deskripsi ?? '-';
-                        $tanggal = $k->tanggal_jatuh_tempo ?? '-';
+                        $nama = $k->penyewa->nama ?? '-';
+                        $deskripsi = $k->penyewa->tipeKos->deskripsi ?? '-';
+                        $tanggal = $k->penyewa->tanggal_jatuh_tempo ?? '-';
                         echo"
                             <tr>
                                 <th scope='row'>".$k->id_kamar."</th>
@@ -137,9 +136,7 @@
                                 <td>". $nama ."</td>
                                 <td>". $deskripsi ."</td>
                                 <td>". $tanggal ."</td>
-                                <td>
-                                    <button>Tombol</button>
-                                </td>
+                              
                             </tr>
                         ";
                     }
@@ -159,7 +156,6 @@
                                     <th scope='col'>Penyewa</th>
                                     <th scope='col'>Tipe Kamar</th>
                                     <th scope='col'>Jatuh Tempo</th>
-                                    <th scope='col'>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -188,10 +184,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal">Tambah Data Kamar</h5>
+                <h5 class="modal-title" id="modal">Tambah Tipe Kos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="msTipeKos" action="{{route('post.admin.tipekos')}}" method="POST"
+            <form id="msTipeKos" action="{{route('admin.kelolakamar.tipekos')}}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
@@ -227,13 +223,13 @@
                 <h5 class="modal-title" id="modal">Tambah Data Kamar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="msTipeKos" action="{{route('post.admin.kamar')}}" method="POST"
+            <form id="msTipeKos" action="{{route('admin.kelolakamar')}}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="noKamar" class="form-label">No. Kamar</label>
-                        <input type="nummber" class="form-control" id="noKamar" name="noKamar" required>
+                        <input type="nummber" class="form-control" id="noKamar" name="id_kamar" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -251,36 +247,29 @@
 
 
 <script>
-    // Fungsi untuk format angka dengan titik sebagai pemisah ribuan
     function formatCurrency(value) {
-        // Menghapus semua karakter selain angka
         value = value.replace(/\D/g, '');
-        // Menambahkan titik setiap tiga digit
         return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
-    // Fungsi untuk membersihkan format saat form disubmit
+    
     function cleanCurrencyInput() {
-        // Hapus titik sebelum pengiriman data
-        let hargaBulananInput = document.getElementById('hargaBulananInput');
-        let hargaTahunanInput = document.getElementById('hargaTahunanInput');
-
-        // Hapus titik di input sebelum mengirimkan form
-        hargaBulananInput.value = hargaBulananInput.value.replace(/\D/g, '');
-        hargaTahunanInput.value = hargaTahunanInput.value.replace(/\D/g, '');
+        @if($msTipe)
+            @foreach($msTipe as $harga)
+                let harga{{$harga->deskripsi}}Input = document.getElementById('harga{{$harga->deskripsi}}Input');
+                harga{{$harga->deskripsi}}Input.value = harga{{$harga->deskripsi}}Input.value.replace(/\D/g, '');
+            @endforeach
+        @endif
     }
 
-    // Menangani input pada Harga Bulanan
-    document.getElementById('hargaBulananInput').addEventListener('input', function () {
-        let formattedValue = formatCurrency(this.value);
-        this.value = formattedValue; // Update nilai di input
-    });
-
-    // Menangani input pada Harga Tahunan
-    document.getElementById('hargaTahunanInput').addEventListener('input', function () {
-        let formattedValue = formatCurrency(this.value);
-        this.value = formattedValue; // Update nilai di input
-    });
+    @if($msTipe)
+        @foreach($msTipe as $harga)
+            document.getElementById('harga{{$harga->deskripsi}}Input').addEventListener('input', function () {
+                let formattedValue = formatCurrency(this.value);
+                this.value = formattedValue;
+            });
+        @endforeach
+    @endif
 </script>
 @endsection
 

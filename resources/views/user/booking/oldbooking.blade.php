@@ -6,7 +6,7 @@
     <title>contoh book</title>
 </head>
 <body>
-    <form action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('booking') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div>

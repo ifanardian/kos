@@ -63,38 +63,39 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="confirmation_tittle">
-                        {{-- <p><strong> Status Pembayaran: <span>{{$payment->status_verifikasi}}</span></strong></p> --}}
-                        {{-- <p><strong>Status Pembayaran: 
-                            <span>{{$payment->status_verifikasi ? 'Terverifikasi' : 'Menunggu Verifikasi'}}</span></strong></p> --}}
-                        @if ($isFirstPayment)
-                            {{-- <span>Silahkan lakukan pembayaran paling lambat
-                            {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span> --}}
-                                {{-- lama --}}
-                            {{-- <p>Silahkan lakukan pembayaran pertama untuk menyelesaikan proses pemesanan. <br> 
-                                <span>Pembayaran paling lambat
-                                {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span></p> --}}
-                            {{-- fiona coba h+1 booking --}}
-                            <p>Silahkan lakukan pembayaran pertama untuk menyelesaikan proses pemesanan. <br> 
-                                <span>Pembayaran paling lambat
-                                {{ \Carbon\Carbon::parse($payment->created_at)->addDay()->format('d M Y') }}</span></p>
-                        @else
-                            <p>Silahkan lakukan pembayaran untuk memperpanjang masa tinggal Anda.</p>
-                        @endif
-                        
+                        <?php
+                        if($isFirstPayment){
+                            echo "
+                                <p>Silahkan lakukan pembayaran pertama untuk aktivasi proses pemesanan. <br> 
+                                <span>Pembayaran paling lambat pada 
+                                 ".\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->format('d M Y') ."</span></p>";
+                        }
+                        elseif(\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->diffInDays(\Carbon\Carbon::now()) > 0){
+                            echo "
+                                <p>Menghimbau untuk segera melakukan pembayaran karena masa tagihan akan segera berakhir. <br>
+                                <span>Pembayaran paling lambat pada 
+                                 ".\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') ."</span></p>";
+                        }else{
+                            echo " 
+                                <p>Terima kasih telah melakukan pembayaran. <br> 
+                                <span>Harap lakukan pembayaran sebelum masa tagihan berakhir pada ".\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') ."</span>
+                                </p>";
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="single_confirmation_details">
-                        <h4>order info</h4>
+                        <h4>{{$isFirstPayment ? 'Pembayaran Pertama':'Status Langganan'}}</h4>
                         <ul>
                             {{-- saat baru pertama kali bayar kos --}}
-                            @if ($isFirstPayment)
-                                <li>
+                            @if($isFirstPayment)
+                                {{--<li>
                                     <p>order number</p><span>: {{$payment->id_penyewa}}_{{$payment->periode_tagihan}}</span>
-                                </li>
+                                </li>--}}
                                 <li>
                                     <p>Tanggal Jatuh Tempo</p><span>:
-                                        {{ \Carbon\Carbon::parse($payment->created_at)->addDay()->format('d M Y') }}</span>
+                                        {{ \Carbon\Carbon::parse($payment->created_at)->subDay()->format('d M Y') }}</span>
                                 </li>
                                 <li>
                                     <p>Nama Lengkap</p>
@@ -111,7 +112,7 @@
                                 <li>
                                     <p>Tipe Kos</p>
                                     <span>:
-                                        {{ DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
+                                        {{ DB::table('ms_tipe_kos')->where('id_tipe_kos', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
                                 </li>
                                 <li>
                                     <p>Periode Penempatan</p>
@@ -123,33 +124,40 @@
                                     <span>:
                                         {{\Carbon\Carbon::parse($detailPenyewa->tanggal_booking)->format('d M Y')}}</span>
                                 </li>
-                            {{-- saat bayar kos per bulannya --}}
                             @else
-                                <li>
-                                    <p>Tanggal Jatuh Tempo</p>
-                                    <span>: {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span>
-                                </li>
                                 <li>
                                     <p>Nama Lengkap</p>
                                     <span>: {{$detailPenyewa->nama}}</span>
                                 </li>
                                 <li>
-                                    <p>Tipe Kos</p>
-                                    <span>: {{ DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
+                                    <p>Status</p>
+                                    <span>: {{$detailPenyewa->status_penyewaan == 1 ? 'Aktif' : 'Tidak Aktif'}}</span>
                                 </li>
                                 <li>
-                                    <p>Periode Penempatan</p>
-                                    <span>: {{ \Carbon\Carbon::parse($payment->periode_tagihan)->format('d M Y') }} -
-                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->addMonth()->format('d M Y') }}</span>
+                                    <p>Masa Penempatan</p>
+                                    <span>: {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subMonth()->format('d M Y') }} - {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') }}</span>
+                                </li>
+                                <li>
+                                    <p>Tanggal Jatuh Tempo</p>
+                                    <span>: {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') }}</span>
+                                </li>
+                                <li>
+                                    <p>Tipe Langganan</p>
+                                    <span>: {{ DB::table('ms_tipe_kos')->where('id_tipe_kos', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
                                 </li>
                             @endif
                         </ul>
+                        <button type="button" class="btn btn-secondary"
+                                style="display: flex; margin-left: auto; margin-top: 20px;"
+                                onclick="showPembayaran(this)" >{{($isFirstPayment ? 'Bayar' : 'Perpanjang')}}</button>
+
+                        
                     </div>
 
                     <div class="order_details_iner">
                         <div class="order_header">
-                            <h3>Order Details</h3>
-                            <a class="btn_3" style="text-decoration: none;" href="{{ route('cobatagihan') }}" >HISTORY PEMBAYARAN</a>
+                            <h3>Riwayat Pembayaran</h3>
+                            <!-- <a class="btn_3" style="text-decoration: none;" href="{{ route('cobatagihan') }}" >HISTORY PEMBAYARAN</a> -->
                         </div>
                         {{-- <button class="btn_3" type="submit">LIHAT TAGIHAN BULAN SEBELUMNYA</button>
                         <h3>Order Details</h3> --}}
@@ -157,35 +165,54 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No Kamar</th>
-                                    <th scope="col">Tipe</th>
-                                    <th scope="col" colspan="2">Total</th>
+                                    <th scope="col">Periode</th>
+                                    <th scope="col">Tanggal Bayar</th>
+                                    <th scope="col">Nominal</th>
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th><span>{{$detailPenyewa->no_kamar}}</span></th>
-                                    <th>{{ DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('deskripsi') }}
-                                    </th>
-                                    <th colspan="2"> <span>Rp.
-                                            {{ number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.') }}</span>
-                                    </th>
-                                </tr>
+                                <?php
+                                   $history = DB::table('payments')->where('id_penyewa', $payment->id_penyewa)->get();
+                                   foreach($history as $h){
+                                        $status = '';
+                                        if($h->status_verifikasi == 1 && $h->metode_pembayaran != null){
+                                            $status = "Lunas";
+                                        }elseif($h->metode_pembayaran == null && $h->status_verifikasi == null){
+                                            $status = "Belum Bayar";
+                                        }elseif($h->status_verifikasi == 0 && $h->metode_pembayaran != null){
+                                            $status = "Ditolak";
+                                        }elseif($h->status_verifikasi == null && $h->metode_pembayaran != null){
+                                            $status = "Menunggu Konfirmasi";
+                                        }   
+                                        echo "
+                                        <tr>
+                                                <th><span>".$h->id_kamar."</span></th>
+                                                <th>".\Carbon\Carbon::parse($h->periode_tagihan)->format('d M Y')." - ".\Carbon\Carbon::parse($h->periode_tagihan)->subDay()->addMonth()->format('d M Y')."</th>
+                                                <th>".\Carbon\Carbon::parse($h->created_at)->format('d M Y')."</th>
+                                                <th>".number_format($h->total_tagihan, 0, ',', '.') ."</th>
+                                                <th>".$status."</th>
+                                         </tr>
+                                        ";
+                                   }
+                                ?>
+                                
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th scope="col" colspan="3">Grand Total</th>
                                     <th scope="col">Rp.
-                                        {{ number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.')}}
+                                        {{-- number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.') --}}
                                     </th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="order_box">
+                <div class="col-lg-4" id="pembayaran" style="display: none;">
+                    <div class="order_box"  >
                         <h2>OPSI PEMBAYARAN</h2>
-                        <form action="{{ route('payment.action') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('tagihan') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="payment_item">
                                 <div class="radion_btn">
@@ -215,7 +242,7 @@
                                 </p>
                             </div>
                             <input type="hidden" name="id_penyewa" value="{{ $payment->id_penyewa }}">
-                            <input type="hidden" name="periode_tagihan" value="{{ $payment->periode_tagihan }}">
+                            <!-- <input type="hidden" name="id_kamar" value="{{ $detailPenyewa->id_kamar }}"> -->
                             <div class="password text-center">
                                 <button class="btn_3" type="submit">BAYAR</button>
                             </div>
@@ -233,7 +260,19 @@
 {{-- @push('scripts') --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    function showPembayaran(button) {
+        if ($("#pembayaran").is(":visible")) {
+            $("#pembayaran").hide();
+            $(button).text("Perpanjang");
+        } else {
+            $("#pembayaran").show();
+            $(button).text("Batal");
+        }
+    }
+
+
     $(document).ready(function () {
+
         $('input[type="radio"]').click(function () {
             if ($(this).attr('id') == 'f-option5') {
                 $('#bukti_tf').attr('required', false);

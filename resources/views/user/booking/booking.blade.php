@@ -58,7 +58,7 @@
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-7">
-                    <form id="formBook" action="{{ route('checkout.store') }}" method="POST"
+                    <form id="formBook" action="{{ route('booking') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-11 form-group p_star">
@@ -78,17 +78,9 @@
                             <select class="form-control" id="tipe_kos" name="tipe_kos">
                                 <option value="">-- Pilih Tipe Kamar --</option>
                                 @foreach ($tipeKos as $tipe)
-                                {{-- lama --}}
-                                {{-- <option value="{{ $tipe->id }}">{{ $tipe->deskripsi	}} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
-                                </option> --}}
-                                {{-- fiona coba --}}
-                                <option value="{{ $tipe->id }}" {{-- $selectedTipe == $tipe->id ? 'selected' : '' --}}>
+                                <option value="{{ $tipe->id_tipe_kos }}">
                                     {{ $tipe->deskripsi }} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
-                                </option>
-                                {{-- <option value="{{ $tipe->id }}" {{ old('tipe_kos') == $tipe->id ? 'selected' : '' }}>
-                                    {{ $tipe->deskripsi }} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
-                                </option> --}}
-                                
+                                </option>                                
                                 @endforeach
                             </select>
                         </div>

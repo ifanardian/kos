@@ -70,16 +70,19 @@
                                         <td>{{$item->nama}}</td>
                                         <td>{{$item->no_telepon}}</td>
                                         <td>
-                                            @if($item->tanggal_menyewa < \Carbon\Carbon::now()->format('Y-m-d'))
-                                            <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">
-                                                {{ $item->status_penyewaan ? 'Aktif' : 'Nonaktif' }}
-                                            </span>
-                                            @else
+                                            <?php
+                                             $now = \Carbon\Carbon::now()->format('Y-m-d');
+                                             ?>
+                                            @if($now>=$item->tanggal_menyewa &&  $item->tanggal_berakhir == null && $item->status_penyewaan == 1 && $item->tanggal_jatuh_tempo>$now)
+                                            <span class="{{ $item->status_penyewaan ? 'text-success' : 'text-danger' }}">Aktif</span>
+                                            @elseif($item->tanggal_menyewa > $now && $item->tanggal_berakhir == null  && $item->status_penyewaan == 1) 
                                             <span class="text-warning">Calon Penghuni</span>
+                                            @elseif($item->tanggal_menyewa <= $now && $item->tanggal_berakhir == null && $item->status_penyewaan == 1 && $item->tanggal_jatuh_tempo<$now)
+                                            <span class="text-danger">Belum bayar</span>
                                             @endif
                                         </td>
                                         <td>{{$item->tanggal_menyewa}}</td>
-                                        @if($item->tanggal_menyewa < \Carbon\Carbon::now()->format('Y-m-d'))
+                                        @if($item->tanggal_menyewa <= \Carbon\Carbon::now()->format('Y-m-d'))
                                         <td>{{ \Carbon\Carbon::now()->startOfDay()->diffInDays(\Carbon\Carbon::parse($item->tanggal_jatuh_tempo)->startOfDay())}} hari</td>
                                         @else
                                         <td>Belum Aktif</td>
@@ -88,14 +91,14 @@
                                             <div class="container">
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#editModal"
-                                                    data-id="{{ $item->id }}">
+                                                    data-id_penyewa="{{ $item->id_penyewa }}">
                                                     <i class="bi bi-pencil-fill"></i> Edit
                                                 </button>
                                                 
                                                     
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#tagihanModal" data-status="{{ $item->status_penyewaan }}"
-                                                    data-id2="{{ $item->id }}">
+                                                    data-id_penyewa2="{{ $item->id_penyewa }}">
                                                     <i class="bi-plus-circle-fill"></i> Tagihan
                                                 </button>
                                                 
@@ -146,12 +149,12 @@
                                             <div class="container">
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#editModal" data-email="{{ $item->email }}"
-                                                    data-id="{{ $item->id }}">
+                                                    data-id_penyewa="{{ $item->id_penyewa }}">
                                                     <i class="bi bi-pencil-fill"></i> {{ $item->status_penyewaan ? 'Edit' : 'Detail' }}
                                                 </button>
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#tagihanModal" data-status="{{ $item->status_penyewaan }}"
-                                                    data-id2="{{ $item->id }}">
+                                                    data-id_penyewa2="{{ $item->id_penyewa }}">
                                                     <i class="bi-plus-circle-fill"></i> Tagihan
                                                 </button>
                                                
@@ -179,10 +182,10 @@
                     <h5 class="modal-title" id="editModalLabel">Edit Data Penyewa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editForm" action="{{ route('admin.penyewa.update') }}" method="POST"
+                <form id="editForm" action="{{ route('admin.penyewa') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" id="edit-id">
+                    <input type="hidden" name="id_penyewa" id="edit-id">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="edit-email" class="form-label">Email</label>
@@ -203,7 +206,7 @@
                                 if($msTipe){
                                     foreach($msTipe as $t){
                                         echo"
-                                            <option value=". $t->id ."> ".$t->deskripsi ."</option>
+                                            <option value=". $t->id_tipe_kos ."> ".$t->deskripsi ."</option>
                                         ";
                                     }
                                 }else{
@@ -222,8 +225,8 @@
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
                                 @if (!empty($item->ktp))
-                                    <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
-                                        <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}" alt="KTP" style="width:150px;height:auto;">
+                                    <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}" id="preview-ktp">
+                                        <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}?t={{ time() }}" alt="KTP" style="width:150px;height:auto;">
                                     </a>
                                 @else
                                     <p>Tidak ada KTP tersedia</p>
@@ -301,14 +304,15 @@
                         </tbody>
                     </table>
                 </div>
-            <form id="tagihanForm" action="{{ route('admin.penyewa.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="id" id="tagihan-id">
+           
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn-tagihan" >Tagih</button>
+                    <form id="tagihanForm" action="{{ route('admin.payment.emailtagih') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="id" id="tagihan-id">
+                        <button type="submit" class="btn btn-primary" id="btn-tagihan" >Ingatkan</button>
+                    </form>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Oke</button>
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -322,11 +326,11 @@
         const editModal = document.getElementById('editModal');
         editModal.addEventListener('show.bs.modal', function (event) {
             const button = event.relatedTarget;
-            let id = button.getAttribute('data-id');
+            let id = button.getAttribute('data-id_penyewa');
             document.getElementById('edit-id').value = id;
 
             $.ajax({
-            url: "{{ route('admin.penyewa.aktif',['']) }}/"+id,
+            url: "{{ route('admin.penyewa.byid',['']) }}/"+id,
             method: 'GET',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -361,7 +365,6 @@
                 }
             },
             error: function(xhr, status, error) {
-                // console.error(xhr.responseText);
             }
             });
         });
@@ -382,10 +385,10 @@
         const tagihanModal = document.getElementById('tagihanModal');
         tagihanModal.addEventListener('show.bs.modal', function (event) {
             const button = event.relatedTarget;
-            let id2 = button.getAttribute('data-id2');
+            let id2 = button.getAttribute('data-id_penyewa2');
             let status = button.getAttribute('data-status');
             document.getElementById('tagihan-id').value = id2;
-            console.log(status)
+            
             if(status == 1){
                 document.getElementById('btn-tagihan').style.display = 'block';
             }else{
@@ -395,27 +398,32 @@
             let tableBody = document.getElementById("tagihanTableBody");
             tableBody.innerHTML = "<tr><td colspan='4' class='text-center'>Loading...</td></tr>";
             $.ajax({
-            url: "{{ route('admin.pembayaran.history',['']) }}/"+id2,
+            url: "{{ route('admin.payment.byid',['']) }}/"+id2,
             method: 'GET',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
                 tableBody.innerHTML = ""; // Kosongkan isi tabel sebelum diisi ulang
-
-                if (response.length === 0) {
+                if (response.data.length === 0) {
                     tableBody.innerHTML = "<tr><td colspan='4' class='text-center'>Tidak ada tagihan</td></tr>";
                 } else {
-                    response.forEach((item, index) => {
-                        let statusBadge = item.status_verifikasi === 1
-                            ? '<span class="badge bg-success">Lunas</span>'
-                            : '<span class="badge bg-danger">Belum Lunas</span>';
+                    (response.data).forEach((item, index) => {
+                        if(item.status_verifikasi === 1){
+                            var statusBadge = '<span class="badge bg-success">Lunas</span>';
+                        }else if( item.status_verifikasi === 0){
+                           var statusBadge = '<span class="badge bg-danger">Ditolak</span>';
+                        }else if( item.status_verifikasi == NULL && item.tanggal_pembayaran == NULL){
+                            var statusBadge = '<span class="badge bg-warning">Belum Dibayar</span>';
+                        }else{
+                            var statusBadge = '<span class="badge bg-warning">Menunggu Konfirmasi</span>';
+                        }
 
                         let row = `
                             <tr>
                                 <td>${index + 1}</td>
                                 <td>${item.periode_tagihan}</td>
-                                <td>${item.tanggal_pembayaran}</td>
+                                <td>${item.tanggal_pembayaran ? item.tanggal_pembayaran : ""}</td>
                                 <td>${statusBadge}</td>
                                 
                             </tr>
@@ -423,7 +431,8 @@
                         tableBody.innerHTML += row;
                     });
                 }
-            }
+            },
+            
             });
         });
     </script>

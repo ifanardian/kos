@@ -57,7 +57,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Harga Kos Bulanan</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.harga_kamar.update') }}" method="POST"
+                    <form action="{{ route('admin.kelolakamar.tipekos.update') }}" method="POST"
                         onsubmit="cleanCurrencyInput()">
                         @csrf
                         <input type="hidden" name="tipe" value="bulanan">
@@ -83,7 +83,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Harga Kos Tahunan</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.harga_kamar.update') }}" method="POST"
+                    <form action="{{ route('admin.kelolakamar.tipekos.update') }}" method="POST"
                         onsubmit="cleanCurrencyInput()">
                         @csrf
                         <input type="hidden" name="tipe" value="tahunan">

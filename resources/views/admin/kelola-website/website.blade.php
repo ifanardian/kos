@@ -63,7 +63,7 @@
                             <div class="panorama-container" '.$default.'>
 
                                 <div data-bs-toggle="modal" data-bs-target="#editModal" 
-                                    onclick="editPanorama('.$p->id.')">
+                                    onclick="editPanorama('.$p->id_panorama.')">
                                     '.$p->text.'
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                 <h5 class="modal-title" id="modal">Tambah Data Kamar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="msTipeKos" action="{{route('post.admin.kelolawebsite')}}" method="POST"
+            <form id="msTipeKos" action="{{route('admin.kelolawebsite')}}" method="POST"
                 enctype="multipart/form-data" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
@@ -233,10 +233,7 @@
 
 <script>
     let viewer = ''
-    const BaseUrl = {
-        !!json_encode(asset('images/panorama/').
-            '/') !!
-    };
+    const BaseUrl = {!!json_encode(asset('images/panorama/').'/') !!};
     let Tempimg = '';
 
     function previewPanorama(event) {
@@ -293,7 +290,7 @@
 
         document.getElementById("editId").value = id;
         $.ajax({
-            url: "{{ route('admin.detail.kelolawebsite') }}",
+            url: "{{ route('admin.kelolawebsite.detail') }}",
             method: 'POST',
             data: {
                 id: id,
@@ -302,6 +299,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
+                console.log(response.hotspots);
                 const panorama = response.detail;
                 panorama.namafile = BaseUrl + panorama.namafile;
                 Tempimg = panorama.namafile;
@@ -346,7 +344,6 @@
         
         if(Array.isArray(hotspots) && hotspots.length > 0){
             hotspots.forEach(element => {
-
                 addHotspot(element)
             });
         }
@@ -367,10 +364,10 @@
 
     function addHotspot(hotspotId = {}) {
         let hotspotContainer = document.getElementById("hotspotContainer");
-
+        console.log("367 : "+hotspotId.id_hotspot);
         if (Object.keys(hotspotId).length === 0) {
             hotspotId = {
-                id: "hotspot-" + Date.now(),
+                id_hotspot: "hotspot-" + Date.now(),
                 yaw: 0,
                 pitch: 0,
                 scene: ""
@@ -379,23 +376,23 @@
         
         let hotspotDiv = document.createElement("div");
         hotspotDiv.classList.add("hotspot-item", "mb-3");
-        hotspotDiv.setAttribute("data-hotspot-id", hotspotId.id);
+        hotspotDiv.setAttribute("data-hotspot-id", hotspotId.id_hotspot);
 
         hotspotDiv.innerHTML = `
             <div class="border p-3">
-                <input type="hidden" class="form-control mb-2" name="id_hotspots" value="${hotspotId.id}">
+                <input type="hidden" class="form-control mb-2" name="id_hotspots" value="${hotspotId.id_hotspot}">
 
                 <label class="form-label">Horisontal</label>
-                <input type="range" class="form-range mb-2 hotspot-input" name="yaw[]" step="0.5" min="-179" max="180" data-hotspot-id="${hotspotId.id}" value="${hotspotId.yaw}">
+                <input type="range" class="form-range mb-2 hotspot-input" name="yaw[]" step="0.5" min="-179" max="180" data-hotspot-id="${hotspotId.id_hotspot}" value="${hotspotId.yaw}">
                 
                 <label class="form-label">Vertikal</label>
-                <input type="range" class="form-range mb-2 hotspot-input" name="pitch[]" step="0.5" min="-89" max="90" data-hotspot-id="${hotspotId.id}" value="${hotspotId.pitch}">
+                <input type="range" class="form-range mb-2 hotspot-input" name="pitch[]" step="0.5" min="-89" max="90" data-hotspot-id="${hotspotId.id_hotspot}" value="${hotspotId.pitch}">
 
                 <label class="form-label">Scene</label>
-                <select class="form-control mb-2 hotspot-input" name="scene[]" data-hotspot-id="${hotspotId.id}">
+                <select class="form-control mb-2 hotspot-input" name="scene[]" data-hotspot-id="${hotspotId.id_hotspot}">
                     <option value="">Pilih Scene</option>
-                    @foreach (DB::table('ms_panorama')->get() as $scene)
-                        <option value="{{ $scene->id }}">
+                    @foreach ($panorama as $scene)
+                        <option value="{{ $scene->id_panorama }}">
                             {{ $scene->text }}
                         </option>
                     @endforeach
@@ -405,7 +402,7 @@
         `;
         hotspotContainer.appendChild(hotspotDiv);
 
-        let selectElement = document.querySelector(`select[data-hotspot-id="${hotspotId.id}"]`);
+        let selectElement = document.querySelector(`select[data-hotspot-id="${hotspotId.id_hotspot}"]`);
         if (selectElement) {
             selectElement.value = hotspotId.scene;
         }
@@ -420,13 +417,13 @@
         // Event listener untuk tombol hapus
         hotspotDiv.querySelector(".remove-hotspot").addEventListener("click", function () {
 
-            let status = removeHotspotFromViewer(hotspotId.id);
+            let status = removeHotspotFromViewer(hotspotId.id_hotspot);
             if(status){
                 hotspotDiv.remove();
             }
         });
 
-        console.log("Hotspot ditambahkan dengan ID:", hotspotId.id);
+        console.log("Hotspot ditambahkan dengan ID:", hotspotId.id_hotspot);
     }
 
     document.getElementById("addHotspot").addEventListener("click", function () {
@@ -518,7 +515,7 @@
         });
         // Kirim data dengan AJAX ke Laravel
         $.ajax({
-            url: '{{ route("admin.save.Hotspots") }}', // Gantilah dengan URL endpoint Laravel Anda
+            url: '{{ route("admin.kelolawebsite.hotspots") }}', // Gantilah dengan URL endpoint Laravel Anda
             type: 'POST',
             data: formData,
             processData: false,
@@ -527,12 +524,12 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                alert('Hotspot berhasil disimpan!');
                 console.log(response);
+                alert('Hotspot berhasil disimpan!');
             }, 
             error: function(xhr) {
-                alert('Gagal menyimpan hotspot!');
                 console.error(xhr.responseText);
+                alert('Gagal menyimpan hotspot!');
             }
         });
         let modal = document.querySelector('.modal.show'); // Cari modal yang sedang terbuka
@@ -548,7 +545,7 @@
         let formData = new FormData();
         formData.append('id',document.getElementById("editId").value);
         $.ajax({
-            url: '{{ route("admin.delete.panorama") }}', // Gantilah dengan URL endpoint Laravel Anda
+            url: '{{ route("admin.kelolawebsite.hotspots.delete") }}', // Gantilah dengan URL endpoint Laravel Anda
             type: 'POST',
             data: formData,
             processData: false,

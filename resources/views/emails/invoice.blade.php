@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Invoice</title>
+    <title>ALAMANDA KOS</title>
 </head>
 <body>
-    <h1>Halo, {{ $user->nama_lengkap }}</h1>
-    <p>Terima kasih atas pembelian Anda. Berikut adalah detail invoice Anda.</p>
+    <h1>Halo, {{ $user->nama }}</h1>
+    @if($status == '1')
+    <h4>Selamat Pembayaranan Anda Telah Dikonfirmasi</h4>
+    <p>Terima kasih atas pembayaran Anda.</p>
+    @elseif($status == '0')
+    <h4>Pembayaranan Anda Gagal</h4>
+    <p>Harap segera melakukan pembayaranagar dapat segera di konfirmasi.</p>
+    @endif
+    <p>Terima kasih.</p>
 </body>
 </html>
