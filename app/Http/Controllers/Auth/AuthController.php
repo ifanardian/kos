@@ -8,6 +8,8 @@ use App\Models\Penyewa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\logout;
+
 
 
 class AuthController extends Controller
@@ -20,7 +22,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function actionLogin(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required'],
@@ -30,11 +32,11 @@ class AuthController extends Controller
         $penyewa = Penyewa::where('email', $request->email)->first();
 
         // Jika email tidak terdaftar di tabel penyewa
-        if (!$penyewa) {
-            return back()->withErrors([
-                'error' => 'Email tidak terdaftar.',
-            ]);
-        }
+        // if (!$penyewa) {
+        //     return back()->withErrors([
+        //         'error' => 'Email tidak terdaftar.',
+        //     ]);
+        // }
         
         // if ($penyewa && !$penyewa->status_penyewaan) {
         //     return back()->withErrors([
@@ -43,11 +45,19 @@ class AuthController extends Controller
         // }
         
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-    
-            return redirect()->intended('/');
+            return redirect(Auth::user()->isAdmin() ? '/admin' : '/');
+            // $request->session()->regenerate();
+            // $user = Auth::user();
+            // if ($user->role === 'admin') {
+            //     return redirect()->route('admin.dashboard');
+            // }else{
+            //     return redirect()->route('dashboard');
+            // }
+            // return redirect()->route('dashboard');
         }
+        Auth::logout();
         return back()->withErrors([
+            
             'error' => 'Email atau password salah.',
         ]);
     }
@@ -89,6 +99,8 @@ class AuthController extends Controller
 
 
     public function logout(){
+        
+        Auth::guard('web')->logout(); // Pastikan menggunakan guard 'web'
         Session::flush();
         return redirect()->route('dashboard');
     }

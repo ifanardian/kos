@@ -41,14 +41,16 @@
                                     foreach ($data as $dt) {
                                         if ($dt->status_verifikasi == '0') {
                                             echo "<tr style='color: Red;'>";
-                                        } else {
+                                        } else if ($dt->status_verifikasi == '1') {
                                             echo "<tr style='color: Green;'>";
+                                        }else{
+                                            echo "<tr>";
                                         }
                                         echo "
-                                            <td>" . DB::table('penyewa')->where('id', $dt->id_penyewa)->value('email') . "</td>
-                                            <td>" . DB::table('penyewa')->where('id', $dt->id_penyewa)->value('nama') . "</td>
-                                            <td>" . DB::table('penyewa')->where('id', $dt->id_penyewa)->value('no_kamar') . "</td>
-                                            <td>" . $dt->tanggal_pembayaran . "</td>
+                                            <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('email') . "</td>
+                                            <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('nama') . "</td>
+                                            <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('no_kamar') . "</td>
+                                            <td>" . ($dt->tanggal_pembayaran ??  'belum bayar') . "</td>
                                             <td>" . $dt->periode_tagihan . "</td>
                                             <td>" . $dt->total_tagihan . "</td>
                                             <td>" . $dt->metode_pembayaran . "</td>
@@ -57,8 +59,8 @@
                                         if ($dt->bukti_pembayaran != null) {
                                             echo "
                                                 <td>
-                                                    <a href='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "'>
-                                                        <img src='" . route('admin.buktitf', ['filename' => $dt->bukti_pembayaran]) . "' alt='tf'
+                                                    <a href='" . route('admin.payment.gambar', ['filename' => $dt->bukti_pembayaran]) . "'>
+                                                        <img src='" . route('admin.payment.gambar', ['filename' => $dt->bukti_pembayaran]) . "' alt='tf'
                                                             style='width:100px;height:auto;'>
                                                     </a>
                                                 </td>
@@ -73,10 +75,11 @@
 
                                         echo "
                                             <td>
-                                                <form action='" . route('admin.action.pembayaran') . "' method='POST'>
+                                                <form action='" . route('admin.payment') . "' method='POST'>
                                                     " . csrf_field() . "
                                                     <input type='hidden' name='id_penyewa' value='" . $dt->id_penyewa . "'>
                                                     <input type='hidden' name='periode_tagihan' value='" . $dt->periode_tagihan . "'>
+                                                    <input type='hidden' name='created_at' value='" . $dt->created_at . "'>
                                                     <select class='form-control' name='status' onchange='this.form.submit()' ".($dt->status_verifikasi == '0'||$dt->status_verifikasi == '1' ? 'disabled' : '' ).">
                                                         <option value=''" . ($dt->status_verifikasi == null ? 'selected' : '') .">Pilih</option>
                                                         <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . " style='color:red;'>Ditolak</option>

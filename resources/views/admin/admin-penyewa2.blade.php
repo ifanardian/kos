@@ -66,8 +66,8 @@
                                         <td>{{$item->nama}}</td>
                                         <td>{{$item->no_telepon}}</td>
                                         {{-- <td>
-                                            <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}">
-                                        <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" alt="KTP"
+                                            <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
+                                        <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}" alt="KTP"
                                             style="width:100px;height:auto;">
                                         </a>
                                         </td> --}}
@@ -105,7 +105,7 @@
                                                     data-no_telepon="{{ $item->no_telepon }}"
                                                     data-tipe_kos="{{ $item->tipe_kos }}"
                                                     data-alamat="{{ $item->alamat }}"
-                                                    data-ktp-url="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                    data-ktp-url="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                     data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
                                                     data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
                                                     data-status_penyewaan="{{ $item->status_penyewaan }}"
@@ -161,7 +161,7 @@
                                                     data-no_telepon="{{ $item->no_telepon }}"
                                                     data-tipe_kos="{{ $item->tipe_kos }}"
                                                     data-alamat="{{ $item->alamat }}"
-                                                    data-ktp-url="{{ route('admin.ktp', ['filename' => $item->ktp]) }}"
+                                                    data-ktp-url="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                     data-tanggal_menyewa="{{ $item->tanggal_menyewa }}"
                                                     data-tanggal_jatuh_tempo="{{ $item->tanggal_jatuh_tempo }}"
                                                     data-status_penyewaan="{{ $item->status_penyewaan }}"
@@ -190,7 +190,7 @@
                     <h5 class="modal-title" id="editModalLabel">Edit Data Penyewa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editForm" action="{{ route('admin.penyewa.update') }}" method="POST"
+                <form id="editForm" action="{{ route('admin.penyewa') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" id="edit-id">
@@ -221,8 +221,8 @@
                         <div class="mb-3">
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
-                                <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
-                                    <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}"
+                                <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}" id="preview-ktp">
+                                    <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}?t={{ time() }}"
                                         alt="KTP" style="width:150px;height:auto;">
                                 </a>
                             </div>

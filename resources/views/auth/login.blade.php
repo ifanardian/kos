@@ -232,7 +232,7 @@
                     </div>
                 @endif
 
-				<form method="POST" action="{{ route('actionlogin') }}" id="loginForm">
+				<form method="POST" action="{{ route('login') }}" id="loginForm">
                     @csrf
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email" name="email" placeholder="Email" id="email" required="" >
@@ -273,7 +273,7 @@
                                     @endif
                                     <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 
-                                    <form method="POST" action="{{ route('actionlogin') }}" id="loginForm"
+                                    <form method="POST" action="{{ route('login') }}" id="loginForm"
                                         class="mx-1 mx-md-8">
                                         @csrf
                                         <div class="d-flex flex-row align-items-center mb-4">

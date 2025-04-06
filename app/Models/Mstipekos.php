@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class Mstipekos extends Model
+class MsTipeKos extends Model
 {
-    protected $table = 'ms_tipe_kos';  
-    protected $primaryKey = 'id';
-    protected $fillable = ['harga', 'bulan', 'deskripsi'];
+    use HasFactory;
+
+    protected $table = 'ms_tipe_kos';
+    protected $primaryKey = 'id_tipe_kos';
+
+    protected $fillable = [
+        'harga',
+        'bulan',
+        'deskripsi',
+    ];
 }

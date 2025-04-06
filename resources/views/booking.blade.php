@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h3>Detail Pembayaran</h3>
-                        <form action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('booking') }}" method="POST" enctype="multipart/form-data">
                             <div class="col-md-11 form-group p_star">
                                 <label for="name">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="name" name="name" required />

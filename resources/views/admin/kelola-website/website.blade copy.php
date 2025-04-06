@@ -140,7 +140,7 @@
                 <h5 class="modal-title" id="modal">Tambah Data Kamar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="msTipeKos" action="{{route('post.admin.kelolawebsite')}}" method="POST" enctype="multipart/form-data"
+            <form id="msTipeKos" action="{{route('admin.kelolawebsite')}}" method="POST" enctype="multipart/form-data"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">

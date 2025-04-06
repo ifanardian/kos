@@ -174,7 +174,7 @@
                     <h5 class="modal-title" id="editModalLabel">Edit Data Penyewa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editForm" action="{{ route('admin.penyewa.update') }}" method="POST"
+                <form id="editForm" action="{{ route('admin.penyewa') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" id="edit-id">
@@ -217,8 +217,8 @@
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
                                 @if (!empty($item->ktp))
-                                    <a href="{{ route('admin.ktp', ['filename' => $item->ktp]) }}" id="preview-ktp">
-                                        <img src="{{ route('admin.ktp', ['filename' => $item->ktp]) }}?t={{ time() }}" alt="KTP" style="width:150px;height:auto;">
+                                    <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}" id="preview-ktp">
+                                        <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}?t={{ time() }}" alt="KTP" style="width:150px;height:auto;">
                                     </a>
                                 @else
                                     <p>Tidak ada KTP tersedia</p>
