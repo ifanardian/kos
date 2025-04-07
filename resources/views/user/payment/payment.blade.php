@@ -64,9 +64,11 @@
                 <div class="col-lg-12">
                     <div class="confirmation_tittle">
                         <?php
+                        // dd($detailPenyewa);
+
                         if($isFirstPayment){
                             echo "
-                                <p>Silahkan lakukan pembayaran pertama untuk aktivasi proses pemesanan. <br> 
+                                <p>Silahkan lakukan pembayaran pertama untuk aktivasi proses booking kamar kos. <br> 
                                 <span>Pembayaran paling lambat pada 
                                  ".\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->format('d M Y') ."</span></p>";
                         }
@@ -84,7 +86,7 @@
                         ?>
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg">
                     <div class="single_confirmation_details">
                         <h4>{{$isFirstPayment ? 'Pembayaran Pertama':'Status Langganan'}}</h4>
                         <ul>

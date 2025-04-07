@@ -35,6 +35,13 @@ class PaymentController extends Controller
             if ($paymentCount[0]->belum_bayar_verifikasi > 0 || $paymentCount[0]->tagihan_tidak_terverifikasi == $paymentCount[0]->total_tagihan) {
                 $isFirstPayment = true;
             }
+
+            // dd([
+            //     'user_id' => $user->id,
+            //     'user_id_penyewa' => $user->id_penyewa,
+            //     'detailPenyewa' => $detailPenyewa,
+            // ]);
+            
     
         return view('user.payment.payment', compact('payment', 'detailPenyewa', 'isFirstPayment'));
     }

@@ -1685,11 +1685,11 @@ ul {
 /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_feature_part.scss */
 .feature_part .single_feature_post_text {
     text-align: center;
-    padding: 50px;
+    padding: 40px;
     background-color: #163e6f;
     border-radius: 30px;
     margin-bottom: 30px;
-    height: 300px;
+    height: 250px;
 }
 
 .price-container {

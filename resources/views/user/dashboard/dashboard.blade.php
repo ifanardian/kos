@@ -252,7 +252,6 @@
                                     <span class="price">Rp {{number_format($m->harga ?? 400000, 0, ',', '.')}}</span>
                                     <span class="period">/ {{ $m->bulan }} bulan</span>
                                 </p>
-                                <p style="color: beige">Sisa Kamar: {} </p>
                             </div>
                             <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
                         </div>

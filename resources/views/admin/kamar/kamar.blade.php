@@ -71,7 +71,7 @@
                                                     <div class='text-center mb-3'>
                                                         <div class='input-container'>
                                                             <span class='price-text'>Rp</span>
-                                                            <input type='text' class='form-control' name='harga' id='harga".$harga->deskripsi."Input' style='width: 145px;'
+                                                            <input type='text' class='form-control' name='harga' id='harga".$harga->deskripsi."Input' style='width: 175px;'
                                                                 value='".number_format($harga->harga, 0, ',', '.')."' required>
                                                         </div>
                                                         <br>
