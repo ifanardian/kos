@@ -253,7 +253,7 @@
                                     <span class="period">/ {{ $m->bulan }} bulan</span>
                                 </p>
                             </div>
-                            <a href="{{ route('booking', ['tipe_kos' => '1']) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
+                            <a href="{{ route('booking', ['tipe_kos' => $m->id_tipe_kos]) }}" class="feature_btn">BOOK NOW <i class="fas fa-play"></i></a>
                         </div>
                     </div>
                 @endforeach

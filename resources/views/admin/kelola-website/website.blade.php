@@ -131,7 +131,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal">Tambah Data Kamar</h5>
+                <h5 class="modal-title" id="modal">Tambah Panorama</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="msTipeKos" action="{{route('admin.kelolawebsite')}}" method="POST"
@@ -152,7 +152,7 @@
                         <div style="padding: 5px; border: 2px solid grey;">
                             <div id='preview' style="height: 300px; width: calc(100% - 10px); margin: 5px;"></div>
 
-                            <label for="yaw" class="form-label" style="padding: 5px;">Horisontal</label>
+                            <label for="yaw" class="form-label" style="padding: 5px;">Horizontal</label>
                             <input type="range" class="form-range" id="yaw" name="yaw" min="-180" max="180" step="0.5">
 
                             <label for="pitch" class="form-label" style="padding: 5px;">Vertikal</label>
@@ -203,7 +203,7 @@
                         <label for="gambar" class="form-label" style="padding: 5px;">Preview Gambar Ketika Load</label>
                         <div class="border p-3">
                             <div id='previewedit' style="height: 300px; width: calc(100% - 10px); margin: 5px;"></div>
-                            <label for="yawedit" class="form-label" style="padding: 5px;">Horisontal</label>
+                            <label for="yawedit" class="form-label" style="padding: 5px;">Horizontal</label>
                             <input type="range" class="form-range" id="yawedit" name="yawedit" min="-180" max="180"
                                 step="0.5">
                             <label for="pitchedit" class="form-label" style="padding: 5px;">Vertikal</label>
@@ -382,7 +382,7 @@
             <div class="border p-3">
                 <input type="hidden" class="form-control mb-2" name="id_hotspots" value="${hotspotId.id_hotspot}">
 
-                <label class="form-label">Horisontal</label>
+                <label class="form-label">Horizontal</label>
                 <input type="range" class="form-range mb-2 hotspot-input" name="yaw[]" step="0.5" min="-179" max="180" data-hotspot-id="${hotspotId.id_hotspot}" value="${hotspotId.yaw}">
                 
                 <label class="form-label">Vertikal</label>
