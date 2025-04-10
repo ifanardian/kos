@@ -13,7 +13,9 @@ class BookingController extends Controller
     public function showCheckout(Request $request)
     {
         $tipeKos = MsTipeKos::orderBy('bulan')->get();
-        return view('user.booking.booking', compact('tipeKos'));
+        $selectedTipeKos = $request->query('tipe_kos'); // ambil dr query
+
+        return view('user.booking.booking', compact('tipeKos', 'selectedTipeKos'));
     }
 
     public function store(Request $request)

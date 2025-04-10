@@ -78,10 +78,12 @@
                             <select class="form-control" id="tipe_kos" name="tipe_kos">
                                 <option value="">-- Pilih Tipe Kamar --</option>
                                 @foreach ($tipeKos as $tipe)
-                                <option value="{{ $tipe->id_tipe_kos }}">
+                                <option value="{{ $tipe->id_tipe_kos }}"
+                                    {{ (isset($selectedTipeKos) && $selectedTipeKos == $tipe->id_tipe_kos) ? 'selected' : '' }}>
                                     {{ $tipe->deskripsi }} | Rp {{ number_format($tipe->harga, 0, ',', '.') }}
                                 </option>                                
                                 @endforeach
+
                             </select>
                         </div>
                         <div class="col-md-11 form-group p_star">
