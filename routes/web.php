@@ -60,6 +60,9 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::get('booking', [AdminBookingController::class, 'verifikasiBooking'])->name('admin.booking');
         Route::post('booking', [AdminBookingController::class, 'updateStatusBooking']);
         Route::get('ktp/{filename}', [AdminBookingController::class, 'showKtp'])->name('admin.ktp.gambar');
+
+        Route::post('/admin/penyewa/tambah', [PenyewaController::class, 'tambahPenyewa'])->name('admin.penyewa.tambah');
+
     });
 });
 

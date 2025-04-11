@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Mail\SetPasswordMail;
-use App\Models\{Penyewa, Mstipekos, Kamar, User};
+use App\Models\{Penyewa, Mstipekos, Kamar, Users};
 
 
 class PenyewaController extends Controller
@@ -52,7 +52,7 @@ class PenyewaController extends Controller
         if (!$request->status_penyewaan) {
             $penyewa->tanggal_berakhir = Carbon::now()->toDateString();
             Kamar::where('id_kamar', $penyewa->no_kamar)->update(['status' => 'F']);
-            User::where('email', $penyewa->email)->delete();
+            Users::where('email', $penyewa->email)->delete();
         }
 
         if ($penyewa->no_kamar != $request->no_kamar) {
@@ -69,4 +69,41 @@ class PenyewaController extends Controller
     {
         return response()->json(Penyewa::findOrFail($id));
     }
+
+    public function tambahPenyewa(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:penyewa',
+            'nama' => 'required|string',
+            'no_telepon' => 'required|string',
+            'tipe_kos' => 'required|string',
+            'alamat' => 'required|string',
+            'tanggal_booking' => 'required|date',
+            'tanggal_menyewa' => 'required|date',
+            'tanggal_jatuh_tempo' => 'required|date',
+            'no_kamar' => 'required',
+            'status_penyewaan' => 'required|boolean',
+            'ktp' => 'required|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $fileName = $request->email . '-' . time() . '.' . $request->file('ktp')->extension();
+        $request->file('ktp')->storeAs('ktp', $fileName);
+
+        $penyewa = new Penyewa();
+        $penyewa->fill($request->except('ktp'));
+        $penyewa->ktp = $fileName;
+        $penyewa->save();
+
+        Kamar::where('id_kamar', $request->no_kamar)->update(['status' => 'T']);
+
+        // (Opsional) Tambahkan akun user juga jika perlu
+        // User::create([
+        //     'email' => $request->email,
+        //     'password' => Hash::make('default123'), // default password
+        //     'role' => 'penyewa',
+        // ]);
+
+        return redirect()->back()->with('success', 'Penyewa baru berhasil ditambahkan.');
+    }
+
 }
