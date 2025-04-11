@@ -61,7 +61,8 @@ class PenyewaController extends Controller
             $penyewa->no_kamar = $request->no_kamar;
         }
 
-        $penyewa->update($request->except(['ktp']));
+        $penyewa->update($request->except(['ktp', 'tanggal_berakhir']));
+        
         return redirect()->back()->with('success', 'Data penyewa berhasil diperbarui.');
     }
 
@@ -102,6 +103,14 @@ class PenyewaController extends Controller
         //     'password' => Hash::make('default123'), // default password
         //     'role' => 'penyewa',
         // ]);
+
+        Users::create([
+            'email' => $penyewa->email,
+            'id_penyewa' => $penyewa->id, // pastikan 'id' adalah primary key dari penyewa
+            'password' => null, // atau kosongkan agar wajib reset password
+            'role' => 'user', // default sesuai struktur kamu
+        ]);
+
 
         return redirect()->back()->with('success', 'Penyewa baru berhasil ditambahkan.');
     }
