@@ -218,18 +218,23 @@
 
 {{-- GRID --}}
 <div class="row-grid dark-bg">
-    <div class="column">
-        <img src="{{ asset('images/display8.jpeg') }}" style="width:100%">
-        <img src="{{ asset('images/display2.jpeg') }}" style="width:100%">
-    </div>
-    <div class="column">
-        <img src="{{ asset('images/display9.jpeg') }}" style="width:100%">
-        <img src="{{ asset('images/display5.jpeg') }}" style="width:100%">
-    </div>
-    <div class="column">
-        <img src="{{ asset('images/display6.jpeg') }}" style="width:100%">
-        <img src="{{ asset('images/display4.jpeg') }}" style="width:100%">
-    </div>
+    <?php
+        for($i = 0 ; $i<6;$i++){
+            
+            echo '
+            <div class="column">
+                <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'.$gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
+                    <img src="'. asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                </a>';
+            $i ++;
+            echo '
+                <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'. $gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
+                    <img src="'. asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                </a>
+            </div>'
+                ;
+        }
+    ?>
 </div>
 
 @if($MsTipeKos->isNotEmpty())

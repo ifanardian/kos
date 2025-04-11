@@ -20,6 +20,96 @@
         font-weight: bold;
         font-size: 16px;
     }
+    
+    .row-grid {
+        width: 75%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0 10px;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-top: 8rem; /* Jarak antara grid foto dan elemen sebelumnya */
+        height: auto; /* Sesuaikan tinggi agar tidak bertindih */
+        position: relative; /* Pastikan posisi relatif */
+        z-index: 0; /* Pastikan grid foto berada di bawah */
+    }
+
+    .column {
+        flex: 1 1 calc(33.33% - 20px); /* 3 kolom untuk desktop */
+        max-width: calc(33.33% - 20px);
+    }
+
+    @media (max-width: 576px) {
+        .column {
+            flex: 1 1 100%; /* 1 kolom untuk mobile */
+            max-width: 100%;
+        }    
+    }
+
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+        .column {
+            -ms-flex: 100%;
+            flex: 100%;
+            max-width: 90%;
+        }
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .column {
+            flex: 1 1 calc(50% - 20px); /* 2 kolom untuk tablet */
+            max-width: calc(50% - 20px);
+        }
+    }
+
+    @media only screen and (min-width: 992px) and (max-width: 1200px) {
+        .column {
+            flex: 1 1 calc(50% - 20px); /* 2 kolom untuk tablet */
+            max-width: 90%;
+        }
+    }
+
+    .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+
+    .preview-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 800px;
+    }
+
+    .image-box {
+        width: 300px;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f8f8;
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .arrow {
+        font-size: 30px;
+        color: #888;
+    }
+
 
 </style>
 @endpush
@@ -88,43 +178,69 @@
                     </a>
                 </div>
             </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="text-center mb-3">
-                    <table class='table table-sm'>
-                        <thead>
-                            <tr>
-                                <th scope='col'>Gambar</th>
-                                <th scope='col'style="width: 50%;">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="{{ asset('images/display8.jpeg') }}" alt="" style="max-height: 100px;">
-                                </td>
-                                <td><button></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- Preview Foto -->
-                    <!-- <img id="currentPhoto" src="img/default-photo.png" alt="Foto Saat Ini" -->
-                        <!-- style="max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px; border-radius: 8px;"> -->
+                <div class="row-grid dark-bg">
+                    <?php
+                        for($i = 0 ; $i<6;$i++){
+                            
+                            echo '
+                            <div class="column">
+                                <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'.$gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
+                                    <img src="'. asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                                </a>';
+                            $i ++;
+                            echo '
+                                <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'. $gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
+                                    <img src="'. asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                                </a>
+                            </div>'
+                                ;
+                        }
+                    ?>
                 </div>
-                <!-- Form Ganti Foto -->
-                <!-- <form id="photoForm" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="newPhoto">Ganti Foto</label>
-                        <input type="file" class="form-control-file" id="newPhoto" name="photo" accept="image/*"
-                            onchange="previewPhoto(event)">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Unggah Foto</button>
-                </form> -->
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- Modal Tambah -->
+<div class="modal fade" id="editGridModal" tabindex="-1" aria-labelledby="editGridModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal">Update Grid</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="msTipeKos" action="{{route('admin.kelolawebsite.grid')}}" method="POST" enctype="multipart/form-data" enctype="multipart/form-data">
+                    @csrf
+                    <div class="preview-wrapper">
+                        <div class="image-box">
+                            <img src="{{ asset('storage/path-lama.jpg') }}" alt="Gambar Lama" id="gambarLama">
+                        </div>
+                        <div class="arrow">➡️</div>
+                        <div class="image-box">
+                            <img src="" alt="Preview Gambar Baru" id="previewGrid">
+                        </div>
+                    </div>    
+                    <div class="mb-3">
+                        <input type="hidden" id="id_gambar" name="id_gambar">
+                        <label for="gambar" class="form-label" style="padding: 5px;">Gambar</label>
+                        <input style="width: min-content;" type="file" class="form-control-file" id="gambar"
+                            name="gambar" accept="image/*">
+                    </div>
+                    
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+        
 
 <!-- Modal Tambah -->
 <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -570,6 +686,27 @@
             location.reload(true);
         }
     }
+    document.getElementById('gambar').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('previewGrid').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    document.querySelectorAll('[data-bs-target="#editGridModal"]').forEach(function(link) {
+        link.addEventListener('click', function () {
+            let gambarSrc = "{{ asset('images/grid') }}/" + this.getAttribute('nama-gambar');
+            console.log(gambarSrc)
+            let id_gambar =  this.getAttribute('id-gambar');
+            document.getElementById('gambarLama').src = gambarSrc;
+            document.getElementById('id_gambar').value = id_gambar;
+        });
+    });
 </script>
+
+
 
 @endsection
