@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MsPanorama;
 use App\Models\PanoramaHotspot;
+use App\Models\PhotoGrid;
 
 class KelolaWebsiteController extends Controller
 {
@@ -138,4 +139,5 @@ class KelolaWebsiteController extends Controller
 
         return response()->json(['message' => 'Data berhasil dihapus'], 200);
     }
+    
 }

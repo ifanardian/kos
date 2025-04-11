@@ -17,6 +17,46 @@
         <div class="card shadow mb-4">
             <!-- Card Body -->
             <div class="card-body">
+                {{-- <form action="#" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama atau email penyewa" value="{{ request('search') }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Cari</button>
+                        </div>
+                    </div>
+                </form> --}}
+                <div class="d-flex justify-content-end">
+                    <form method="GET" action="{{ route('admin.payment') }}" class="mb-3" id="searchForm">
+                        <div class="input-group position-relative" style="width: 450px;">
+                            <input 
+                                type="text" 
+                                name="search" 
+                                id="searchInput" 
+                                class="form-control" 
+                                placeholder="Cari email/nama/no kamar/periode" 
+                                value="{{ request('search') }}"
+                            >
+                    
+                            {{-- Tombol Clear, tampil jika input tidak kosong --}}
+                            @if(request('search'))
+                                <button 
+                                    type="button" 
+                                    id="clearSearch" 
+                                    class="btn position-absolute" 
+                                    style="right: 90px; top: 50%; transform: translateY(-50%); z-index: 10;"
+                                >
+                                    &times;
+                                </button>
+                            @endif
+                    
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit" style="width: 90px;">Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                
                 <div class="table-responsive">
                     <table class="table table-sm">
                         <thead class="thead-center">
@@ -48,8 +88,8 @@
                                             <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('email') . "</td>
                                             <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('nama') . "</td>
                                             <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('no_kamar') . "</td>
-                                            <td>" . ($dt->tanggal_pembayaran ??  'belum bayar') . "</td>
-                                            <td>" . $dt->periode_tagihan . "</td>
+                                            <td>" . ($dt->tanggal_pembayaran ? \Carbon\Carbon::parse($dt->tanggal_pembayaran)->format('d-m-Y') : 'belum bayar') . "</td>
+                                            <td>" . \Carbon\Carbon::parse($dt->periode_tagihan)->format('d-m-Y') . "</td>
                                             <td>" . $dt->total_tagihan . "</td>
                                             <td>" . $dt->metode_pembayaran . "</td>
                                         ";
@@ -113,6 +153,23 @@
     document.getElementById('status').addEventListener('change', function () {
         document.getElementById('form-update-status').submit();
     });
-
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const clearBtn = document.getElementById('clearSearch');
+        const input = document.getElementById('searchInput');
+        const form = document.getElementById('searchForm');
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function () {
+                input.value = '';
+                form.submit();
+            });
+        }
+    });
+</script>
+
+
+
 @endsection

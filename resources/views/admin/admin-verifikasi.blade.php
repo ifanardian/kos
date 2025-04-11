@@ -94,8 +94,8 @@
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
                                             </td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>{{ $item->periode_penempatan }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->periode_penempatan)->format('d-m-Y') }}</td>
                                             <td>
                                                 <form id="form-update-status-{{ $item->id_booking }}"
                                                     action="{{ route('admin.booking') }}" method="POST">
@@ -169,8 +169,8 @@
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
                                             </td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>{{ $item->periode_penempatan }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->periode_penempatan)->format('d-m-Y') }}</td>
                                             <td>{{ $item->status }}</td>
                                         </tr>
                                         @endforeach
@@ -223,8 +223,8 @@
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
                                             </td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>{{ $item->periode_penempatan }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->periode_penempatan)->format('d-m-Y') }}</td>
                                             <td>{{ $item->status }}</td>
                                         </tr>
                                         @endforeach

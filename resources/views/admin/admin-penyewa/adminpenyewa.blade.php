@@ -81,7 +81,7 @@
                                             <span class="text-danger">Belum bayar</span>
                                             @endif
                                         </td>
-                                        <td>{{$item->tanggal_menyewa}}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->tanggal_menyewa)->format('d-m-Y')}}</td>
                                         @if($item->tanggal_menyewa <= \Carbon\Carbon::now()->format('Y-m-d'))
                                         <td>{{ \Carbon\Carbon::now()->startOfDay()->diffInDays(\Carbon\Carbon::parse($item->tanggal_jatuh_tempo)->startOfDay())}} hari</td>
                                         @else
