@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MsPanorama;
 use App\Models\MsTipeKos;
+use App\Models\Gambar;
 
 class DashboardController extends Controller
 {
@@ -15,7 +16,7 @@ class DashboardController extends Controller
         $panorama = MsPanorama::with('hotspots.scenePanorama:id_panorama,text') 
         ->get();
         $MsTipeKos = MsTipeKos::all();
-        // dd($panorama);
-        return view('user.dashboard.dashboard',compact('panorama','MsTipeKos'));
+        $gambar = Gambar::all();
+        return view('user.dashboard.dashboard',compact('panorama','MsTipeKos', 'gambar'));
     }
 }
