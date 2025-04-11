@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ALAMANDA KOS</title>
+    <title>FORTUNA KOS</title>
 </head>
 <body>
     <h1>Halo, {{ $user->nama }}</h1>
@@ -10,7 +10,7 @@
     <p>Terima kasih atas pembayaran Anda.</p>
     @elseif($status == '0')
     <h4>Pembayaranan Anda Gagal</h4>
-    <p>Harap segera melakukan pembayaranagar dapat segera di konfirmasi.</p>
+    <p>Harap segera melakukan pembayaran agar dapat segera di konfirmasi.</p>
     @endif
     <p>Terima kasih.</p>
 </body>

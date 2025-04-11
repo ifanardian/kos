@@ -9,6 +9,7 @@ use App\Models\MsPanorama;
 use App\Models\PanoramaHotspot;
 use App\Models\Gambar;
 
+
 class KelolaWebsiteController extends Controller
 {
     public function ShowKelolaWebsite()
@@ -172,3 +173,4 @@ class KelolaWebsiteController extends Controller
         return redirect()->back();
     }
 }
+
