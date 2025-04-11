@@ -41,7 +41,8 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::post('kelola-website/detail', [KelolaWebsiteController::class, 'DetailKelolaWebsite'])->name('admin.kelolawebsite.detail');
         Route::post('kelola-website/hotspots/save', [KelolaWebsiteController::class, 'SaveHotspots'])->name('admin.kelolawebsite.hotspots');
         Route::post('kelola-website/hotspots/delete', [KelolaWebsiteController::class, 'DeletePanorama'])->name('admin.kelolawebsite.hotspots.delete');
-        
+        Route::post('kelola-website/grid',[KelolaWebsiteController::class, 'GridGambar'])->name('admin.kelolawebsite.grid');
+
         Route::get('penyewa', [PenyewaController::class, 'penyewa'])->name('admin.penyewa');
         Route::post('penyewa', [PenyewaController::class, 'updatePenyewa']);
         Route::get('penyewa/aktif/{id}', [PenyewaController::class, 'detailPenyewa'])->name('admin.penyewa.byid');

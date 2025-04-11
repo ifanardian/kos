@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             HotSpotsSeeder::class,
             TipeKosSeeder::class,
+            GambarSeeder::class,
         ]);
     }
 }

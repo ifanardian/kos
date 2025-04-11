@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\MsPanorama;
 use App\Models\PanoramaHotspot;
-use App\Models\PhotoGrid;
+use App\Models\Gambar;
+
 
 class KelolaWebsiteController extends Controller
 {
     public function ShowKelolaWebsite()
     {
         $panorama = MsPanorama::all();
-        return view('admin.kelola-website.website', compact('panorama'));
+        $gambar = Gambar::all();
+        return view('admin.kelola-website.website', compact('panorama', 'gambar'));
     }
 
     public function PostPanorama(Request $request)
@@ -139,5 +142,35 @@ class KelolaWebsiteController extends Controller
 
         return response()->json(['message' => 'Data berhasil dihapus'], 200);
     }
-    
+
+    public function GridGambar(Request $request){
+        $request->validate([
+            'gambar' => 'required|file|mimes:jpg,jpeg,png',
+            'id_gambar'=> 'required|numeric'
+        ]);
+
+        $detail = Gambar::where('id_gambar', $request->id_gambar)->first();
+        $filename = '';
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/grid/'), $filename);
+
+            // Hapus file lama
+            $oldPath = public_path('images/grid/' . $detail->nama_gambar);
+            if (File::exists($oldPath)) {
+                File::delete($oldPath);
+            }
+
+            // Update database
+            $detail->update([
+                'nama_gambar' => $filename
+            ]);
+
+        }
+
+        return redirect()->back();
+    }
 }
+
