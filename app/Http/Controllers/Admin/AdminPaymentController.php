@@ -16,12 +16,33 @@ use Carbon\Carbon;
 
 class AdminPaymentController extends Controller
 {
-    public function showPayment()
+    public function showPayment(Request $request)
     {
-        $data = Payment::orderBy('status_verifikasi', 'desc')
+        // lama
+        // $data = Payment::orderBy('status_verifikasi', 'desc')
+        //     ->orderBy('periode_tagihan', 'desc')
+        //     ->get();
+        
+        // return view('admin.verifikasi-pembayaran.admin-riwayat', compact('data'));
+
+        // fiona baru   
+        $query = Payment::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+
+            $query->whereHas('penyewa', function($q) use ($search) {
+                $q->where('email', 'like', "%$search%")
+                ->orWhere('nama', 'like', "%$search%")
+                ->orWhere('no_kamar', 'like', "%$search%");
+            })
+            ->orWhere('periode_tagihan', 'like', "%$search%");
+        }
+
+        $data = $query->orderBy('status_verifikasi', 'desc')
             ->orderBy('periode_tagihan', 'desc')
             ->get();
-        
+
         return view('admin.verifikasi-pembayaran.admin-riwayat', compact('data'));
     }
 

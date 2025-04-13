@@ -23,4 +23,10 @@ class Payment extends Model
         'bukti_pembayaran',
         'status_verifikasi',
     ];
+
+    public function penyewa()
+    {
+        return $this->belongsTo(Penyewa::class, 'id_penyewa');
+    }
+
 }
