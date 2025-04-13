@@ -409,11 +409,12 @@
                     tableBody.innerHTML = "<tr><td colspan='4' class='text-center'>Tidak ada tagihan</td></tr>";
                 } else {
                     (response.data).forEach((item, index) => {
+                        console.log(item.status_verifikasi == null);
                         if(item.status_verifikasi === 1){
                             var statusBadge = '<span class="badge bg-success">Lunas</span>';
                         }else if( item.status_verifikasi === 0){
                            var statusBadge = '<span class="badge bg-danger">Ditolak</span>';
-                        }else if( item.status_verifikasi == NULL && item.tanggal_pembayaran == NULL){
+                        }else if( item.status_verifikasi == null && item.tanggal_pembayaran == null){
                             var statusBadge = '<span class="badge bg-warning">Belum Dibayar</span>';
                         }else{
                             var statusBadge = '<span class="badge bg-warning">Menunggu Konfirmasi</span>';

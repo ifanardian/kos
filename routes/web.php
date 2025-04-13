@@ -45,7 +45,7 @@ Route::middleware(['auth','admin'])->group(function () {
 
         Route::get('penyewa', [PenyewaController::class, 'penyewa'])->name('admin.penyewa');
         Route::post('penyewa', [PenyewaController::class, 'updatePenyewa']);
-        Route::get('penyewa/aktif/{id}', [PenyewaController::class, 'detailPenyewa'])->name('admin.penyewa.byid');
+        Route::get('penyewa/{id}', [PenyewaController::class, 'detailPenyewa'])->name('admin.penyewa.byid');
         
         Route::get('/kelola-kamar', [KelolaKamarController::class, 'ShowIndex'])->name('admin.kelolakamar');
         Route::post('/kelola-kamar/tipekos', [KelolaKamarController::class, 'PostTipeLangganan'])->name('admin.kelolakamar.tipekos');

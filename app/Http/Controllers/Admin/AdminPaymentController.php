@@ -100,7 +100,7 @@ class AdminPaymentController extends Controller
             ->first();
         
         $isFirstPayment = $paymentCount->total_tagihan == 1 && $paymentCount->tagihan_belum_terverifikasi == 1;
-
+        // var_dump($isFirstPayment);
         return response()->json([
             'data' => Payment::where('id_penyewa', $id_penyewa)
                 ->orderBy('periode_tagihan', 'desc')
