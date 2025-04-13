@@ -20,6 +20,7 @@ class AlertPaymentMail extends Mailable
     }
     public function build()
     {
+    //fix id_tipe_kos
        $sisa = \Carbon\Carbon::now()->startOfDay()->diffInDays(\Carbon\Carbon::parse($this->userdetail->tanggal_jatuh_tempo)->startOfDay());
        $langganan = DB::table('ms_tipe_kos')
                     ->where('id_tipe_kos', $this->userdetail->tipe_kos)
