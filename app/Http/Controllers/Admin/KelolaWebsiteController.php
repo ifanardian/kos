@@ -79,7 +79,7 @@ class KelolaWebsiteController extends Controller
         ]);
         $panorama = MsPanorama::findOrFail($request->id);
 
-        if ((int)$request->default == 1) {
+        if ((int)$request->default === 1 && $panorama->default !== 1) {
             MsPanorama::query()->update(['default' => 0]);
             $panorama->update(['default' => 1]);
         }
