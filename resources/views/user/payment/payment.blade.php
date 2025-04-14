@@ -97,7 +97,7 @@
                                 </li>--}}
                                 <li>
                                     <p>Tanggal Jatuh Tempo</p><span>:
-                                        {{ \Carbon\Carbon::parse($payment->created_at)->subDay()->format('d M Y') }}</span>
+                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span>
                                 </li>
                                 <li>
                                     <p>Nama Lengkap</p>

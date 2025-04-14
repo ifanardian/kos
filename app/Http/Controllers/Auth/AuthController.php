@@ -29,8 +29,10 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        $penyewa = Penyewa::where('email', $request->email)->first();
-
+        $penyewa = Penyewa::where('email', $request->email)
+                  ->orderBy('created_at', 'desc') // urutkan dari paling baru
+                  ->first(); // ambil satu saja yang paling baru
+                  
         // Jika email tidak terdaftar di tabel penyewa
         // if (!$penyewa) {
         //     return back()->withErrors([
@@ -38,11 +40,11 @@ class AuthController extends Controller
         //     ]);
         // }
         
-        // if ($penyewa && !$penyewa->status_penyewaan) {
-        //     return back()->withErrors([
-        //         'error' => 'Akun Anda nonaktif dan tidak bisa login.',
-        //     ]);
-        // }
+        if ($penyewa && !$penyewa->status_penyewaan) {
+            return back()->withErrors([
+                'error' => 'Akun Anda nonaktif dan tidak bisa login.',
+            ]);
+        }
         
         if (Auth::attempt($credentials)) {
             return redirect(Auth::user()->isAdmin() ? '/admin' : '/');

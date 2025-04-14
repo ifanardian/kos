@@ -26,10 +26,14 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Penghuni</h1>
+        <h1 class="h3 mb-0 text-gray-800">Data Penghunii</h1>
         {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
     </div>
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahModal">
+        <i class="bi bi-person-plus-fill"></i> Tambah Penghuni
+    </button>
+    
 
     <!-- Content Row -->
     <div class="row">
@@ -280,7 +284,85 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    {{-- Modal tambah penghuni --}}
+    <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('admin.penyewa.tambah') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahModalLabel">Tambah Penghuni Baru</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nama</label>
+                            <input type="text" class="form-control" name="nama" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nomor Telepon</label>
+                            <input type="text" class="form-control" name="no_telepon" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tipe Kos</label>
+                            <select class="form-control" name="tipe_kos" required>
+                                @foreach($msTipe as $t)
+                                    <option value="{{ $t->id_tipe_kos }}">{{ $t->deskripsi }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Alamat</label>
+                            <textarea class="form-control" name="alamat" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Foto KTP</label>
+                            <input type="file" class="form-control" name="ktp" accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tanggal Booking</label>
+                            <input type="date" class="form-control" name="tanggal_booking" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tanggal Menyewa</label>
+                            <input type="date" class="form-control" name="tanggal_menyewa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tanggal Jatuh Tempo</label>
+                            <input type="date" class="form-control" name="tanggal_jatuh_tempo" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">No Kamar</label>
+                            <select class="form-control" name="no_kamar" required>
+                                @foreach(DB::table('kamar')->where('status','F')->get() as $k)
+                                    <option value="{{ $k->id_kamar }}">No. {{ $k->id_kamar }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status Penyewaan</label>
+                            <select class="form-control" name="status_penyewaan">
+                                <option value="1" selected>Aktif</option>
+                                <option value="0">Nonaktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Modal Edit Penghuni-->
 <div class="modal fade" id="tagihanModal" tabindex="-1" aria-labelledby="tagihanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg"> <!-- Tambahkan modal-lg agar lebih lebar -->
         <div class="modal-content">
