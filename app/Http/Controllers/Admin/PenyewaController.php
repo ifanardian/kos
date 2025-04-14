@@ -11,14 +11,17 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Mail\SetPasswordMail;
-use App\Models\{Penyewa, Mstipekos, Kamar, Users};
+use App\Models\{Penyewa, Mstipekos, Kamar, Users, Payment};
 
 
 class PenyewaController extends Controller
 {
     public function penyewa()
     {
-        $penghuniAktif = Penyewa::whereNull('tanggal_berakhir')->get();
+        // $penghuniAktif = Penyewa::whereNull('tanggal_berakhir')->get();
+        $penghuniAktif = Penyewa::where('status_penyewaan', 1)
+            ->whereNull('tanggal_berakhir')
+            ->get();
         $penghuniRiwayat = Penyewa::whereNotNull('tanggal_berakhir')->get();
         $msTipe = Mstipekos::orderBy('id_tipe_kos', 'asc')->get();
 
@@ -74,45 +77,76 @@ class PenyewaController extends Controller
     public function tambahPenyewa(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:penyewa',
+            'email' => 'required|email|unique:users,email',
             'nama' => 'required|string',
             'no_telepon' => 'required|string',
             'tipe_kos' => 'required|string',
             'alamat' => 'required|string',
             'tanggal_booking' => 'required|date',
             'tanggal_menyewa' => 'required|date',
-            'tanggal_jatuh_tempo' => 'required|date',
             'no_kamar' => 'required',
             'status_penyewaan' => 'required|boolean',
             'ktp' => 'required|mimes:jpeg,png,jpg|max:2048',
         ]);
+        
 
-        $fileName = $request->email . '-' . time() . '.' . $request->file('ktp')->extension();
-        $request->file('ktp')->storeAs('ktp', $fileName);
+        DB::beginTransaction();
 
-        $penyewa = new Penyewa();
-        $penyewa->fill($request->except('ktp'));
-        $penyewa->ktp = $fileName;
-        $penyewa->save();
+        try {
+            // Simpan file KTP
+            $fileName = $request->email . '-' . time() . '.' . $request->file('ktp')->extension();
+            $request->file('ktp')->storeAs('ktp', $fileName);
 
-        Kamar::where('id_kamar', $request->no_kamar)->update(['status' => 'T']);
+            $penyewa = Penyewa::create([
+                'email' => $request->email,
+                'nama' => $request->nama,
+                'no_telepon' => $request->no_telepon,
+                'no_kamar' => $request->no_kamar,
+                'tipe_kos' => $request->tipe_kos,
+                'alamat' => $request->alamat,
+                'ktp' => $fileName,
+                'status_penyewaan' => 1,
+                'tanggal_booking' => $request->tanggal_booking,
+                'tanggal_menyewa' => $request->tanggal_menyewa,
+                'tanggal_jatuh_tempo' => $request->tanggal_menyewa,
+                'tanggal_berakhir' => null,
+            ]);
 
-        // (Opsional) Tambahkan akun user juga jika perlu
-        // User::create([
-        //     'email' => $request->email,
-        //     'password' => Hash::make('default123'), // default password
-        //     'role' => 'penyewa',
-        // ]);
+            // Update status kamar menjadi Terisi (T)
+            Kamar::where('id_kamar', $request->no_kamar)->update(['status' => 'T']);
 
-        Users::create([
-            'email' => $penyewa->email,
-            'id_penyewa' => $penyewa->id, // pastikan 'id' adalah primary key dari penyewa
-            'password' => null, // atau kosongkan agar wajib reset password
-            'role' => 'user', // default sesuai struktur kamu
-        ]);
+            // Buat akun user
+            Users::create([
+                'email' => $penyewa->email,
+                'id_penyewa' => $penyewa->id_penyewa,
+                'password' => null, // kosongkan agar harus setel ulang 
+                'role' => 'user',
+            ]);
 
+            // Ambil harga kos berdasarkan tipe
+            $hargaKos = DB::table('ms_tipe_kos')->where('id_tipe_kos', $request->tipe_kos)->value('harga');
 
-        return redirect()->back()->with('success', 'Penyewa baru berhasil ditambahkan.');
+            // Tambah data pembayaran pertama
+            Payment::create([
+                'id_penyewa' => $penyewa->id_penyewa,
+                'periode_tagihan' => $penyewa->tanggal_menyewa, // atau booking tergantung logika kamu
+                'id_kamar' => $penyewa->no_kamar,
+                'total_tagihan' => $hargaKos,
+                'metode_pembayaran' => null,
+                'tanggal_pembayaran' => null,
+                'bukti_pembayaran' => null,
+                'status_verifikasi' => null
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Penyewa baru berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'Gagal menambahkan penyewa: ' . $e->getMessage());
+        }
     }
+
 
 }
