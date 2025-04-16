@@ -9,22 +9,12 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Riwayat Pembayaran</h1>
-        {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
     </div>
 
     <div class="col-xl col-lg-7">
         <div class="card shadow mb-4">
             <!-- Card Body -->
             <div class="card-body">
-                {{-- <form action="#" method="GET" class="mb-3">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama atau email penyewa" value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">Cari</button>
-                        </div>
-                    </div>
-                </form> --}}
                 <div class="d-flex justify-content-end">
                     <form method="GET" action="{{ route('admin.payment') }}" class="mb-3" id="searchForm">
                         <div class="input-group position-relative" style="width: 450px;">
@@ -37,7 +27,6 @@
                                 value="{{ request('search') }}"
                             >
                     
-                            {{-- Tombol Clear, tampil jika input tidak kosong --}}
                             @if(request('search'))
                                 <button 
                                     type="button" 

@@ -10,7 +10,9 @@ use App\Models\MsTipeKos;
 class KelolaKamarController extends Controller
 {
     public function ShowIndex(){
-        $kamar = Kamar::with(['penyewa.tipeKos'])->orderBy('id_kamar', 'ASC')->get();
+        $kamar = Kamar::with(['penyewa.tipeKos'])
+            ->orderByRaw('CAST(id_kamar AS UNSIGNED) ASC')
+            ->get();
         $msTipe = MsTipeKos::all();
         return view('admin.kamar.kamar', compact('kamar', 'msTipe'));
     }

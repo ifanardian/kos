@@ -71,7 +71,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-7 col-xl-10 order-2 order-lg-1">
 
-                                    <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Password</p>
+                                    <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create New Password</p>
                                     @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -118,37 +118,5 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{{-- <script>
-  $(document).ready(function(){
-      $('#registerForm').on('submit', function(event){
-          event.preventDefault();
-          let username = $('#username').val();
-          let email = $('#email').val();
-          let password = $('#password').val();
-          let firstName = $('#first_name').val();
-          let lastName = $('#last_name').val();
-
-          $.ajax({
-              url: '/actionregister',
-              method: 'POST',
-              contentType: 'application/json',
-              data: JSON.stringify({
-                  username: username,
-                  email: email,
-                  password: password,
-                  first_name: firstName,
-                  last_name: lastName
-              }),
-              success: function(response){
-                  alert("Registration successful");
-                  window.location.href = '/login';
-              },
-              error: function(xhr, status, error){
-                alert("Registration failed. Please fill out all field");
-              }
-          });
-      });
-  });
-</script> --}}
 
 </html>

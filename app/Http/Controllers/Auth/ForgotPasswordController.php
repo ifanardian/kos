@@ -32,10 +32,7 @@ class ForgotPasswordController extends Controller
     public function showCreatePasswordForm(Request $request)
     {
         $email = $request->query('email');
-        // old
-        // return view('auth.create_password', compact('email'));
-
-        // fiona ganti ke tampilan baru
+        
         return view('auth.register', compact('email'));
     }
 
@@ -53,18 +50,12 @@ class ForgotPasswordController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Update user's password
         $user = Users::where('email', $request->email)->first();
         $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect()->route('login')->with('status', 'Your password has been set. Please log in.');
     }
-
-    // public function showForgetPasswordForm()
-    // {
-    //     return view('auth.register');
-    // }
 
     public function sendResetLinkEmail(Request $request)
     {

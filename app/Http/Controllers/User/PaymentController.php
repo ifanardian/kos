@@ -81,6 +81,8 @@ class PaymentController extends Controller
             $tagihan = DB::table('ms_tipe_kos')
                         ->where('id_tipe_kos', $penyewa->tipe_kos)
                         ->first();
+
+            $bulan = $tagihan->bulan;
             
             DB::table('payments')
                 ->insert([

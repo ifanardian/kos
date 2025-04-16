@@ -4,8 +4,6 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    {{-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> --}}
-    <!-- <title>dashboard</title> -->
     <title>@yield('title')</title>
     <link rel="icon" href="{{ asset('images/luck.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
@@ -45,6 +43,9 @@
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#facility">Facility</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="https://wa.me/6281354190343?text=Halo,%20ingin%20tanya%20seputar%20kos">Contact</a>
@@ -115,7 +116,7 @@
                 <div class="col-md-4 info_section">
                     <div class="single_footer_part">
                         <h4>Alamat Lengkap</h4>
-                        <p>Jl. Anggrek No. 5, Jakarta, Indonesia</p>
+                        <p>Mangunsari, Sidomukti, Salatiga City, Central Java</p>
                     </div>
                     <div class="single_footer_part">
                         <h4>Jam Operasional</h4>
@@ -123,15 +124,13 @@
                     </div>
                     <div class="single_footer_part">
                         <h4>Kontak</h4>
-                        <p>WhatsApp: +XXXXXXXXXXXXX</p>
+                        <p>WhatsApp: +6281354190343</p>
                     </div>
                     <div class="single_footer_part">
                         <h4>Social</h4>
                         <div class="footer_icon social_icon">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fas fa-globe"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -150,23 +149,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const navbar = document.querySelector('.main_menu');
-        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); // Semua elemen link navbar
+        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); 
 
         window.addEventListener('scroll', () => {
             const bannerHeight = document.querySelector('.banner_part').offsetHeight;
 
             if (window.scrollY > bannerHeight) {
-                // Ubah warna navbar dan font setelah scroll
                 navbar.style.background = '#7cafc8';
                 navLinks.forEach(link => {
-                    link.style.color = '#fff'; // Warna font terang untuk background solid
+                    link.style.color = '#fff';
                 });
             } else {
-                // Kembalikan warna navbar dan font ke default saat di atas banner
-                navbar.style.background = 'transparent'; // Transparan sebelum scroll
+                navbar.style.background = 'transparent'; 
                 navbar.style.boxShadow = 'none';
                 navLinks.forEach(link => {
-                    link.style.color = '#000'; // Warna font gelap untuk background terang
+                    link.style.color = '#000'; 
                 });
             }
         });

@@ -22,7 +22,7 @@
     }
     
     .row-grid {
-        width: 75%;
+        width: 80%;
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
@@ -30,10 +30,10 @@
         justify-content: center;
         align-items: center;
         margin: auto;
-        margin-top: 8rem; /* Jarak antara grid foto dan elemen sebelumnya */
         height: auto; /* Sesuaikan tinggi agar tidak bertindih */
         position: relative; /* Pastikan posisi relatif */
         z-index: 0; /* Pastikan grid foto berada di bawah */
+        margin-bottom: 3rem;
     }
 
     .column {
@@ -120,8 +120,6 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Website</h1>
-        {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
     </div>
 
     <!-- Card Panorama -->
@@ -135,7 +133,7 @@
                     <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                         data-bs-toggle="modal" data-bs-target="#tambahModal">
                         <i class='fas fa-plus fa-sm text-white-50'></i>
-                        Tambah Data
+                        Tambah Panorama
                     </button>
                 </div>
             </div>
@@ -171,13 +169,9 @@
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Photo Grid</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                </div>
             </div>
+            
+            <p class="text-center" style="font-size: 15px; font-weight: bold; color:#4b6fdb; margin-top:1rem;">Klik gambar untuk edit.</p>
                 <div class="row-grid dark-bg">
                     <?php
                         for($i = 0 ; $i<6;$i++){
@@ -225,7 +219,7 @@
                     </div>    
                     <div class="mb-3">
                         <input type="hidden" id="id_gambar" name="id_gambar">
-                        <label for="gambar" class="form-label" style="padding: 5px;">Gambar</label>
+                        <label for="gambar" class="form-label" style="padding: 5px;">Ubah Gambar</label>
                         <input style="width: min-content;" type="file" class="form-control-file" id="gambar"
                             name="gambar" accept="image/*">
                     </div>
@@ -373,12 +367,11 @@
                     'yaw': 0, // Kunci posisi yaw
                     'pitch': 0, // Kunci posisi pitch
                     'hfov': 85,
-                    'draggable': false, // Nonaktifkan drag dengan mouse
+                    'draggable': true, // Nonaktifkan drag dengan mouse
                     'mouseZoom': false, // Nonaktifkan zoom dengan scroll
                     'showControls': false, // Sembunyikan tombol navigasi
                 });
 
-                // Set nilai input sesuai dengan posisi awal
                 document.getElementById("yaw").value = viewer.getYaw();
                 document.getElementById("pitch").value = viewer.getPitch();
                 document.getElementById("hfov").value = viewer.getHfov() * -1;
@@ -387,7 +380,6 @@
         }
     }
 
-    // Event listener untuk mengubah tampilan panorama saat input diubah
     document.getElementById("yaw").addEventListener("input", function () {
         if (viewer) viewer.setYaw(parseFloat(this.value));
     });
@@ -441,7 +433,7 @@
             'yaw': Number(data.yaw),
             'pitch': Number(data.pitch),
             'hfov': Number(data.hfov),
-            'draggable': false,
+            'draggable': true,
             'mouseZoom': false,
             'showControls': false,
         });
@@ -465,7 +457,6 @@
         }
     }
 
-    // Event listener untuk mengubah tampilan panorama saat input diubah
     document.getElementById("yawedit").addEventListener("input", function () {
         if (viewer) viewer.setYaw(parseFloat(this.value));
     });
@@ -523,14 +514,11 @@
             selectElement.value = hotspotId.scene;
         }
 
-        // Tambahkan event listener ke input baru
         hotspotDiv.querySelectorAll(".hotspot-input").forEach(input => {
             input.addEventListener("input", updateHotspotPreview);
-            // **Trigger event input secara otomatis**
             input.dispatchEvent(new Event("input"));
         });
 
-        // Event listener untuk tombol hapus
         hotspotDiv.querySelector(".remove-hotspot").addEventListener("click", function () {
 
             let status = removeHotspotFromViewer(hotspotId.id_hotspot);
@@ -546,7 +534,6 @@
         addHotspot();
     });
 
-    // Fungsi untuk memperbarui hotspot di preview
     function updateHotspotPreview() {
         let hotspotContainer = document.getElementById("hotspotContainer");
         let hotspots = [];
@@ -568,11 +555,9 @@
             });
         });
 
-        // Update viewer dengan hotspot baru
         updatePannellumHotspots(hotspots);
     }
 
-    // Fungsi untuk memperbarui daftar hotspot di pannellum
     function updatePannellumHotspots(hotspots) {
         if (viewer) {
             viewer.destroy();
@@ -584,7 +569,7 @@
             'yaw': Number(document.getElementById("yawedit").value),
             'pitch': Number(document.getElementById("pitchedit").value),
             'hfov': Number(document.getElementById("hfovedit").value)*-1,
-            'draggable': false,
+            'draggable': true,
             'mouseZoom': false,
             'showControls': false,
             'hotSpots': hotspots,
@@ -706,7 +691,5 @@
         });
     });
 </script>
-
-
 
 @endsection

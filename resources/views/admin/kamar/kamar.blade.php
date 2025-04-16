@@ -12,7 +12,6 @@
         border-radius: 0;
         box-shadow: none;
         width: 170px;
-        /* Sesuaikan lebar input */
         display: inline-block;
     }
 
@@ -100,7 +99,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Kelola Kamar</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Daftar Kamar</h6>
                 <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#editModal2">
                     <i class='fas fa-plus fa-sm text-white-50'></i> Tambah Data
                 </button>
@@ -240,11 +239,6 @@
         </div>
     </div>
 </div>
-
-
-<!-- /.container-fluid -->
-
-
 
 <script>
     function formatCurrency(value) {

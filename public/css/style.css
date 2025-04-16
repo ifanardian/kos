@@ -2685,6 +2685,7 @@ ul {
 /* line 47, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_confirmation_part.scss */
 .confirmation_part .order_details_iner {
     margin-top: 50px;
+    margin-bottom: 5rem;
     background-color: #ceeffb;
     padding: 30px 30px 15px;
     text-transform: capitalize;

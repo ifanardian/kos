@@ -5,8 +5,6 @@ use App\Http\Controllers\Admin\{IndexController, AdminBookingController, AdminPa
 use App\Http\Controllers\User\{BookingController, DashboardController, PaymentController};
 use App\Http\Controllers\Auth\{AuthController, ForgotPasswordController};
 
-use App\Http\Controllers\AdminController;
-
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('login', [AuthController::class, 'viewLogin'])->name('login');
@@ -66,22 +64,3 @@ Route::middleware(['auth','admin'])->group(function () {
 
     });
 });
-
-
-
-// FIONA
-
-// admin
-Route::get('/cdashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin'); // sudah tak pindah ke admin/
-Route::get('/cpenyewaadmin', [AdminController::class, 'penyewaAdmin'])->name('penyewaadmin');
-Route::get('/ckamaradmin', [AdminController::class, 'kamarAdmin'])->name('kamaradmin');
-Route::get('/criwayatadmin', [AdminController::class, 'riwayatAdmin'])->name('riwayatadmin');
-Route::get('/cverifikasiadmin', [AdminController::class, 'verifikasiAdmin'])->name('verifikasiadmin');
-Route::get('/cwebsiteadmin', [AdminController::class, 'websiteAdmin'])->name('websiteadmin');
-
-// user
-Route::get('/cbooking', [AdminController::class, 'booking'])->name('cobabooking');
-Route::get('/cpayment', [AdminController::class, 'payment'])->name('cobapayment');
-Route::get('/ctagihan', [AdminController::class, 'tagihan'])->name('cobatagihan');
-
-Route::get('/cpassword', [AdminController::class, 'password'])->name('cobapassword');

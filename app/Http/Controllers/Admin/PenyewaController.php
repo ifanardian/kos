@@ -82,7 +82,6 @@ class PenyewaController extends Controller
             'no_telepon' => 'required|string',
             'tipe_kos' => 'required|string',
             'alamat' => 'required|string',
-            'tanggal_booking' => 'required|date',
             'tanggal_menyewa' => 'required|date',
             'no_kamar' => 'required',
             'status_penyewaan' => 'required|boolean',
@@ -93,6 +92,10 @@ class PenyewaController extends Controller
         DB::beginTransaction();
 
         try {
+            $tanggalMenyewa = Carbon::parse($request->tanggal_menyewa);
+            $tanggalBooking = $tanggalMenyewa->copy(); 
+            $tanggalJatuhTempo = $tanggalMenyewa->copy(); 
+
             // Simpan file KTP
             $fileName = $request->email . '-' . time() . '.' . $request->file('ktp')->extension();
             $request->file('ktp')->storeAs('ktp', $fileName);
@@ -106,9 +109,9 @@ class PenyewaController extends Controller
                 'alamat' => $request->alamat,
                 'ktp' => $fileName,
                 'status_penyewaan' => 1,
-                'tanggal_booking' => $request->tanggal_booking,
-                'tanggal_menyewa' => $request->tanggal_menyewa,
-                'tanggal_jatuh_tempo' => $request->tanggal_menyewa,
+                'tanggal_booking' => $tanggalBooking->toDateString(),
+                'tanggal_menyewa' => $tanggalMenyewa->toDateString(),
+                'tanggal_jatuh_tempo' => $tanggalJatuhTempo->toDateString(),
                 'tanggal_berakhir' => null,
             ]);
 
@@ -129,13 +132,20 @@ class PenyewaController extends Controller
             // Tambah data pembayaran pertama
             Payment::create([
                 'id_penyewa' => $penyewa->id_penyewa,
-                'periode_tagihan' => $penyewa->tanggal_menyewa, // atau booking tergantung logika kamu
+                'periode_tagihan' => $penyewa->tanggal_menyewa, 
                 'id_kamar' => $penyewa->no_kamar,
                 'total_tagihan' => $hargaKos,
-                'metode_pembayaran' => null,
-                'tanggal_pembayaran' => null,
+                'metode_pembayaran' => 'Tunai',
+                'tanggal_pembayaran' => $tanggalJatuhTempo->toDateString(),
                 'bukti_pembayaran' => null,
-                'status_verifikasi' => null
+                'status_verifikasi' => 1
+            ]);
+
+            $langganan = MsTipeKos::findOrFail($penyewa->tipe_kos);
+
+            // Update tanggal jatuh tempo berdasarkan tipe kos
+            $penyewa->update([
+                'tanggal_jatuh_tempo' => Carbon::parse($penyewa->tanggal_menyewa)->addMonths($langganan->bulan)->format('Y-m-d'),
             ]);
 
             DB::commit();

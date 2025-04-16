@@ -3,22 +3,6 @@
 
 @push('styles')
 <style>
-    /* .banner_part {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        min-height: 100vh;
-        background-image: url("{{ asset('images/houses.png') }}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        overflow: hidden;
-        width: 100%;
-        height: auto;
-    } */
 
     .banner_part {
         display: flex;
@@ -35,19 +19,19 @@
         overflow: hidden;
         width: 100%;
         height: auto;
-        padding: 20px; /* Tambahkan padding untuk mobile */
+        padding: 20px; 
     }
 
     .banner_text_iner p {
-        white-space: nowrap; /* Mencegah teks turun ke baris berikutnya */
+        white-space: nowrap; 
         overflow: hidden;
-        text-overflow: ellipsis; /* Tambahkan elipsis jika teks terlalu panjang */
+        text-overflow: ellipsis; 
     }
 
     @media (max-width: 768px) {
         .banner_text_iner p {
-            white-space: normal; /* Izinkan teks turun ke baris berikutnya pada layar kecil */
-            word-break: break-word; /* Pecah kata jika terlalu panjang */
+            white-space: normal; 
+            word-break: break-word; 
         }
     }
 
@@ -57,12 +41,6 @@
 @section('content')
 <!-- banner part start-->
 <section class="banner_part">
-    {{-- <div class="banner_video">
-        <video autoplay muted loop>
-            <source src="{{ asset('images/leaf.mp4') }}" type="video/mp4">
-    Your browser does not support the video tag.
-    </video>
-    </div> --}}
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
@@ -100,7 +78,6 @@
                                 echo '"firstScene": "' . $defaultScene->id_panorama . '",';
                             }
                         ?>
-                        // "author": "Matthew Petroff",
                         "sceneFadeDuration": 1000,
                         "autoLoad": true
                     },
@@ -108,12 +85,6 @@
                         <?php
                             foreach($panorama as $p){
                                 $hotspots = '';
-                                // $temp = DB::Select("
-                                //     SELECT h.pitch, h.yaw, p.text, h.scene
-                                //     FROM panorama_hotspots h
-                                //     JOIN ms_panorama p ON h.scene = p.id
-                                //     WHERE h.id_panorama = ".$p->id.";
-                                // ");
                                 $temp = $p->hotspots;
                                 // dd($p);
                                 if(count($temp) > 0){
@@ -149,9 +120,10 @@
         </script>
         </div>
     </div>
+    
 <?php endif; ?>
 {{-- CARD FASILITAS --}}
-<div class="ag-format-container mt-4 mb-5">
+<div class="ag-format-container mt-4 mb-5" id="facility">
     <div class="ag-courses_box">
         <div class="ag-courses_item">
             <a class="ag-courses-item_link">
@@ -271,23 +243,21 @@
 {{-- @push('scripts')
     <script>
         const navbar = document.querySelector('.main_menu');
-        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); // Semua elemen link navbar
+        const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); 
 
         window.addEventListener('scroll', () => {
             const bannerHeight = document.querySelector('.banner_part').offsetHeight;
 
             if (window.scrollY > bannerHeight) {
-                // Ubah warna navbar dan font setelah scroll
                 navbar.style.background = '#7cafc8';
                 navLinks.forEach(link => {
-                    link.style.color = '#fff'; // Warna font terang untuk background solid
+                    link.style.color = '#fff'; 
                 });
             } else {
-                // Kembalikan warna navbar dan font ke default saat di atas banner
-                navbar.style.background = 'transparent'; // Transparan sebelum scroll
+                navbar.style.background = 'transparent'; 
                 navbar.style.boxShadow = 'none';
                 navLinks.forEach(link => {
-                    link.style.color = '#000'; // Warna font gelap untuk background terang
+                    link.style.color = '#000'; 
                 });
             }
         });
