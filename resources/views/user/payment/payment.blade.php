@@ -36,7 +36,7 @@
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
                         <h2>Payment Confirmation</h2>
-                        <p>Home <span>-</span> Order Confirmation</p>
+                        <p>Home <span>-</span> Payment Confirmation</p>
                     </div>
                 </div>
             </div>
@@ -92,9 +92,16 @@
                         <ul>
                             {{-- saat baru pertama kali bayar kos --}}
                             @if($isFirstPayment)
-                                {{--<li>
-                                    <p>order number</p><span>: {{$payment->id_penyewa}}_{{$payment->periode_tagihan}}</span>
-                                </li>--}}
+                                <li>
+                                    <p>Tanggal Pemesanan</p>
+                                    <span>:
+                                        {{\Carbon\Carbon::parse($detailPenyewa->tanggal_booking)->format('d M Y')}}</span>
+                                </li>
+                                <li>
+                                    <p>Periode Penempatan</p>
+                                    <span>: {{ \Carbon\Carbon::parse($payment->periode_tagihan)->format('d M Y') }} -
+                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->addMonth()->format('d M Y') }}</span>
+                                </li>
                                 <li>
                                     <p>Tanggal Jatuh Tempo</p><span>:
                                         {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span>
@@ -116,17 +123,22 @@
                                     <span>:
                                         {{ DB::table('ms_tipe_kos')->where('id_tipe_kos', $detailPenyewa->tipe_kos)->value('deskripsi') }}</span>
                                 </li>
-                                <li>
-                                    <p>Periode Penempatan</p>
-                                    <span>: {{ \Carbon\Carbon::parse($payment->periode_tagihan)->format('d M Y') }} -
-                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->addMonth()->format('d M Y') }}</span>
-                                </li>
-                                <li>
-                                    <p>Tanggal Pemesanan</p>
-                                    <span>:
-                                        {{\Carbon\Carbon::parse($detailPenyewa->tanggal_booking)->format('d M Y')}}</span>
-                                </li>
                             @else
+                                <li>
+                                    <p>Masa Penempatan</p>
+                                    @php
+                                        $bulan = DB::table('ms_tipe_kos')->where('id_tipe_kos', $detailPenyewa->tipe_kos)->value('bulan');
+                                    @endphp
+                                    <span>:
+                                    {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->format('d M Y') }} - 
+                                    {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->addMonths($bulan)->format('d M Y') }}
+                                    </span>
+
+                                </li>
+                                <li>
+                                    <p>Tanggal Jatuh Tempo</p>
+                                    <span>: {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') }}</span>
+                                </li>
                                 <li>
                                     <p>Nama Lengkap</p>
                                     <span>: {{$detailPenyewa->nama}}</span>
@@ -134,14 +146,6 @@
                                 <li>
                                     <p>Status</p>
                                     <span>: {{$detailPenyewa->status_penyewaan == 1 ? 'Aktif' : 'Tidak Aktif'}}</span>
-                                </li>
-                                <li>
-                                    <p>Masa Penempatan</p>
-                                    <span>: {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subMonth()->format('d M Y') }} - {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') }}</span>
-                                </li>
-                                <li>
-                                    <p>Tanggal Jatuh Tempo</p>
-                                    <span>: {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->subDay()->format('d M Y') }}</span>
                                 </li>
                                 <li>
                                     <p>Tipe Langganan</p>
@@ -159,10 +163,7 @@
                     <div class="order_details_iner">
                         <div class="order_header">
                             <h3>Riwayat Pembayaran</h3>
-                            <!-- <a class="btn_3" style="text-decoration: none;" href="{{ route('cobatagihan') }}" >HISTORY PEMBAYARAN</a> -->
                         </div>
-                        {{-- <button class="btn_3" type="submit">LIHAT TAGIHAN BULAN SEBELUMNYA</button>
-                        <h3>Order Details</h3> --}}
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
@@ -176,21 +177,26 @@
                             <tbody>
                                 <?php
                                    $history = DB::table('payments')->where('id_penyewa', $payment->id_penyewa)->get();
+                                //    dd($history);
                                    foreach($history as $h){
                                         $status = '';
-                                        if($h->status_verifikasi == 1 && $h->metode_pembayaran != null){
+                                        if($h->status_verifikasi == '1' && $h->metode_pembayaran != null){
                                             $status = "Lunas";
-                                        }elseif($h->metode_pembayaran == null && $h->status_verifikasi == null){
+                                        }elseif($h->status_verifikasi == null && $h->metode_pembayaran == null){
                                             $status = "Belum Bayar";
-                                        }elseif($h->status_verifikasi == 0 && $h->metode_pembayaran != null){
+                                        }elseif($h->status_verifikasi == '0' && $h->metode_pembayaran != null){
                                             $status = "Ditolak";
                                         }elseif($h->status_verifikasi == null && $h->metode_pembayaran != null){
                                             $status = "Menunggu Konfirmasi";
                                         }   
+
+                                        $tipeKos = DB::table('penyewa')->where('id_penyewa', $h->id_penyewa)->value('tipe_kos');
+                                        $bulan = DB::table('ms_tipe_kos')->where('id_tipe_kos', $tipeKos)->value('bulan');
+
                                         echo "
                                         <tr>
                                                 <th><span>".$h->id_kamar."</span></th>
-                                                <th>".\Carbon\Carbon::parse($h->periode_tagihan)->format('d M Y')." - ".\Carbon\Carbon::parse($h->periode_tagihan)->subDay()->addMonth()->format('d M Y')."</th>
+                                                <th>".\Carbon\Carbon::parse($h->periode_tagihan)->format('d M Y')." - ".\Carbon\Carbon::parse($h->periode_tagihan)->subDay()->addMonths($bulan)->format('d M Y')."</th>
                                                 <th>".\Carbon\Carbon::parse($h->created_at)->format('d M Y')."</th>
                                                 <th>".number_format($h->total_tagihan, 0, ',', '.') ."</th>
                                                 <th>".$status."</th>
@@ -200,14 +206,6 @@
                                 ?>
                                 
                             </tbody>
-                            <!-- <tfoot>
-                                <tr>
-                                    <th scope="col" colspan="3">Grand Total</th>
-                                    <th scope="col">Rp.
-                                        {{-- number_format(DB::table('ms_tipe_kos')->where('id', $detailPenyewa->tipe_kos)->value('harga'), 0, ',', '.') --}}
-                                    </th>
-                                </tr>
-                            </tfoot> -->
                         </table>
                     </div>
                 </div>
@@ -306,27 +304,24 @@
 
 <script>
     const navbar = document.querySelector('.main_menu');
-    const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); // Semua elemen link navbar
+    const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); 
 
     window.addEventListener('scroll', () => {
         const bannerHeight = document.querySelector('.breadcrumb, .breadcrumb_bg').offsetHeight;
 
         if (window.scrollY > bannerHeight) {
-            // Ubah warna navbar dan font setelah scroll
-            navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
+            navbar.style.background = '#7cafc8'; 
             navLinks.forEach(link => {
-                link.style.color = '#fff'; // Warna font terang untuk background solid
+                link.style.color = '#fff'; 
             });
         } else {
-            // Kembalikan warna navbar dan font ke default saat di atas banner
-            navbar.style.background = 'transparent'; // Transparan sebelum scroll
+            navbar.style.background = 'transparent'; 
             navbar.style.boxShadow = 'none';
             navLinks.forEach(link => {
-                link.style.color = '#e5e5d2'; // Warna font gelap untuk background terang
+                link.style.color = '#e5e5d2'; 
             });
         }
     });
 
 </script>
-{{-- @endpush --}}
 @endsection

@@ -18,51 +18,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <title>Login | Kos Fortuna</title>
     <style>
-        /* body {
-            font-family: "Lexend", sans-serif;
-            font-optical-sizing: auto;
-            font-style: normal;
-            letter-spacing: 1px;
-            background-image: url("{{ asset('images/flipped-house.png') }}");
-            background-size: cover;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            overflow: hidden;
-        }
-
-        .form-control {
-            border: none;
-            border-bottom: 2px solid #ccc;
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        .form-control:focus {
-            border-bottom: 2px solid #007bff;
-            outline: none;
-            box-shadow: none;
-        }
-
-        .form-label {
-            font-weight: bold;
-        }
-
-        .alert {
-            margin-top: 20px;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        } */
-
         body{
             margin: 0;
             padding: 0;
@@ -76,7 +31,6 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             overflow: hidden;
-            /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
         }
         .main{
             width: 450px;
@@ -176,16 +130,6 @@
             padding: 80px;
             transform: scale(.6);
         }
-        /* .btn-close-custom {
-            background: none;
-            border: none;
-            font-size: 0.5rem; 
-            color: #000; 
-            line-height: 1;
-            padding: 0;
-            cursor: pointer;
-        } */
-
         
     </style>
 </head>
@@ -195,25 +139,6 @@
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="login">
-                {{-- @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-
-                <!-- Tampilkan pesan error jika ada -->
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif --}}
-                
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -250,62 +175,6 @@
 				</form>
 			</div>
 	</div>
-    {{-- <section class="vh-100">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-lg-10 col-xl-5">
-                    <div class="card text-black" style="border-radius: 25px;">
-                        <div class="card-body p-md-5">
-                            <div class="row justify-content-center">
-                                <div class="col-md-10 col-lg-5 col-xl-10 order-2 order-lg-1">
-                                    @if (session('success'))
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            {{ session('success') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    @endif
-
-                                    @if ($errors->has('error'))
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            {{ $errors->first('error') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    @endif
-                                    <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
-
-                                    <form method="POST" action="{{ route('login') }}" id="loginForm"
-                                        class="mx-1 mx-md-8">
-                                        @csrf
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <label class="form-label" for="form3Example1c">Email</label>
-                                                <input type="email" id="email" name="email" class="form-control" />
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-5">
-                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <label class="form-label" for="form3Example4c">Password</label>
-                                                <input type="password" id="password" name="password"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="password text-center">
-                                            <button class="btn_3" type="submit" value="submit">Login</button>
-                                        </div>
-
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

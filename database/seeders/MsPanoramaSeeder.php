@@ -37,5 +37,13 @@ class MsPanoramaSeeder extends Seeder
             'yaw' => '170',
             'default' => 0,
         ]);
+        MsPanorama::create([
+            'text' => 'Tampak Depan',
+            'namafile'=> '1744037074_dpn.JPG',
+            'hfov'=> '107',
+            'pitch' => '-1.5',
+            'yaw' => '-174',
+            'default' => 0,
+        ]);
     }
 }

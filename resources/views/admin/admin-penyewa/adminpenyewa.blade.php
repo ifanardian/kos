@@ -201,7 +201,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit-no_telepon" class="form-label">Nomor Telepon</label>
-                            <input type="text" class="form-control" id="edit-no_telepon" name="no_telepon" required>
+                            <input type="number" class="form-control" id="edit-no_telepon" name="no_telepon" required>
                         </div>
                         <div class="mb-3">
                             <label for="edit-tipe_kos" class="form-label">Tipe Kos</label>
@@ -305,7 +305,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Nomor Telepon</label>
-                            <input type="text" class="form-control" name="no_telepon" required>
+                            <input type="number" class="form-control" name="no_telepon" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Tipe Kos</label>
@@ -323,18 +323,18 @@
                             <label class="form-label">Foto KTP</label>
                             <input type="file" class="form-control" name="ktp" accept="image/*" required>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label">Tanggal Booking</label>
                             <input type="date" class="form-control" name="tanggal_booking" required>
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label class="form-label">Tanggal Menyewa</label>
                             <input type="date" class="form-control" name="tanggal_menyewa" required>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label">Tanggal Jatuh Tempo</label>
                             <input type="date" class="form-control" name="tanggal_jatuh_tempo" required>
-                        </div>
+                        </div> --}}
                         
                         <div class="mb-3">
                             <label class="form-label">No Kamar</label>

@@ -30,8 +30,8 @@ class AuthController extends Controller
         ]);
 
         $penyewa = Penyewa::where('email', $request->email)
-                  ->orderBy('created_at', 'desc') // urutkan dari paling baru
-                  ->first(); // ambil satu saja yang paling baru
+                  ->orderBy('created_at', 'desc') 
+                  ->first(); 
                   
         // Jika email tidak terdaftar di tabel penyewa
         // if (!$penyewa) {
@@ -48,14 +48,6 @@ class AuthController extends Controller
         
         if (Auth::attempt($credentials)) {
             return redirect(Auth::user()->isAdmin() ? '/admin' : '/');
-            // $request->session()->regenerate();
-            // $user = Auth::user();
-            // if ($user->role === 'admin') {
-            //     return redirect()->route('admin.dashboard');
-            // }else{
-            //     return redirect()->route('dashboard');
-            // }
-            // return redirect()->route('dashboard');
         }
         Auth::logout();
         return back()->withErrors([
@@ -102,7 +94,7 @@ class AuthController extends Controller
 
     public function logout(){
         
-        Auth::guard('web')->logout(); // Pastikan menggunakan guard 'web'
+        Auth::guard('web')->logout(); 
         Session::flush();
         return redirect()->route('dashboard');
     }

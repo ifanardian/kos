@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-md-11 form-group p_star">
                             <label for="no_hp">No HP (WhatsApp)</label>
-                            <input type="text" class="form-control" id="no_hp" name="no_hp" required />
+                            <input type="number" class="form-control" id="no_hp" name="no_hp" required />
                         </div>
                         <div class="col-md-11 form-group p_star">
                             <label for="email">Alamat Email</label>
@@ -75,8 +75,8 @@
                         </div>
                         <div class="col-md-11 form-group p_star">
                             <label for="tipe_kos">Tipe Kamar</label>
-                            <select class="form-control" id="tipe_kos" name="tipe_kos">
-                                <option value="">-- Pilih Tipe Kamar --</option>
+                            <select class="form-control" id="tipe_kos" name="tipe_kos" required>
+                                <option value=""> Pilih Tipe Kamar </option>
                                 @foreach ($tipeKos as $tipe)
                                 <option value="{{ $tipe->id_tipe_kos }}"
                                     {{ (isset($selectedTipeKos) && $selectedTipeKos == $tipe->id_tipe_kos) ? 'selected' : '' }}>
@@ -113,17 +113,13 @@
                         <div class="payment_item">
                             <p>
                                 Silahkan isi form untuk melakukan booking kamar kos,
-                                Anda akan bisa melakukan pembayaran setelah admin mengkonfirmasi booking Anda.
-                                Verifikasi akan dikirim via email. Pastikan data yang Anda kirim lengkap dan valid
+                                Anda akan bisa melakukan pembayaran setelah admin mengkonfirmasi ketersediaan kamar dan booking anda dalam 1 x 24 jam.
+                                Verifikasi ketersediaan kamar akan dikirim via email. Pastikan data yang Anda kirim lengkap dan valid.
                             </p>
                         </div>
                         <div class="password text-center">
                             <a class="btn_3" id="bookButton" type="submit">BOOKING</a>
                         </div>
-
-                        {{-- fiona coba popup --}}
-                        {{-- <button class="btn_3" id="bookButton" form="formBook" type="button">BOOK</button> --}}
-                        {{-- end --}}
                     </div>
                 </div>
             </div>
@@ -133,40 +129,30 @@
 
 <!-- custom js -->
 <script src="js/custom.js"></script>
-{{-- lama --}}
-<script>
-    document.getElementById('bookButton').addEventListener('click', function() {
-        document.getElementById('formBook').submit();
-    });
-</script>
-
-{{-- fiona coba validasi form --}}
 <script>
     document.getElementById('bookButton').addEventListener('click', function (event) {
-        // Prevent default submission
+
         event.preventDefault();
 
-        // Select the form and its fields
         const form = document.getElementById('formBook');
         console.log('Form:', form);
         const fields = form.querySelectorAll('[required]');
         let isValid = true;
 
-        // Check each required field
         fields.forEach(field => {
             if (!field.value.trim()) {
                 console.log(`Field ${field.name || field.id} is invalid`);
                 isValid = false;
-                field.classList.add('is-invalid'); // Optional: Add a visual indicator
+                field.classList.add('is-invalid'); 
             } else {
-                field.classList.remove('is-invalid'); // Remove the indicator if valid
+                field.classList.remove('is-invalid'); 
             }
         });
 
-        // If all fields are valid, submit the form
         if (isValid) {
             alert('Booking berhasil! Harap menunggu email.');
-            form.submit();
+            // form.submit();
+            document.getElementById('formBook').submit();
         } else {
             alert('Harap isi semua field yang wajib diisi.');
         }
@@ -176,23 +162,21 @@
 
 <script>
     const navbar = document.querySelector('.main_menu');
-    const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); // Semua elemen link navbar
+    const navLinks = document.querySelectorAll('.nav-link, .navbar-brand, .navbar-toggler'); 
 
     window.addEventListener('scroll', () => {
         const bannerHeight = document.querySelector('.breadcrumb, .breadcrumb_bg').offsetHeight;
 
         if (window.scrollY > bannerHeight) {
-            // Ubah warna navbar dan font setelah scroll
-            navbar.style.background = '#7cafc8'; // Background warna solid setelah scroll
+            navbar.style.background = '#7cafc8';
             navLinks.forEach(link => {
-                link.style.color = '#fff'; // Warna font terang untuk background solid
+                link.style.color = '#fff'; 
             });
         } else {
-            // Kembalikan warna navbar dan font ke default saat di atas banner
-            navbar.style.background = 'transparent'; // Transparan sebelum scroll
+            navbar.style.background = 'transparent'; 
             navbar.style.boxShadow = 'none';
             navLinks.forEach(link => {
-                link.style.color = '#e5e5d2'; // Warna font gelap untuk background terang
+                link.style.color = '#e5e5d2'; 
             });
         }
     });

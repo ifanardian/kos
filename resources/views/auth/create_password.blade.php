@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Password</title>
+    <title>Create New Password</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>

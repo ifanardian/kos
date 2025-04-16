@@ -7,14 +7,12 @@
 <style>
     .nav-tabs .nav-link {
         background-color: #ebe8e8;
-        /* Warna abu-abu untuk tab nonaktif */
         color: black;
         transition: background-color 0.3s, color 0.3s;
     }
 
     .nav-tabs .nav-link.active {
         background-color: #007bff !important;
-        /* Warna biru untuk tab aktif */
         color: white !important;
         font-weight: bold;
     }
@@ -27,8 +25,6 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Verifikasi Calon Penghuni</h1>
-        {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
     </div>
 
     <div class="row">
@@ -51,8 +47,6 @@
                     <div class="card shadow mb-4">
                         <!-- Card Body -->
                         <div class="card-body">
-                            {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a> --}}
                             <div class="table-responsive">
                                 <table class="table table-sm">
                                     <thead class="thead-center">
@@ -63,7 +57,6 @@
                                             <th scope="col">Email</th>
                                             <th scope="col">Alamat</th>
                                             <th scope="col">Tipe Kamar</th>
-                                            <!-- <th scope="col">Harga</th> -->
                                             <th scope="col">KTP</th>
                                             <th scope="col">Tanggal Pemesanan</th>
                                             <th scope="col">Periode Penempatan</th>
@@ -268,8 +261,6 @@
                         ?>
                         
                     </select>
-                    {{-- <label for="modal-room-number" class="form-label">Nomor Kamar</label>
-          <input type="text" class="form-control" id="modal-room-number" placeholder="Masukkan nomor kamar"> --}}
                     <input type="hidden" id="no_form" value="">
                 </div>
             </div>
