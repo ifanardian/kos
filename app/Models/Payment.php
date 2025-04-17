@@ -26,7 +26,7 @@ class Payment extends Model
 
     public function penyewa()
     {
-        return $this->belongsTo(Penyewa::class, 'id_penyewa');
+        return $this->belongsTo(Penyewa::class, 'id_penyewa', 'id_penyewa');
     }
 
 }
