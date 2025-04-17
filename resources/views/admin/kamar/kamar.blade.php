@@ -127,7 +127,10 @@
                         $status = $k->status === 'T' ? 'Tersewa' : 'Kosong';
                         $nama = $k->penyewa->nama ?? '-';
                         $deskripsi = $k->penyewa->tipeKos->deskripsi ?? '-';
-                        $tanggal = $k->penyewa->tanggal_jatuh_tempo ?? '-';
+                        $tanggal = ($k->penyewa && $k->penyewa->tanggal_jatuh_tempo) 
+                            ? date('d-m-Y', strtotime($k->penyewa->tanggal_jatuh_tempo)) 
+                            : '-';
+
                         echo"
                             <tr>
                                 <th scope='row'>".$k->id_kamar."</th>
