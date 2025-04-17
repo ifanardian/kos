@@ -178,7 +178,7 @@
     </div>
 
 
-    <!-- /.container-fluid -->
+    <!-- Modal Edit Penghuni -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -225,7 +225,7 @@
                             <label for="edit-alamat" class="form-label">Alamat</label>
                             <textarea class="form-control" id="edit-alamat" name="alamat" rows="3" required></textarea>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="edit-ktp" class="form-label">Foto KTP</label>
                             <div class="mb-2">
                                 @if (!empty($item->ktp))
@@ -235,6 +235,15 @@
                                 @else
                                     <p>Tidak ada KTP tersedia</p>
                                 @endif
+                            </div>
+                            <input type="file" class="form-control" id="edit-ktp" name="ktp" accept="image/*">
+                        </div> --}}
+                        <div class="mb-3">
+                            <label for="edit-ktp" class="form-label">Foto KTP</label>
+                            <div class="mb-2" id="preview-ktp-container" style="display: none;">
+                                <a href="#" id="preview-ktp" target="_blank">
+                                    <img src="" alt="KTP" id="preview-ktp-img" style="width:150px;height:auto;">
+                                </a>
                             </div>
                             <input type="file" class="form-control" id="edit-ktp" name="ktp" accept="image/*">
                         </div>
@@ -362,9 +371,9 @@
     </div>
     
 
-    <!-- Modal Edit Penghuni-->
+    <!-- Modal Tagihan Penghuni-->
 <div class="modal fade" id="tagihanModal" tabindex="-1" aria-labelledby="tagihanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> <!-- Tambahkan modal-lg agar lebih lebar -->
+    <div class="modal-dialog modal-lg"> 
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="tagihanModalLabel">Detail Tagihan Penyewa</h5>
@@ -437,6 +446,16 @@
                 document.getElementById('edit-tanggal_menyewa').value = response.tanggal_menyewa;
                 document.getElementById('edit-status_penyewaan').value = response.status_penyewaan;
                 
+                // Menampilkan preview KTP dari response
+                if(response.ktp){
+                    const ktpUrl = `{{ url('admin/ktp') }}/${response.ktp}?t=${Date.now()}`;
+                    document.getElementById('preview-ktp').href = ktpUrl;
+                    document.getElementById('preview-ktp-img').src = ktpUrl;
+                    document.getElementById('preview-ktp-container').style.display = 'block';
+                } else {
+                    document.getElementById('preview-ktp-container').innerHTML = '<p>Tidak ada KTP tersedia</p>';
+                }
+
                 if(response.tanggal_berakhir && !response.status_penyewaan){
                     document.getElementById("tanggalBerakhir").hidden = false;
                     document.getElementById("edit-tanggal_berakhir").value = response.tanggal_berakhir;
@@ -502,13 +521,21 @@
                             var statusBadge = '<span class="badge bg-warning">Menunggu Konfirmasi</span>';
                         }
 
+                        function formatTanggal(tanggalStr) {
+                            const tanggal = new Date(tanggalStr);
+                            const hari = String(tanggal.getDate()).padStart(2, '0');
+                            const bulan = String(tanggal.getMonth() + 1).padStart(2, '0'); // bulan dari 0-11
+                            const tahun = tanggal.getFullYear();
+                            return `${hari}-${bulan}-${tahun}`;
+                        }
+
+
                         let row = `
                             <tr>
                                 <td>${index + 1}</td>
-                                <td>${item.periode_tagihan}</td>
-                                <td>${item.tanggal_pembayaran ? item.tanggal_pembayaran : ""}</td>
+                                <td>${item.periode_tagihan ? formatTanggal(item.periode_tagihan) : ""}</td>
+                                <td>${item.tanggal_pembayaran ? formatTanggal(item.tanggal_pembayaran) : ""}</td>
                                 <td>${statusBadge}</td>
-                                
                             </tr>
                         `;
                         tableBody.innerHTML += row;
