@@ -22,18 +22,59 @@ class AdminPaymentController extends Controller
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
-
-            $query->whereHas('penyewa', function($q) use ($search) {
-                $q->where('email', 'like', "%$search%")
-                ->orWhere('nama', 'like', "%$search%")
-                ->orWhere('no_kamar', 'like', "%$search%");
-            })
-            ->orWhere('periode_tagihan', 'like', "%$search%");
+        
+            $query->where(function($q) use ($search) {
+                $q->whereHas('penyewa', function($sub) use ($search) {
+                    $sub->where('email', 'like', "%$search%")
+                        ->orWhere('nama', 'like', "%$search%")
+                        ->orWhere('no_kamar', 'like', "%$search%");
+                })->orWhere('periode_tagihan', 'like', "%$search%");
+            });
+        }
+        
+        if ($request->start_date) {
+            $query->whereDate('tanggal_pembayaran', '>=', $request->start_date);
         }
 
-        $data = $query->orderBy('status_verifikasi', 'desc')
-            ->orderBy('periode_tagihan', 'desc')
-            ->get();
+        if ($request->end_date) {
+            $query->whereDate('tanggal_pembayaran', '<=', $request->end_date);
+        }
+
+        if ($request->has('status')) {
+            switch ($request->status) {
+                case '1':
+                case '0':
+                    $query->where('status_verifikasi', $request->status);
+                    break;
+                case 'null':
+                    $query->whereNull('status_verifikasi');
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // $data = $query->orderBy('status_verifikasi', 'desc')
+        //     ->orderBy('periode_tagihan', 'desc')
+        //     ->get();
+
+        // Tambahkan sorting
+        $sortable = ['email', 'nama', 'no_kamar', 'tanggal_pembayaran', 'periode_tagihan', 'total_tagihan', 'metode_pembayaran', 'status_verifikasi'];
+        $sort = $request->get('sort', 'status_verifikasi');
+        $direction = $request->get('direction', 'desc');
+
+        if (in_array($sort, $sortable)) {
+            if (in_array($sort, ['email', 'nama', 'no_kamar'])) {
+                $query->join('penyewa', 'penyewa.id_penyewa', '=', 'payment.id_penyewa')
+                    ->orderBy("penyewa.$sort", $direction)
+                    ->select('payment.*');
+            } else {
+                $query->orderBy($sort, $direction);
+            }
+        }
+
+        $data = $query->get();
+
 
         return view('admin.verifikasi-pembayaran.admin-riwayat', compact('data'));
     }
