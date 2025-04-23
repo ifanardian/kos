@@ -71,12 +71,15 @@ class PaymentController extends Controller
         $penyewa = DB::table('penyewa')
             ->where('id_penyewa', $request->id_penyewa)
             ->first();
+
         $fileName = null;
+        
+        // local simpan di folder local
         if ($request->file('bukti_tf')) {
             $bukti_pembayaran = $request->file('bukti_tf');
-            $fileName =$request->email.'-'.date('d-m-Y').'.'.$bukti_pembayaran->extension();
-            $filePath = $bukti_pembayaran->storeAs('bukti pembayaran/'.$request->email, $fileName, 'local');
-        }
+            $fileName = $penyewa->email.'-'.date('d-m-Y').'.'.$bukti_pembayaran->extension();
+            $filePath = $bukti_pembayaran->storeAs('bukti pembayaran/'.$penyewa->email, $fileName, 'local');
+        }        
         if (!$isFirstPayment) {
             $tagihan = DB::table('ms_tipe_kos')
                         ->where('id_tipe_kos', $penyewa->tipe_kos)
