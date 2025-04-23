@@ -343,14 +343,26 @@
                             <input type="date" class="form-control" name="tanggal_jatuh_tempo" required>
                         </div> --}}
                         
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label">No Kamar</label>
                             <select class="form-control" name="no_kamar" required>
                                 @foreach(DB::table('kamar')->where('status','F')->get() as $k)
                                     <option value="{{ $k->id_kamar }}">No. {{ $k->id_kamar }}</option>
                                 @endforeach
                             </select>
+                        </div> --}}
+                        <div class="mb-3">
+                            <label class="form-label">No Kamar</label>
+                            <select class="form-control" name="no_kamar" required>
+                                @foreach(DB::table('kamar')
+                                    ->where('status','F')
+                                    ->orderByRaw('CAST(SUBSTRING(id_kamar, 2) AS UNSIGNED) ASC')
+                                    ->get() as $k)
+                                    <option value="{{ $k->id_kamar }}">No. {{ $k->id_kamar }}</option>
+                                @endforeach
+                            </select>
                         </div>
+                        
                         <div class="mb-3">
                             <label class="form-label">Status Penyewaan</label>
                             <select class="form-control" name="status_penyewaan">

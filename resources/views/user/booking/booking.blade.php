@@ -41,8 +41,8 @@
             <div class="col-lg-8">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Booking Kamar</h2>
-                        <p>Home <span>-</span> Booking Kamar</p>
+                        <h2>Pesan Kamar</h2>
+                        <p>Home <span>-</span> Pesan Kamar</p>
                     </div>
                 </div>
             </div>
