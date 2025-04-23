@@ -51,7 +51,7 @@
                                 <div class="banner_text_iner">
                                     <h1>Kos Fortuna</h1>
                                     <p>Hunian Nyaman, Fasilitas Lengkap, Harga Bersahabat.</p>
-                                    <a href="{{ route('booking') }}" class="btn_2">book now</a>
+                                    <a href="{{ route('booking') }}" class="btn_2">pesan sekarang</a>
                                 </div>
                             </div>
                         </div>

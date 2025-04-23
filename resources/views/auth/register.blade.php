@@ -71,7 +71,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-7 col-xl-10 order-2 order-lg-1">
 
-                                    <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create New Password</p>
+                                    <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Buat Password</p>
                                     @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>

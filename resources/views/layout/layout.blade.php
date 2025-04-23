@@ -42,13 +42,13 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
+                                    <a class="nav-link" href="{{ route('dashboard') }}">Beranda</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#facility">Facility</a>
+                                    <a class="nav-link" href="#facility">Fasilitas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://wa.me/6281354190343?text=Halo,%20ingin%20tanya%20seputar%20kos">Contact</a>
+                                    <a class="nav-link" href="https://wa.me/6281354190343?text=Halo,%20ingin%20tanya%20seputar%20kos">Kontak</a>
                                 </li>
                                 <?php
                                     $user = Auth::user();
@@ -61,7 +61,7 @@
                                     } else {
                                         echo '
                                             <li class="nav-item">
-                                                <a class="nav-link" href="' . route('booking') . '">Booking</a>
+                                                <a class="nav-link" href="' . route('booking') . '">Pesan Kamar</a>
                                             </li>
                                         ';
                                     }
@@ -105,7 +105,7 @@
                 <!-- Bagian Peta -->
                 <div class="col-md-6">
                     <div class="single_footer_part">
-                        <h4>Our Location</h4>
+                        <h4>Lokasi Kami</h4>
                         <div class="maps_container">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1148.3001655459595!2d110.49470678989275!3d-7.34160484265857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a79c376ec6c21%3A0x6b978b8638843e71!2sMbak%20Lusi%201!5e0!3m2!1sen!2sid!4v1733029132564!5m2!1sen!2sid" 
                                 width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
