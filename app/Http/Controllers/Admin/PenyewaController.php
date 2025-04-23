@@ -126,7 +126,8 @@ class PenyewaController extends Controller
                 'role' => 'user',
             ]);
 
-            // Ambil harga kos berdasarkan tipe
+            Mail::to($penyewa->email)->send(new SetPasswordMail($penyewa, 'approved', null));
+
             $hargaKos = DB::table('ms_tipe_kos')->where('id_tipe_kos', $request->tipe_kos)->value('harga');
 
             // Tambah data pembayaran pertama

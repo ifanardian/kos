@@ -188,7 +188,7 @@
                                                     <select class='form-control' name='status' onchange='this.form.submit()' ".($dt->status_verifikasi == '0'||$dt->status_verifikasi == '1' ? 'disabled' : '' ).">
                                                         <option value=''" . ($dt->status_verifikasi == null ? 'selected' : '') .">Pilih</option>
                                                         <option value='0' " . ($dt->status_verifikasi == '0' ? 'selected' : '') . " style='color:red;'>Ditolak</option>
-                                                        <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected ' : '') . " style='color:green;'>Disetuji</option>
+                                                        <option value='1' " . ($dt->status_verifikasi == '1' ? 'selected ' : '') . " style='color:green;'>Disetujui</option>
                                                     </select>
                                                 </form>
                                             </td>
