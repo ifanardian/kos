@@ -8,6 +8,7 @@
     th a {
         font-size: 12px;
     }
+
 </style>
 
 
@@ -97,60 +98,49 @@
                     </form>
                 </div>
 
-
-                <div class="table-responsive">
-                    <table class="table table-sm align-middle">
-                        @php
+                {{-- <div style="overflow-x: auto; white-space: nowrap;"> --}}
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            @php
                             function sortArrow($column, $request) {
-                                $currentSort = $request->get('sort');
-                                $currentDir = $request->get('direction', 'asc');
+                            $currentSort = $request->get('sort');
+                            $currentDir = $request->get('direction', 'asc');
 
-                                $newDir = ($currentSort == $column && $currentDir == 'asc') ? 'desc' : 'asc';
-                                $icon = '⇅';
+                            $newDir = ($currentSort == $column && $currentDir == 'asc') ? 'desc' : 'asc';
+                            $icon = '⇅';
 
-                                if ($currentSort == $column) {
-                                    $icon = $currentDir == 'asc' ? '↑' : '↓';
-                                }
-
-                                // Generate new query
-                                $query = array_merge($request->query(), ['sort' => $column, 'direction' => $newDir]);
-
-                                return '<a href="'.url()->current().'?'.http_build_query($query).'" class="ms-1 text-decoration-none">'.$icon.'</a>';
+                            if ($currentSort == $column) {
+                            $icon = $currentDir == 'asc' ? '↑' : '↓';
                             }
-                        @endphp
+
+                            // Generate new query
+                            $query = array_merge($request->query(), ['sort' => $column, 'direction' => $newDir]);
+
+                            return '<a href="'.url()->current().'?'.http_build_query($query).'"
+                                class="ms-1 text-decoration-none">'.$icon.'</a>';
+                            }
+                            @endphp
 
 
-                        <thead class="thead-center">
-                            <tr>
-                                <th scope="col">Email {!! sortArrow('email', request()) !!}</th>
-                                <th scope="col">Nama Penyewa {!! sortArrow('nama', request()) !!}</th>
-                                <th scope="col">No Kamar {!! sortArrow('no_kamar', request()) !!}</th>
-                                <th scope="col">Tanggal Pembayaran {!! sortArrow('tanggal_pembayaran', request()) !!}</th>
-                                <th scope="col">Periode Pembayaran {!! sortArrow('periode_tagihan', request()) !!}</th>
-                                <th scope="col">Nominal {!! sortArrow('total_tagihan', request()) !!}</th>
-                                <th scope="col">Metode Pembayaran {!! sortArrow('metode_pembayaran', request()) !!}</th>
-                                <th scope="col">Bukti Pembayaran</th>
-                                <th scope="col">Status Verifikasi {!! sortArrow('status_verifikasi', request()) !!}</th>
-                            </tr>
-                        </thead>
-
-
-
-                        {{-- <thead class="thead-center">
-                            <tr>
-                                <th scope="col">Email</th>
-                                <th scope="col">Nama Penyewa</th>
-                                <th scope="col">No Kamar</th>
-                                <th scope="col">Tanggal Pembayaran</th>
-                                <th scope="col">Periode Pembayaran</th>
-                                <th scope="col">Nominal</th>
-                                <th scope="col">Metode Pembayaran</th>
-                                <th scope="col">Bukti Pembayaran</th>
-                                <th scope="col">Status Verifikasi</th>
-                            </tr>
-                        </thead> --}}
-                        <tbody>
-                            <?php
+                            <thead class="thead-center">
+                                <tr>
+                                    <th scope="col">Email {!! sortArrow('email', request()) !!}</th>
+                                    <th scope="col">Nama Penyewa {!! sortArrow('nama', request()) !!}</th>
+                                    <th scope="col">No Kamar {!! sortArrow('no_kamar', request()) !!}</th>
+                                    <th scope="col">Tanggal Pembayaran {!! sortArrow('tanggal_pembayaran', request())
+                                        !!}</th>
+                                    <th scope="col">Periode Penempatan {!! sortArrow('periode_tagihan', request()) !!}
+                                    </th>
+                                    <th scope="col">Nominal {!! sortArrow('total_tagihan', request()) !!}</th>
+                                    <th scope="col">Metode Pembayaran {!! sortArrow('metode_pembayaran', request()) !!}
+                                    </th>
+                                    <th scope="col">Bukti Pembayaran</th>
+                                    <th scope="col">Status Verifikasi {!! sortArrow('status_verifikasi', request()) !!}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
                             
                                 if(count($data)>0){
                                     foreach ($data as $dt) {
@@ -165,9 +155,9 @@
                                             <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('email') . "</td>
                                             <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('nama') . "</td>
                                             <td>" . DB::table('penyewa')->where('id_penyewa', $dt->id_penyewa)->value('no_kamar') . "</td>
-                                            <td>" . ($dt->tanggal_pembayaran ? \Carbon\Carbon::parse($dt->tanggal_pembayaran)->format('d-m-Y') : 'belum bayar') . "</td>
+                                            <td>" . ($dt->tanggal_pembayaran ? \Carbon\Carbon::parse($dt->tanggal_pembayaran)->format('d-m-Y') : 'Belum Bayar') . "</td>
                                             <td>" . \Carbon\Carbon::parse($dt->periode_tagihan)->format('d-m-Y') . "</td>
-                                            <td>" . $dt->total_tagihan . "</td>
+                                            <td>" . "Rp " . number_format($dt->total_tagihan, 0, ',', '.') . "</td>
                                             <td>" . $dt->metode_pembayaran . "</td>
                                         ";
 
@@ -217,9 +207,10 @@
                             ?>
 
 
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                {{-- </div> --}}
             </div>
         </div>
     </div>

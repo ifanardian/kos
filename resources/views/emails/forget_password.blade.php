@@ -9,5 +9,7 @@
     <p>Klik link berikut untuk reset password:</p>
     <a href="{{ $url_setpassword }}">Reset Password</a>
     <p>Jika Anda tidak meminta reset password, abaikan email ini.</p>
+    <p>Hormat kami,</p>
+    <p>FORTUNA KOST</p>
 </body>
 </html>

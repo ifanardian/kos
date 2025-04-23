@@ -49,7 +49,7 @@
                         <div class="col-lg-5 col-md-8">
                             <div class="banner_text">
                                 <div class="banner_text_iner">
-                                    <h1>Kos Fortunaa</h1>
+                                    <h1>Kos Fortuna</h1>
                                     <p>Hunian Nyaman, Fasilitas Lengkap, Harga Bersahabat.</p>
                                     <a href="{{ route('booking') }}" class="btn_2">book now</a>
                                 </div>

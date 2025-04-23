@@ -51,8 +51,8 @@ class HotSpotsSeeder extends Seeder
         ]);
         PanoramaHotspot::create([
             'id_panorama' => '1',
-            'pitch' => '0',
-            'yaw' => '72',
+            'pitch' => '-11.5',
+            'yaw' => '169',
             'scene' => '4',
         ]);PanoramaHotspot::create([
             'id_panorama' => '4',

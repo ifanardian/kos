@@ -70,7 +70,7 @@
                             echo "
                                 <p>Silahkan lakukan pembayaran pertama untuk aktivasi proses booking kamar kos. <br> 
                                 <span>Pembayaran paling lambat pada 
-                                 ".\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->format('d M Y') ."</span></p>";
+                                 ".\Carbon\Carbon::parse($detailPenyewa->tanggal_booking)->addDays(2)->format('d M Y') ."</span></p>";
                         }
                         elseif(\Carbon\Carbon::parse($detailPenyewa->tanggal_jatuh_tempo)->diffInDays(\Carbon\Carbon::now()) > 0){
                             echo "
