@@ -128,7 +128,13 @@
 
             <!-- Card Header-->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Virtual Tour 360<sup>°</sup></h6>
+                <div class="d-flex align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Virtual Tour 360<sup>°</sup></h6>
+                    <!-- Tanda Tanya -->
+                    <button class="btn btn-link p-0 ms-2" data-bs-toggle="modal" data-bs-target="#tutorialModal">
+                        <i class="fas fa-question-circle text-info" style="font-size: 1.25rem;"></i>
+                    </button>
+                </div>
                 <div class="dropdown no-arrow">
                     <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                         data-bs-toggle="modal" data-bs-target="#tambahModal">
@@ -237,7 +243,7 @@
         
 
 <!-- Modal Tambah -->
-<div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -282,10 +288,64 @@
             </form>
         </div>
     </div>
+</div> --}}
+
+<!-- Modal Tambah -->
+<div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal">Tambah Panorama</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="msTipeKos" action="{{ route('admin.kelolawebsite') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label" style="padding: 5px;">Gambar</label>
+                        <input style="width: min-content;" type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*" onchange="previewPanorama(event)">
+                    </div>
+                    <div class="mb-3" id="containerPreview" style="display:none;">
+                        <label for="gambar" class="form-label" style="padding: 5px;">Preview Gambar Ketika Load</label>
+                        <div style="padding: 5px;">
+                            <div id="preview" style="height: 300px; width: calc(100% - 10px); margin: 5px;"></div>
+
+                            <label for="yaw" class="form-label" style="padding: 5px;">
+                                Horizontal
+                                <i class="fas fa-question-circle text-info" data-bs-toggle="tooltip" title="Arah pandangan ke kiri/kanan."></i>
+                            </label>
+                            <input type="range" class="form-range" id="yaw" name="yaw" min="-180" max="180" step="0.5">
+
+                            <label for="pitch" class="form-label" style="padding: 5px;">
+                                Vertikal
+                                <i class="fas fa-question-circle text-info" data-bs-toggle="tooltip" title="Arah pandangan ke atas/bawah."></i>
+                            </label>
+                            <input type="range" class="form-range" name="pitch" id="pitch" min="-90" max="90" step="0.5">
+
+                            <label for="hfov" class="form-label" style="padding: 5px;">
+                                Zoom
+                                <i class="fas fa-question-circle text-info" data-bs-toggle="tooltip" title="Pengaturan zoom untuk gambar panorama, semakin besar nilai zoom, semakin dekat tampilan gambar."></i>
+                            </label>
+                            <input type="range" class="form-range" name="hfov" id="hfov" min="-120" max="-50" step="0.5">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
+
 <!-- Modal Edit / hapus Panorama -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -339,12 +399,143 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+<!-- Modal Edit / hapus Panorama -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel2">UPDATE GAMBAR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" id="editId">
+
+                    <!-- Default -->
+                    <div class="mb-3">
+                        <label class="form-label">Set as Default 
+                            <!-- Tanda Tanya dengan ikon -->
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Pilih jika panorama ini ingin dijadikan default yang akan muncul pertama kali ketika halaman dibuka.">
+                                <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                            </span>
+                        </label>
+                        <div>
+                            <input type="radio" id="defaultYes" name="isDefault" value="1">
+                            <label for="defaultYes">Ya</label>
+
+                            <input type="radio" id="defaultNo" name="isDefault" value="0">
+                            <label for="defaultNo">Tidak</label>
+                        </div>
+                    </div>
+
+                    <!-- Judul Panorama -->
+                    <div class="mb-3">
+                        <label for="editText" class="form-label">Judul Panorama</label>
+                        <input type="text" class="form-control" id="editText">
+                    </div>
+
+                    <!-- Preview Gambar -->
+                    <div class="mb-3" id="containerPreview2" style="display:none; ">
+                        <label for="gambar" class="form-label" style="padding: 5px;">Preview Gambar Ketika Load
+                            <!-- Tanda Tanya dengan ikon -->
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ini adalah gambar yang akan terlihat pertama kali ketika panorama dimuat. Anda bisa menyesuaikan posisi gambar saat load.">
+                                <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                            </span>
+                        </label>
+                        <div class="border p-3">
+                            <div id='previewedit' style="height: 300px; width: calc(100% - 10px); margin: 5px;"></div>
+                            
+                            <label for="yawedit" class="form-label" style="padding: 5px;">Horizontal 
+                                <!-- Tanda Tanya dengan ikon -->
+                                <span data-bs-toggle="tooltip" data-bs-placement="top" title="Arah pandangan ke kiri/kanan.">
+                                    <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                                </span>
+                            </label>
+                            <input type="range" class="form-range" id="yawedit" name="yawedit" min="-180" max="180" step="0.5">
+                            
+                            <label for="pitchedit" class="form-label" style="padding: 5px;">Vertikal 
+                                <!-- Tanda Tanya dengan ikon -->
+                                <span data-bs-toggle="tooltip" data-bs-placement="top" title="Arah pandangan ke atas/bawah.">
+                                    <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                                </span>
+                            </label>
+                            <input type="range" class="form-range" name="pitchedit" id="pitchedit" min="-90" max="90" step="0.5">
+                            
+                            <label for="hfovedit" class="form-label" style="padding: 5px;">Zoom 
+                                <!-- Tanda Tanya dengan ikon -->
+                                <span data-bs-toggle="tooltip" data-bs-placement="top" title="Pengaturan zoom untuk gambar panorama, semakin besar nilai zoom, semakin dekat tampilan gambar.">
+                                    <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                                </span>
+                            </label>
+                            <input type="range" class="form-range" name="hfovedit" id="hfovedit" min="-120" max="-50" step="0.5">
+                        </div>
+                    </div>
+
+                    <!-- Hotspot -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary" id="addHotspot">
+                            Tambah Hotspot 
+                            <!-- Tanda Tanya dengan ikon -->
+                            
+                        </button>
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Hotspot adalah tanda panah yang dapat mengarahkan pengguna ke pemandangan lain dalam panorama.">
+                            <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                        </span>
+                    </div>
+
+                    <div id="hotspotContainer">
+                        
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deletePanorama()">Hapus</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" onclick="saveHotspots()">Simpan</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+<div class="modal fade" id="tutorialModal" tabindex="-1" aria-labelledby="tutorialModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tutorialModalLabel">Panduan Penggunaan Panorama</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <ol>
+            <li>Masukkan nama panorama dan gambar yang ingin ditampilkan.</li>
+            <li>Atur posisi panorama menggunakan slider untuk mengatur yaw (horizontal), pitch (vertikal), dan zoom (hfov).</li>
+            <li>Setelah panorama selesai ditambahkan, klik tombol panorama untuk menambahkan atau mengubah hotspot.</li>
+            <li>Hotspot yang baru ditambahkan akan muncul di sisi pengguna.</li>
+            <li>Jika diperlukan, bisa menghapus panorama yang sudah tidak diperlukan. Panorama default akan digantikan dengan yang baru jika panorama yang dihapus adalah panorama utama.</li>
+          </ol>
+          <p class="text-muted"><strong>Tips:</strong> Pastikan gambar panorama memiliki rasio 2:1 (misalnya 8000x4000 piksel) untuk hasil yang optimal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
 <script>
     let viewer = ''
     const BaseUrl = {!!json_encode(asset('images/panorama/').'/') !!};
     let Tempimg = '';
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+
 
     function previewPanorama(event) {
         const file = event.target.files[0];
@@ -489,13 +680,28 @@
             <div class="border p-3">
                 <input type="hidden" class="form-control mb-2" name="id_hotspots" value="${hotspotId.id_hotspot}">
 
-                <label class="form-label">Horizontal</label>
+                <!-- Horizontal -->
+                <label class="form-label">Horizontal
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Mengatur letak panah hotspot ke kiri/kanan.">
+                        <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                    </span>
+                </label>
                 <input type="range" class="form-range mb-2 hotspot-input" name="yaw[]" step="0.5" min="-179" max="180" data-hotspot-id="${hotspotId.id_hotspot}" value="${hotspotId.yaw}">
-                
-                <label class="form-label">Vertikal</label>
+
+                <!-- Vertikal -->
+                <label class="form-label">Vertikal
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Mengatur letak panah hotspot ke atas/bawah.">
+                        <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                    </span>
+                </label>
                 <input type="range" class="form-range mb-2 hotspot-input" name="pitch[]" step="0.5" min="-89" max="90" data-hotspot-id="${hotspotId.id_hotspot}" value="${hotspotId.pitch}">
 
-                <label class="form-label">Scene</label>
+                <!-- Scene -->
+                <label class="form-label">Scene
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Pilih scene lain untuk mengarahkan pengguna ke pemandangan lain saat hotspot diklik.">
+                        <i class="fas fa-question-circle text-info" style="font-size: 18px; cursor: pointer;"></i>
+                    </span>
+                </label>
                 <select class="form-control mb-2 hotspot-input" name="scene[]" data-hotspot-id="${hotspotId.id_hotspot}">
                     <option value="">Pilih Scene</option>
                     @foreach ($panorama as $scene)
@@ -504,6 +710,7 @@
                         </option>
                     @endforeach
                 </select>
+
                 <button type="button" class="btn btn-danger btn-sm remove-hotspot">Hapus</button>
             </div>
         `;
@@ -525,6 +732,11 @@
             if(status){
                 hotspotDiv.remove();
             }
+        });
+
+        var tooltipTriggerList = [].slice.call(hotspotDiv.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
         });
 
         console.log("Hotspot ditambahkan dengan ID:", hotspotId.id_hotspot);
