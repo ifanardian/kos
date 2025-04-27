@@ -1,7 +1,7 @@
 <?php
 
 // Tentukan path ke direktori aplikasi Laravel
-$laravel = _DIR_ . '/../';
+$laravel = __DIR__ . '/../';
 
 // Muat file autoload Composer
 require $laravel . 'vendor/autoload.php';
