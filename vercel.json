@@ -41,13 +41,22 @@
       {
         "src": "/user/(.*)",
         "dest": "/api/index.php"
+      },
+      {
+        "src": "/api/(.*)",
+        "dest": "/api/index.php"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/api/index.php"
       }
+
     ],
     "env": {
       "APP_ENV": "production",
       "APP_KEY": "base64:2Kg90m3nQ2dXGUqMGM4ehEPRK0+lmLzOqYAAqfXsiEE=",
       "APP_DEBUG": "false",
-      "APP_URL": "https://kos-fortuna-omega.vercel.app",
+      "APP_URL": "https://kos-one.vercel.app",
       "APP_CONFIG_CACHE": "/tmp/config.php",
       "APP_EVENTS_CACHE": "/tmp/events.php",
       "APP_PACKAGES_CACHE": "/tmp/packages.php",
