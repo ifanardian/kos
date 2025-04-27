@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 use App\Mail\SetPasswordMail;
 use App\Models\Booking;
-use App\Models\Mstipekos;
+use App\Models\MsTipeKos;
 use App\Models\Penyewa;
 use App\Models\Users;
 use App\Models\Payment;
@@ -25,7 +25,7 @@ class AdminBookingController extends Controller
         $pending = Booking::where('status', 'PENDING')->orderBy('created_at', 'asc')->get();
         $approved = Booking::where('status', 'APPROVED')->orderBy('created_at', 'asc')->get();
         $rejected = Booking::where('status', 'REJECTED')->orderBy('created_at', 'asc')->get();
-        $tipe = Mstipekos::all();
+        $tipe = MsTipeKos::all();
         
         return view('admin.admin-verifikasi', compact('pending', 'approved', 'rejected', 'tipe'));
     }
@@ -72,7 +72,7 @@ class AdminBookingController extends Controller
                     'password' => null,
                 ]);
 
-                $tipekos = Mstipekos::findOrFail($booking->tipe_kos);
+                $tipekos = MsTipeKos::findOrFail($booking->tipe_kos);
                 Payment::create([
                     'id_kamar' => $request->id_kamar,
                     'id_penyewa' => $penyewa->id_penyewa,
