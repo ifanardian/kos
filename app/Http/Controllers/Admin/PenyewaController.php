@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Mail\SetPasswordMail;
-use App\Models\{Penyewa, Mstipekos, Kamar, Users, Payment};
+use App\Models\{Penyewa, MsTipeKos, Kamar, Users, Payment};
 
 
 class PenyewaController extends Controller
@@ -23,7 +23,7 @@ class PenyewaController extends Controller
             ->whereNull('tanggal_berakhir')
             ->get();
         $penghuniRiwayat = Penyewa::whereNotNull('tanggal_berakhir')->get();
-        $msTipe = Mstipekos::orderBy('id_tipe_kos', 'asc')->get();
+        $msTipe = MsTipeKos::orderBy('id_tipe_kos', 'asc')->get();
 
         return view('admin.admin-penyewa.adminpenyewa', compact('penghuniAktif', 'penghuniRiwayat', 'msTipe'));
     }
