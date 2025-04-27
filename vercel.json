@@ -53,9 +53,10 @@
 
     ],
     "env": {
+      "APP_NAME": "KOS FORTUNA",
       "APP_ENV": "production",
       "APP_KEY": "base64:2Kg90m3nQ2dXGUqMGM4ehEPRK0+lmLzOqYAAqfXsiEE=",
-      "APP_DEBUG": "false",
+      "APP_DEBUG": "true",
       "APP_URL": "https://kos-one.vercel.app",
       "APP_CONFIG_CACHE": "/tmp/config.php",
       "APP_EVENTS_CACHE": "/tmp/events.php",
@@ -72,7 +73,15 @@
       "DB_PORT": "3306",
       "DB_DATABASE": "bqciaonaz4ieritzawc6",
       "DB_USERNAME": "uag6pegwtozxsrvb",
-      "DB_PASSWORD": "XuqvIoNkcpmHbenldaBS"
+      "DB_PASSWORD": "XuqvIoNkcpmHbenldaBS",
+      "MAIL_MAILER":"smtp",
+      "MAIL_HOST":"smtp.googlemail.com",
+      "MAIL_PORT":"587",
+      "MAIL_USERNAME":"rumahkosfortuna@gmail.com",
+      "MAIL_PASSWORD":"curahvsgxmygkwie",
+      "MAIL_ENCRYPTION":"tls",
+      "MAIL_FROM_ADDRESS":"rumahkosfortuna@gmail.com",
+      "MAIL_FROM_NAME":"${APP_NAME}"
     },
     "outputDirectory": "public"
   }
