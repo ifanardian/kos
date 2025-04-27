@@ -5,13 +5,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
-    <link rel="icon" href="{{ asset('images/luck.png') }}" type="image/png">
+    <link rel="icon" href="{{ secure_asset('images/luck.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href={{ secure_asset('css/bootstrap.min.css') }}>
     <!-- animate CSS -->
-    <link rel="stylesheet" href={{ asset('css/animate.css') }}>
+    <link rel="stylesheet" href={{ secure_asset('css/animate.css') }}>
     <!-- style CSS -->
-    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ secure_asset('css/style.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
@@ -26,7 +26,7 @@
             align-items: center;
             min-height: 100vh;
             font-family: "Lexend", sans-serif;
-            background-image: url("{{ asset('images/flipped-house.png') }}");
+            background-image: url("{{ secure_asset('images/flipped-house.png') }}");
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;

@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <title>dashboard</title> -->
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('images/luck.png') }}" type="image/png">
+    <link rel="icon" href="{{ secure_asset('images/luck.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href={{ secure_asset('css/bootstrap.min.css') }}>
     <!-- animate CSS -->
-    <link rel="stylesheet" href={{ asset('css/animate.css') }}>
+    <link rel="stylesheet" href={{ secure_asset('css/animate.css') }}>
     <!-- style CSS -->
-    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ secure_asset('css/style.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
@@ -33,7 +33,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="{{ route('dashboard') }}"> 
-                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 15px;"> Fortuna
+                            <img src="{{ secure_asset('images/luck.png') }}" style="width: 35px; margin-right: 15px;"> Fortuna
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
