@@ -81,7 +81,7 @@
       "MAIL_PASSWORD":"curahvsgxmygkwie",
       "MAIL_ENCRYPTION":"tls",
       "MAIL_FROM_ADDRESS":"rumahkosfortuna@gmail.com",
-      "MAIL_FROM_NAME":"${APP_NAME}"
+      "MAIL_FROM_NAME":"KOS FORTUNA"
     },
     "outputDirectory": "public"
   }
