@@ -317,7 +317,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                     onclick="cancelStatus()">Batal</button>
-                <button type="button" class="btn btn-primary" onclick="submitForm2()">Ya</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm2()">Kirim</button>
             </div>
         </div>
     </div>

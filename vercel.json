@@ -82,6 +82,9 @@
       "MAIL_ENCRYPTION":"tls",
       "MAIL_FROM_ADDRESS":"rumahkosfortuna@gmail.com",
       "MAIL_FROM_NAME":"KOS FORTUNA",
+      "CLOUDINARY_URL":"cloudinary://548271162579115:IqV6-BJAjVIlkD1hELGCjnJPbb4@drzpwvfyh",
+      "CLOUDINARY_UPLOAD_PRESET":"ml_default",
+      "CLOUDINARY_NOTIFICATION_URL":"https://kos-fortuna.vercel.app/",
       "CLOUDINARY_CLOUD_NAME":"drzpwvfyh",
       "CLOUDINARY_API_KEY":"548271162579115",
       "CLOUDINARY_API_SECRET":"IqV6-BJAjVIlkD1hELGCjnJPbb4"
