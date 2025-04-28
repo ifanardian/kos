@@ -13,6 +13,7 @@ use App\Models\MsTipeKos;
 use App\Mail\InvoiceMail;
 use App\Mail\AlertPaymentMail;
 use Carbon\Carbon;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class AdminPaymentController extends Controller
 {
@@ -112,17 +113,28 @@ class AdminPaymentController extends Controller
 
     public function showbuktitf($filename)
     {   
-        $email = explode('-', $filename)[0];
-        $filePath = "bukti pembayaran/{$email}/{$filename}";
+        // $email = explode('-', $filename)[0];
+        // $filePath = "bukti pembayaran/{$email}/{$filename}";
 
-        if (Storage::disk('local')->exists($filePath)) {
-            return Response::make(Storage::disk('local')->get($filePath), 200, [
-                'Content-Type' => 'image/jpeg',
-                'Content-Disposition' => 'inline; filename="' . $filename . '"',
-            ]);
-        }
+        // if (Storage::disk('local')->exists($filePath)) {
+        //     return Response::make(Storage::disk('local')->get($filePath), 200, [
+        //         'Content-Type' => 'image/jpeg',
+        //         'Content-Disposition' => 'inline; filename="' . $filename . '"',
+        //     ]);
+        // }
         
-        abort(404);
+        // abort(404);
+        $email = explode('-', $filename)[0];
+
+        try {
+            // Attempt to retrieve the image from Cloudinary
+            $imageUrl = Cloudinary::getUrl("kos/bukti_tf/{$filename}");
+
+            return redirect($imageUrl);
+        } catch (\Exception $e) {
+            // Handle the error (e.g., image not found)
+            abort(404);
+        }
     }
 
     public function getHistoryPembayaran($id_penyewa)
