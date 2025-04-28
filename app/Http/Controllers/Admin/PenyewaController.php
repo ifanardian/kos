@@ -13,6 +13,8 @@ use Carbon\Carbon;
 use App\Mail\SetPasswordMail;
 use App\Models\{Penyewa, MsTipeKos, Kamar, Users, Payment};
 
+use Cloudinary\Cloudinary;
+
 
 class PenyewaController extends Controller
 {
@@ -45,11 +47,37 @@ class PenyewaController extends Controller
 
         $penyewa = Penyewa::findOrFail($request->id_penyewa);
         
+        // if ($request->hasFile('ktp')) {
+        //     $fileName = $request->email . '-' . time() . '.' . $request->file('ktp')->extension();
+        //     $filePath = $request->file('ktp')->storeAs('ktp', $fileName);
+        //     Storage::delete("ktp/$penyewa->ktp");
+        //     $penyewa->ktp = $fileName;
+        // }
+
         if ($request->hasFile('ktp')) {
-            $fileName = $request->email . '-' . time() . '.' . $request->file('ktp')->extension();
-            $filePath = $request->file('ktp')->storeAs('ktp', $fileName);
-            Storage::delete("ktp/$penyewa->ktp");
-            $penyewa->ktp = $fileName;
+            // Ambil file KTP dari request
+            $ktpFile = $request->file('ktp');
+            
+            // Inisialisasi Cloudinary
+            $cloudinary = new Cloudinary();
+            
+            // Upload file ke Cloudinary
+            $uploadedKtp = $cloudinary->uploadApi()->upload($ktpFile->getRealPath(), [
+                'folder' => 'kos/ktp',  // Tentukan folder penyimpanan di Cloudinary
+                'public_id' => $request->email . '-' . time(),  // Nama unik berdasarkan email dan waktu
+                'overwrite' => true,  // Menimpa jika sudah ada file dengan public_id yang sama
+            ]);
+    
+            // Ambil URL dari file yang diupload
+            $uploadedKtpUrl = $uploadedKtp['secure_url'];
+            
+            // Hapus KTP lama jika ada
+            if ($penyewa->ktp) {
+                $cloudinary->uploadApi()->destroy('kos/ktp/' . $penyewa->ktp);
+            }
+    
+            // Simpan URL KTP baru di database
+            $penyewa->ktp = $uploadedKtpUrl;
         }
 
         if (!$request->status_penyewaan) {

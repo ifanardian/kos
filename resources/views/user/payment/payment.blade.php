@@ -99,12 +99,15 @@
                                 </li>
                                 <li>
                                     <p>Periode Penempatan</p>
+                                    @php
+                                        $bulan = DB::table('ms_tipe_kos')->where('id_tipe_kos', $detailPenyewa->tipe_kos)->value('bulan');
+                                    @endphp
                                     <span>: {{ \Carbon\Carbon::parse($payment->periode_tagihan)->format('d M Y') }} -
-                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->addMonth()->format('d M Y') }}</span>
+                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->addMonth($bulan)->format('d M Y') }}</span>
                                 </li>
                                 <li>
                                     <p>Tanggal Jatuh Tempo</p><span>:
-                                        {{ \Carbon\Carbon::parse($payment->periode_tagihan)->subDay()->format('d M Y') }}</span>
+                                        {{ \Carbon\Carbon::parse($detailPenyewa->tanggal_booking)->addDays(2)->format('d M Y') }}</span>
                                 </li>
                                 <li>
                                     <p>Nama Lengkap</p>

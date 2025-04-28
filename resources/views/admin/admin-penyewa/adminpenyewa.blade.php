@@ -458,7 +458,8 @@
                 
                 // Menampilkan preview KTP dari response
                 if(response.ktp){
-                    const ktpUrl = `{{ url('admin/ktp') }}/${response.ktp}?t=${Date.now()}`;
+                    // const ktpUrl = `{{ url('admin/ktp') }}/${response.ktp}?t=${Date.now()}`;
+                    const ktpUrl = `${response.ktp}`;
                     document.getElementById('preview-ktp').href = ktpUrl;
                     document.getElementById('preview-ktp-img').src = ktpUrl;
                     document.getElementById('preview-ktp-container').style.display = 'block';
