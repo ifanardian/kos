@@ -161,12 +161,24 @@
                                             <td>" . $dt->metode_pembayaran . "</td>
                                         ";
 
+                                        // if ($dt->bukti_pembayaran != null) {
+                                        //     echo "
+                                        //         <td>
+                                        //             <a href='" . route('admin.payment.gambar', ['filename' => $dt->bukti_pembayaran]) . "'>
+                                        //                 <img src='" . route('admin.payment.gambar', ['filename' => $dt->bukti_pembayaran]) . "' alt='tf'
+                                        //                     style='width:100px;height:auto;'>
+                                        //             </a>
+                                        //         </td>
+                                        //     ";
                                         if ($dt->bukti_pembayaran != null) {
+                                            // Generate the Cloudinary URL dynamically
+                                            $cloudinaryUrl = cloudinary()->image("{$dt->bukti_pembayaran}")->toUrl();
+
+
                                             echo "
                                                 <td>
-                                                    <a href='" . route('admin.payment.gambar', ['filename' => $dt->bukti_pembayaran]) . "'>
-                                                        <img src='" . route('admin.payment.gambar', ['filename' => $dt->bukti_pembayaran]) . "' alt='tf'
-                                                            style='width:100px;height:auto;'>
+                                                    <a href='{$cloudinaryUrl}' target='_blank'>
+                                                        <img src='{$cloudinaryUrl}' alt='Bukti Pembayaran' style='width:100px;height:auto;'>
                                                     </a>
                                                 </td>
                                             ";

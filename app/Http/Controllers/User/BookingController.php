@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\MsTipeKos;
-use Illuminate\Support\Facades\DB;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+// use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary\Cloudinary;
+// use Cloudinary\Configuration\Configuration;
+
 
 class BookingController extends Controller
 {
@@ -57,14 +59,16 @@ class BookingController extends Controller
             'note' => 'nullable',
         ]);
 
-        // Upload KTP ke Cloudinary
-        $uploadedKtpUrl = Cloudinary::upload($request->file('ktp')->getRealPath(), [
-            'folder' => 'ktp',
+        $ktpFile = $request->file('ktp');
+        $cloudinary = new Cloudinary();
+        $uploadedKtp = $cloudinary->uploadApi()->upload($ktpFile->getRealPath(), [
+            'folder' => 'kos/ktp',
             'public_id' => $request->email . '-' . time(),
             'overwrite' => true,
-        ])->getSecurePath(); // ambil URL HTTPS
+        ]);
 
-        dd($uploadedKtpUrl);
+        $uploadedKtpUrl = $uploadedKtp['secure_url']; 
+        // dd($uploadedKtpUrl);
         // Simpan data booking ke database
         Booking::create([
             'nama_lengkap' => $request->nama_lengkap,

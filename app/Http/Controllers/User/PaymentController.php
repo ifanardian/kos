@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Penyewa;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Cloudinary\Cloudinary;
+use Cloudinary\Configuration\Configuration;
 
 class PaymentController extends Controller
 {
@@ -73,13 +75,33 @@ class PaymentController extends Controller
             ->first();
 
         $fileName = null;
+        $fileUrl = null;
         
         // local simpan di folder local
+        // if ($request->file('bukti_tf')) {
+        //     $bukti_pembayaran = $request->file('bukti_tf');
+        //     $fileName = $penyewa->email.'-'.date('d-m-Y').'.'.$bukti_pembayaran->extension();
+        //     $filePath = $bukti_pembayaran->storeAs('bukti pembayaran/'.$penyewa->email, $fileName, 'local');
+        // }        
+
         if ($request->file('bukti_tf')) {
-            $bukti_pembayaran = $request->file('bukti_tf');
-            $fileName = $penyewa->email.'-'.date('d-m-Y').'.'.$bukti_pembayaran->extension();
-            $filePath = $bukti_pembayaran->storeAs('bukti pembayaran/'.$penyewa->email, $fileName, 'local');
-        }        
+            $buktiPembayaran = $request->file('bukti_tf');
+            
+            // Initialize Cloudinary configuration
+            $cloudinary = new Cloudinary();
+    
+            // Upload the image to Cloudinary
+            $uploadedFile = $cloudinary->uploadApi()->upload($buktiPembayaran->getRealPath(), [
+                'folder' => 'kos/bukti_tf',
+                'public_id' => $penyewa->email . '-' . time(),
+                'overwrite' => true,
+            ]);
+    
+            // Get the file's secure URL after upload
+            $fileName = $uploadedFile['public_id']; // ini simpan nama file nya
+
+        }
+
         if (!$isFirstPayment) {
             $tagihan = DB::table('ms_tipe_kos')
                         ->where('id_tipe_kos', $penyewa->tipe_kos)
