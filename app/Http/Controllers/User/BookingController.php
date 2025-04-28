@@ -64,6 +64,7 @@ class BookingController extends Controller
             'overwrite' => true,
         ])->getSecurePath(); // ambil URL HTTPS
 
+        dd($uploadedKtpUrl);
         // Simpan data booking ke database
         Booking::create([
             'nama_lengkap' => $request->nama_lengkap,
