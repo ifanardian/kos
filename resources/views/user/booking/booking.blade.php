@@ -118,7 +118,7 @@
                             </p>
                         </div>
                         <div class="password text-center">
-                            <a class="btn_3" id="bookButton" type="submit">BOOKING</a>
+                            <a class="btn_3" id="bookButton" type="button">BOOKING</a>
                         </div>
                     </div>
                 </div>
@@ -151,8 +151,8 @@
 
         if (isValid) {
             alert('Booking berhasil! Harap menunggu email.');
-            // form.submit();
-            document.getElementById('formBook').submit();
+            form.submit();
+            // document.getElementById('formBook').submit();
         } else {
             alert('Harap isi semua field yang wajib diisi.');
         }
