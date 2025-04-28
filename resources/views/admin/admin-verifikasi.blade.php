@@ -81,12 +81,22 @@
                                                 
                                                 ?>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
                                                     <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
+                                            </td> --}}
+                                            <td>
+                                                @if($item->ktp)
+                                                    <a href="{{ $item->ktp }}" target="_blank">
+                                                        <img src="{{ $item->ktp }}" alt="KTP" style="width:100px; height:auto;">
+                                                    </a>
+                                                @else
+                                                    Tidak ada KTP
+                                                @endif
                                             </td>
+                                            
                                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->periode_penempatan)->format('d-m-Y') }}</td>
                                             <td>
@@ -156,11 +166,20 @@
                                                 @endif
                                                 @endforeach
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
                                                     <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
+                                            </td> --}}
+                                            <td>
+                                                @if($item->ktp)
+                                                    <a href="{{ $item->ktp }}" target="_blank">
+                                                        <img src="{{ $item->ktp }}" alt="KTP" style="width:100px; height:auto;">
+                                                    </a>
+                                                @else
+                                                    Tidak ada KTP
+                                                @endif
                                             </td>
                                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->periode_penempatan)->format('d-m-Y') }}</td>
@@ -210,11 +229,20 @@
                                                 @endif
                                                 @endforeach
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
                                                     <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
                                                         alt="KTP" style="width:100px;height:auto;">
                                                 </a>
+                                            </td> --}}
+                                            <td>
+                                                @if($item->ktp)
+                                                    <a href="{{ $item->ktp }}" target="_blank">
+                                                        <img src="{{ $item->ktp }}" alt="KTP" style="width:100px; height:auto;">
+                                                    </a>
+                                                @else
+                                                    Tidak ada KTP
+                                                @endif
                                             </td>
                                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->periode_penempatan)->format('d-m-Y') }}</td>

@@ -81,7 +81,10 @@
       "MAIL_PASSWORD":"curahvsgxmygkwie",
       "MAIL_ENCRYPTION":"tls",
       "MAIL_FROM_ADDRESS":"rumahkosfortuna@gmail.com",
-      "MAIL_FROM_NAME":"KOS FORTUNA"
+      "MAIL_FROM_NAME":"KOS FORTUNA",
+      "CLOUDINARY_CLOUD_NAME":"drzpwvfyh",
+      "CLOUDINARY_API_KEY":"548271162579115",
+      "CLOUDINARY_API_SECRET":"IqV6-BJAjVIlkD1hELGCjnJPbb4"
     },
     "outputDirectory": "public"
   }
