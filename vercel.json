@@ -90,5 +90,5 @@
       "CLOUDINARY_API_SECRET":"IqV6-BJAjVIlkD1hELGCjnJPbb4"
     },
     "outputDirectory": "public",
-    "buildCommand": "./vercel-build.sh"
+    "buildCommand": "vercel-build.sh"
   }
