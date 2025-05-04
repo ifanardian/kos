@@ -5,13 +5,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ secure_asset('images/luck.png') }}" type="image/png">
+    <link rel="icon" href="{{ auto_asset('images/luck.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href={{ secure_asset('css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href={{ auto_asset('css/bootstrap.min.css') }}>
     <!-- animate CSS -->
-    <link rel="stylesheet" href={{ secure_asset('css/animate.css') }}>
+    <link rel="stylesheet" href={{ auto_asset('css/animate.css') }}>
     <!-- style CSS -->
-    <link rel="stylesheet" href={{ secure_asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ auto_asset('css/style.css') }}>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
@@ -37,7 +37,7 @@
                             <span class="menu_icon"><i class="fa fa-bars"></i></span>
                         </button>
                         <a class="navbar-brand" href="{{ route('dashboard') }}">
-                            <img src="{{ secure_asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna
+                            <img src="{{ auto_asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna
                         </a>
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">

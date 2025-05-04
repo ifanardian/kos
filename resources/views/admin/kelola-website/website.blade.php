@@ -185,12 +185,12 @@
                             echo '
                             <div class="column">
                                 <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'.$gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
-                                    <img src="'. secure_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                                    <img src="'. auto_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
                                 </a>';
                             $i ++;
                             echo '
                                 <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'. $gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
-                                    <img src="'. secure_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                                    <img src="'. auto_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
                                 </a>
                             </div>'
                                 ;
@@ -216,7 +216,7 @@
                     @csrf
                     <div class="preview-wrapper">
                         <div class="image-box">
-                            <img src="{{ secure_asset('storage/path-lama.jpg') }}" alt="Gambar Lama" id="gambarLama">
+                            <img src="{{ auto_asset('storage/path-lama.jpg') }}" alt="Gambar Lama" id="gambarLama">
                         </div>
                         <div class="arrow">➡️</div>
                         <div class="image-box">
@@ -526,7 +526,7 @@
 
 <script>
     let viewer = ''
-    const BaseUrl = {!!json_encode(secure_asset('images/panorama/').'/') !!};
+    const BaseUrl = {!!json_encode(auto_asset('images/panorama/').'/') !!};
     let Tempimg = '';
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -895,7 +895,7 @@
     });
     document.querySelectorAll('[data-bs-target="#editGridModal"]').forEach(function(link) {
         link.addEventListener('click', function () {
-            let gambarSrc = "{{ secure_asset('images/grid') }}/" + this.getAttribute('nama-gambar');
+            let gambarSrc = "{{ auto_asset('images/grid') }}/" + this.getAttribute('nama-gambar');
             console.log(gambarSrc)
             let id_gambar =  this.getAttribute('id-gambar');
             document.getElementById('gambarLama').src = gambarSrc;
