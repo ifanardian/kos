@@ -23,6 +23,7 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+        
         // $request->validate([
         //     'tipe_kos' => 'required|exists:ms_tipe_kos,id_tipe_kos',
         //     'nama_lengkap' => 'required',
@@ -47,7 +48,8 @@ class BookingController extends Controller
         //     'ktp' => $fileName,
         // ]);
         // return redirect()->route('dashboard')->with('success', 'Booking berhasil!');
-
+        
+        // dd($request->all());
         $request->validate([
             'tipe_kos' => 'required|exists:ms_tipe_kos,id_tipe_kos',
             'nama_lengkap' => 'required',
@@ -58,7 +60,6 @@ class BookingController extends Controller
             'periode_penempatan' => 'required',
             'note' => 'nullable',
         ]);
-
         $ktpFile = $request->file('ktp');
         $cloudinary = new Cloudinary();
         $uploadedKtp = $cloudinary->uploadApi()->upload($ktpFile->getRealPath(), [

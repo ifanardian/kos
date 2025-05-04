@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_penyewa');
+            $table->increments('id_payments');
+            $table->Integer('id_penyewa');
             $table->date('periode_tagihan');
             $table->string('id_kamar');
             $table->string('total_tagihan');
@@ -21,7 +22,8 @@ return new class extends Migration
             $table->string('bukti_pembayaran')->nullable();
             $table->boolean('status_verifikasi')->nullable();
             $table->timestamps();
-            $table->primary(['id_penyewa', 'periode_tagihan']);
+
+            $table->primary(['id_payments','id_penyewa', 'periode_tagihan']);
         });
     }
 

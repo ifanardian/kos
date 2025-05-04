@@ -129,7 +129,7 @@
 
         pannellum.viewer('panorama1', {
             "type": "equirectangular",
-            "panorama": "{{ secure_asset('images/panorama.jpeg') }}",
+            "panorama": "{{ auto_asset('images/panorama.jpeg') }}",
             "autoLoad": true,
             "yaw": 180,  // Menghadap ke kanan (0 = tengah, 90 = kanan, -90 = kiri)
             "pitch": -11, // Menghadap sedikit ke atas (-90 = bawah, 90 = atas)
@@ -154,7 +154,7 @@
         });
         pannellum.viewer('panorama2', {
             "type": "equirectangular",
-            "panorama": "{{ secure_asset('images/km.jpeg') }}",
+            "panorama": "{{ auto_asset('images/km.jpeg') }}",
             "autoLoad": true,
             "yaw": 145,  // Menghadap ke kanan (0 = tengah, 90 = kanan, -90 = kiri)
             "pitch": -11, // Menghadap sedikit ke atas (-90 = bawah, 90 = atas)
@@ -162,7 +162,7 @@
         });
         pannellum.viewer('panorama3', {
             "type": "equirectangular",
-            "panorama": "{{ secure_asset('images/jmr.jpeg') }}",
+            "panorama": "{{ auto_asset('images/jmr.jpeg') }}",
             "autoLoad": true,
             "yaw": -40,  // Menghadap ke kanan (0 = tengah, 90 = kanan, -90 = kiri)
             "pitch": -11, // Menghadap sedikit ke atas (-90 = bawah, 90 = atas)

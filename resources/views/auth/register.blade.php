@@ -5,13 +5,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="{{ secure_asset('images/luck.png') }}" type="image/png">
+    <link rel="icon" href="{{ auto_asset('images/luck.png') }}" type="image/png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href={{ secure_asset('css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href={{ auto_asset('css/bootstrap.min.css') }}>
     <!-- animate CSS -->
-    <link rel="stylesheet" href={{ secure_asset('css/animate.css') }}>
+    <link rel="stylesheet" href={{ auto_asset('css/animate.css') }}>
     <!-- style CSS -->
-    <link rel="stylesheet" href={{ secure_asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ auto_asset('css/style.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
@@ -22,7 +22,7 @@
             font-optical-sizing: auto;
             font-style: normal;
             letter-spacing: 1px;
-            background-image: url("{{ secure_asset('images/flipped-house.png') }}");
+            background-image: url("{{ auto_asset('images/flipped-house.png') }}");
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;

@@ -11,7 +11,7 @@
         align-items: center;
         position: relative;
         min-height: 100vh;
-        background-image: url("{{ secure_asset('images/houses.png') }}");
+        background-image: url("{{ auto_asset('images/houses.png') }}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -108,7 +108,7 @@
                                         'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
                                         'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
                                         'type':'equirectangular',
-                                        'panorama':'".secure_asset('images/panorama/'.$p->namafile)."',
+                                        'panorama':'".auto_asset('images/panorama/'.$p->namafile)."',
                                         ".$hotspots."
                                     },
                                 ";
@@ -196,12 +196,12 @@
             echo '
             <div class="column">
                 <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'.$gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
-                    <img src="'. secure_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                    <img src="'. auto_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
                 </a>';
             $i ++;
             echo '
                 <a href="" data-bs-toggle="modal" data-bs-target="#editGridModal" nama-gambar="'. $gambar[$i]['nama_gambar'].'" id-gambar="'.$gambar[$i]['id_gambar'].'">
-                    <img src="'. secure_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
+                    <img src="'. auto_asset("images/grid/".$gambar[$i]['nama_gambar']) .'" style="width:100%">
                 </a>
             </div>'
                 ;
