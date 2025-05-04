@@ -89,5 +89,6 @@
       "CLOUDINARY_API_KEY":"548271162579115",
       "CLOUDINARY_API_SECRET":"IqV6-BJAjVIlkD1hELGCjnJPbb4"
     },
-    "outputDirectory": "public"
+    "outputDirectory": "public",
+    "buildCommand": "./vercel-build.sh"
   }

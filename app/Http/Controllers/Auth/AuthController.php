@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\logout;
 
 
-
 class AuthController extends Controller
 {
     public function viewLogin()
@@ -63,6 +62,7 @@ class AuthController extends Controller
         }
         return view('register');
     }
+
     public function actionRegister(Request $request)
     {
         $request->validate([
@@ -72,7 +72,7 @@ class AuthController extends Controller
             'last_name' => 'required',
             'email'=> 'required|email'
         ]);
-        // dd($request->all());
+        
         $existingUser = Users::where('username', $request->username)->first();
         
         if ($existingUser) {
@@ -91,8 +91,8 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi berhasil!');
     }
 
-
-    public function logout(){
+    public function logout()
+    {
         
         Auth::guard('web')->logout(); 
         Session::flush();
