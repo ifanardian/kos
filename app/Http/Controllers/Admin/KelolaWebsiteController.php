@@ -9,6 +9,8 @@ use App\Models\MsPanorama;
 use App\Models\PanoramaHotspot;
 use App\Models\Gambar;
 
+use Cloudinary\Cloudinary;
+
 
 class KelolaWebsiteController extends Controller
 {
@@ -34,12 +36,22 @@ class KelolaWebsiteController extends Controller
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('images/panorama'), $filename);
-
+        
+            // Upload ke Cloudinary
+            
+            $cloudinary = new Cloudinary();
+            $uploaded = $cloudinary->uploadApi()->upload($request->file('gambar')->getRealPath(), [
+                'folder' => 'panorama',
+                'public_id' => time() . '_' . pathinfo($request->file('gambar')->getClientOriginalName(), PATHINFO_FILENAME),
+                'overwrite' => true,
+            ]);
+        
+            $secureUrl =$uploaded['secure_url']; ; // URL HTTPS Cloudinary
+        
+            // Simpan ke database
             MsPanorama::create([
                 'text' => $request->nama,
-                'namafile' => $filename,
+                'namafile' => $secureUrl, // Simpan URL-nya, bukan filename
                 'yaw' => $request->yaw,
                 'pitch' => $request->pitch,
                 'hfov' => $request->hfov * -1,

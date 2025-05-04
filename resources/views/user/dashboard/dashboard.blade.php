@@ -108,7 +108,7 @@
                                         'pitch':".$p->pitch.", //seberapa tinggi/rendah letak panahnya (vertikal)
                                         'yaw': ".$p->yaw.", //sudut mana yang diliat pertama kali (horizontal)
                                         'type':'equirectangular',
-                                        'panorama':'".auto_asset('images/panorama/'.$p->namafile)."',
+                                        'panorama':'".auto_asset($p->namafile)."',
                                         ".$hotspots."
                                     },
                                 ";

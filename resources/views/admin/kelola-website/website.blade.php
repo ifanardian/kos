@@ -600,7 +600,7 @@
             success: function (response) {
                 console.log(response.hotspots);
                 const panorama = response.detail;
-                panorama.namafile = BaseUrl + panorama.namafile;
+                // panorama.namafile = BaseUrl + panorama.namafile;
                 Tempimg = panorama.namafile;
                 showPannellum(panorama, response.hotspots)
 
