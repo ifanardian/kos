@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('ktp');
             $table->date('periode_penempatan');
             $table->string('note')->nullable();
-            $table->enum('status', ['PENDING', 'APPROVED', 'REJECTED'])->default('PENDING');
+            $table->enum('status', ['PENDING', 'APPROVED', 'REJECTED','CANCEL'])->default('PENDING');
             $table->timestamps();
         });
     }
