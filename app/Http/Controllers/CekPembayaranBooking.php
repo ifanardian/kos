@@ -17,11 +17,11 @@ class CekPembayaranBooking extends Controller
     public function cekPembayaranSekali()
     {   $result= NULL;
         $created = NULL;
-        $payment = Payment::where('status_verifikasi', NULL)->get();
+        $payment = Payment::where('status_verifikasi', NULL)->where('metode_pembayaran',NULL)->get();
         if (!$payment->isEmpty()) {
             foreach ($payment as $p){
                 $selisih = (now()->diffInMinutes($p->created_at))*-1;
-                if($selisih > 1440){
+                if($selisih > 1440 ){
                     DB::transaction(function () use ($p) {
                         $penyewa = Penyewa::where('id_penyewa', $p->id_penyewa)->first();
                         
@@ -38,7 +38,6 @@ class CekPembayaranBooking extends Controller
                         // Hapus data penyewa
                         $penyewa->delete();
                     });
-                    
                     return response()->json(['result' =>'pembayaran sudah lebih dari 24 jam']);
                 }
             }
