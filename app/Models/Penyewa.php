@@ -13,6 +13,7 @@ class Penyewa extends Model
     protected $primaryKey = 'id_penyewa';
 
     protected $fillable = [
+        'id_booking',
         'email',
         'nama',
         'no_telepon',

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('penyewa', function (Blueprint $table) {
             $table->id('id_penyewa');
+            $table->unsignedBigInteger('id_booking');
             $table->string('email');
             $table->string('nama');
             $table->string('no_telepon');
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->timestamps();
             
             $table->foreign('no_kamar')->references('id_kamar')->on('kamar')->onDelete('set null');
+            $table->foreign('id_booking')->references('id_booking')->on('bookings')->onDelete('cascade');
         });
     }
 

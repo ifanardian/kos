@@ -50,9 +50,10 @@ class AdminBookingController extends Controller
         DB::transaction(function () use ($request) {
             $booking = Booking::findOrFail($request->id_booking);
             $booking->status = $request->status;
-
             if ($request->status === "APPROVED") {
+                // dd($request->all());
                 $penyewa = Penyewa::create([
+                    'id_booking' => $request->id_booking,
                     'email' => $booking->email,
                     'nama' => $booking->nama_lengkap,
                     'no_telepon' => $booking->no_hp,
@@ -66,6 +67,7 @@ class AdminBookingController extends Controller
                     'tanggal_jatuh_tempo' => $booking->periode_penempatan,
                     'tanggal_berakhir' => null,
                 ]);
+                // dd($penyewa);
                 Users::create([
                     'id_penyewa' => $penyewa->id_penyewa,
                     'email' => $booking->email,

@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{IndexController, AdminBookingController, AdminPaymentController, KelolaKamarController, KelolaWebsiteController, PenyewaController};
 use App\Http\Controllers\User\{BookingController, DashboardController, PaymentController};
 use App\Http\Controllers\Auth\{AuthController, ForgotPasswordController};
+use App\Http\Controllers\CekPembayaranBooking;
 
+
+Route::get('/cek-pembayaran-booking', [CekPembayaranBooking::class, 'cekPembayaranSekali'])->name('cek.pembayaran.sekaligus');
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('login', [AuthController::class, 'viewLogin'])->name('login');
