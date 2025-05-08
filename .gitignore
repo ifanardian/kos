@@ -22,3 +22,5 @@ yarn-error.log
 /.zed
 /.vercel.json
 /storage
+docker-compose.yml
+/docker/*

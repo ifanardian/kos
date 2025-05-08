@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Cloudinary\Cloudinary;
 use Cloudinary\Configuration\Configuration;
 
+use App\Models\Payment;
+
 class PaymentController extends Controller
 {
     public function showPayment()
@@ -53,23 +55,28 @@ class PaymentController extends Controller
         $request->validate([
             'id_penyewa' => 'required|integer',
             'metode_pembayaran' => 'required|string',
-            'bukti_tf' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'bukti_tf' => 'nullable|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
-        $paymentCount = DB::select('
-        SELECT 
-            SUM(CASE WHEN metode_pembayaran IS NULL THEN 1 ELSE 0 END) AS belum_bayar_verifikasi,
-            SUM(CASE WHEN status_verifikasi = 0 THEN 1 ELSE 0 END) AS tagihan_tidak_terverifikasi,
-            SUM(CASE WHEN status_verifikasi = 1 THEN 1 ELSE 0 END) AS tagihan_sudah_terverifikasi,
+        $payment = Payment::wherenull('metode_pembayaran')->wherenull('status_verifikasi')->where('id_penyewa',$request->id_penyewa)->get();
+        // dd($payment);
+        // $paymentCount = DB::select('
+        // SELECT 
+        //     SUM(CASE WHEN metode_pembayaran IS NULL THEN 1 ELSE 0 END) AS belum_bayar_verifikasi,
+        //     SUM(CASE WHEN status_verifikasi = 0 THEN 1 ELSE 0 END) AS tagihan_tidak_terverifikasi,
+        //     SUM(CASE WHEN status_verifikasi = 1 THEN 1 ELSE 0 END) AS tagihan_sudah_terverifikasi,
 
-            COUNT(*) AS total_tagihan
-        FROM payments
-        WHERE id_penyewa = ?
-        ', [$request->id_penyewa]);
+        //     COUNT(*) AS total_tagihan
+        // FROM payments
+        // WHERE id_penyewa = ?
+        // ', [$request->id_penyewa]);
         $isFirstPayment = false;
-        if ($paymentCount[0]->belum_bayar_verifikasi > 0 || $paymentCount[0]->tagihan_tidak_terverifikasi == $paymentCount[0]->total_tagihan) {
+        if(!$payment->isEmpty()){
             $isFirstPayment = true;
         }
-
+        // if ($paymentCount[0]->belum_bayar_verifikasi > 0 || $paymentCount[0]->tagihan_tidak_terverifikasi == $paymentCount[0]->total_tagihan) {
+        //     $isFirstPayment = true;
+        // }
+        // dd($isFirstPayment);
         $penyewa = DB::table('penyewa')
             ->where('id_penyewa', $request->id_penyewa)
             ->first();

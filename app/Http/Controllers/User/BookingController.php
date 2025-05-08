@@ -49,14 +49,14 @@ class BookingController extends Controller
         // ]);
         // return redirect()->route('dashboard')->with('success', 'Booking berhasil!');
         
-        // dd($request->all());
+
         $request->validate([
             'tipe_kos' => 'required|exists:ms_tipe_kos,id_tipe_kos',
             'nama_lengkap' => 'required',
             'no_hp' => 'required',
             'email' => 'required|email',
             'alamat' => 'required',
-            'ktp' => 'required|mimes:jpg,jpeg,png|max:2048',
+            'ktp' => 'required|mimes:jpg,jpeg,png,webp|max:2048',
             'periode_penempatan' => 'required',
             'note' => 'nullable',
         ]);

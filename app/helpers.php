@@ -1,8 +1,8 @@
 <?php
 
-if (!function_exists('secure_asset')) {
-    function secure_asset($path)
+if (!function_exists('asset')) {
+    function asset($path)
     {
-        return app()->environment('production') ? secure_asset($path) : asset($path);
+        return app()->environment('production') ? asset($path) : asset($path);
     }
 }
