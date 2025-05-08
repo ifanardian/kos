@@ -25,9 +25,10 @@ class AdminBookingController extends Controller
         $pending = Booking::where('status', 'PENDING')->orderBy('created_at', 'asc')->get();
         $approved = Booking::where('status', 'APPROVED')->orderBy('created_at', 'asc')->get();
         $rejected = Booking::where('status', 'REJECTED')->orderBy('created_at', 'asc')->get();
+        $canceled = Booking::where('status', 'CANCELED')->orderBy('created_at', 'asc')->get();
         $tipe = MsTipeKos::all();
         
-        return view('admin.admin-verifikasi', compact('pending', 'approved', 'rejected', 'tipe'));
+        return view('admin.admin-verifikasi', compact('pending', 'approved', 'rejected', 'tipe', 'canceled'));
     }
     
     public function showKtp($filename)
