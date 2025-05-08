@@ -36,6 +36,8 @@
                     type="button" role="tab" aria-controls="nav-approved" aria-selected="false">Approved</button>
                 <button class="nav-link" id="nav-rejected-tab" data-bs-toggle="tab" data-bs-target="#nav-rejected"
                     type="button" role="tab" aria-controls="nav-rejected" aria-selected="false">Rejected</button>
+                <button class="nav-link" id="nav-canceled-tab" data-bs-toggle="tab" data-bs-target="#nav-canceled"
+                    type="button" role="tab" aria-controls="nav-canceled" aria-selected="false">Canceled</button>
             </div>
         </nav>
         <div class="col-xl col-lg-7">
