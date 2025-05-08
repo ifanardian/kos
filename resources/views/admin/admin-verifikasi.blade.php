@@ -256,6 +256,68 @@
                     </div>
                 </div>
 
+                {{-- CANCELED --}}
+                <div class="tab-pane fade" id="nav-canceled" role="tabpanel" aria-labelledby="nav-canceled-tab"
+                    tabindex="0">
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead class="thead-center">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nama Penyewa</th>
+                                            <th>No HP</th>
+                                            <th>Email</th>
+                                            <th>Alamat</th>
+                                            <th>Tipe Kamar</th>
+                                            <th>KTP</th>
+                                            <th>Tanggal Pemesanan</th>
+                                            <th>Periode Penempatan</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($canceled as $item)
+                                        <tr>
+                                            <td>{{ $item->id_booking }}</td>
+                                            <td>{{ $item->nama_lengkap }}</td>
+                                            <td>{{ $item->no_hp }}</td>
+                                            <td>{{ $item->email}}</td>
+                                            <td>{{ $item->alamat}}</td>
+                                            <td>
+                                                @foreach($tipe as $t)
+                                                @if($item->tipe_kos == $t->id_tipe_kos)
+                                                {{ $t->deskripsi }}
+                                                @endif
+                                                @endforeach
+                                            </td>
+                                            {{-- <td>
+                                                <a href="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}">
+                                                    <img src="{{ route('admin.ktp.gambar', ['filename' => $item->ktp]) }}"
+                                                        alt="KTP" style="width:100px;height:auto;">
+                                                </a>
+                                            </td> --}}
+                                            <td>
+                                                @if($item->ktp)
+                                                    <a href="{{ $item->ktp }}" target="_blank">
+                                                        <img src="{{ $item->ktp }}" alt="KTP" style="width:100px; height:auto;">
+                                                    </a>
+                                                @else
+                                                    Tidak ada KTP
+                                                @endif
+                                            </td>
+                                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->periode_penempatan)->format('d-m-Y') }}</td>
+                                            <td>{{ $item->status }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
