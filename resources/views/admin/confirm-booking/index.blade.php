@@ -41,6 +41,7 @@
                             <option value="PENDING" {{ $item->status == 'PENDING' ? 'selected' : '' }}>PENDING</option>
                             <option value="APPROVED" {{ $item->status == 'APPROVED' ? 'selected' : '' }}>APPROVED</option>
                             <option value="REJECTED" {{ $item->status == 'REJECT' ? 'selected' : '' }}>REJECTED</option>
+                            <option value="CANCELED" {{ $item->status == 'CANCELED' ? 'selected' : '' }}>CANCELED</option>
                         </select>
                     </form>
                     </td>
