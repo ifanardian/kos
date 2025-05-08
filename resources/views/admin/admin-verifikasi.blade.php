@@ -43,7 +43,7 @@
         <div class="col-xl col-lg-7">
             <div class="tab-content" id="nav-tabContent">
 
-                {{-- PENDING --}}
+                 <!-- PENDING  -->
                 <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-home-tab"
                     tabindex="0">
                     <div class="card shadow mb-4">
