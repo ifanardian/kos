@@ -10,7 +10,7 @@ class Payment extends Model
     use HasFactory;
 
     protected $table = 'payments';
-    protected $primaryKey = ['id_penyewa', 'periode_tagihan'];
+    protected $primaryKey = 'id_payments';
     public $incrementing = false;
 
     protected $fillable = [

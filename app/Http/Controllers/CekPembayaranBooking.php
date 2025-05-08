@@ -18,9 +18,11 @@ class CekPembayaranBooking extends Controller
     {   $result= NULL;
         $created = NULL;
         $payment = Payment::where('status_verifikasi', NULL)->where('metode_pembayaran',NULL)->get();
+        $result = 'tidak ada pembayaran yang belum terverifikasi';
         if (!$payment->isEmpty()) {
+            $result = 'pembayaran belum lebih dari 24 jam';
             foreach ($payment as $p){
-                $selisih = (now()->diffInMinutes($p->created_at))*-1;
+                $selisih = (now()->diffInMinutes($p->created_at));
                 if($selisih > 1440 ){
                     DB::transaction(function () use ($p) {
                         $penyewa = Penyewa::where('id_penyewa', $p->id_penyewa)->first();
@@ -38,11 +40,11 @@ class CekPembayaranBooking extends Controller
                         // Hapus data penyewa
                         $penyewa->delete();
                     });
-                    return response()->json(['result' =>'pembayaran sudah lebih dari 24 jam']);
+
+                    return response()->json(['result' =>'pembayaran sudah lebih dari 24 jam','selisih'=>$selisih,'vercel'=>now(),'created_at'=>$p->created_at]);
                 }
             }
-            return response()->json(['result' =>'pembayaran belum lebih dari 24 jam']);
         }
-        return response()->json(['result' =>'tidak ada pembayaran yang belum terverifikasi']);
+        return response()->json(['result' =>$result]);
     }
 }
