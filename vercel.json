@@ -51,7 +51,5 @@
       "dest": "/api/index.php"
     }
 
-  ],
-  "env": {
-  }
+  ]
 }
