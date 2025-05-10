@@ -20,7 +20,7 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
-vercel.json
+.vercel.json
 /storage
 docker-compose.yml
 /docker/*
