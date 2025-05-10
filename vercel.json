@@ -51,42 +51,5 @@
       "dest": "/api/index.php"
     }
 
-  ],
-  "env": {
-      "APP_NAME": "KOS FORTUNA",
-      "APP_ENV": "production",
-      "APP_KEY": "base64:2Kg90m3nQ2dXGUqMGM4ehEPRK0+lmLzOqYAAqfXsiEE=",
-      "APP_DEBUG": "true",
-      "APP_URL": "https://kos-one.vercel.app",
-      "APP_CONFIG_CACHE": "/tmp/config.php",
-      "APP_EVENTS_CACHE": "/tmp/events.php",
-      "APP_PACKAGES_CACHE": "/tmp/packages.php",
-      "APP_ROUTES_CACHE": "/tmp/routes.php",
-      "APP_SERVICES_CACHE": "/tmp/services.php",
-      "VIEW_COMPILED_PATH": "/tmp",
-      "CACHE_DRIVER": "array",
-      "LOG_CHANNEL": "stderr",
-      "SESSION_DRIVER": "cookie",
-      "SESSION_LIFETIME": "60",
-      "DB_CONNECTION": "mysql",
-      "DB_HOST": "bqciaonaz4ieritzawc6-mysql.services.clever-cloud.com",
-      "DB_PORT": "3306",
-      "DB_DATABASE": "bqciaonaz4ieritzawc6",
-      "DB_USERNAME": "uag6pegwtozxsrvb",
-      "DB_PASSWORD": "XuqvIoNkcpmHbenldaBS",
-      "MAIL_MAILER":"smtp",
-      "MAIL_HOST":"smtp.googlemail.com",
-      "MAIL_PORT":"587",
-      "MAIL_USERNAME":"rumahkosfortuna@gmail.com",
-      "MAIL_PASSWORD":"curahvsgxmygkwie",
-      "MAIL_ENCRYPTION":"tls",
-      "MAIL_FROM_ADDRESS":"rumahkosfortuna@gmail.com",
-      "MAIL_FROM_NAME":"KOS FORTUNA",
-      "CLOUDINARY_URL":"cloudinary://548271162579115:IqV6-BJAjVIlkD1hELGCjnJPbb4@drzpwvfyh",
-      "CLOUDINARY_UPLOAD_PRESET":"ml_default",
-      "CLOUDINARY_NOTIFICATION_URL":"https://kos-fortuna.vercel.app/",
-      "CLOUDINARY_CLOUD_NAME":"drzpwvfyh",
-      "CLOUDINARY_API_KEY":"548271162579115",
-      "CLOUDINARY_API_SECRET":"IqV6-BJAjVIlkD1hELGCjnJPbb4"
-  }
+  ]
 }
