@@ -37,7 +37,7 @@
                             <span class="menu_icon"><i class="fa fa-bars"></i></span>
                         </button>
                         <a class="navbar-brand" href="{{ route('dashboard') }}">
-                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Fortuna
+                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 20px;"> Kostiva
                         </a>
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -139,7 +139,7 @@
         <!-- Copyright -->
         <div class="copyright_part">
             <div class="container">
-                <p class="text-center">© 2024 Kos Fortuna. All Rights Reserved.</p>
+                <p class="text-center">© 2024 Kostiva. All Rights Reserved.</p>
             </div>
         </div>
     </footer>

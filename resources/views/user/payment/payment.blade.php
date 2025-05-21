@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Payment | Kos Fortuna')
+@section('title', 'Payment | Kostiva')
 
 @push('styles')
 <style>
@@ -225,7 +225,7 @@
                                     <div class="check"></div>
                                 </div>
                                 <p>
-                                    Datang secara langsung ke Kos Fortuna untuk melakukan pembayaran secara tunai.
+                                    Datang secara langsung ke Kostiva untuk melakukan pembayaran secara tunai.
                                 </p>
                             </div>
                             <div class="payment_item">

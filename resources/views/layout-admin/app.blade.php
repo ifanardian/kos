@@ -42,7 +42,7 @@
                 href="{{ route('admin.dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                 </div>
-                <div class="sidebar-brand-text mx-3">ADMIN FORTUNA</div>
+                <div class="sidebar-brand-text mx-3">ADMIN KOSTIVA</div>
             </a>
 
             <!-- Divider -->
