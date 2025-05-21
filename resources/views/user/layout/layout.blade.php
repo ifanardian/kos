@@ -33,7 +33,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="{{ route('dashboard') }}"> 
-                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 15px;"> Fortuna
+                            <img src="{{ asset('images/luck.png') }}" style="width: 35px; margin-right: 15px;"> Kostiva
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

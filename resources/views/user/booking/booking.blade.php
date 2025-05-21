@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Booking | Kos Fortuna')
+@section('title', 'Booking | Kostiva')
 
 @push('styles')
 <style>
