@@ -45,7 +45,7 @@
                                     <a class="nav-link" href="{{ route('dashboard') }}">Beranda</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#facility">Fasilitas</a>
+                                    <a class="nav-link" id="facility-link" href="#">Fasilitas</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="https://wa.me/6281354190343?text=Halo,%20ingin%20tanya%20seputar%20kos">Kontak</a>
@@ -116,7 +116,7 @@
                 <div class="col-md-4 info_section">
                     <div class="single_footer_part">
                         <h4>Alamat Lengkap</h4>
-                        <p>Mangunsari, Sidomukti, Salatiga City, Central Java</p>
+                        <p>Indonesia</p>
                     </div>
                     <div class="single_footer_part">
                         <h4>Jam Operasional</h4>
@@ -171,7 +171,30 @@
         @yield('scripts')
     </script>
 
-    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const facilityLink = document.getElementById("facility-link");
+
+            facilityLink.addEventListener("click", function(e) {
+                e.preventDefault();
+
+                // Cek apakah user sedang berada di dashboard
+                const isDashboard = window.location.pathname === "{{ route('dashboard', [], false) }}";
+
+                if (isDashboard) {
+                    // Scroll ke bagian #facility di halaman saat ini
+                    const facilitySection = document.querySelector("#facility");
+                    if (facilitySection) {
+                        facilitySection.scrollIntoView({ behavior: "smooth" });
+                    }
+                } else {
+                    // Redirect ke dashboard dengan anchor ke #facility
+                    window.location.href = "{{ route('dashboard') }}#facility";
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
