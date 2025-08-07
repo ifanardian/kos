@@ -11,3 +11,8 @@ Route::post('/action-login', [App\Http\Controllers\login::class, 'login']);
 
 Route::post('/action-register', [App\Http\Controllers\login::class, 'actionRegister']);
 
+Route::post('/action-register1', [App\Http\Controllers\login::class, 'actionRegister']);
+
+Route::post('/action-register2', [App\Http\Controllers\login::class, 'actionRegister']);
+
+Route::post('/action-register3', [App\Http\Controllers\login::class, 'actionRegister']);
